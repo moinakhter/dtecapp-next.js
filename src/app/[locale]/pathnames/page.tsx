@@ -1,4 +1,4 @@
-import PageLayout from '@/components/Layout/PageLayout';
+
 import {Locale, useTranslations} from 'next-intl';
 import {setRequestLocale} from 'next-intl/server';
 import {use} from 'react';
@@ -17,7 +17,7 @@ export default function PathnamesPage({params}: Props) {
   const t = useTranslations('PathnamesPage');
 
   return (
-    <PageLayout title={t('title')}>
+  
       <div className="max-w-[490px]">
         {t.rich('description', {
           p: (chunks) => <p className="mt-4">{chunks}</p>,
@@ -26,6 +26,6 @@ export default function PathnamesPage({params}: Props) {
           )
         })}
       </div>
-    </PageLayout>
+ 
   );
 }

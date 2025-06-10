@@ -16,7 +16,7 @@ export default function Navbar() {
   }
 
   return (
-    <nav className="w-full bg-blue-100/60 !px-4  !my-5 max-h-[90px] h-full rounded-2xl  !py-4 !md:px-6">
+    <nav className="w-full absolute z-50  bg-white/10 !px-4 container mx-auto   border-[#808080]/15 border-[1px]   backdrop-blur-[32px]  !my-5 max-h-fit h-full rounded-2xl  !py-4 !md:px-6">
       <div className="mx-auto flex max-w-7xl items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center">

@@ -26,8 +26,9 @@ a {
 }
 .container {
   max-width: 1184px;
-  margin: 0 auto;
+  margin: 0 auto ;
   padding: 0 1rem;
+  
 }
 
 /* Responsive container */
