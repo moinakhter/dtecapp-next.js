@@ -5,7 +5,7 @@ import { Button } from "../ui/button";
 
 function AICallCenter() {
   return (
-    <SectionWrapper className="">
+    <SectionWrapper  >
       <div className="container flex flex-col gap-[24px]">
         <div className="text-center mb-20">
           <h2 className="text-4xl md:text-5xl font-extrabold mb-6">
@@ -45,22 +45,22 @@ function AICallCenter() {
           <div className="md:w-1/2 p-2 w-full grid grid-cols-1 gap-8">
             {[
               {
-                icon: "/images/AI-CALL-CENTER-ICONS/SmartCall.png",
+                icon: "/images/Icons/SmartCall.png",
                 title: "Akıllı Çağrı Karşılama",
                 desc: "Her çağrıyı doğru yönlendirme ve anında çözüm.",
               },
               {
-                icon: "/images/AI-CALL-CENTER-ICONS/AutonomousCall.png",
+                icon: "/images/Icons/AutonomousCall.png",
                 title: "Otonom Giden Çağrılar",
                 desc: "Bilgilendirme, hatırlatma ve anketler.",
               },
               {
-                icon: "/images/AI-CALL-CENTER-ICONS/GlobalSupport.png",
+                icon: "/images/Icons/GlobalSupport.png",
                 title: "7/24 Hizmet, Çok Dilli Destek",
                 desc: "Kesintisiz, global destek deneyimi.",
               },
               {
-                icon: "/images/AI-CALL-CENTER-ICONS/AI.png",
+                icon: "/images/Icons/AI.png",
                 title: "Sürekli Öğrenen Zeka",
                 desc: "Her etkileşimden gelişen sistem.",
               },
@@ -140,7 +140,7 @@ function AICallCenter() {
         </div>
 
         {/* Nasıl Çalışır Section */}
-        <div className="w-full p-[64px] space-y-[64px] bg-[radial-gradient(86.63%_97.02%_at_50%_151.62%,_#8FBBFF_0%,_#FFFFFF_100%)] dark:bg-background rounded-3xl border border-border shadow-md ">
+        <div className="w-full p-[64px] space-y-[64px] dark:bg-[radial-gradient(97.15%_108.81%_at_50%_139.84%,_#3D7EE2_0%,_#000000_100%)] bg-[radial-gradient(86.63%_97.02%_at_50%_151.62%,_#8FBBFF_0%,_#FFFFFF_100%)]  rounded-3xl border border-border shadow-md ">
           <div className="flex items-center justify-between">
             <div>
               <h2 className="text-3xl md:text-4xl font-extrabold mb-4">
@@ -278,7 +278,7 @@ function AICallCenter() {
                 src="/images/Backgrounds/bg1.svg"
                 alt="background"
                 fill
-                className="object-cover  stroke-primary"
+                className="object-cover bg-white dark:bg-[radial-gradient(100.2%_132.81%_at_60.38%_0%,_#121212_48.71%,_#003FA1_100%)]  stroke-primary"
               />
             </div>
 

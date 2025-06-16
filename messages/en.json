@@ -6,8 +6,7 @@
   "Metadata": {
     "language": "tr",
     "title": "Turkish translation of the home page messages."
-  }
-,
+  },
   "Error": {
     "description": "<p>We've unfortunately encountered an error.</p><p>You can try to <retry>reload the page</retry> you were visiting.</p>",
     "title": "Something went wrong!"
@@ -20,8 +19,8 @@
     "title": "next-intl example"
   },
   "LocaleSwitcher": {
-    "label": "Change language",
-    "locale": "{locale, select, de {🇩🇪 Deutsch} en {🇺🇸 English} other {Unknown}}"
+ 
+    "locale": "TR"
   },
   "Manifest": {
     "name": "next-intl example"

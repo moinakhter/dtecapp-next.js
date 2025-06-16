@@ -1,10 +1,14 @@
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
-import Navbar from "@/components/Layout/Navbar";
+import Navbar from "@/components/Navbar";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Celias } from "@/lib/utils";
+import Footer from "@/components/Footer";
+
+ 
+ 
 
 
 export default async function LocaleLayout({
@@ -34,6 +38,7 @@ export default async function LocaleLayout({
           <NextIntlClientProvider>
             <Navbar />
             {children}
+            <Footer />
           </NextIntlClientProvider>
       </ThemeProvider>
         </body>
