@@ -72,14 +72,14 @@ export default function Navbar() {
         {/* Right Side Controls */}
         <div className="flex items-center !space-x-6">
           {/* Language Selector */}
-          <LocaleSwitcher className="text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors" />
+          <LocaleSwitcher  />
 
           {/* Theme Toggle */}
           <Button
             variant="ghost"
             size="icon"
             onClick={toggleTheme}
-            className=" "
+            className="!hover:bg-transparent dark:hover:bg-transparent hover:text-accent transition-colors "
           >
             {isDark ? (
               <Sun className="h-5 w-5" />

@@ -1,8 +1,11 @@
-import { cn } from "@/lib/utils";
+
 import Image from "next/image";
 import LogosTicker from "./logos-tricker";
+import { useTranslations } from "next-intl";
+import CounterCard from "../common/CounterCard";
 
 export const Hero = () => {
+  const t=useTranslations("HomePage.Hero");
   return (
     <section className="relative md:p-0 p-2 h-full xl:h-full lg:min-h-screen text-center flex items-center flex-col justify-between w-full overflow-hidden bg-background text-foreground">
       {/* Blurred radial gradients */}
@@ -22,41 +25,31 @@ export const Hero = () => {
       </div>
       {/* Main Content */}
       <div className="z-40 flex items-center justify-center flex-col h-full w-full    ">
-        <div className=" py-[318px] ">
-          <h1 className="lg:text-8xl md:text-6xl text-4xl font-extrabold mb-8 text-center">
-            Geleceğe Yolculuk
-          </h1>
+        <div className=" my-[318px] ">
+        <h1 
+        
+        className="lg:text-8xl md:text-6xl text-4xl font-extrabold leading-tight mb-8 text-center dark:text-transparent dark:bg-clip-text dark:bg-[linear-gradient(311deg,_#FAFAFA_14%,_#CDCDCD_36%,_#999999_52%,_#E2E2E2_69%,_#FAFAFA_89%)]"
+        >
+  {t("title")}
+</h1>
+
           <p className="lg:text-xl md:text-lg text-base font-light  ]">
-            Hepsi Bir Arada Akıllı Sesli Asistan Çözümünüz
+            {t("description")}
           </p>
         </div>
 
         {/* Statistics Cards */}
-        <div className="flex max-w-[984px] w-full   items-center flex-wrap justify-center gap-4">
-          {[
-            { value: "6", label: "Ödül" },
-            { value: "12", label: "Anlaşmalı Firma" },
-            { value: "600.000", label: "Mutlu Çalışan" },
-            { value: "56+", label: "Dilde Çeviri" },
-          ].map((item, i) => (
-            <div
-              key={i}
-              className="bg-card text-foreground shadow-md rounded-xl px-6 py-4 min-w-[233px] h-[176px] flex flex-col items-center justify-center hover:shadow-lg transition-shadow duration-300"
-            >
-              <p
-                className={cn(
-                  " font-normal",
-                  item.value === "600.000"
-                    ? "md:text-[40px] text-3xl"
-                    : "md:text-[53px] text-4xl"
-                )}
-              >
-                {item.value}
-              </p>
-              <p className="text-[20px] opacity-55 font-light">{item.label}</p>
-            </div>
-          ))}
-        </div>
+        <div className="flex max-w-[984px] w-full items-center flex-wrap justify-center gap-4">
+  {[
+    { value: "6", label: "Ödül" },
+    { value: "12", label: "Anlaşmalı Firma" },
+    { value: "600.000", label: "Mutlu Çalışan" },
+    { value: "56+", label: "Dilde Çeviri" },
+  ].map((item, i) => (
+    <CounterCard key={i} value={item.value} label={item.label} />
+  ))}
+</div>
+
       </div>
 
       {/* Logos Row */}
