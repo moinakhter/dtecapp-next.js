@@ -38,7 +38,13 @@
     "Hero": {
       "title": "Geleceğe Yolculuk",
       "description": " Hepsi Bir Arada Akıllı Sesli Asistan Çözümünüz",
-      "button": "Get Started"
+      "counter1":"Ödül",
+      "counter2":"Anlaşmalı Firma",
+      "counter3":"Mutlu Çalışan" ,
+      "counter4":"Dilde Çeviri"
+    },"Dtec AI Call Center": {
+      "title": "Dtec AI Call Center",
+      "description": " Dtec AI Call Center çözümümüz, gelen ve giden çağrıların insan müdahalesi olmadan yöneterek müşteri deneyimini devrim niteliğinde dönüştürüyor!"
     }
   }
 }

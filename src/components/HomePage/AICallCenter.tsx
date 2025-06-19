@@ -2,19 +2,19 @@ import React from "react";
 import SectionWrapper from "../common/SectionWrapper";
 import Image from "next/image"; 
 import { Button } from "../ui/button";
+import { useTranslations } from "next-intl";
 
 function AICallCenter() {
+  const t = useTranslations("HomePage.Dtec AI Call Center");
   return (
     <SectionWrapper  >
       <div className="container flex flex-col gap-[24px]">
         <div className="text-center mb-20">
           <h2 className="text-4xl md:text-5xl font-extrabold mb-6">
-            Dtec AI Call Center
+            {t("title")}
           </h2>
           <p className="text-lg max-w-3xl mx-auto">
-            Dtec AI Call Center çözümümüz, gelen ve giden çağrıların insan
-            müdahalesi olmadan yöneterek müşteri deneyimini devrim niteliğinde
-            dönüştürüyor!
+            {t("description")}
           </p>
         </div>
 

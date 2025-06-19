@@ -90,7 +90,7 @@ function TokenFeatureCard({
   return (
     <div className="group max-w-[320px] w-full flex gap-[24px] md:text-start text-center  flex-col h-full">
       <div className="">
-        <h3 className="text-xl   font-medium  text-gray-900 mb-2.5 group-hover:text-secondary transition-colors duration-300">
+        <h3 className="text-xl   font-medium   mb-2.5 group-hover:text-secondary transition-colors duration-300">
           {title}
         </h3>
         <p className="text-base  font-light ">{description}</p>

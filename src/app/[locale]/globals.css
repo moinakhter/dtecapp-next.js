@@ -65,6 +65,7 @@ a {
   --blue: #3d7ee2;
   --blue-dark: #143773;
   --background: #EEE;
+    --fade-end: #EEE;
   --foreground: #212121;
   --icon-filter: invert(0%) brightness(0%);
   /* UI Tokens */
@@ -82,6 +83,7 @@ a {
 
 .dark {
   --background: #0A0A0A;
+    --fade-end: rgba(20, 55, 115, 0);
   --foreground: #fafafa;
   --card: #212121;
   --border: #2a2a2a;

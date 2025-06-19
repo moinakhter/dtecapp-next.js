@@ -1,37 +1,46 @@
-import Image from "next/image";
+ 
 import TokenSection from "./token-section";
 
-// Feature data for mapping
+import {
+  PersonICon,
+  ShareICon,
+  MicICon,
+  PuzzleICon,
+  LoadingIcon,
+} from "../common/Icons";
+import { SpotlightBg } from "../common/RadialBlueGlow";
+ 
+import ScrollAnimatedLogo from "../common/AnimatedLogo";
+
 const features = [
   {
-    icon: "/images/Icons/mic.svg",
-
+    icon: MicICon,
     title: "Doğal Dil Anlama (NLU)",
     description:
       "Sezgisel kullanıcı iletişimi için konuşmayı anlama, bağlam açısından zengin etkileşimler",
   },
   {
-    icon: "/images/Icons/share.svg",
+    icon: ShareICon,
 
     title: "Çok Modlu Etkileşim",
     description:
       "Esnek kullanıcı etkileşimi için kesintisiz ses, metin ve görsel geçişler",
   },
   {
-    icon: "/images/Icons/person.svg",
+    icon: PersonICon,
 
     title: "Kişiselleştirme ve Kullanıcı Tanıma",
     description:
       "Yanıtları kişiselleştirilmiş etkileşime göre uyarlayarak kullanıcı tercihlerini öğrenin ve hatırlayın",
   },
   {
-    icon: "/images/Icons/puzzle.svg",
+    icon: PuzzleICon,
     title: "Üçüncü Taraf Hizmetlerle Entegrasyon",
     description:
       "Kolaylık sağlamak için merkezi bir merkez oluşturarak çeşitli hizmetlere bağlanın",
   },
   {
-    icon: "/images/Icons/sun.svg",
+    icon: LoadingIcon,
     title: "Bağlama Duyarlı Görev Sürekliliği",
     description:
       "Tekrarlama ihtiyacını azaltarak akıcı etkileşimler için bağlamı koruyun",
@@ -51,10 +60,10 @@ export default function ComparisonSection() {
   return (
     <>
       <div className="relative   h-full w-full">
-        <div className="hidden bg-radial  inset-0 dark:absolute bg-center top-[-350px] from-[#143773] via-[#121212] to-transparent" />
         <section className="relative w-full py-24 overflow-hidden ">
+          <SpotlightBg />
           {/* Content */}
-          <div className="container relative     z-10 px-5">
+          <div className="container relative z-10 px-5">
             <div className="text-center mb-[96px]">
               <h2 className="dark:text-transparent dark:bg-clip-text dark:bg-[linear-gradient(311deg,_#FAFAFA_14%,_#CDCDCD_36%,_#999999_52%,_#E2E2E2_69%,_#FAFAFA_89%)] mb-2.5 text-[56px] font-black">
                 Sıradışı Bir Asistan Deneyimi
@@ -74,7 +83,7 @@ export default function ComparisonSection() {
                   </div>
                 </div>
 
-                <div className="flex flex-col gap-8">
+                <div className="flex flex-col gap-8 group">
                   {features.map((feature, index) => (
                     <FeatureItem
                       key={index}
@@ -106,35 +115,31 @@ export default function ComparisonSection() {
             </div>
           </div>
         </section>
-        <section className=" w-full py-[419px] overflow-hidden  ">
+        {/* <section className=" w-full py-[419px] overflow-hidden  ">
           <Image
-          src="/images/Backgrounds/circles.png"
-          alt="Extraordinary Experience Background"
-        width={2000}
-          height={2000}
-          className="  z-0 top-[17%]   absolute object-center   dark:hidden block"
-          priority
-        />
-          {/* Logo */}
+            src="/images/Backgrounds/circles.png"
+            alt="Extraordinary Experience Background"
+            width={2000}
+            height={2000}
+            className="  z-0 top-[17%]   absolute object-center    block"
+            priority
+          />
+    
           <div className="relative z-10 flex items-center justify-center  w-[744px]  h-[744px]   mx-auto  ">
             <Image
               src="/images/logo/DTEC_WhiteMode.png"
               alt="DTEC Logo"
               fill
-              className="object-contain dark:hidden block"
-              priority
-            />
-            <Image
-              src="/images/logo/DTEC_DarkMode.png"
-              alt="DTEC Logo"
-              fill
-              className="object-contain dark:block hidden"
+              className="object-contain "
               priority
             />
           </div>
-        </section>
+        </section> */}
+   <section className="relative z-0 w-full bg-black overflow-hidden">
+  <ScrollAnimatedLogo />
+</section>
+
         <TokenSection />
-        
       </div>
     </>
   );
@@ -145,23 +150,16 @@ function FeatureItem({
   title,
   description,
 }: {
-  Icon: string;
+  Icon: React.ComponentType<{ className?: string }>;
   title: string;
   description: string;
 }) {
   return (
     <div className="flex items-start gap-4  ">
       <div className="mt-1">
-        <Image
-          width={32}
-          height={32}
-          src={Icon}
-          alt={title}
-          priority
-          className="filter invert dark:invert-0     transition-all duration-300  "
-        />
+        <Icon className="w-8 h-8 hover:text-secondary transition-all duration-500" />
       </div>
-      <div className="flex-1 flex flex-col gap-1">
+      <div className="flex-1 flex flex-col gap-1 ">
         <h4 className="text-base font-bold  ">{title}</h4>
         <p className="text-sm font-light  ">{description}</p>
       </div>
