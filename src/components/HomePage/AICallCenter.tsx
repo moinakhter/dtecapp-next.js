@@ -1,21 +1,21 @@
+"use client";
 import React from "react";
 import SectionWrapper from "../common/SectionWrapper";
-import Image from "next/image"; 
+import Image from "next/image";
 import { Button } from "../ui/button";
 import { useTranslations } from "next-intl";
+import { motion } from "framer-motion";
 
 function AICallCenter() {
   const t = useTranslations("HomePage.Dtec AI Call Center");
   return (
-    <SectionWrapper  >
+    <SectionWrapper>
       <div className="container flex flex-col gap-[24px]">
         <div className="text-center mb-20">
           <h2 className="text-4xl md:text-5xl font-extrabold mb-6">
             {t("title")}
           </h2>
-          <p className="text-lg max-w-3xl mx-auto">
-            {t("description")}
-          </p>
+          <p className="text-lg max-w-3xl mx-auto">{t("description")}</p>
         </div>
 
         {/* Main Content */}
@@ -34,15 +34,26 @@ function AICallCenter() {
               </p>
             </div>
 
-            <Button  size="sm" variant="secondary" className="mt-6    ">
-              Daha Fazla Bilgi Edinin <span className=" rotate-[-45deg] inline-block  ">
-                →
-                </span>
+            <Button size="sm" variant="secondary" className="mt-6    ">
+              Daha Fazla Bilgi Edinin{" "}
+              <span className=" rotate-[-45deg] inline-block  ">→</span>
             </Button>
           </div>
 
           {/* Right Features List */}
-          <div className="md:w-1/2 p-2 w-full grid grid-cols-1 gap-8">
+          <motion.div className="md:w-1/2 p-2 w-full grid grid-cols-1 gap-8"
+           initial="hidden"
+  whileInView="visible"
+  viewport={{ once: true, amount: 0.3 }}
+  variants={{
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.15,
+      },
+    },
+  }}
+          >
             {[
               {
                 icon: "/images/Icons/SmartCall.png",
@@ -65,7 +76,15 @@ function AICallCenter() {
                 desc: "Her etkileşimden gelişen sistem.",
               },
             ].map((feature, index) => (
-              <div key={index} className="flex items-start gap-4">
+             <motion.div
+      key={index}
+      variants={{
+        hidden: { opacity: 0, y: 40 },
+        visible: { opacity: 1, y: 0 },
+      }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      className="flex items-start gap-4"
+    >
                 <div className="min-w-[48px] min-h-[48px] p-2 flex items-center justify-center">
                   <Image
                     src={feature.icon}
@@ -81,14 +100,20 @@ function AICallCenter() {
                   </h4>
                   <p className="text-foreground/70 text-sm">{feature.desc}</p>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
 
         {/* Scalability Section */}
         <div className="w-full flex flex-col md:flex-row gap-10  ">
-          <div className="p-10 bg-card w-[300px] rounded-3xl border border-border shadow-md flex flex-col justify-between">
+         <motion.div
+    initial={{ opacity: 0, y: 40 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.7, ease: "easeOut", delay: 0.1 }}
+    viewport={{ once: true, amount: 0.3 }}
+    className="p-10 bg-card w-[300px] rounded-3xl border border-border shadow-md flex flex-col justify-between"
+  >
             <div>
               <h3 className="text-2xl font-bold mb-4">Ölçeklenebilir Yapı</h3>
               <p className="text-base leading-relaxed text-foreground/80">
@@ -100,9 +125,15 @@ function AICallCenter() {
                 geliştirmeye gerek kalmadan büyüyen ihtiyaçlara cevap verir.
               </p>
             </div>
-          </div>
+          </motion.div>
 
-          <div className="w-[420px]  rounded-3xl border border-border shadow-md overflow-hidden flex items-center justify-center">
+          <motion.div
+    initial={{ opacity: 0, scale: 0.95 }}
+    whileInView={{ opacity: 1, scale: 1 }}
+    transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
+    viewport={{ once: true, amount: 0.3 }}
+    className="w-[420px] rounded-3xl border border-border shadow-md overflow-hidden flex items-center justify-center"
+  >
             <Image
               src="/images/Photorealistic-Digital-Artwork.png"
               alt="Agent"
@@ -110,7 +141,7 @@ function AICallCenter() {
               height={300}
               className="object-cover w-full h-full"
             />
-          </div>
+          </motion.div>
 
           <div className="p-10 bg-card w-[416px] rounded-3xl border border-border shadow-md flex flex-col items-end justify-between">
             <div className="flex items-center mb-4">
@@ -140,7 +171,13 @@ function AICallCenter() {
         </div>
 
         {/* Nasıl Çalışır Section */}
-        <div className="w-full p-[64px] space-y-[64px] dark:bg-[radial-gradient(97.15%_108.81%_at_50%_139.84%,_#3D7EE2_0%,_#000000_100%)] bg-[radial-gradient(86.63%_97.02%_at_50%_151.62%,_#8FBBFF_0%,_#FFFFFF_100%)]  rounded-3xl border border-border shadow-md ">
+        <motion.div
+          initial={{ opacity: 0, y: 60 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+           viewport={{ once: true, amount: 0.3 }}
+          className="w-full p-[64px] space-y-[64px] dark:bg-[radial-gradient(97.15%_108.81%_at_50%_139.84%,_#3D7EE2_0%,_#000000_100%)] bg-[radial-gradient(86.63%_97.02%_at_50%_151.62%,_#8FBBFF_0%,_#FFFFFF_100%)]  rounded-3xl border border-border shadow-md "
+        >
           <div className="flex items-center justify-between">
             <div>
               <h2 className="text-3xl md:text-4xl font-extrabold mb-4">
@@ -262,16 +299,21 @@ function AICallCenter() {
               Bugün kullanmaya başlayın!
             </p>
             <Button size="lg" variant="secondary">
-              Demo Talep Edin <span className=" rotate-[-45deg] inline-block ">
-                →
-                </span>
+              Demo Talep Edin{" "}
+              <span className=" rotate-[-45deg] inline-block ">→</span>
             </Button>
           </div>
-        </div>
+        </motion.div>
 
         <div className=" flex flex-col md:flex-row gap-10">
           {/* Left card */}
-          <div className="w-full relative p-10 bg-card dark:bg-card rounded-3xl border border-border shadow-md flex flex-col justify-center items-center overflow-hidden">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+             viewport={{ once: true, amount: 0.3 }}
+            className="w-full relative p-10 bg-card dark:bg-card rounded-3xl border border-border shadow-md flex flex-col justify-center items-center overflow-hidden"
+          >
             {/* Background Circles */}
             <div className="absolute inset-0 z-0">
               <Image
@@ -298,10 +340,16 @@ function AICallCenter() {
                 </p>
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Right image */}
-          <div className="w-full max-w-[450px]  rounded-2xl border border-border shadow-md overflow-hidden flex items-center justify-center">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+             viewport={{ once: true, amount: 0.3 }}
+            className="w-full max-w-[450px] rounded-2xl border border-border shadow-md overflow-hidden flex items-center justify-center"
+          >
             <Image
               src="/images/Futuristic-Digital-Artwork.png"
               alt="AI Illustration"
@@ -309,7 +357,7 @@ function AICallCenter() {
               height={300}
               className="object-cover w-full h-full"
             />
-          </div>
+          </motion.div>
         </div>
       </div>
     </SectionWrapper>

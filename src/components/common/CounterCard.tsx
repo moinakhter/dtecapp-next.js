@@ -1,16 +1,46 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
 
 interface CounterCardProps {
   value: string;
   label: string;
+  index?: number; // NEW
 }
 
-export default function CounterCard({ value, label }: CounterCardProps) {
+export default function CounterCard({ value, label, index = 0 }: CounterCardProps) {
+  const [displayValue, setDisplayValue] = useState("0");
+
+  useEffect(() => {
+    const isPlus = value.includes("+");
+    const numericValue = parseInt(value.replace(/[^\d]/g, ""));
+    const hasDot = value.includes(".");
+    const duration = 1500;
+    const startTime = performance.now();
+
+    const animate = (time: number) => {
+      const progress = Math.min((time - startTime) / duration, 1);
+      const current = Math.floor(progress * numericValue);
+
+      const formatted = hasDot
+        ? current.toLocaleString("tr-TR")
+        : current.toString();
+
+      setDisplayValue(formatted + (isPlus ? "+" : ""));
+
+      if (progress < 1) requestAnimationFrame(animate);
+    };
+
+    requestAnimationFrame(animate);
+  }, [value]);
+
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: index * 0.15, duration: 0.6, ease: "easeOut" }}
       className="
         relative 
         bg-white 
@@ -36,10 +66,10 @@ export default function CounterCard({ value, label }: CounterCardProps) {
           "font-normal",
           value === "600.000" ? "md:text-[40px] text-3xl" : "md:text-[53px] text-4xl"
         )}>
-          {value}
+          {displayValue}
         </p>
         <p className="text-sm">{label}</p>
       </div>
-    </div>
+    </motion.div>
   );
 }

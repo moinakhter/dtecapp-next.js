@@ -79,7 +79,7 @@ export default function Footer() {
 
   return (
     <footer className="w-full h-full   bg-background">
-      <div className="px-[70px]  mx-auto lg:pt-[128px]    py-8    md:py-16 ">
+      <div className="px-[70px]  mx-auto lg:pt-[128px]  py-8 md:py-16 ">
         {/* Main Footer Content */}
         <div className="flex lg:flex-nowrap flex-wrap justify-between gap-12 mb-12">
           {/* Logo and Social Links */}
@@ -108,7 +108,7 @@ export default function Footer() {
                     width={24}
                     height={24}
                     alt={social.label}
-                    className="h-[24px] invert dark:invert-0    w-[24px]"
+                    className="h-[24px] invert dark:invert-0 w-[24px]"
                   />
                 </Link>
               ))}
@@ -175,7 +175,7 @@ export default function Footer() {
             </div>
           </div>
           {/* DTEC Token Card */}
-          <div className="w-[258px] h-[180px]   relative group overflow-hidden rounded-2xl shadow-lg">
+          <div className="w-[258px] h-[180px] cursor-pointer   relative group overflow-hidden rounded-2xl shadow-lg">
             <Image
               src="/images/dtec-token.png"
               alt="DTEC Token"
@@ -183,40 +183,53 @@ export default function Footer() {
               quality={100}
               className="object-cover transition-transform duration-300 ease-in-out group-hover:scale-105"
             />
+       <div className="absolute bottom-4 left-4 z-10">
+        <Link
+          href="https://dtec.space/"
+          className="!text-white  text-lg  font-bold flex items-center gap-1  transition-transform duration-300 ease-in-out  group-hover:scale-105"
+          target="_blank"
+          rel="noopener noreferrer"
+          title="DTEC Token"
+
+        >
+          DTEC Token
+          <span className="text-[12px]">↗</span>
+        </Link>
+      </div>
+
           </div>
         </div>
 
         {/* Newsletter Section */}
         <div className=" pt-[112px] mb-8">
-              
-          <form onSubmit={handleNewsletterSubmit} className="flex  items-center justify-center gap-3">
+          <form
+            onSubmit={handleNewsletterSubmit}
+            className="flex  items-center justify-center gap-3"
+          >
             <Input
-                type="email"
-                placeholder="Bir Mail Adresi Girin"
-            
-                // onChange={(e: unknown) => setEmail(e?.target?.value)}
-                className="flex-1 rounded-[9.6px] min-h-[48px] border-none  focus-within:border-none outline-none bg-[#E0E0E0] max-w-[374px] w-full h-full dark:bg-[#212121]"
-                required
-              />
+              type="email"
+              placeholder="Bir Mail Adresi Girin"
+              // onChange={(e: unknown) => setEmail(e?.target?.value)}
+              className="flex-1 rounded-[9.6px] min-h-[48px] border-none  focus-within:border-none outline-none bg-[#E0E0E0] max-w-[374px] w-full h-full dark:bg-[#212121]"
+              required
+            />
             <Button
               type="submit"
               size="sm"
               className="bg-secondary rounded-[9.6px"
- 
             >
               Geçmişten Takip Edin
             </Button>
           </form>
 
-            <p className="text-center  text-sm font-light mt-6">
-              Güncellemeler sayın duyurular DTEC&apos;den ilgili açık ve etkili
-              bilgileri göndermek için bilgilendirme kullanılabilir.
-              <br />
-              İstediğiniz zaman abonelikten çıkabilirsiniz. Daha fazla bilgi
-              için Gizlilik Politikamızı gözden geçirin.
-            </p>
-          </div>
-       
+          <p className="text-center  text-sm font-light mt-6">
+            Güncellemeler sayın duyurular DTEC&apos;den ilgili açık ve etkili
+            bilgileri göndermek için bilgilendirme kullanılabilir.
+            <br />
+            İstediğiniz zaman abonelikten çıkabilirsiniz. Daha fazla bilgi için
+            Gizlilik Politikamızı gözden geçirin.
+          </p>
+        </div>
 
         {/* Bottom Legal Links */}
         <div className="pt-[128px]">

@@ -64,7 +64,7 @@ export default function ComparisonSection() {
           <ScrollAnimatedLogo />
         </div>
         <section className="relative z-10 w-full py-24">
-          <SpotlightBg />
+          <SpotlightBg className="dark:absolute hidden" />
           {/* Content */}
           <div className="container relative z-10 px-5">
             <div className="text-center mb-[96px]">

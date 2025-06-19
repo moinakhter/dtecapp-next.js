@@ -1,4 +1,5 @@
 "use client";
+import { motion } from "framer-motion";
 
 import { Button } from "@/components/ui/button";
 
@@ -66,7 +67,20 @@ export default function TokenSection() {
         </div>
 
         {/* Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12   container mx-auto place-items-center md:place-items-stretch">
+   <motion.div
+  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 container mx-auto place-items-center md:place-items-stretch"
+  initial="hidden"
+  whileInView="visible"
+  viewport={{ once: true, amount: 0.3 }}
+  variants={{
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.2,
+      },
+    },
+  }}
+>
           {tokenFeatures.map((feature, index) => (
             <TokenFeatureCard
               key={index}
@@ -74,7 +88,7 @@ export default function TokenSection() {
               description={feature.description}
             />
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
@@ -88,16 +102,21 @@ function TokenFeatureCard({
   description: string;
 }) {
   return (
-    <div className="group max-w-[320px] w-full flex gap-[24px] md:text-start text-center  flex-col h-full">
-      <div className="">
-        <h3 className="text-xl   font-medium   mb-2.5 group-hover:text-secondary transition-colors duration-300">
+    <motion.div
+      variants={{
+        hidden: { opacity: 0, y: 50 },
+        visible: { opacity: 1, y: 0 },
+      }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      className="group max-w-[320px] w-full flex gap-[24px] md:text-start text-center flex-col h-full"
+    >
+      <div>
+        <h3 className="text-xl font-medium mb-2.5 group-hover:text-secondary transition-colors duration-300">
           {title}
         </h3>
-        <p className="text-base  font-light ">{description}</p>
+        <p className="text-base font-light">{description}</p>
       </div>
-
-      {/* Separator line */}
-      <div className="w-full h-[2px] bg-black dark:bg-white  group-hover:bg-secondary transition-colors duration-300 mt-auto" />
-    </div>
+      <div className="w-full h-[2px] bg-black dark:bg-white group-hover:bg-secondary transition-colors duration-300 mt-auto" />
+    </motion.div>
   );
 }

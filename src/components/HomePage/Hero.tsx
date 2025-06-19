@@ -41,7 +41,7 @@ export const Hero = () => {
             { value: "600.000", label: t("counter3") },
             { value: "56+", label: t("counter4") },
           ].map((item, i) => (
-            <CounterCard key={i} value={item.value} label={item.label} />
+         <CounterCard key={i} value={item.value} label={item.label} index={i} />
           ))}
         </div>
       </div>

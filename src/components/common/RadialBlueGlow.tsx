@@ -1,6 +1,8 @@
-export const SpotlightBg = () => {
+export const SpotlightBg = ({
+  className = "",
+}) => {
   return (
-    <div className="pointer-events-none absolute inset-0  z-0">
+    <div className={`pointer-events-none absolute inset-0  z-0 ${className} overflow-hidden`}>
       <div
         className="w-full h-full mx-auto rounded-full"
         style={{
