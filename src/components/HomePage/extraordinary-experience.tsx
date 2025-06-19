@@ -1,4 +1,3 @@
- 
 import TokenSection from "./token-section";
 
 import {
@@ -9,8 +8,9 @@ import {
   LoadingIcon,
 } from "../common/Icons";
 import { SpotlightBg } from "../common/RadialBlueGlow";
- 
+
 import ScrollAnimatedLogo from "../common/AnimatedLogo";
+ 
 
 const features = [
   {
@@ -59,8 +59,11 @@ const limitations = [
 export default function ComparisonSection() {
   return (
     <>
-      <div className="relative   h-full w-full">
-        <section className="relative w-full py-24 overflow-hidden ">
+      <div className="relative h-full w-full overflow-visible">
+        <div className="absolute inset-0 z-0 pointer-events-none overflow-visible">
+          <ScrollAnimatedLogo />
+        </div>
+        <section className="relative z-10 w-full py-24">
           <SpotlightBg />
           {/* Content */}
           <div className="container relative z-10 px-5">
@@ -115,30 +118,9 @@ export default function ComparisonSection() {
             </div>
           </div>
         </section>
-        {/* <section className=" w-full py-[419px] overflow-hidden  ">
-          <Image
-            src="/images/Backgrounds/circles.png"
-            alt="Extraordinary Experience Background"
-            width={2000}
-            height={2000}
-            className="  z-0 top-[17%]   absolute object-center    block"
-            priority
-          />
-    
-          <div className="relative z-10 flex items-center justify-center  w-[744px]  h-[744px]   mx-auto  ">
-            <Image
-              src="/images/logo/DTEC_WhiteMode.png"
-              alt="DTEC Logo"
-              fill
-              className="object-contain "
-              priority
-            />
-          </div>
-        </section> */}
-   <section className="relative z-0 w-full bg-black overflow-hidden">
-  <ScrollAnimatedLogo />
-</section>
-
+      
+  <div className="lg:h-[1032px] md:h-[1032px] h-[600px]"></div>
+        {/* Token Section or anything else */}
         <TokenSection />
       </div>
     </>

@@ -7,31 +7,26 @@ import Image from "next/image";
 export default function ScrollAnimatedLogo() {
   const ref = useRef(null);
 
-  // Track scroll progress (from when section enters until logo hits center)
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "center center"],
   });
 
-  // Animate scale of circles from 0.5 to 1.8
   const scale = useSpring(useTransform(scrollYProgress, [0, 1], [0.5, 1.8]), {
-    stiffness: 40, // ↓ lower = slower
-    damping: 14, // ↓ lower = bouncier (optional)
-    mass: 1.5, // ↑ higher = slower momentum
+    stiffness: 40,
+    damping: 14,
+    mass: 1.5,
   });
 
   return (
     <div
       ref={ref}
-      className="relative flex items-center justify-center w-full h-[100vh] overflow-hidden"
+      className="absolute inset-0 flex items-center top-[300px] md:top-[200px]  sm:-top-12  justify-center overflow-visible pointer-events-none"
     >
-      {/* Optional glow background */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle,_rgba(0,139,255,0.12)_0%,_transparent_70%)] z-0" />
-
-      {/* Animated Rings */}
+      {/* Animated rings */}
       <motion.svg
         style={{ scale }}
-        className="absolute w-[1000px] h-[1000px] z-0"
+        className="absolute md:w-[1000px] md:h-[1000px] sm:w-[700px] sm:h-[700px] w-[444px] h-[444px] "
         viewBox="0 0 744 744"
         fill="none"
       >
@@ -48,8 +43,8 @@ export default function ScrollAnimatedLogo() {
         ))}
       </motion.svg>
 
-      {/* DTEC Logo */}
-      <div className="relative w-[744px] mx-auto w-full h-[744px] z-10">
+      {/* Logo perfectly centered inside rings */}
+      <div className="relative w-[320px] h-[320px] sm:w-[544px] sm:h-[544px] lg:w-[744px] lg:h-[744px] md:w-[600px] md:h-[600px] z-10">
         <Image
           src="/images/logo/DTEC_WhiteMode.png"
           alt="DTEC Logo"
