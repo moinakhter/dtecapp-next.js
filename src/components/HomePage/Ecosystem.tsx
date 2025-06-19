@@ -3,11 +3,12 @@
 import React, { useState, useRef, useEffect } from "react";
 import SectionWrapper from "../common/SectionWrapper";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 function Ecosystem() {
   const [isPlaying, setIsPlaying] = useState(false);
   const videoRef = useRef<HTMLVideoElement | null>(null);
-
+const t = useTranslations("HomePage.Ecosystem");
   const handlePlay = () => {
     setIsPlaying(true);
   };
@@ -26,15 +27,10 @@ function Ecosystem() {
         {/* Left Text Content */}
         <div className="lg:max-w-[400px] w-fill">
           <h2 className="text-4xl md:text-5xl font-extrabold mb-6">
-            Ekosistem
+   {t("title")}
           </h2>
           <p className="text-base text-foreground/80 leading-relaxed">
-            Dtec, Gelişmiş doğal dil işleme kabiliyetleri ve üst düzey yapay
-            zeka özellikleri sayesinde sadece sürücünün sesli komutlarını
-            anlamakla kalmaz, aynı zamanda yerleşik otonom öğrenme sistemi ve
-            duygusal mutabakat mekanizması sayesinde sürücünün ruh halini
-            algılayabilir, ihtiyaç ve isteklerini öngörerek erkenden çözüm ve
-            hizmet sunabilir.
+            {t("description")}
           </p>
         </div>
 

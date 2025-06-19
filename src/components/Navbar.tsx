@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronDown, Moon, Sun } from "lucide-react";
+import {  Moon, Sun } from "lucide-react";
 import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
@@ -14,11 +14,13 @@ import Image from "next/image";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import LocaleSwitcher from "./common/LocaleSwitcher";
+import DownloadButton from "./common/DownloadeLink";
+import { useTranslations } from "next-intl";
 
 export default function Navbar() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
-
+ const t = useTranslations("Navbar");
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -51,20 +53,20 @@ export default function Navbar() {
         {/* Navigation Links */}
         <div className="hidden items-center !space-x-[36px] md:flex">
           <Link href="/products" className="  transition-colors">
-            Ürünlerimiz
+                  {t("products")}
           </Link>
           <Link href="/about" className="  transition-colors">
-            Hakkımızda
+               {t("about")}
           </Link>
           <DropdownMenu>
-            <DropdownMenuTrigger className="flex items-center space-x-1   transition-colors">
-              <span>DTEC Token</span>
-              <ChevronDown className="h-4 w-4" />
+            <DropdownMenuTrigger className="flex items-center space-x-1 transition-colors">
+              <span>Dtec Token</span>
+              <span className=" rotate-[-45deg] inline-block  ">→</span>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
-              <DropdownMenuItem>Token Bilgileri</DropdownMenuItem>
-              <DropdownMenuItem>Whitepaper</DropdownMenuItem>
-              <DropdownMenuItem>Tokenomics</DropdownMenuItem>
+              <DropdownMenuItem>{t("tokenInfo")}</DropdownMenuItem>
+              <DropdownMenuItem>{t("whitepaper")}</DropdownMenuItem>
+              <DropdownMenuItem>{t("tokenomics")}</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
@@ -72,26 +74,22 @@ export default function Navbar() {
         {/* Right Side Controls */}
         <div className="flex items-center !space-x-6">
           {/* Language Selector */}
-          <LocaleSwitcher  />
+          <LocaleSwitcher />
 
           {/* Theme Toggle */}
-          <Button
-            variant="ghost"
-            size="icon"
+          <button
             onClick={toggleTheme}
-            className="!hover:bg-transparent dark:hover:bg-transparent hover:text-accent transition-colors "
+            className="!hover:bg-transparent cursor-pointer   hover:text-accent transition-colors "
           >
             {isDark ? (
               <Sun className="h-5 w-5" />
             ) : (
               <Moon className="h-5 w-5" />
             )}
-          </Button>
+          </button>
 
           {/* Download Assistant Button */}
-          <Button className="bg-secondary hover:bg-blue-600 text-white  !p-[12px] rounded-lg font-medium">
-            Asistanı İndirin
-          </Button>
+          <DownloadButton title={t("Download")}/>
         </div>
 
         {/* Mobile Menu Button */}

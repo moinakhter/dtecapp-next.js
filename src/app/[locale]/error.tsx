@@ -18,7 +18,7 @@ export default function Error({error, reset}: Props) {
 
   return (
   
-      <div>
+      <div className='flex flex-col items-center justify-center min-h-screen p-4 text-center'>
         {t.rich('description', {
           p: (chunks) => <p className="mt-4">{chunks}</p>,
           retry: (chunks) => (

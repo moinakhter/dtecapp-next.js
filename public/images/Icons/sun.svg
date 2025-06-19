@@ -1,10 +1,10 @@
 <svg width="32" height="33" viewBox="0 0 32 33" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M16 5.20117V11.2012" stroke="#FAFAFA" stroke-width="2" stroke-linecap="round"/>
-<path d="M16 29.2012V23.2012" stroke="#FAFAFA" stroke-width="2" stroke-linecap="round"/>
-<path d="M28 17.2012H22" stroke="#FAFAFA" stroke-width="2" stroke-linecap="round"/>
-<path d="M4 17.2012H10" stroke="#FAFAFA" stroke-width="2" stroke-linecap="round"/>
-<path d="M24.4851 8.71582L20.2451 12.9558" stroke="#FAFAFA" stroke-width="2" stroke-linecap="round"/>
-<path d="M7.51465 25.6863L11.7546 21.4463" stroke="#FAFAFA" stroke-width="2" stroke-linecap="round"/>
-<path d="M24.4851 25.6863L20.2451 21.4463" stroke="#FAFAFA" stroke-width="2" stroke-linecap="round"/>
-<path d="M7.51465 8.71582L11.7546 12.9558" stroke="#FAFAFA" stroke-width="2" stroke-linecap="round"/>
+<path d="M16 5.20117V11.2012" stroke="#FAFAFA" strokeWidth="2" strokeLinecap="round"/>
+<path d="M16 29.2012V23.2012" stroke="#FAFAFA" strokeWidth="2" strokeLinecap="round"/>
+<path d="M28 17.2012H22" stroke="#FAFAFA" strokeWidth="2" strokeLinecap="round"/>
+<path d="M4 17.2012H10" stroke="#FAFAFA" strokeWidth="2" strokeLinecap="round"/>
+<path d="M24.4851 8.71582L20.2451 12.9558" stroke="#FAFAFA" strokeWidth="2" strokeLinecap="round"/>
+<path d="M7.51465 25.6863L11.7546 21.4463" stroke="#FAFAFA" strokeWidth="2" strokeLinecap="round"/>
+<path d="M24.4851 25.6863L20.2451 21.4463" stroke="#FAFAFA" strokeWidth="2" strokeLinecap="round"/>
+<path d="M7.51465 8.71582L11.7546 12.9558" stroke="#FAFAFA" strokeWidth="2" strokeLinecap="round"/>
 </svg>

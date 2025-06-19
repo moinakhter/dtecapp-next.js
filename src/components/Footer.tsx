@@ -7,27 +7,7 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { Input } from "./ui/input";
-
-const footerLinks = {
-  products: [
-    { name: "Araç Asistanı", href: "/products/car-assistant" },
-    { name: "Alışveriş Asistanı", href: "/products/shopping-assistant" },
-    { name: "Akıllı Ev Asistanı", href: "/products/home-assistant" },
-    { name: "Seyahat Asistanı", href: "/products/travel-assistant" },
-  ],
-  about: [
-    // { name: "Hakkımızda", href: "/about" },
-    // { name: "Ekibimiz", href: "/team" },
-    // { name: "Kariyer", href: "/careers" },
-    // { name: "Basın Kiti", href: "/press" },
-  ],
-  legal: [
-    { name: "Hizmetler & Koşullar", href: "/terms" },
-    { name: "Gizlilik Politikası", href: "/privacy" },
-    { name: "KVKK Aydınlatma Metni", href: "/kvkk" },
-    { name: "Tüm Hakları Saklıdır", href: "/rights" },
-  ],
-};
+import { useTranslations } from "next-intl";
 
 const socialLinks = [
   {
@@ -68,6 +48,8 @@ const socialLinks = [
 ];
 
 export default function Footer() {
+  const t = useTranslations("Footer");
+
   const [email, setEmail] = useState("");
 
   const handleNewsletterSubmit = (e: React.FormEvent) => {
@@ -75,6 +57,29 @@ export default function Footer() {
     // Handle newsletter signup
     console.log("Newsletter signup:", email);
     setEmail("");
+  };
+  const footerLinks = {
+    products: [
+      { name: t("products.car"), href: "/products/car-assistant" },
+      {
+        name: t("products.shopping"),
+        href: "/products/shopping-assistant",
+      },
+      { name: t("products.home"), href: "/products/home-assistant" },
+      { name: t("products.travel"), href: "/products/travel-assistant" },
+    ],
+    about: [
+      // { name: "Hakkımızda", href: "/about" },
+      // { name: "Ekibimiz", href: "/team" },
+      // { name: "Kariyer", href: "/careers" },
+      // { name: "Basın Kiti", href: "/press" },
+    ],
+    legal: [
+      { key: "terms", href: "/terms" },
+      { key: "privacy", href: "/privacy" },
+      { key: "kvkk", href: "/kvkk" },
+      { key: "all_rights", href: "/rights" },
+    ],
   };
 
   return (
@@ -117,7 +122,9 @@ export default function Footer() {
           <div className="gap-12 flex   justify-center items-start">
             {/* Products */}
             <div className=" ">
-              <h3 className=" font-medium text-base  mb-4">Ürünlerimiz</h3>
+              <h3 className=" font-medium text-base  mb-4">
+                {t("productstitle")}
+              </h3>
               <ul className="space-y-3">
                 {footerLinks.products.map((link) => (
                   <li key={link.name}>
@@ -134,7 +141,7 @@ export default function Footer() {
 
             {/* About */}
             <div className=" ">
-              <h3 className="font-semibold text-foreground mb-4">Hakkımızda</h3>
+              <h3 className="font-medium text-base  mb-4">{t("about")}</h3>
               {/* <ul className="space-y-3">
               {footerLinks.about.map((link) => (
                 <li key={link.name}>
@@ -151,17 +158,18 @@ export default function Footer() {
 
             {/* Contact */}
             <div className="  ">
-              <h3 className="font-semibold text-foreground mb-4">
-                Bize Ulaşın
-              </h3>
+              <h3 className="font-medium text-base  mb-4">{t("contact")}</h3>
               <div className="space-y-[13px]">
                 <div className="flex items-start gap-2  ">
                   <MapPin className="h-4 w-4 flex-shrink-0" />
-                  <span className="text-[13px] w-full">
-                    Finlandiya Mah. Finlandiya Bulvarı
-                    <br />
-                    N:100 34394 Avcılar/İstanbul
-                  </span>
+                  {/* <span className="text-[13px] w-full">{t("address")}</span> */}
+
+                 <div className="text-[13px] w-full">
+  {t("address").split("\n").map((line, i) => (
+    <p key={i}>{line}</p>
+  ))}
+</div>
+
                 </div>
                 <div className="flex items-center gap-2 ">
                   <Phone className="h-4 w-4" />
@@ -183,34 +191,31 @@ export default function Footer() {
               quality={100}
               className="object-cover transition-transform duration-300 ease-in-out group-hover:scale-105"
             />
-       <div className="absolute bottom-4 left-4 z-10">
-        <Link
-          href="https://dtec.space/"
-          className="!text-white  text-lg  font-bold flex items-center gap-1  transition-transform duration-300 ease-in-out  group-hover:scale-105"
-          target="_blank"
-          rel="noopener noreferrer"
-          title="DTEC Token"
-
-        >
-          DTEC Token
-          <span className="text-[12px]">↗</span>
-        </Link>
-      </div>
-
+            <div className="absolute bottom-4 left-4 z-10">
+              <Link
+                href="https://dtec.space/"
+                className="!text-white  text-lg  font-bold flex items-center gap-1  transition-transform duration-300 ease-in-out  group-hover:scale-105"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="DTEC Token"
+              >
+                DTEC Token
+                <span className="text-[12px]">↗</span>
+              </Link>
+            </div>
           </div>
         </div>
 
         {/* Newsletter Section */}
-        <div className=" pt-[112px] mb-8">
+        <div className="pt-[112px] mb-8">
           <form
             onSubmit={handleNewsletterSubmit}
-            className="flex  items-center justify-center gap-3"
+            className="flex items-center justify-center gap-3"
           >
             <Input
               type="email"
-              placeholder="Bir Mail Adresi Girin"
-              // onChange={(e: unknown) => setEmail(e?.target?.value)}
-              className="flex-1 rounded-[9.6px] min-h-[48px] border-none  focus-within:border-none outline-none bg-[#E0E0E0] max-w-[374px] w-full h-full dark:bg-[#212121]"
+              placeholder={t("newsletter_placeholder")}
+              className="flex-1 rounded-[9.6px] min-h-[48px] border-none focus-within:border-none outline-none bg-[#E0E0E0] max-w-[374px] w-full h-full dark:bg-[#212121]"
               required
             />
             <Button
@@ -218,16 +223,20 @@ export default function Footer() {
               size="sm"
               className="bg-secondary rounded-[9.6px"
             >
-              Geçmişten Takip Edin
+              {t("newsletter_button")}
             </Button>
           </form>
 
-          <p className="text-center  text-sm font-light mt-6">
-            Güncellemeler sayın duyurular DTEC&apos;den ilgili açık ve etkili
-            bilgileri göndermek için bilgilendirme kullanılabilir.
-            <br />
-            İstediğiniz zaman abonelikten çıkabilirsiniz. Daha fazla bilgi için
-            Gizlilik Politikamızı gözden geçirin.
+          <p className="text-center text-sm font-light mt-6">
+            {t
+              .raw("newsletter_note")
+              .split("\n")
+              .map((line: string, i: number) => (
+                <span key={`${i}-${line}`}>
+                  {line}
+                  <br />
+                </span>
+              ))}
           </p>
         </div>
 
@@ -237,12 +246,11 @@ export default function Footer() {
             <div className="flex flex-wrap gap-9 text-[13px]  ">
               {footerLinks.legal.map((link) => (
                 <Link
-                  key={link.name}
+                  key={link.key}
                   href={link.href}
-                  className="hover:text-primary font-medium
-                   transition-colors duration-200"
+                  className="hover:text-primary font-medium transition-colors duration-200"
                 >
-                  {link.name}
+                  {t(`legal.${link.key}`)}
                 </Link>
               ))}
             </div>

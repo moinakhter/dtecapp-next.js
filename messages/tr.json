@@ -34,17 +34,222 @@
     "description": "Please double-check the browser address bar or use the navigation to go to a known page.",
     "title": "Page not found"
   },
+
+  "Navbar": {
+    "products": "Ürünlerimiz",
+    "about": "Hakkımızda",
+    "tokenInfo": "Token Bilgileri",
+    "whitepaper": "Whitepaper",
+    "tokenomics": "Tokenomics",
+    "Download": "  Asistanı İndirin"
+  },
+
+  "Footer": {
+    "contact": "Bize Ulaşın",
+    "address": "Finlandiya Mah. Finlandiya Bulvarı\nN:100 34394 Avcılar/İstanbul",
+    "newsletter_placeholder": "Bir Mail Adresi Girin",
+    "newsletter_button": "Geçmişten Takip Edin",
+    "newsletter_note": "Güncellemeler sayın duyurular DTEC'den ilgili açık ve etkili bilgileri göndermek için bilgilendirme kullanılabilir.\nİstediğiniz zaman abonelikten çıkabilirsiniz. Daha fazla bilgi için Gizlilik Politikamızı gözden geçirin.",
+    "productstitle": "Ürünlerimiz",
+    "about": "Hakkımızda",
+
+    "legal": {
+      "terms": "Hizmetler & Koşullar",
+      "privacy": "Gizlilik Politikası",
+      "kvkk": "KVKK Aydınlatma Metni",
+      "all_rights": "Tüm Hakları Saklıdır"
+    },
+    "products": {
+      "car": "Araç Asistanı",
+      "shopping": "Alışveriş Asistanı",
+      "home": "Akıllı Ev Asistanı",
+      "travel": "Seyahat Asistanı"
+    }
+  },
+
   "HomePage": {
     "Hero": {
       "title": "Geleceğe Yolculuk",
       "description": " Hepsi Bir Arada Akıllı Sesli Asistan Çözümünüz",
-      "counter1":"Ödül",
-      "counter2":"Anlaşmalı Firma",
-      "counter3":"Mutlu Çalışan" ,
-      "counter4":"Dilde Çeviri"
-    },"Dtec AI Call Center": {
-      "title": "Dtec AI Call Center",
-      "description": " Dtec AI Call Center çözümümüz, gelen ve giden çağrıların insan müdahalesi olmadan yöneterek müşteri deneyimini devrim niteliğinde dönüştürüyor!"
+      "counter1": "Ödül",
+      "counter2": "Anlaşmalı Firma",
+      "counter3": "Mutlu Çalışan",
+      "counter4": "Dilde Çeviri"
+    },
+
+    "mindsmeet": "tüm zihinlerin buluştuğu yer",
+    "Dtec AI Call Center": {
+      "title": "Dtec AI Çağrı Merkezi",
+      "description": "Dtec AI Call Center çözümümüz, gelen ve giden çağrıların insan müdahalesi olmadan yöneterek müşteri deneyimini devrim niteliğinde dönüştürüyor!",
+      "sectionTitle": "Geleceğin Çağrı Deneyimi Başladı.",
+      "sectionDescription": "Yapay zeka destekli çağrı merkezi çözümümüz ile müşteri hizmetlerinde devrim yaratın. DtecAI, gelen ve giden çağrıları otomatik olarak yönetir, kişiselleştirilmiş hizmet sunar ve 7/24 kesintisiz destek sağlar.",
+      "button": "Daha Fazla Bilgi Edinin",
+      "features": {
+        "f1": {
+          "title": "Akıllı Çağrı Karşılama",
+          "description": "Her çağrıyı doğru yönlendirme ve anında çözüm."
+        },
+        "f2": {
+          "title": "Otonom Giden Çağrılar",
+          "description": "Bilgilendirme, hatırlatma ve anketler."
+        },
+        "f3": {
+          "title": "7/24 Hizmet, Çok Dilli Destek",
+          "description": "Kesintisiz, global destek deneyimi."
+        },
+        "f4": {
+          "title": "Sürekli Öğrenen Zeka",
+          "description": "Her etkileşimden gelişen sistem."
+        }
+      },
+      "scalability": {
+        "title": "Ölçeklenebilir Yapı",
+        "description": "DtecAI, küçük ekiplerden global operasyonlara kadar her ölçekte esnek bir şekilde uyarlanabilir. Ek geliştirmeye gerek kalmadan büyüyen ihtiyaçlara cevap verir."
+      },
+      "security": {
+        "title": "Kurumsal Güvenlik Standartları",
+        "description": "Tüm iletişim ve işlem kayıtları, uluslararası güvenlik standartlarına uygun şekilde şifrelenir ve saklanır. DtecAI, veri gizliliğinizi ciddiyetle korur."
+      },
+      "howItWorks": {
+        "title": "Nasıl Çalışır?",
+        "subtitle": "Müşterilerinizin olduğu her yerde DtecAI ile var olun.",
+        "columns": {
+          "col1": {
+            "title": "Anında Algılama ve Yönlendirme",
+            "points": [
+              "Müşteri sizi aradığında DtecAI çağrıyı otomatik olarak karşılar.",
+              "Arayan kişinin ihtiyacını saniyeler içinde analiz eder.",
+              "Konuya göre en doğru yanıtı sunar veya yönlendirir."
+            ]
+          },
+          "col2": {
+            "title": "Yapay Zekâ ile Dinle, Anla ve Cevapla",
+            "points": [
+              "NLP teknolojisiyle müşterinin ne söylediğini ve ne istediğini anlar.",
+              "İnsan benzeri, doğal ve akıcı bir konuşma deneyimi sunar.",
+              "Her etkileşimden öğrenerek gelecekte daha doğru tepkiler verir."
+            ]
+          },
+          "col3": {
+            "title": "Verimli, Ölçülebilir ve Her Zaman Hazır",
+            "points": [
+              "Randevu hatırlatma, kampanya ve anket gibi aramalar otonom şekilde gerçekleştirilir.",
+              "7/24 hizmet vererek gelen hiçbir çağrı cevapsız kalmaz.",
+              "Operasyonel maliyetleri düşürür, müşteri memnuniyetini artırır."
+            ]
+          }
+        },
+        "cta": {
+          "text": "Bugün kullanmaya başlayın!",
+          "button": "Demo Talep Edin"
+        }
+      },
+      "automation": {
+        "title": "Otomatik Süreç Akışları",
+        "description": "Manuel işlemlere veda edin. Müşteriyle gerçekleşen her etkileşim sonrası tetiklenen e-posta, SMS ya da CRM girdileri tamamen otomatikleştirilir. Zaman kazanın, hata payını sıfırlayın."
+      }
+    },
+    "Ecosystem": {
+      "title": "Ekosistem",
+      "description": " Dtec, Gelişmiş doğal dil işleme kabiliyetleri ve üst düzey yapay zeka özellikleri sayesinde sadece sürücünün sesli komutlarını anlamakla kalmaz, aynı zamanda yerleşik otonom öğrenme sistemi ve duygusal mutabakat mekanizması sayesinde sürücünün ruh halini algılayabilir, ihtiyaç ve isteklerini öngörerek erkenden çözüm ve hizmet sunabilir."
+    },
+    "Dtec Assistants": {
+      "title": "Dtec Asistanları",
+      "description": "Hepsi bir arada akıllı sesli asistanlar:\nHer komutta size rehber, her adımda konfor.",
+      "car": {
+        "title": "Dtec Araç Asistanı",
+        "description": "Araçlar ile karşıda bir insan varmış gibi konuşmayı sağlar. Ses tanıma teknolojisiyle sizinle etkileşim kurar ve istediğiniz bilgileri veya komutları hızla yerine getirir.",
+        "features": {
+          "f1": "Sohbet Modülü",
+          "f2": "Yüz Tanıma",
+          "f3": "Telefon Kontrolü",
+          "f4": "Araç Donanımları Kontrolü"
+        }
+      },
+      "shopping": {
+        "title": "Dtec Alışveriş Asistanı",
+        "description": "Herkesin e-ticaret platformlarında konuşarak rahatlıkla alışveriş yapabileceği alışveriş asistanıdır",
+        "features": {
+          "f1": "Gelişmiş NLP yetenekleri",
+          "f2": "Kişiselleştirme ve Özelleştirme",
+          "f3": "Güvenli İşlem İşleme"
+        }
+      },
+      "home": {
+        "title": "Dtec Akıllı Ev Asistanı",
+        "description": "IoT cihazlarıyla uyumlu çalışarak veri analizi, cihaz yönetimi ve kullanıcı deneyimini optimize etme konularında uzmanlaşmıştır.",
+        "features": {
+          "f1": "IoT Cihazları Sorunsuz Entegrasyon",
+          "f2": "Bağlama Duyarlı Zeka",
+          "f3": "Otomasyon ve Kişiselleştirme"
+        }
+      },
+      "learnMore": "Detaylı İncele"
+    },
+    "Comparison Section": {
+      "title": "Sıradışı Bir Asistan Deneyimi",
+      "description": "Hepsi Bir Arada Akıllı Sesli Asistanlar.",
+      "features": {
+        "f1": {
+          "title": "Doğal Dil Anlama (NLU)",
+          "description": "Sezgisel kullanıcı iletişimi için konuşmayı anlama, bağlam açısından zengin etkileşimler"
+        },
+        "f2": {
+          "title": "Çok Modlu Etkileşim",
+          "description": "Esnek kullanıcı etkileşimi için kesintisiz ses, metin ve görsel geçişler"
+        },
+        "f3": {
+          "title": "Kişiselleştirme ve Kullanıcı Tanıma",
+          "description": "Yanıtları kişiselleştirilmiş etkileşime göre uyarlayarak kullanıcı tercihlerini öğrenin ve hatırlayın"
+        },
+        "f4": {
+          "title": "Üçüncü Taraf Hizmetlerle Entegrasyon",
+          "description": "Kolaylık sağlamak için merkezi bir merkez oluşturarak çeşitli hizmetlere bağlanın"
+        },
+        "f5": {
+          "title": "Bağlama Duyarlı Görev Sürekliliği",
+          "description": "Tekrarlama ihtiyacını azaltarak akıcı etkileşimler için bağlamı koruyun"
+        }
+      },
+      "otherApplicationsTitle": "Diğerler Uygulamalar",
+      "limitations": {
+        "l1": "Temel ve statik tepkiler ve cevaplar.",
+        "l2": "Tek modlu etkileşim.",
+        "l3": "Kişiselleştirilmez deneyim",
+        "l4": "Kapalı ekosistem",
+        "l5": "Temel etkileşimler"
+      }
+    },
+    "TokenSection": {
+      "header": "Dtec Token ile\nMobilitenin Geleceğini Yaşayın!",
+      "description": "Dtec Token, blok zinciri altyapısıyla çalışan Dtec Asistan üzerinden sesli komutlarla uygulama kontrolü sağlar. Araç şarj edildiğinde veya asistan kullanıldığında token kazanır. Bu ödüller, sistem içinde özgürce harcanabilir ve değer yaratmak için kullanılabilir. Gerçek zamanlı veri, yapay zeka ve güvenli blockchain entegrasyonu sayesinde mobilite artık daha akıllı, kazançlı ve tamamen kişisel.",
+      "cta": "Daha Fazlasını Öğrenin",
+      "features": {
+        "feature_1": {
+          "title": "Sesli Komutla Erişim",
+          "description": "IoT cihazlarına ve uygulamalara sesle anında erişim."
+        },
+        "feature_2": {
+          "title": "Yapay Zeka Entegrasyonu",
+          "description": "Asistan destekli, sürekli evrilen akıllı mobilite ekosistemi."
+        },
+        "feature_3": {
+          "title": "Kişiselleştirilmiş Deneyim",
+          "description": "Sürüş alışkanlıklarına göre dinamik optimizasyon."
+        },
+        "feature_4": {
+          "title": "Token Kazanımı",
+          "description": "Şarj işlemleri ve asistan etkileşimleriyle token kazan, istediğin gibi değerlendir."
+        },
+        "feature_5": {
+          "title": "Gerçek Zamanlı Veri",
+          "description": "Anlık rota ve sürüş içgörüleriyle verimli mobilite."
+        },
+        "feature_6": {
+          "title": "Blockchain Güvencesi",
+          "description": "Blockchain'in şeffaf, güvenli ve izlenebilir işlem altyapısı."
+        }
+      }
     }
   }
 }

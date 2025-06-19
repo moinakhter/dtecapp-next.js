@@ -18,84 +18,94 @@ import {
 import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 import TextGradientWhite from "../common/text-gradient-white";
+import { useTranslations } from "next-intl";
 
 export default function DtecAssistants() {
   const [activeCard, setActiveCard] = useState("car");
+const t = useTranslations("HomePage.Dtec Assistants");
 
-  const cards = [
-    {
-      id: "car",
-      title: "Dtec Araç Asistanı",
-      description:
-        "Araçlar ile karşıda bir insan varmış gibi konuşmayı sağlar. Ses tanıma teknolojisiyle sizinle etkileşim kurar ve istediğiniz bilgileri veya komutları hızla yerine getirir.",
-      image: "/images/Home/dtec-assistants/car.png",
-      link: "#",
-      features: [
-        {
-          icon: <MessageSquareText className="h-5 w-5" />,
-          text: "Sohbet Modülü",
-        },
-        { icon: <ScanFace className="h-5 w-5" />, text: "Yüz Tanıma" },
-        { icon: <Phone className="h-5 w-5" />, text: "Telefon Kontrolü" },
-        {
-          icon: <Cpu className="h-5 w-5" />,
-          text: "Araç Donanımları Kontrolü",
-        },
-      ],
-    },
-    {
-      id: "shopping",
-      title: "Dtec Alışveriş Asistanı",
-      description:
-        "Herkesin e-ticaret platformlarında konuşarak rahatlıkla alışveriş yapabileceği alışveriş asistanıdır",
-      image: "/images/Home/dtec-assistants/women-shopping.png",
-      link: "#",
+const cards = [
+  {
+    id: "car",
+    title: t("car.title"),
+    description: t("car.description"),
+    image: "/images/Home/dtec-assistants/car.png",
+    link: "#",
+    features: [
+      {
+        icon: <MessageSquareText className="h-5 w-5" />,
+        text: t("car.features.f1"),
+      },
+      {
+        icon: <ScanFace className="h-5 w-5" />,
+        text: t("car.features.f2"),
+      },
+      {
+        icon: <Phone className="h-5 w-5" />,
+        text: t("car.features.f3"),
+      },
+      {
+        icon: <Cpu className="h-5 w-5" />,
+        text: t("car.features.f4"),
+      },
+    ],
+  },
+  {
+    id: "shopping",
+    title: t("shopping.title"),
+    description: t("shopping.description"),
+    image: "/images/Home/dtec-assistants/women-shopping.png",
+    link: "#",
+    features: [
+      {
+        icon: <Code className="h-5 w-5" />,
+        text: t("shopping.features.f1"),
+      },
+      {
+        icon: <User className="h-5 w-5" />,
+        text: t("shopping.features.f2"),
+      },
+      {
+        icon: <Shield className="h-5 w-5" />,
+        text: t("shopping.features.f3"),
+      },
+    ],
+  },
+  {
+    id: "home",
+    title: t("home.title"),
+    description: t("home.description"),
+    image: "/images/Home/dtec-assistants/smarthome.png",
+    link: "#",
+    features: [
+      {
+        icon: <Layers className="h-5 w-5" />,
+        text: t("home.features.f1"),
+      },
+      {
+        icon: <Zap className="h-5 w-5" />,
+        text: t("home.features.f2"),
+      },
+      {
+        icon: <Cpu className="h-5 w-5" />,
+        text: t("home.features.f3"),
+      },
+    ],
+  },
+];
 
-      features: [
-        {
-          icon: <Code className="h-5 w-5" />,
-          text: "Gelişmiş NLP yetenekleri",
-        },
-        {
-          icon: <User className="h-5 w-5" />,
-          text: "Kişiselleştirme ve Özelleştirme",
-        },
-        { icon: <Shield className="h-5 w-5" />, text: "Güvenli İşlem İşleme" },
-      ],
-    },
-    {
-      id: "home",
-      title: "Dtec Akıllı Ev Asistanı",
-      description:
-        "IoT cihazlarıyla uyumlu çalışarak veri analizi, cihaz yönetimi ve kullanıcı deneyimini optimize etme konularında uzmanlaşmıştır.",
-      image: "/images/Home/dtec-assistants/smarthome.png",
-      link: "#",
-
-      features: [
-        {
-          icon: <Layers className="h-5 w-5" />,
-          text: "IoT Cihazları Sorunsuz Entegrasyon",
-        },
-        { icon: <Zap className="h-5 w-5" />, text: "Bağlama Duyarlı Zeka" },
-        {
-          icon: <Cpu className="h-5 w-5" />,
-          text: "Otomasyon ve Kişiselleştirme",
-        },
-      ],
-    },
-  ];
 
   return (
     <div className="w-full bg-white dark:bg-[#0B0B0B] py-[128px] ">
       <div className="container mx-auto">
         {/* Header */}
         <div className="text-center mb-10 md:mb-24">
-          <TextGradientWhite text="Dtec Asistanları" />
+          <TextGradientWhite text={t("title")} />
 
-          <p className="text-2xl font-light opacity-60 ">
-            Hepsi Bir Arada Akıllı Sesli Asistanlar. Hepsi Bir Arada Akıllı
-            Sesli Asistanlar.
-          </p>
+{t("description").split("\n").map((line, i) => (
+  <p className="text-2xl font-light opacity-60 "key={i}>{line}</p>
+))}
+ 
         </div>
         {/* Expanding Cards */}
         <div className="flex h-[500px] w-full gap-2.5 mx-auto">
@@ -147,7 +157,7 @@ export default function DtecAssistants() {
                           animate={{ opacity: 1, x: 0 }}
                           transition={{ duration: 0.3, delay: 0.2 }}
                         >
-                          Detaylı İncele
+                         {t("learnMore")}
                         </motion.span>
                         <motion.span
                           initial={{ opacity: 0, x: 10 }}

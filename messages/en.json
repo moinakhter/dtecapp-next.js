@@ -4,26 +4,26 @@
     "title": "Turkish translation of the home page messages."
   },
   "Manifest": {
-    "name": "DTEC - Akıllı Sesli Asistan Platformu",
+    "name": "DTEC - Smart Voice Assistant Platform",
     "shortName": "DTEC",
-    "description": "Hepsi Bir Arada Akıllı Sesli Asistanlar. Araç, ev, alışveriş ve seyahat asistanlarıyla mobilitenin geleceğini yaşayın.",
+    "description": "All-in-One Smart Voice Assistants. Experience the future of mobility with car, home, shopping and travel assistants.",
     "shortcuts": {
-      "carAssistant": "Araç Asistanı",
-      "carAssistantShort": "Araç",
-      "carAssistantDesc": "Araçlar ile sesli etkileşim kurun",
-      "homeAssistant": "Akıllı Ev Asistanı",
-      "homeAssistantShort": "Ev",
-      "homeAssistantDesc": "Evinizi sesli komutlarla kontrol edin",
-      "shoppingAssistant": "Alışveriş Asistanı",
-      "shoppingAssistantShort": "Alışveriş",
-      "shoppingAssistantDesc": "Sesli komutlarla alışveriş yapın",
+      "carAssistant": "Car Assistant",
+      "carAssistantShort": "Car",
+      "carAssistantDesc": "Voice interaction with vehicles",
+      "homeAssistant": "Smart Home Assistant",
+      "homeAssistantShort": "Home",
+      "homeAssistantDesc": "Control your home with voice commands",
+      "shoppingAssistant": "Shopping Assistant",
+      "shoppingAssistantShort": "Shopping",
+      "shoppingAssistantDesc": "Shop with voice commands",
       "dtecToken": "DTEC Token",
       "dtecTokenShort": "Token",
-      "dtecTokenDesc": "Blockchain tabanlı token sistemi"
+      "dtecTokenDesc": "Blockchain-based token system"
     }
   },
   "LocaleSwitcher": {
-    "locale": "TR"
+    "locale": "EN"
   },
 
   "Error": {
@@ -33,5 +33,240 @@
   "NotFoundPage": {
     "description": "Please double-check the browser address bar or use the navigation to go to a known page.",
     "title": "Page not found"
+  },
+
+  "Navbar": {
+    "products": "Our products",
+    "about": "About Us",
+    "tokenInfo": "Token Information",
+    "whitepaper": "Whitepaper",
+    "tokenomics": "Tokenomics",
+    "Download": "Download Assistant"
+  },
+  "Footer": {
+    "contact": "Contact Us",
+    "address": "Finlandiya Mah. Finland Boulevard\nN:100 34394 Avcılar/İstanbul",
+    "newsletter_placeholder": "Enter an Email Address",
+    "newsletter_button": "Follow the Past",
+    "newsletter_note": "Updates, dear announcements, notifications can be used to send clear and effective information from DTEC.\nYou can unsubscribe at any time. For more information, please review our Privacy Policy.",
+    "productstitle": "Our Products",
+    "about": "About Us",
+
+    "legal": {
+      "terms": "Services & Conditions",
+      "privacy": "Privacy Policy",
+      "kvkk": "KVKK Information Text",
+      "all_rights": "All Rights Reserved"
+    },
+    "products": {
+      "car": "Car Assistant",
+      "shopping": "Shopping Assistant",
+      "home": "Smart Home Assistant",
+      "travel": "Travel Assistant"
+    }
+  },
+  "HomePage": {
+    "Hero": {
+      "title": "Journey to the Future",
+
+      "description": "Your All-in-One Smart Voice Assistant Solution",
+
+      "counter1": "Award",
+
+      "counter2": "Partner",
+
+      "counter3": "Happy Employee",
+
+      "counter4": "Language Translation"
+    },
+
+    "mindsmeet": "Where all minds meet",
+
+    "Dtec AI Call Center": {
+      "title": "Dtec AI Call Center",
+
+      "description": "Our Dtec AI Call Center solution revolutionizes customer experience by managing incoming and outgoing calls without human intervention!",
+
+      "sectionTitle": "The Future of Call Experience Has Started.",
+
+      "sectionDescription": "Revolutionize customer service with our AI-powered call center solution. DtecAI automatically manages incoming and outgoing calls, provides personalized service and Provides uninterrupted support 24/7.",
+      "button": "Learn More",
+      "features": {
+        "f1": {
+          "title": "Intelligent Call Answering",
+          "description": "Correctly route and instantly resolve every call."
+        },
+        "f2": {
+          "title": "Autonomous Outgoing Calls",
+          "description": "Information, reminders and surveys."
+        },
+        "f3": {
+          "title": "24/7 Service, Multilingual Support",
+          "description": "Uninterrupted, global support experience."
+        },
+        "f4": {
+          "title": "Continuously Learning Intelligence",
+          "description": "A system that evolves with every interaction."
+        }
+      },
+      "scalability": {
+        "title": "Scalable Structure",
+        "description": "DtecAI can be flexibly adapted to any scale, from small teams to global operations. It responds to growing needs without the need for additional development."
+      },
+      "security": {
+        "title": "Corporate Security Standards",
+        "description": "All communication and transaction records are encrypted and stored in accordance with international security standards. DtecAI takes your data privacy seriously."
+      },
+      "howItWorks": {
+        "title": "How Does It Work?",
+        "subtitle": "Be present wherever your customers are with DtecAI.",
+        "columns": {
+          "col1": {
+            "title": "Instant Detection and Routing",
+            "points": [
+              "When a customer calls you, DtecAI automatically answers the call.",
+              "Analyzes the caller's needs in seconds.",
+              "Offers or routes the most accurate answer based on the topic."
+            ]
+          },
+          "col2": {
+            "title": "Listen, Understand and Respond with Artificial Intelligence",
+            "points": [
+              "Understands what the customer says and wants with NLP technology.",
+              "Offers a human-like, natural and fluent conversational experience.",
+              "Learns from every interaction and responds more accurately in the future."
+            ]
+          },
+          "col3": {
+            "title": "Efficient, Measurable and Always Ready",
+            "points": [
+              "Calls such as appointment reminders, campaigns and surveys are carried out autonomously.",
+              "No incoming call goes unanswered by providing 24/7 service.",
+              "Reduces operational costs, increases customer satisfaction."
+            ]
+          }
+        },
+        "cta": {
+          "text": "Start using today!",
+          "button": "Request a Demo"
+        }
+      },
+      "automation": {
+        "title": "Automatic Process Flows",
+        "description": "Say goodbye to manual processes. E-mail, SMS or CRM entries triggered after each interaction with the customer are completely automated. Save time, reduce the margin of error."
+      }
+    },
+    "Ecosystem": {
+      "title": "Ekosistem",
+      "description": " Thanks to its advanced natural language processing capabilities and high-level artificial intelligence features, Dtec not only understands the driver's voice commands, but also perceives the driver's mood, anticipates their needs and desires, and provides early solutions and services thanks to its built-in autonomous learning system and emotional consensus mechanism."
+    },
+    "Dtec Assistants": {
+      "title": "Dtec Assistants",
+      "description": "All-in-one intelligent voice assistants:\nGuidance with every command, comfort with every step.",
+
+      "car": {
+        "title": "Dtec Vehicle Assistant",
+        "description": "It allows you to talk to vehicles as if there was a person in front of you. It interacts with you with voice recognition technology and quickly fulfills the information or commands you want.",
+        "features": {
+          "f1": "Chat Module",
+          "f2": "Face Recognition",
+          "f3": "Phone Control",
+          "f4": "Vehicle Equipment Control"
+        }
+      },
+      "shopping": {
+        "title": "Dtec Shopping Assistant",
+        "description": "It is a shopping assistant that everyone can easily shop on e-commerce platforms by talking",
+        "features": {
+          "f1": "Advanced NLP capabilities",
+          "f2": "Personalization and Customization",
+          "f3": "Secure Transaction Processing"
+        }
+      },
+      "home": {
+        "title": "Dtec Smart Home Assistant",
+        "description": "Specializes in data analysis, device management and user experience optimization by working with IoT devices.",
+        "features": {
+          "f1": "Seamless Integration with IoT Devices",
+          "f2": "Context-Aware Intelligence",
+          "f3": "Automation and Personalization"
+        }
+      },
+      "learnMore": "See in Detail"
+    },
+    "Comparison Section": {
+      "title": "An Extraordinary Assistant Experience",
+      "description": "AAll-in-One Intelligent Voice Assistants.",
+      "features": {
+        "f1": {
+          "title": "Natural Language Understanding (NLU)",
+
+          "description": "Speech understanding for intuitive user communication, context-rich interactions"
+        },
+
+        "f2": {
+          "title": "Multimodal Interaction",
+
+          "description": "Seamless transitions of voice, text, and visuals for flexible user interaction"
+        },
+
+        "f3": {
+          "title": "Personalization and User Identification",
+
+          "description": "Learn and remember user preferences by tailoring responses to personalized interactions"
+        },
+
+        "f4": {
+          "title": "Integration with Third-Party Services",
+
+          "description": "Connect to various services by creating a central hub for convenience"
+        },
+
+        "f5": {
+          "title": "Context-Aware Task Continuity",
+
+          "description": "Context-aware for smooth interactions, reducing the need for repetition protect"
+        }
+      },
+      "otherApplicationsTitle": "Other Applications",
+      "limitations": {
+        "l1": "Basic and static reactions and responses.",
+        "l2": "Single-mode interaction.",
+        "l3": "Non-personalized experience",
+        "l4": "Closed ecosystem",
+        "l5": "Basic interactions"
+      }
+    },
+    "TokenSection": {
+      "header": "Experience the Future of Mobility with Dtec Token!",
+      "description": "Dtec Token enables application control via voice commands via the blockchain-powered Dtec Assistant. Tokens are earned when the vehicle is charged or the assistant is used. These rewards can be spent freely within the system and used to create value. Mobility is now smarter, more profitable and more personal thanks to real-time data, artificial intelligence and secure blockchain integration.",
+      "cta": "Learn More",
+      "features": {
+        "feature_1": {
+          "title": "Voice Command Access",
+          "description": "Instant voice access to IoT devices and applications."
+        },
+        "feature_2": {
+          "title": "Artificial Intelligence Integration",
+          "description": "Assistant-powered, continuously evolving smart mobility ecosystem."
+        },
+        "feature_3": {
+          "title": "Personalized Experience",
+          "description": "Dynamic optimization based on driving habits."
+        },
+        "feature_4": {
+          "title": "Token Earning",
+          "description": "Earn tokens with charging transactions and assistant interactions, spend them however you want."
+        },
+        "feature_5": {
+          "title": "Real-Time Data",
+          "description": "Efficient mobility with instant route and driving insights."
+        },
+        "feature_6": {
+          "title": "Blockchain Assurance",
+          "description": "Blockchain's transparent, secure and traceable transaction infrastructure."
+        }
+      }
+    }
   }
 }
