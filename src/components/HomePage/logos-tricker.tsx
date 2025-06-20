@@ -4,7 +4,7 @@ import React from 'react'
 const LogosTicker = () => {
   return (
   <div className="w-full  h-full   flex items-center justify-center  py-[128px] relative">
-        <div className="w-full h-[90px]   z-50">
+        <div className="w-full h-[90px]   z-10">
           <div className="flex items-center justify-around gap-8 w-full h-full overflow-x-auto scrollbar-hide">
             {[
               "/images/Hero/logos/itu-cekirdek-beyaz.png",

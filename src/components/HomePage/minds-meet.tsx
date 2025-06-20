@@ -5,16 +5,22 @@ import SectionWrapper from "../common/SectionWrapper";
 import TextGradientWhite from "../common/text-gradient-white";
 import { useTranslations } from "next-intl";
 
-export default function MindsBanner() {
-  const t=useTranslations("HomePage");
+export default function MindsBanner({
+  text,
+  img,
+  children,
+}: {
+  text?: string;
+  img?: string;
+  children?: React.ReactNode;
+}) {
+  const t = useTranslations("HomePage");
   return (
     <SectionWrapper className="w-full py-12  ">
       <div className="container px-4">
         <div className="relative w-full flex items-center justify-center max-w-[1184px] h-[384px] mx-auto">
-    
-
           <Image
-            src="/images/Backgrounds/shape.svg"
+            src={img || "/images/Backgrounds/shape.svg"}
             alt="Minds Meet Background"
             fill
             className="relative  bg-black h-full rounded-3xl   overflow-hidden"
@@ -23,10 +29,10 @@ export default function MindsBanner() {
           {/* Content */}
           <div className="relative z-10 text-center">
             <TextGradientWhite
-              text={t("mindsmeet")}
+              text={text || t("mindsMeet")}
               className="md:text-4xl text-2xl lg:text-5xl font-bold  text-white"
             />
-            <h2></h2>
+             {children}
           </div>
         </div>
       </div>

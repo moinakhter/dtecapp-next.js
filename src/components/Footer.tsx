@@ -8,6 +8,7 @@ import Image from "next/image";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { Input } from "./ui/input";
 import { useTranslations } from "next-intl";
+import DtecTokenCard from "./common/DtecTokenCard";
 
 const socialLinks = [
   {
@@ -164,12 +165,13 @@ export default function Footer() {
                   <MapPin className="h-4 w-4 flex-shrink-0" />
                   {/* <span className="text-[13px] w-full">{t("address")}</span> */}
 
-                 <div className="text-[13px] w-full">
-  {t("address").split("\n").map((line, i) => (
-    <p key={i}>{line}</p>
-  ))}
-</div>
-
+                  <div className="text-[13px] w-full">
+                    {t("address")
+                      .split("\n")
+                      .map((line, i) => (
+                        <p key={i}>{line}</p>
+                      ))}
+                  </div>
                 </div>
                 <div className="flex items-center gap-2 ">
                   <Phone className="h-4 w-4" />
@@ -183,27 +185,7 @@ export default function Footer() {
             </div>
           </div>
           {/* DTEC Token Card */}
-          <div className="w-[258px] h-[180px] cursor-pointer   relative group overflow-hidden rounded-2xl shadow-lg">
-            <Image
-              src="/images/dtec-token.png"
-              alt="DTEC Token"
-              fill
-              quality={100}
-              className="object-cover transition-transform duration-300 ease-in-out group-hover:scale-105"
-            />
-            <div className="absolute bottom-4 left-4 z-10">
-              <Link
-                href="https://dtec.space/"
-                className="!text-white  text-lg  font-bold flex items-center gap-1  transition-transform duration-300 ease-in-out  group-hover:scale-105"
-                target="_blank"
-                rel="noopener noreferrer"
-                title="DTEC Token"
-              >
-                DTEC Token
-                <span className="text-[12px]">↗</span>
-              </Link>
-            </div>
-          </div>
+     <DtecTokenCard   className = "w-[258px] h-[180px]" />
         </div>
 
         {/* Newsletter Section */}
@@ -221,7 +203,7 @@ export default function Footer() {
             <Button
               type="submit"
               size="sm"
-              className="bg-secondary rounded-[9.6px"
+              className="bg-secondary text-[13px] text-white font-normal rounded-[9.6px]"
             >
               {t("newsletter_button")}
             </Button>

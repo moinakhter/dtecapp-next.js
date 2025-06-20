@@ -23,7 +23,7 @@
     }
   },
   "LocaleSwitcher": {
-    "locale": "EN"
+    "locale": "TR"
   },
 
   "Error": {
@@ -32,7 +32,8 @@
   },
   "NotFoundPage": {
     "description": "Please double-check the browser address bar or use the navigation to go to a known page.",
-    "title": "Page not found"
+    "title": "Page not found",
+    "backToHome": "Back to Home"
   },
 
   "Navbar": {
@@ -47,8 +48,8 @@
     "contact": "Contact Us",
     "address": "Finlandiya Mah. Finland Boulevard\nN:100 34394 Avcılar/İstanbul",
     "newsletter_placeholder": "Enter an Email Address",
-    "newsletter_button": "Follow the Past",
-    "newsletter_note": "Updates, dear announcements, notifications can be used to send clear and effective information from DTEC.\nYou can unsubscribe at any time. For more information, please review our Privacy Policy.",
+    "newsletter_button": "Follow Newsletter",
+    "newsletter_note": "We respect your privacy. DTEC may use your information to send you relevant content and event information.\nYou can unsubscribe at any time.For more information, see our Privacy Policy.",
     "productstitle": "Our Products",
     "about": "About Us",
 
@@ -196,7 +197,7 @@
     },
     "Comparison Section": {
       "title": "An Extraordinary Assistant Experience",
-      "description": "AAll-in-One Intelligent Voice Assistants.",
+      "description": "All-in-One Intelligent Voice Assistants.",
       "features": {
         "f1": {
           "title": "Natural Language Understanding (NLU)",
@@ -268,5 +269,35 @@
         }
       }
     }
+  },
+  "car-assistant": {
+    "title": "Redefining the Driving Experience",
+
+    "description": "Our Car Assistant is an intelligent companion that is with you throughout your journey. It maximizes your safety and comfort by providing access to all the functions of your vehicle with voice commands, and offers you every detail you need without taking your attention away from the road.",
+
+    "faceRecognitionTitle": "Face Recognition",
+    "faceRecognitionDescription": "It recognizes each driver individually and automatically activates the settings suitable for their profile.",
+
+    "moodBasedSuggestionsTitle": "Providing Suggestions Based on Emotion",
+    "moodBasedSuggestionsDescription": "It detects your mood while driving and suggests the most suitable music, weather or entertainment options for you.",
+
+    "voiceControlTitle": "Controlling Hardware with Voice",
+    "voiceControlDescription": "Phone, It allows you to control equipment such as air conditioning and media systems completely hands-free.",
+
+    "sendEmailTitle": "Sending E-mails",
+    "sendEmailDescription": "It allows you to easily send e-mails while in the vehicle, based on the driver's voice commands.",
+
+    "chatAndInfoTitle": "Chatting and Receiving Information",
+    "chatAndInfoDescription": "The Vehicle Assistant receives information and provides meaningful answers to questions by chatting naturally with the driver.",
+
+    "qaResponseTitle": "Answering Questions Asked",
+    "qaResponseDescription": "It provides instant and effective answers to questions asked by the driver.",
+
+    "translateTitle": "Translating in 22 Languages",
+    "translateDescription": "It provides effective communication during international travel or for multilingual users with its translation capability.",
+
+    "reminderTitle": "Reminder Recording",
+    "reminderDescription": "Records reminders on the date and time specified by the driver so that they do not forget important events.",
+    "dtecgpt": " Our DtecGPT combines natural language processing and context tracking. It interprets your complex questions like a human, providing a conversational experience with fluent and complete answers. It interprets your commands regarding vehicle functions and conveys all the information you need in a single touch."
   }
 }

@@ -32,7 +32,8 @@
   },
   "NotFoundPage": {
     "description": "Please double-check the browser address bar or use the navigation to go to a known page.",
-    "title": "Page not found"
+    "title": "Page not found",
+    "backToHome": "Ana Sayfaya Geri Dön"
   },
 
   "Navbar": {
@@ -251,5 +252,38 @@
         }
       }
     }
+  },
+  "car-assistant": {
+    "title": "Yeniden </br> Tanımlanan </br> Sürüş Deneyimi​",
+    "description": "Araç Asistanımız, yolculuğunuz boyunca yanınızda olan zeki bir yol arkadaşıdır. Sesli komutlarla aracınızın tüm fonksiyonlarına erişim sağlayarak güvenliğinizi ve konforunuzu en üst düzeye çıkarır, dikkatinizi yoldan ayırmadan ihtiyacınız olan her detayı sunar.",
+
+    "faceRecognitionTitle": "Yüz Tanıma",
+    "faceRecognitionDescription": "Her sürücüyü bire bir tanır ve profiline uygun ayarları otomatik olarak devreye alır.",
+
+    "moodBasedSuggestionsTitle": "Duyguya Göre Öneri Sunma",
+    "moodBasedSuggestionsDescription": "Sürüş esnasındaki ruh hâlinizi tespit ederek size en uygun müzik, hava durumu ya da eğlence seçeneklerini önerir.",
+
+    "voiceControlTitle": "Donanımları Ses ile Kontrol Etme",
+    "voiceControlDescription": "Telefon, klima ve medya sistemleri gibi donanımları tamamen eller serbest kontrol etmenize imkân tanır.",
+
+    "sendEmailTitle": "Mail Atma",
+    "sendEmailDescription": "Sürücünün sesli komutlarına dayanarak, araç içindeyken kolayca e-posta gönderme olanağı sağlar.",
+
+    "chatAndInfoTitle": "Sohbet Edip Bilgi Alma",
+    "chatAndInfoDescription": "Araç Asistanı, sürücüyle doğal bir şekilde sohbet ederek bilgi alır ve sorulara anlamlı cevaplar verir.",
+
+    "qaResponseTitle": "Sorulan Sorulara Cevap Verme",
+    "qaResponseDescription": "Sürücünün sormuş olduğu sorulara anında ve etkili bir şekilde cevaplar sunar.",
+
+    "translateTitle": "22 Dilde Çeviri Yapma",
+    "translateDescription": "Çeviri yapma yeteneğiyle uluslararası seyahatlerde veya çok dilli kullanıcılar için etkili iletişim sağlar.",
+
+    "reminderTitle": "Hatırlatma Kaydetme",
+    "reminderDescription": "Sürücünün belirlediği tarih ve saatte hatırlatmaları kaydederek önemli etkinlikleri unutmamalarını sağlar.",
+
+    "dtecgpt": " Geliştirdiğimiz DtecGPT, doğal dil işleme ve bağlam takibini bir araya getirir. Karmaşık sorularınızı insan gibi anlamlandırır, akıcı ve bütünlüklü yanıtlarla bir sohbet deneyimi sunar. Araç fonksiyonlarıyla ilgili komutlarınızı yorumlarken ihtiyacınız olan tüm bilgiyi tek bir dokunuşta birleşik şekilde aktarır.",
+    "ComplexQuestionsTitle1": "Karmaşık Soruları ve ",
+    "ComplexQuestionsTitle2": "Sohbetlerinize Karşılık Verir",
+    "dtecgptDescription": "Otomatik Konuşma Tanıma (ASR) ve Doğal Dil Anlama (NLU) modüllerimiz, komutlarınızı hızlı ve doğru biçimde işler; neredeyse insan becerisiyle karşılık verir.\nBu sayede her talebinizde en uygun aksiyon anında tetiklenir, sistem kendini sürekli geliştirerek sürüş deneyiminizi daha akıcı hale getirir."
   }
 }

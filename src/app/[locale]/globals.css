@@ -16,6 +16,7 @@ body {
   }
 }
  
+ 
 
 a {
   color: inherit;
@@ -117,4 +118,8 @@ a {
  
 
 
- 
+ [data-slot="dropdown-menu-trigger"]:focus,
+[data-slot="dropdown-menu-trigger"]:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
