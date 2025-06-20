@@ -18,7 +18,7 @@ import {
   VoiceMessageIcon,
 } from "@/components/common/Icons";
 import { useTranslations } from "next-intl";
-import MindsBanner from "@/components/HomePage/minds-meet";
+ 
 
 export default function CarAssistantPage() {
   const [mounted, setMounted] = useState(false);
@@ -185,14 +185,14 @@ export default function CarAssistantPage() {
         </div>
       </SectionWrapper>
 
-     <SectionWrapper className="w-full   relative  rounded-3xl ">
+     <SectionWrapper className="w-full    relative  rounded-3xl ">
     
      
           <Image
             src= "/images/Backgrounds/shape1.svg"
             alt="Minds Meet Background"
             fill
-            className="relative   object-cover   overflow-hidden"
+            className="relative   object-cover bg-black  rounded-3xl  overflow-hidden"
           />
 
           {/* Content */}
