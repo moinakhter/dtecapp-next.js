@@ -30,12 +30,10 @@ export default function CarAssistantPage() {
     offset: ["start end", "center center"],
   });
 
- 
-const scale = useSpring(useTransform(scrollYProgress, [0, 1], [1.5, 0.6]), {
-  stiffness: 100,
-  damping: 30,
-});
-
+  const scale = useSpring(useTransform(scrollYProgress, [0, 1], [1.5, 0.6]), {
+    stiffness: 100,
+    damping: 30,
+  });
 
   const features = [
     {
@@ -183,7 +181,7 @@ const scale = useSpring(useTransform(scrollYProgress, [0, 1], [1.5, 0.6]), {
           <div className="lg:w-1/2 flex justify-center">
             <div className="w-[512px] h-[512px] rounded-4xl overflow-hidden shadow-lg">
               <Image
-                src="/images/Backgrounds/colorful-spiral.svg"
+                src="/imaes/Backgrounds/colorful-spiral.svg"
                 alt="DtecGPT"
                 width={512}
                 height={512}

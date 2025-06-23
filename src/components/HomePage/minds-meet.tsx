@@ -29,7 +29,7 @@ export default function MindsBanner({
           {/* Content */}
           <div className="relative z-10 text-center">
             <TextGradientWhite
-              text={text || t("mindsMeet")}
+              text={text || t("mindsmeet")}
               className="md:text-4xl text-2xl lg:text-5xl font-bold  text-white"
             />
              {children}

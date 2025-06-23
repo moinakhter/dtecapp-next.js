@@ -25,7 +25,6 @@
   "LocaleSwitcher": {
     "locale": "EN"
   },
-
   "Error": {
     "description": "<p>We've unfortunately encountered an error.</p><p>You can try to <retry>reload the page</retry> you were visiting.</p>",
     "title": "Something went wrong!"
@@ -35,7 +34,6 @@
     "title": "Page not found",
     "backToHome": "Ana Sayfaya Geri Dön"
   },
-
   "Navbar": {
     "products": "Ürünlerimiz",
     "about": "Hakkımızda",
@@ -44,7 +42,6 @@
     "tokenomics": "Tokenomics",
     "Download": "  Asistanı İndirin"
   },
-
   "Footer": {
     "contact": "Bize Ulaşın",
     "address": "Finlandiya Mah. Finlandiya Bulvarı\nN:100 34394 Avcılar/İstanbul",
@@ -53,7 +50,6 @@
     "newsletter_note": "Güncellemeler sayın duyurular DTEC'den ilgili açık ve etkili bilgileri göndermek için bilgilendirme kullanılabilir.\nİstediğiniz zaman abonelikten çıkabilirsiniz. Daha fazla bilgi için Gizlilik Politikamızı gözden geçirin.",
     "productstitle": "Ürünlerimiz",
     "about": "Hakkımızda",
-
     "legal": {
       "terms": "Hizmetler & Koşullar",
       "privacy": "Gizlilik Politikası",
@@ -67,7 +63,6 @@
       "travel": "Seyahat Asistanı"
     }
   },
-
   "HomePage": {
     "Hero": {
       "title": "Geleceğe Yolculuk",
@@ -77,7 +72,6 @@
       "counter3": "Mutlu Çalışan",
       "counter4": "Dilde Çeviri"
     },
-
     "mindsmeet": "tüm zihinlerin buluştuğu yer",
     "Dtec AI Call Center": {
       "title": "Dtec AI Çağrı Merkezi",
@@ -252,38 +246,46 @@
         }
       }
     }
+   
   },
   "car-assistant": {
     "title": "Yeniden </br> Tanımlanan </br> Sürüş Deneyimi​",
     "description": "Araç Asistanımız, yolculuğunuz boyunca yanınızda olan zeki bir yol arkadaşıdır. Sesli komutlarla aracınızın tüm fonksiyonlarına erişim sağlayarak güvenliğinizi ve konforunuzu en üst düzeye çıkarır, dikkatinizi yoldan ayırmadan ihtiyacınız olan her detayı sunar.",
-
     "faceRecognitionTitle": "Yüz Tanıma",
     "faceRecognitionDescription": "Her sürücüyü bire bir tanır ve profiline uygun ayarları otomatik olarak devreye alır.",
-
     "moodBasedSuggestionsTitle": "Duyguya Göre Öneri Sunma",
     "moodBasedSuggestionsDescription": "Sürüş esnasındaki ruh hâlinizi tespit ederek size en uygun müzik, hava durumu ya da eğlence seçeneklerini önerir.",
-
     "voiceControlTitle": "Donanımları Ses ile Kontrol Etme",
     "voiceControlDescription": "Telefon, klima ve medya sistemleri gibi donanımları tamamen eller serbest kontrol etmenize imkân tanır.",
-
     "sendEmailTitle": "Mail Atma",
     "sendEmailDescription": "Sürücünün sesli komutlarına dayanarak, araç içindeyken kolayca e-posta gönderme olanağı sağlar.",
-
     "chatAndInfoTitle": "Sohbet Edip Bilgi Alma",
     "chatAndInfoDescription": "Araç Asistanı, sürücüyle doğal bir şekilde sohbet ederek bilgi alır ve sorulara anlamlı cevaplar verir.",
-
     "qaResponseTitle": "Sorulan Sorulara Cevap Verme",
     "qaResponseDescription": "Sürücünün sormuş olduğu sorulara anında ve etkili bir şekilde cevaplar sunar.",
-
     "translateTitle": "22 Dilde Çeviri Yapma",
     "translateDescription": "Çeviri yapma yeteneğiyle uluslararası seyahatlerde veya çok dilli kullanıcılar için etkili iletişim sağlar.",
-
     "reminderTitle": "Hatırlatma Kaydetme",
     "reminderDescription": "Sürücünün belirlediği tarih ve saatte hatırlatmaları kaydederek önemli etkinlikleri unutmamalarını sağlar.",
-
     "dtecgpt": " Geliştirdiğimiz DtecGPT, doğal dil işleme ve bağlam takibini bir araya getirir. Karmaşık sorularınızı insan gibi anlamlandırır, akıcı ve bütünlüklü yanıtlarla bir sohbet deneyimi sunar. Araç fonksiyonlarıyla ilgili komutlarınızı yorumlarken ihtiyacınız olan tüm bilgiyi tek bir dokunuşta birleşik şekilde aktarır.",
     "ComplexQuestionsTitle1": "Karmaşık Soruları ve ",
     "ComplexQuestionsTitle2": "Sohbetlerinize Karşılık Verir",
     "dtecgptDescription": "Otomatik Konuşma Tanıma (ASR) ve Doğal Dil Anlama (NLU) modüllerimiz, komutlarınızı hızlı ve doğru biçimde işler; neredeyse insan becerisiyle karşılık verir.\nBu sayede her talebinizde en uygun aksiyon anında tetiklenir, sistem kendini sürekli geliştirerek sürüş deneyiminizi daha akıcı hale getirir."
-  }
-}
+  },
+  "shopping-assistant": {
+    "f1title": "Doğal Dil Anlama Yeteneği",
+    "f1description": "Gelişmiş NLP (Doğal Dil İşleme) modeli sayesinde kullanıcıların doğal konuşma dilini anlayabilir ve bu sayede alışveriş deneyimini daha kişisel ve etkileşimli hale getirebilir.",
+    "f2title": "Akıllı Filtreleme Özellikleri",
+    "f2description": "Yapay zekaya sahip asistan, güçlü filtreleme algoritmalarıyla renk, beden, marka gibi tercihleri anlayarak, kullanıcılara istedikleri ürünleri hızlı ve etkili bir şekilde bulma imkanı sunar.",
+    "f3title": "Akıllı Telefon ve Tarayıcı Uyumluluğu",
+    "f3description": "Dtec Alışveriş Asistanı, akıllı telefonlar ve web tarayıcıları ile tam uyumlu olarak çalışır, kullanıcılara herhangi bir cihazdan kusursuz bir alışveriş deneyimi sunar.",
+    "f4title": "Güvenli Ödeme İşlemleri",
+    "f4description": "Alışveriş Asistanı, çeşitli ödeme yöntemlerini destekleyerek güvenli ve sorunsuz ödeme işlemleri sağlar, kredi kartı veya diğer ödeme seçenekleriyle alışverişi tamamlamanıza olanak tanır.",
+    "f5title": "Kişiselleştirilmiş Öneriler",
+    "f5description": "Asistan, öğrenme modülü ile kullanıcı davranışlarını analiz ederek kişiselleştirilmiş ürün önerileri sunar, böylece kullanıcıların tercihlerine uygun alışveriş deneyimi yaşamalarını sağlar.",
+    "f6title": "Çok Dilli Yetenek",
+    "f6description": "Dtec Alışveriş Asistanı, 22 farklı dilde çalışabilme özelliğiyle küresel bir kullanıcı kitlesine hitap eder, farklı coğrafyalardan ve dil gruplarından kullanıcılara optimum hizmet sağlar.",
+    "dtecgpt":"Gelişmiş yapay zekamız DtecGPT, insan benzeri konuşmaları anlama ve yanıt verme kabiliyetiyle alışverişi sezgisel hale getirir. Bu teknoloji sayesinde, alışveriş artık sadece bir işlem değil, akıllı bir sohbet deneyimidir."
+  ,"smartshopping":"Her Alanda Akıllı Alışveriş",
+    "smartshoppingDescription": "E-ticaret siteleri, online marketler, biletleme sistemleri ve rezervasyon uygulamalarında kullanılabilen DTEC Alışveriş Asistanı; hız, kolaylık, erişilebilirlik ve kişiye özel öneriler sunar. Ayrıca görme engelli kullanıcılar için erişimi kolaylaştırır. Sistemimiz, B2B modelinde konumlandırılmış olup kendi alanında eşsizdir."}
+    }
