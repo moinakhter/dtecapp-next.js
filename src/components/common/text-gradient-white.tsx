@@ -11,7 +11,7 @@ const TextGradientWhite = ({
 } = {}) => {
   return (
     <h2
-      className={`${className}  font-black  dark:text-transparent dark:bg-clip-text dark:bg-[linear-gradient(311deg,_#FAFAFA_14%,_#CDCDCD_36%,_#999999_52%,_#E2E2E2_69%,_#FAFAFA_89%)]`}
+      className={`${className} lg:leading-[1.1] font-black  dark:text-transparent dark:bg-clip-text dark:bg-[linear-gradient(311deg,_#FAFAFA_14%,_#CDCDCD_36%,_#999999_52%,_#E2E2E2_69%,_#FAFAFA_89%)]`}
     >
       {text}
       {children}

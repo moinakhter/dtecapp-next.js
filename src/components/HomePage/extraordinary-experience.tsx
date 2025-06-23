@@ -10,7 +10,6 @@ import {
   LoadingIcon,
 } from "../common/Icons";
 import { SpotlightBg } from "../common/RadialBlueGlow";
-
 import ScrollAnimatedLogo from "../common/AnimatedLogo";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
@@ -58,7 +57,16 @@ export default function ComparisonSection() {
     <>
       <div className="relative h-full w-full overflow-visible">
         <div className="absolute inset-0 z-0 pointer-events-none overflow-visible">
-          <ScrollAnimatedLogo />
+          <ScrollAnimatedLogo >
+     <div className="relative w-[320px] h-[320px] sm:w-[544px] sm:h-[544px] lg:w-[744px] lg:h-[744px] md:w-[600px] md:h-[600px] z-10">
+        <Image
+          src="/images/logo/DTEC_WhiteMode.png"
+          alt="DTEC Logo"
+          fill
+          className="object-contain"
+        />
+      </div>
+            </ScrollAnimatedLogo>
         </div>
         <section className="relative z-10 w-full py-24">
           <SpotlightBg className="dark:absolute hidden" />
@@ -71,16 +79,15 @@ export default function ComparisonSection() {
               <p className="text-2xl font-light ">{t("description")}</p>
             </div>
 
-            <motion.div 
-                    initial={{ opacity: 0, y: 50 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.6 }}
-  viewport={{ once: true }}
-            className="flex flex-col md:flex-row justify-center gap-8 mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="flex flex-col md:flex-row justify-center gap-8 mx-auto"
+            >
               {/* DTEC Features */}
-              <div 
-        
-              className="w-full max-w-[552px] group md:w-1/2 p-12 dark:bg-[#121212] bg-[#FAFAFA] rounded-2xl border-[#212121]/30 border-2 hover:border-secondary">
+              <div className="w-full max-w-[552px] group md:w-1/2 p-12 dark:bg-[#121212] bg-[#FAFAFA] rounded-2xl border-[#212121]/30 border-2 hover:border-secondary">
                 <div className="flex flex-col gap-2.5 mb-8">
                   <div className="flex gap-2">
                     <Image
@@ -140,29 +147,28 @@ function FeatureItem({
   Icon,
   title,
   description,
-  index
+  index,
 }: {
   Icon: React.ComponentType<{ className?: string }>;
   title: string;
   description: string;
   index: number;
 }) {
- return (
-  <motion.div
-    initial={{ opacity: 0, x: -20 }}
-    whileInView={{ opacity: 1, x: 0 }}
-    transition={{ duration: 0.5, delay: index * 0.1 }}
-    viewport={{ once: true }}
-    className="flex items-start gap-4"
-  >
-    <div className="mt-1">
-      <Icon className="w-8 h-8 hover:text-secondary transition-all duration-500" />
-    </div>
-    <div className="flex-1 flex flex-col gap-1">
-      <h4 className="text-base font-bold">{title}</h4>
-      <p className="text-sm font-light">{description}</p>
-    </div>
-  </motion.div>
-);
-
+  return (
+    <motion.div
+      initial={{ opacity: 0, x: -20 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      viewport={{ once: true }}
+      className="flex items-start gap-4"
+    >
+      <div className="mt-1">
+        <Icon className="w-8 h-8 hover:text-secondary transition-all duration-500" />
+      </div>
+      <div className="flex-1 flex flex-col gap-1">
+        <h4 className="text-base font-bold">{title}</h4>
+        <p className="text-sm font-light">{description}</p>
+      </div>
+    </motion.div>
+  );
 }

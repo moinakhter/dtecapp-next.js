@@ -23,7 +23,7 @@ import MindsBanner from "@/components/HomePage/minds-meet";
 
 export default function CarAssistantPage() {
   const t = useTranslations("car-assistant");
-  const d = useTranslations("HomePage");
+ 
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -147,6 +147,7 @@ export default function CarAssistantPage() {
               icon={feature.icon}
               title={feature.title}
               description={feature.description}
+                className="max-w-[320px]"
             />
           ))}
           <div className="lg:col-span-3 grid grid-cols-2 place-content-center gap-12">
@@ -156,7 +157,7 @@ export default function CarAssistantPage() {
                 icon={feature.icon}
                 title={feature.title}
                 description={feature.description}
-                className="mx-auto"
+                className="mx-auto max-w-[320px]"
               />
             ))}
           </div>
@@ -181,7 +182,7 @@ export default function CarAssistantPage() {
           <div className="lg:w-1/2 flex justify-center">
             <div className="w-[512px] h-[512px] rounded-4xl overflow-hidden shadow-lg">
               <Image
-                src="/imaes/Backgrounds/colorful-spiral.svg"
+                src="/images/Backgrounds/colorful-spiral.svg"
                 alt="DtecGPT"
                 width={512}
                 height={512}
@@ -264,7 +265,7 @@ export default function CarAssistantPage() {
           </div>
         </div>
       </SectionWrapper>
-      <MindsBanner text={d("mindsmeet")} />
+      <MindsBanner  />
 
       {/* Footer Section */}
     </div>

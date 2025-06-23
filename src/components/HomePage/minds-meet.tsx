@@ -15,6 +15,7 @@ export default function MindsBanner({
   children?: React.ReactNode;
 }) {
   const t = useTranslations("HomePage");
+  
   return (
     <SectionWrapper className="w-full py-12  ">
       <div className="container px-4">
@@ -29,7 +30,7 @@ export default function MindsBanner({
           {/* Content */}
           <div className="relative z-10 text-center">
             <TextGradientWhite
-              text={text || t("mindsmeet")}
+              text={text ? text : t("mindsmeet")}
               className="md:text-4xl text-2xl lg:text-5xl font-bold  text-white"
             />
              {children}

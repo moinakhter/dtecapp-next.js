@@ -7,15 +7,26 @@ import TextGradientWhite from "@/components/common/text-gradient-white";
 import SectionWrapper from "@/components/common/SectionWrapper";
 import LogosTicker from "@/components/HomePage/logos-tricker";
 import FeatureCard from "@/components/common/FeatureCard";
- 
+
 import { useTranslations } from "next-intl";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import MindsBanner from "@/components/HomePage/minds-meet";
-import { CartIcon, CodeIcon, FilterIcon, GlobeIcon, LanguageIcon, PersonICon, PlaneIcon, ShieldIcon, SuitCaseIcon, TwoSideArrowIcon } from "@/components/common/Icons";
+import {
+  CartIcon,
+  CodeIcon,
+  FilterIcon,
+  GlobeIcon,
+  LanguageIcon,
+  PersonICon,
+  PlaneIcon,
+  ShieldIcon,
+  SuitCaseIcon,
+  TwoSideArrowIcon,
+} from "@/components/common/Icons";
 
 export default function CarAssistantPage() {
   const t = useTranslations("shopping-assistant");
-  const d = useTranslations("HomePage");
+ 
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -27,44 +38,38 @@ export default function CarAssistantPage() {
     damping: 30,
   });
 
-
-const features = [
-  {
-    title: t("f1title"),
-    description: t("f1description"),
-    icon: CodeIcon,
-  },
-  {
-    title: t("f2title"),
-    description: t("f2description"),
-    icon: FilterIcon,
-
-  },
-  {
-    title: t("f3title"),
-    description: t("f3description"),
-    icon: TwoSideArrowIcon,
-
-  },
-  {
-    title: t("f4title"),
-    description: t("f4description"),
-    icon: ShieldIcon,
-
-  },
-  {
-    title: t("f5title"),
-    description: t("f5description"),
-    icon: PersonICon
-
-  },
-  {
-    title: t("f6title"),
-    description: t("f6description"),
-    icon: LanguageIcon,
-
-  },
-];
+  const features = [
+    {
+      title: t("f1title"),
+      description: t("f1description"),
+      icon: CodeIcon,
+    },
+    {
+      title: t("f2title"),
+      description: t("f2description"),
+      icon: FilterIcon,
+    },
+    {
+      title: t("f3title"),
+      description: t("f3description"),
+      icon: TwoSideArrowIcon,
+    },
+    {
+      title: t("f4title"),
+      description: t("f4description"),
+      icon: ShieldIcon,
+    },
+    {
+      title: t("f5title"),
+      description: t("f5description"),
+      icon: PersonICon,
+    },
+    {
+      title: t("f6title"),
+      description: t("f6description"),
+      icon: LanguageIcon,
+    },
+  ];
 
   return (
     <div className="min-h-screen bg-background">
@@ -78,10 +83,10 @@ const features = [
             <div className="space-y-8">
               <div className="space-y-6">
                 <TextGradientWhite className="text-3xl md:text-7xl font-bold  ">
-                  Konuşarak Kolay Alışveriş Deneyimi
+                  {t("heroTitle")}
                 </TextGradientWhite>
                 <p className="text-base font-light  max-w-xl">
-                Dtec Alışveriş Asistanı, sesli komutlarla ürün aramadan sepet oluşturup ödeme tamamlamaya kadar tüm aşamaları tek bir akışta birleştirir. Kullanıcılar, eller serbest tek bir cümleyle aradıkları ürünü bulur, fiyat karşılaştırması yapar ve güvenli ödeme adımlarını onaylayarak alışverişini hızla tamamlar. Hem mobil uygulamalarda hem de web sitelerinde sorunsuz çalışan bu çözüm, müşteri memnuniyetini ve dönüşüm oranlarını aynı anda yükseltir.
+                  {t("heroDescription")}
                 </p>
               </div>
             </div>
@@ -127,6 +132,8 @@ const features = [
               icon={feature.icon}
               title={feature.title}
               description={feature.description}
+                              className="max-w-[320px]"
+
             />
           ))}
           <div className="lg:col-span-3 grid grid-cols-2 place-content-center gap-12">
@@ -136,7 +143,7 @@ const features = [
                 icon={feature.icon}
                 title={feature.title}
                 description={feature.description}
-                className="mx-auto"
+                className="mx-auto max-w-[320px]"
               />
             ))}
           </div>
@@ -161,7 +168,7 @@ const features = [
           <div className="lg:w-1/2 flex justify-center">
             <div className="w-[512px] h-[512px] rounded-4xl overflow-hidden shadow-lg">
               <Image
-                src="/imaes/Backgrounds/colorful-spiral.svg"
+                src="/images/Backgrounds/colorful-spiral.svg"
                 alt="DtecGPT"
                 width={512}
                 height={512}
@@ -192,7 +199,7 @@ const features = [
               text={t("smartshopping")}
               className="md:text-4xl text-2xl lg:text-[64px] font-bold mb-8  text-white"
             />
-           
+
             {t("smartshoppingDescription")
               .split("\n")
               .map((line, i) => (
@@ -203,12 +210,12 @@ const features = [
                   {line}
                 </p>
               ))}
-              <div className="flex items-center mt-12 justify-center mx-auto gap-8">
-                <CartIcon className="w-8 h-8 text-white" />
-                <PlaneIcon className="w-8 h-8 text-white" />
-                <SuitCaseIcon className="w-8 h-8 text-white" />
-                <GlobeIcon className="w-8 h-8 text-white" />
-              </div>
+            <div className="flex items-center mt-12 justify-center mx-auto gap-8">
+              <CartIcon className="w-8 h-8 text-white" />
+              <PlaneIcon className="w-8 h-8 text-white" />
+              <SuitCaseIcon className="w-8 h-8 text-white" />
+              <GlobeIcon className="w-8 h-8 text-white" />
+            </div>
           </div>
         </SectionWrapper>
       </div>
@@ -220,20 +227,19 @@ const features = [
           {/* Left Content */}
           <div className="lg:w-1/2 text-center lg:text-left">
             <TextGradientWhite
-              text="Sesli Alışverişin Geleceği"
+              text={t("se3title")}
               className="mb-8 text-[56px] font-black "
             />
 
             <p className="font-light text-base max-w-[575px] mx-auto lg:mx-0">
-             Geleceğin alışverişi sesle yönetiliyor. DTEC, bu dönüşümün öncüsü olarak, sesli komutlarla alışverişin sağladığı konforu e-ticaretin her alanına taşıyor. Kullanıcı etkileşimini artıran ve dönüşüm oranlarını yükselten bu teknoloji, markalar için yeni bir büyüme yolu sunuyor.
+              {t("se3description")}
             </p>
           </div>
 
           {/* Right Image */}
           <div className="lg:w-1/2 flex justify-center">
             <Image
-                         src="/images/Backgrounds/shape3.svg"
-
+              src="/images/Backgrounds/shape3.svg"
               alt="DtecGPT"
               width={577}
               height={387}
@@ -242,7 +248,7 @@ const features = [
           </div>
         </div>
       </SectionWrapper>
-      <MindsBanner text={d("mindsmeet")} />
+      <MindsBanner   />
 
       {/* Footer Section */}
     </div>

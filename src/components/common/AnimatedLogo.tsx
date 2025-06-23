@@ -2,9 +2,11 @@
 
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { useRef } from "react";
-import Image from "next/image";
 
-export default function ScrollAnimatedLogo() {
+export default function ScrollAnimatedLogo({
+  children,
+  className
+}: { children?: React.ReactNode,className?:string } = {}) {
   const ref = useRef(null);
 
   const { scrollYProgress } = useScroll({
@@ -21,7 +23,7 @@ export default function ScrollAnimatedLogo() {
   return (
     <div
       ref={ref}
-      className="absolute inset-0 flex items-center top-[300px] md:top-[200px]  sm:-top-12  justify-center overflow-visible pointer-events-none"
+      className={`absolute inset-0 flex items-center top-[300px] md:top-[200px]  sm:-top-12  justify-center overflow-visible pointer-events-none ${className}`}
     >
       {/* Animated rings */}
       <motion.svg
@@ -43,15 +45,7 @@ export default function ScrollAnimatedLogo() {
         ))}
       </motion.svg>
 
-      {/* Logo perfectly centered inside rings */}
-      <div className="relative w-[320px] h-[320px] sm:w-[544px] sm:h-[544px] lg:w-[744px] lg:h-[744px] md:w-[600px] md:h-[600px] z-10">
-        <Image
-          src="/images/logo/DTEC_WhiteMode.png"
-          alt="DTEC Logo"
-          fill
-          className="object-contain"
-        />
-      </div>
+      {children}
     </div>
   );
 }

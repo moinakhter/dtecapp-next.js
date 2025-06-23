@@ -1012,7 +1012,14 @@ export const PhoneIcon = (props: React.SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
+export const PhoneStarsIcon = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+<path d="M20.9994 19.9738V22.9846C21.0005 23.2642 20.9432 23.5408 20.831 23.7969C20.7188 24.053 20.5542 24.2829 20.3478 24.4719C20.1415 24.6608 19.8978 24.8047 19.6325 24.8942C19.3672 24.9838 19.0861 25.017 18.8072 24.9919C15.7128 24.6563 12.7404 23.601 10.1289 21.9108C7.69921 20.3699 5.63926 18.3141 4.09534 15.8892C2.39586 13.271 1.33824 10.2901 1.00816 7.18795C0.983033 6.91042 1.01608 6.63071 1.1052 6.36663C1.19432 6.10254 1.33757 5.85987 1.52581 5.65407C1.71405 5.44826 1.94317 5.28383 2.19858 5.17123C2.45398 5.05864 2.73008 5.00036 3.0093 5.0001H6.02608C6.5141 4.9953 6.98722 5.16778 7.35725 5.48537C7.72727 5.80297 7.96896 6.24401 8.03727 6.72629C8.1646 7.68982 8.40074 8.63587 8.74118 9.54642C8.87648 9.90563 8.90576 10.296 8.82556 10.6713C8.74536 11.0466 8.55903 11.3911 8.28867 11.664L7.01156 12.9386C8.44308 15.4512 10.5276 17.5315 13.0451 18.9602L14.3222 17.6856C14.5956 17.4158 14.9408 17.2298 15.3169 17.1498C15.6929 17.0698 16.0841 17.099 16.444 17.234C17.3564 17.5738 18.3043 17.8095 19.2698 17.9365C19.7582 18.0053 20.2044 18.2509 20.5233 18.6265C20.8422 19.0021 21.0116 19.4817 20.9994 19.9738Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M17.1594 3.26673C17.2472 2.91109 17.7528 2.91109 17.8406 3.26673L17.9511 3.7144C18.3571 5.3589 19.6411 6.64291 21.2856 7.0489L21.7333 7.1594C22.0889 7.24721 22.0889 7.75279 21.7333 7.8406L21.2856 7.9511C19.6411 8.35709 18.3571 9.6411 17.9511 11.2856L17.8406 11.7333C17.7528 12.0889 17.2472 12.0889 17.1594 11.7333L17.0489 11.2856C16.6429 9.6411 15.3589 8.35709 13.7144 7.9511L13.2667 7.8406C12.9111 7.75279 12.9111 7.24721 13.2667 7.1594L13.7144 7.0489C15.3589 6.64291 16.6429 5.3589 17.0489 3.7144L17.1594 3.26673Z" stroke="currentColor"/>
+<path d="M22.8486 1.11855C22.8876 0.960484 23.1124 0.960484 23.1514 1.11855L23.2005 1.31751C23.3809 2.0484 23.9516 2.61907 24.6825 2.79951L24.8815 2.84862C25.0395 2.88765 25.0395 3.11235 24.8815 3.15138L24.6825 3.20049C23.9516 3.38093 23.3809 3.9516 23.2005 4.68249L23.1514 4.88145C23.1124 5.03952 22.8876 5.03952 22.8486 4.88145L22.7995 4.68249C22.6191 3.9516 22.0484 3.38093 21.3175 3.20049L21.1185 3.15138C20.9605 3.11235 20.9605 2.88765 21.1185 2.84862L21.3175 2.79951C22.0484 2.61907 22.6191 2.0484 22.7995 1.31751L22.8486 1.11855Z" stroke="currentColor"/>
+</svg>
 
+);
 export const ClockIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
     width="25"
@@ -1244,7 +1251,7 @@ export const ThinPlaneIcon = (props: React.SVGProps<SVGSVGElement>) => (
   </svg>
 );
 
-export const ThinCarIcon= (props: React.SVGProps<SVGSVGElement>) => (
+export const ThinCarIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
     width="22"
     height="22"
@@ -1275,16 +1282,120 @@ export const ThinCarIcon= (props: React.SVGProps<SVGSVGElement>) => (
 );
 
 export const CarIcon = (props: React.SVGProps<SVGSVGElement>) => (
-<svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
-<path d="M21 9.31813C21 8.77566 20.7893 8.25539 20.4143 7.8718C20.039 7.48817 19.5303 7.27267 19 7.27267C15.168 7.27267 6.83199 7.27267 3 7.27267C2.46967 7.27267 1.961 7.48817 1.58568 7.8718C1.21066 8.25539 1 8.77566 1 9.31813C1 11.3265 1 14.0909 1 14.0909H21V9.31813Z" stroke="currentColor" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
-<path d="M18.0119 3.73627C17.8075 3.00449 17.1535 2.5 16.4092 2.5C13.8655 2.5 8.13419 2.5 5.59054 2.5C4.84623 2.5 4.19224 3.00453 3.98789 3.73627C3.59287 5.1504 2.99988 7.27271 2.99988 7.27271H18.9999C18.9999 7.27271 18.4069 5.1504 18.0119 3.73627Z" stroke="currentColor" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
-<path d="M6.33332 14.0909H1V15.4545C1 16.5842 1.89531 17.5 3 17.5C3.43598 17.5 3.89734 17.5 4.33332 17.5C5.43801 17.5 6.33332 16.5842 6.33332 15.4545C6.33332 14.7299 6.33332 14.0909 6.33332 14.0909Z" stroke="currentColor" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
-<path d="M21.0001 14.0909H15.6667V15.4545C15.6667 16.5842 16.5621 17.5 17.6667 17.5C18.1027 17.5 18.5641 17.5 19.0001 17.5C20.1048 17.5 21.0001 16.5842 21.0001 15.4545C21.0001 14.7299 21.0001 14.0909 21.0001 14.0909Z" stroke="currentColor" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
-<path d="M1 10.6818H3" stroke="currentColor" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
-<path d="M19 10.6818H21" stroke="currentColor" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
-<path d="M4.33337 14.0909L7.00005 11.3636H15.0001L17.6667 14.0909H4.33337Z" stroke="currentColor" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
-<path d="M3 7.27267C3 7.27267 2.52166 6.7835 2.13801 6.39113C1.83631 6.08248 1.42668 5.90904 1 5.90904" stroke="currentColor" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
-<path d="M19 7.27267C19 7.27267 19.4783 6.7835 19.862 6.39113C20.1637 6.08248 20.5733 5.90904 21 5.90904" stroke="currentColor" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+  <svg
+    width="22"
+    height="20"
+    viewBox="0 0 22 20"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    {...props}
+  >
+    <path
+      d="M21 9.31813C21 8.77566 20.7893 8.25539 20.4143 7.8718C20.039 7.48817 19.5303 7.27267 19 7.27267C15.168 7.27267 6.83199 7.27267 3 7.27267C2.46967 7.27267 1.961 7.48817 1.58568 7.8718C1.21066 8.25539 1 8.77566 1 9.31813C1 11.3265 1 14.0909 1 14.0909H21V9.31813Z"
+      stroke="currentColor"
+      strokeMiterlimit="10"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M18.0119 3.73627C17.8075 3.00449 17.1535 2.5 16.4092 2.5C13.8655 2.5 8.13419 2.5 5.59054 2.5C4.84623 2.5 4.19224 3.00453 3.98789 3.73627C3.59287 5.1504 2.99988 7.27271 2.99988 7.27271H18.9999C18.9999 7.27271 18.4069 5.1504 18.0119 3.73627Z"
+      stroke="currentColor"
+      strokeMiterlimit="10"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M6.33332 14.0909H1V15.4545C1 16.5842 1.89531 17.5 3 17.5C3.43598 17.5 3.89734 17.5 4.33332 17.5C5.43801 17.5 6.33332 16.5842 6.33332 15.4545C6.33332 14.7299 6.33332 14.0909 6.33332 14.0909Z"
+      stroke="currentColor"
+      strokeMiterlimit="10"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M21.0001 14.0909H15.6667V15.4545C15.6667 16.5842 16.5621 17.5 17.6667 17.5C18.1027 17.5 18.5641 17.5 19.0001 17.5C20.1048 17.5 21.0001 16.5842 21.0001 15.4545C21.0001 14.7299 21.0001 14.0909 21.0001 14.0909Z"
+      stroke="currentColor"
+      strokeMiterlimit="10"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M1 10.6818H3"
+      stroke="currentColor"
+      strokeMiterlimit="10"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M19 10.6818H21"
+      stroke="currentColor"
+      strokeMiterlimit="10"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M4.33337 14.0909L7.00005 11.3636H15.0001L17.6667 14.0909H4.33337Z"
+      stroke="currentColor"
+      strokeMiterlimit="10"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M3 7.27267C3 7.27267 2.52166 6.7835 2.13801 6.39113C1.83631 6.08248 1.42668 5.90904 1 5.90904"
+      stroke="currentColor"
+      strokeMiterlimit="10"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M19 7.27267C19 7.27267 19.4783 6.7835 19.862 6.39113C20.1637 6.08248 20.5733 5.90904 21 5.90904"
+      stroke="currentColor"
+      strokeMiterlimit="10"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
+export const RefreshIcon = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    {...props}
+  >
+    <path
+      d="M23 4V10H17"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      d="M1 20V14H7"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      d="M3.51 8.99959C4.01717 7.56637 4.87913 6.28499 6.01547 5.27501C7.1518 4.26502 8.52547 3.55935 10.0083 3.22385C11.4911 2.88834 13.0348 2.93393 14.4952 3.35636C15.9556 3.77879 17.2853 4.5643 18.36 5.63959L23 9.99959M1 13.9996L5.64 18.3596C6.71475 19.4349 8.04437 20.2204 9.50481 20.6428C10.9652 21.0652 12.5089 21.1108 13.9917 20.7753C15.4745 20.4398 16.8482 19.7342 17.9845 18.7242C19.1209 17.7142 19.9828 16.4328 20.49 14.9996"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  </svg>
+);
+
+export const MobileIcon = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+<path d="M17 2H7C5.89543 2 5 2.89543 5 4V20C5 21.1046 5.89543 22 7 22H17C18.1046 22 19 21.1046 19 20V4C19 2.89543 18.1046 2 17 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M12 18H12.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
 
 );
+
+
+//Partners

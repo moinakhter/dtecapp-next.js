@@ -246,7 +246,6 @@
         }
       }
     }
-   
   },
   "car-assistant": {
     "title": "Yeniden </br> Tanımlanan </br> Sürüş Deneyimi​",
@@ -273,6 +272,8 @@
     "dtecgptDescription": "Otomatik Konuşma Tanıma (ASR) ve Doğal Dil Anlama (NLU) modüllerimiz, komutlarınızı hızlı ve doğru biçimde işler; neredeyse insan becerisiyle karşılık verir.\nBu sayede her talebinizde en uygun aksiyon anında tetiklenir, sistem kendini sürekli geliştirerek sürüş deneyiminizi daha akıcı hale getirir."
   },
   "shopping-assistant": {
+    "heroTitle": "  Konuşarak Kolay Alışveriş Deneyimi",
+    "heroDescription": "Dtec Alışveriş Asistanı, sesli komutlarla ürün aramadan sepet oluşturup ödeme tamamlamaya kadar tüm aşamaları tek bir akışta birleştirir. Kullanıcılar, eller serbest tek bir cümleyle aradıkları ürünü bulur, fiyat karşılaştırması yapar ve güvenli ödeme adımlarını onaylayarak alışverişini hızla tamamlar. Hem mobil uygulamalarda hem de web sitelerinde sorunsuz çalışan bu çözüm, müşteri memnuniyetini ve dönüşüm oranlarını aynı anda yükseltir.",
     "f1title": "Doğal Dil Anlama Yeteneği",
     "f1description": "Gelişmiş NLP (Doğal Dil İşleme) modeli sayesinde kullanıcıların doğal konuşma dilini anlayabilir ve bu sayede alışveriş deneyimini daha kişisel ve etkileşimli hale getirebilir.",
     "f2title": "Akıllı Filtreleme Özellikleri",
@@ -285,7 +286,87 @@
     "f5description": "Asistan, öğrenme modülü ile kullanıcı davranışlarını analiz ederek kişiselleştirilmiş ürün önerileri sunar, böylece kullanıcıların tercihlerine uygun alışveriş deneyimi yaşamalarını sağlar.",
     "f6title": "Çok Dilli Yetenek",
     "f6description": "Dtec Alışveriş Asistanı, 22 farklı dilde çalışabilme özelliğiyle küresel bir kullanıcı kitlesine hitap eder, farklı coğrafyalardan ve dil gruplarından kullanıcılara optimum hizmet sağlar.",
-    "dtecgpt":"Gelişmiş yapay zekamız DtecGPT, insan benzeri konuşmaları anlama ve yanıt verme kabiliyetiyle alışverişi sezgisel hale getirir. Bu teknoloji sayesinde, alışveriş artık sadece bir işlem değil, akıllı bir sohbet deneyimidir."
-  ,"smartshopping":"Her Alanda Akıllı Alışveriş",
-    "smartshoppingDescription": "E-ticaret siteleri, online marketler, biletleme sistemleri ve rezervasyon uygulamalarında kullanılabilen DTEC Alışveriş Asistanı; hız, kolaylık, erişilebilirlik ve kişiye özel öneriler sunar. Ayrıca görme engelli kullanıcılar için erişimi kolaylaştırır. Sistemimiz, B2B modelinde konumlandırılmış olup kendi alanında eşsizdir."}
-    }
+    "dtecgpt": "Gelişmiş yapay zekamız DtecGPT, insan benzeri konuşmaları anlama ve yanıt verme kabiliyetiyle alışverişi sezgisel hale getirir. Bu teknoloji sayesinde, alışveriş artık sadece bir işlem değil, akıllı bir sohbet deneyimidir.",
+    "smartshopping": "Her Alanda Akıllı Alışveriş",
+    "smartshoppingDescription": "E-ticaret siteleri, online marketler, biletleme sistemleri ve rezervasyon uygulamalarında kullanılabilen DTEC Alışveriş Asistanı; hız, kolaylık, erişilebilirlik ve kişiye özel öneriler sunar. Ayrıca görme engelli kullanıcılar için erişimi kolaylaştırır. Sistemimiz, B2B modelinde konumlandırılmış olup kendi alanında eşsizdir.",
+    "se3title": "Sesli Alışverişin Geleceği",
+    "se3description": "Geleceğin alışverişi sesle yönetiliyor. DTEC, bu dönüşümün öncüsü olarak, sesli komutlarla alışverişin sağladığı konforu e-ticaretin her alanına taşıyor. Kullanıcı etkileşimini artıran ve dönüşüm oranlarını yükselten bu teknoloji, markalar için yeni bir büyüme yolu sunuyor."
+  },
+  "home-assistant": {
+    "heroTitle": "Ev Konforunuz İçin Akıllı Asistan",
+    "heroDescription": "DTEC Ev Asistanı, yaşam alanınızı tek bir merkezden yönetmenin en akıllı yolunu sunar. Işıklar, ısıtma/soğutma sistemleri, güvenlik kameraları ve çok daha fazlası, tek bir sesli komutla kontrol altında. Enerji verimliliği ve üst düzey güvenlik özellikleriyle hem konforunuzu artırır hem de huzurlu bir ortam sağlar.",
+    "f1title": "Ev ve Araç Senkronizasyonu",
+    "f1description": "Akıllı Ev Asistanı, ev ile araç asistanları arasında özelleştirilmiş senaryolar oluşturarak evden ayrılırken veya eve dönüşte aracın ve evin otomatik olarak entegre bir şekilde uyarlanabilmesini sağlar. Bu entegrasyon, kullanıcılara sorunsuz bir ev-araç geçiş deneyimi sunar.",
+
+    "f2title": "Gerçek Zamanlı Bilgi Yönetimi",
+    "f2description": "Akıllı Ev Asistanı, ev içindeki güvenlik kameraları, sensörler ve cihazlar aracılığıyla elde edilen verileri kullanıcılara gerçek zamanlı olarak sunar. Bu sayede kullanıcılar, evdeki olayları anlık olarak izleyebilir ve gerektiğinde müdahale edebilir.",
+
+    "f3title": "Mobil Uyum ve Erişilebilirlik",
+    "f3description": "Ev ve araç asistanları, kullanıcıların mobil cihazlarını kullanarak her an her yerden ev ve araçlarını yönetmelerine olanak tanır. Kullanıcılar, uzaktan erişim ile evlerini kontrol etme özgürlüğüne sahip olurlar.",
+
+    "f4title": "Gelişmiş Veri Güvenliği ve Güvenli İletişim",
+    "f4description": "Akıllı Ev Asistanı, kullanıcı verilerinin güvenliğini en üst düzeye çıkarmak için güçlü şifreleme teknolojileri kullanır. Kullanıcıların kişisel bilgileri, ev içindeki cihazlar arasında ve dışarıya yapılan iletişimlerde endüstri standardı güvenlik protokollerine göre korunur.",
+
+    "f5title": "Kişiselleştirilmiş Otomasyon Senaryoları",
+    "f5description": "Akıllı Ev Asistanı, kullanıcıların önceden belirlenmiş tercihlerine ve rutinlerine dayalı olarak kişiselleştirilmiş otomasyon senaryoları oluşturabilme özelliği sunar. Bu, kullanıcıların yaşam alanlarını daha etkili ve kişisel bir şekilde yönetmelerine olanak tanır.",
+    "HomeCallTitle": "Gerçek Zamanlı Bağlantı ve Güncel Bilgiler",
+    "HomeCallDescription": "Akıllı Ev Asistanı, gerçek zamanlı bağlantı özelliği sayesinde kullanıcılarına anlık güncel bilgiler sunar. Örneğin, evdeki güvenlik kameralarından gelen canlı görüntüler, kapı veya pencere sensörlerinden alınan anlık bilgiler ve evin enerji tüketimi gibi veriler, kullanıcıların her an evlerini takip etmelerine olanak tanır. Araç Asistanı ile entegrasyon, evden uzakta olduğunuzda bile aracınızdaki bilgileri ve kontrolü sağlayarak kullanıcılara tam bir mobil yaşam tarzı sunar. Bu, ev ve araç asistanlarının güçlü entegrasyonu ile birleşen bir yaşam deneyimidir.",
+    "se3title": "AAkıllı Ev & \n Araç Asistanı Entegrasyonu",
+    "se3description": "Akıllı Ev Asistanı, kullanıcıların evdeki kontrolünü sadece iç mekanla sınırlamaz, aynı zamanda araçlarıyla etkileşimde bulunmalarını sağlar. Bu asistan, evden çıkarken veya eve dönerken aracın konforunu önceden belirlenmiş tercihlere göre ayarlayabilir. Örneğin, eve yaklaştığınızda otomatik olarak kapıları açabilir, ışıkları açabilir ve termostatı istenen sıcaklığa getirebilir. Bu entegrasyon, kullanıcılara ev ve araçları arasında sürekli ve sorunsuz bir bağlantı sunar."
+  },
+  "travel-assistant": {
+    "heroTitle": "Seyahat Asistanıyla Yeni Keşiflere Çıkın",
+    "heroDescription": "Dtec ile yolculuklarınıza başlayın, seyahat planlamanızı sorunsuz ve keyifli hale getirmek için tasarlanmış kişisel seyahat arkadaşınız. Dtec, online seyahat bilgilerini bulmanıza yardımcı olmak, uçak biletleri rezervasyonundan konforlu otelleri keşfetmeye kadar her adımda size rehberlik eden seyahatinizdeki kişisel uzmanı",
+    "f1Title": "Uçuş Yardımı",
+    "f1Description": "Uçuş rezervasyonları için Dtec, programlar, havayolları ve bilet fiyatları konusunda gerçek zamanlı bilgi sunar. Bütçenize uygun veya lüks arayışında olun, Dtec tercihlerinize göre zahmetsiz bir rezervasyon deneyimi sağlar.",
+
+    "f2Title": "Otel Önerileri",
+    "f2Description": "Dtec'ten otel önerileri isteyin, size uygun konforlu seçeneklerin bir listesini oluşturur. İsimler ve fiyatlar Dtec'e geçen Dtec, otel görüntülerini sergileyerek konaklamanız için görsel seçim yapmanızı sağlar.",
+
+    "f3Title": "Gerçek Zamanlı Güncellemeler",
+    "f3Description": "Dtec'in gerçek zamanlı güncellemeleri ile bilgide her zaman güncel kalın. Ani uçuş değişiklikleri veya son dakika otel fırsatları olsun, Dtec sizi bilgilendirir ve seyahat planlarınızda esneklik sağlar.",
+
+    "f4Title": "Güvenlik ve Gizlilik",
+    "f4Description": "Dtec'in güvenlik ve gizlilik konusundaki taahhüdü ile güvende olun. Verileriniz en yüksek standartlarda işlenir.",
+
+    "f5Title": "Kullanıcı Dostu Etkileşim",
+    "f5Description": "Dtec ile doğal konuşmalar yapın. En ucuz uçuşları sorun veya belirli alanlıklara sahip bir otel isteyin. Dtec tercihlerinize dayalı kişiselleştirilmiş öneriler sunar."
+  },
+  "ai-assistant": {
+    "heroTitle": "Yapay Zeka ile Güçlendirilmiş Çağrı Merkezi Deneyimi",
+    "heroDescription": "Dtec AI Call Center çözümümüz, gelen ve giden çağrıları insan müdahalesi olmadan yöneterek müşteri deneyimini devrim niteliğinde dönüştürüyor. Yapay zekâ destekli aramalar sayesinde işletmenizin verimliliğini artırın, müşterilerinizle daha hızlı, daha kişisel ve daha etkili bir iletişim kurun.",
+    "f1Title": "Otomatik Giden Çağrılar",
+    "f1Description": "Kişiye özel çağrılar ile bilgi verme, randevu hatırlatma veya anket yapma imkânı.",
+
+    "f2Title": "Akıllı Çağrı Karşılama",
+    "f2Description": "Gelen çağrılarda doğru yönlendirme ve anında çözümler sunar.",
+
+    "f3Title": "7/24 Hizmet",
+    "f3Description": "Gecesi-gündüzü olmayan kesintisiz destek sistemi.",
+
+    "f4Title": "Maliyet ve Zaman Tasarrufu",
+    "f4Description": "Operasyonel giderleri düşürürken verimliliği artırın.",
+
+    "f5Title": "Kişiselleştirilmiş İletişim",
+    "f5Description": "Müşteri geçmişine dayalı kişisel iletişim deneyimi.",
+
+    "f6Title": "Çok Dilli Destek",
+    "f6Description": "Global müşterilere ana dillerinde kaliteli hizmet sunun.",
+    "section2Title": "DtecAI Voice Akıllı Çağrı Asistanı",
+    "section2Description": "DtecAI Voice, gelişmiş doğal dil işleme (NLP) teknolojileri sayesinde müşterilerin söylediklerini sadece algılamakla kalmaz, onların niyetlerini de anlayarak hızlı ve doğru çözümler sunar.\nİnsan benzeri diyalog yetenekleri sayesinde çağrı merkezinizde bekleme sürelerini minimuma indirir, kullanıcı memnuniyetini maksimize eder. Ayrıca her konuşmayı analiz eder, böylece süreçlerinizi sürekli optimize eder",
+    "section3Title": "Geleceğin İletişim Modeli: Otonom Çağrılar",
+    "section3Description": "DtecAI, manuel işlem gerektirmeden müşterilere kişiselleştirilmiş aramalar yapar. Randevu onayı, ödeme hatırlatma, kampanya bilgilendirme veya anket gibi işlemleri yapay zekâ destekli çağrılarla otonom şekilde gerçekleştirir. Konuşmalar doğal ve akıcı olduğundan müşteriler gerçek bir temsilciyle iletişim kuruyormuş gibi hisseder, böylece kullanıcı deneyimi üst düzeye çıkar.",
+   
+  "section4Title":"Sürekli Öğrenen Yapay Zeka",
+    "section4Description": "DtecAI Call Center, her müşteri etkileşiminden öğrenerek kendini sürekli geliştirir. Sistem, verilen yanıtları analiz eder, müşteri memnuniyeti skorlarını değerlendirir ve yeni müşteri davranışlarına hızla uyum sağlar. Böylece zaman içinde daha kişisel, daha hızlı ve daha doğru bir iletişim deneyimi sunarak müşteri ilişkilerini güçlendirir."
+  
+  
+  },"AboutPage":{
+    "title":"Her Kelimeyle\nYeni Bir Deneyim",
+    "description":"Dtec’e hoş geldiniz. Sesin gücünü merkeze alarak markaların ve kullanıcıların buluştuğu yeni bir etkileşim çağı başlatıyoruz. Sesli asistanlarımız, her kelimeyi markanızın benzersiz kimliğini yansıtacak şekilde yorumlar; kullanıcılarla kurduğunuz bağı kişiselleştirilmiş, tutarlı ve unutulmaz kılar.",
+    "features1title":"Misyonumuz​",
+    "features1description":"Görsel kimliğinizin ötesine taşınan, unutulmaz bir işitsel varlık inşa etmenize yardımcı oluyoruz. En yeni ses asistanı teknolojilerimizle markaların hedef kitleleriyle doğrudan ve empatik bir bağ kurmasını sağlıyor; her etkileşimi kişiselleştirerek müşteri sadakatini ve memnuniyetini artırıyoruz.",
+    "features2title":"Vizyonumuz",
+    "features2description":"Konuşmanın sınır tanımadığı, her cihazın ve markanın insan sesine anlam kazandırdığı bir evren tasarlıyoruz. Dtec olarak, insan ve teknoloji arasındaki engelleri kaldırıp, ses tabanlı etkileşimi günlük hayatın merkezine yerleştirerek geleceğin dijital deneyimlerini bugünden inşa ediyoruz."
+  }
+}
