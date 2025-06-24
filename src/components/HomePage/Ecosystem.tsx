@@ -4,6 +4,7 @@ import React, { useState, useRef, useEffect } from "react";
 import SectionWrapper from "../common/SectionWrapper";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
+import TextGradientWhite from "../common/text-gradient-white";
 
 function Ecosystem() {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -26,9 +27,9 @@ const t = useTranslations("HomePage.Ecosystem");
       <div className="container flex flex-col md:flex-row items-center justify-between gap-12">
         {/* Left Text Content */}
         <div className="lg:max-w-[400px] w-fill">
-          <h2 className="text-4xl md:text-5xl font-extrabold mb-6">
+          <TextGradientWhite className="text-4xl md:text-5xl font-extrabold mb-6">
    {t("title")}
-          </h2>
+          </TextGradientWhite>
           <p className="text-base text-foreground/80 leading-relaxed">
             {t("description")}
           </p>

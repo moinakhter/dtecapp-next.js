@@ -99,11 +99,11 @@
       },
       "scalability": {
         "title": "Ölçeklenebilir Yapı",
-        "description": "DtecAI, küçük ekiplerden global operasyonlara kadar her ölçekte esnek bir şekilde uyarlanabilir. Ek geliştirmeye gerek kalmadan büyüyen ihtiyaçlara cevap verir."
+        "description": "DtecAI, <bold>küçük ekiplerden global operasyonlara</bold> kadar her ölçekte esnek bir şekilde uyarlanabilir. Ek geliştirmeye gerek kalmadan büyüyen ihtiyaçlara cevap verir."
       },
       "security": {
         "title": "Kurumsal Güvenlik Standartları",
-        "description": "Tüm iletişim ve işlem kayıtları, uluslararası güvenlik standartlarına uygun şekilde şifrelenir ve saklanır. DtecAI, veri gizliliğinizi ciddiyetle korur."
+        "description": "Tüm iletişim ve işlem kayıtları, <bold>uluslararası güvenlik standartlarına uygun</bold> şekilde şifrelenir ve saklanır. DtecAI, veri gizliliğinizi ciddiyetle korur."
       },
       "howItWorks": {
         "title": "Nasıl Çalışır?",
@@ -113,24 +113,24 @@
             "title": "Anında Algılama ve Yönlendirme",
             "points": [
               "Müşteri sizi aradığında DtecAI çağrıyı otomatik olarak karşılar.",
-              "Arayan kişinin ihtiyacını saniyeler içinde analiz eder.",
-              "Konuya göre en doğru yanıtı sunar veya yönlendirir."
+              "Arayan kişinin ihtiyacını <bold>saniyeler içinde</bold> analiz eder.",
+              "Konuya göre <bold>en doğru yanıtı</bold> sunar veya yönlendirir."
             ]
           },
           "col2": {
             "title": "Yapay Zekâ ile Dinle, Anla ve Cevapla",
             "points": [
-              "NLP teknolojisiyle müşterinin ne söylediğini ve ne istediğini anlar.",
-              "İnsan benzeri, doğal ve akıcı bir konuşma deneyimi sunar.",
-              "Her etkileşimden öğrenerek gelecekte daha doğru tepkiler verir."
+              "<bold>NLP teknolojisiyle</bold> müşterinin ne söylediğini ve ne istediğini anlar.",
+              "İnsan benzeri, <bold>doğal ve akıcı bir konuşma</bold> deneyimi sunar.",
+              "Her etkileşimden öğrenerek gelecekte daha <bold>doğru tepkiler verir</bold>."
             ]
           },
           "col3": {
             "title": "Verimli, Ölçülebilir ve Her Zaman Hazır",
             "points": [
-              "Randevu hatırlatma, kampanya ve anket gibi aramalar otonom şekilde gerçekleştirilir.",
-              "7/24 hizmet vererek gelen hiçbir çağrı cevapsız kalmaz.",
-              "Operasyonel maliyetleri düşürür, müşteri memnuniyetini artırır."
+              "Randevu hatırlatma, kampanya ve anket gibi <bold>aramalar otonom şekilde</bold> gerçekleştirilir.",
+              "7/24 hizmet vererek gelen <bold>hiçbir çağrı cevapsız kalmaz</bold>.",
+              "Operasyonel maliyetleri düşürür, <bold>müşteri memnuniyetini artırır</bold>."
             ]
           }
         },
@@ -141,7 +141,7 @@
       },
       "automation": {
         "title": "Otomatik Süreç Akışları",
-        "description": "Manuel işlemlere veda edin. Müşteriyle gerçekleşen her etkileşim sonrası tetiklenen e-posta, SMS ya da CRM girdileri tamamen otomatikleştirilir. Zaman kazanın, hata payını sıfırlayın."
+        "description": "Manuel işlemlere veda edin. Müşteriyle gerçekleşen her etkileşim sonrası tetiklenen <bold>e-posta, SMS ya da CRM girdileri tamamen otomatikleştirilir.</bold> Zaman kazanın, hata payını sıfırlayın."
       }
     },
     "Ecosystem": {
@@ -297,16 +297,12 @@
     "heroDescription": "DTEC Ev Asistanı, yaşam alanınızı tek bir merkezden yönetmenin en akıllı yolunu sunar. Işıklar, ısıtma/soğutma sistemleri, güvenlik kameraları ve çok daha fazlası, tek bir sesli komutla kontrol altında. Enerji verimliliği ve üst düzey güvenlik özellikleriyle hem konforunuzu artırır hem de huzurlu bir ortam sağlar.",
     "f1title": "Ev ve Araç Senkronizasyonu",
     "f1description": "Akıllı Ev Asistanı, ev ile araç asistanları arasında özelleştirilmiş senaryolar oluşturarak evden ayrılırken veya eve dönüşte aracın ve evin otomatik olarak entegre bir şekilde uyarlanabilmesini sağlar. Bu entegrasyon, kullanıcılara sorunsuz bir ev-araç geçiş deneyimi sunar.",
-
     "f2title": "Gerçek Zamanlı Bilgi Yönetimi",
     "f2description": "Akıllı Ev Asistanı, ev içindeki güvenlik kameraları, sensörler ve cihazlar aracılığıyla elde edilen verileri kullanıcılara gerçek zamanlı olarak sunar. Bu sayede kullanıcılar, evdeki olayları anlık olarak izleyebilir ve gerektiğinde müdahale edebilir.",
-
     "f3title": "Mobil Uyum ve Erişilebilirlik",
     "f3description": "Ev ve araç asistanları, kullanıcıların mobil cihazlarını kullanarak her an her yerden ev ve araçlarını yönetmelerine olanak tanır. Kullanıcılar, uzaktan erişim ile evlerini kontrol etme özgürlüğüne sahip olurlar.",
-
     "f4title": "Gelişmiş Veri Güvenliği ve Güvenli İletişim",
     "f4description": "Akıllı Ev Asistanı, kullanıcı verilerinin güvenliğini en üst düzeye çıkarmak için güçlü şifreleme teknolojileri kullanır. Kullanıcıların kişisel bilgileri, ev içindeki cihazlar arasında ve dışarıya yapılan iletişimlerde endüstri standardı güvenlik protokollerine göre korunur.",
-
     "f5title": "Kişiselleştirilmiş Otomasyon Senaryoları",
     "f5description": "Akıllı Ev Asistanı, kullanıcıların önceden belirlenmiş tercihlerine ve rutinlerine dayalı olarak kişiselleştirilmiş otomasyon senaryoları oluşturabilme özelliği sunar. Bu, kullanıcıların yaşam alanlarını daha etkili ve kişisel bir şekilde yönetmelerine olanak tanır.",
     "HomeCallTitle": "Gerçek Zamanlı Bağlantı ve Güncel Bilgiler",
@@ -319,16 +315,12 @@
     "heroDescription": "Dtec ile yolculuklarınıza başlayın, seyahat planlamanızı sorunsuz ve keyifli hale getirmek için tasarlanmış kişisel seyahat arkadaşınız. Dtec, online seyahat bilgilerini bulmanıza yardımcı olmak, uçak biletleri rezervasyonundan konforlu otelleri keşfetmeye kadar her adımda size rehberlik eden seyahatinizdeki kişisel uzmanı",
     "f1Title": "Uçuş Yardımı",
     "f1Description": "Uçuş rezervasyonları için Dtec, programlar, havayolları ve bilet fiyatları konusunda gerçek zamanlı bilgi sunar. Bütçenize uygun veya lüks arayışında olun, Dtec tercihlerinize göre zahmetsiz bir rezervasyon deneyimi sağlar.",
-
     "f2Title": "Otel Önerileri",
     "f2Description": "Dtec'ten otel önerileri isteyin, size uygun konforlu seçeneklerin bir listesini oluşturur. İsimler ve fiyatlar Dtec'e geçen Dtec, otel görüntülerini sergileyerek konaklamanız için görsel seçim yapmanızı sağlar.",
-
     "f3Title": "Gerçek Zamanlı Güncellemeler",
     "f3Description": "Dtec'in gerçek zamanlı güncellemeleri ile bilgide her zaman güncel kalın. Ani uçuş değişiklikleri veya son dakika otel fırsatları olsun, Dtec sizi bilgilendirir ve seyahat planlarınızda esneklik sağlar.",
-
     "f4Title": "Güvenlik ve Gizlilik",
     "f4Description": "Dtec'in güvenlik ve gizlilik konusundaki taahhüdü ile güvende olun. Verileriniz en yüksek standartlarda işlenir.",
-
     "f5Title": "Kullanıcı Dostu Etkileşim",
     "f5Description": "Dtec ile doğal konuşmalar yapın. En ucuz uçuşları sorun veya belirli alanlıklara sahip bir otel isteyin. Dtec tercihlerinize dayalı kişiselleştirilmiş öneriler sunar."
   },
@@ -337,36 +329,29 @@
     "heroDescription": "Dtec AI Call Center çözümümüz, gelen ve giden çağrıları insan müdahalesi olmadan yöneterek müşteri deneyimini devrim niteliğinde dönüştürüyor. Yapay zekâ destekli aramalar sayesinde işletmenizin verimliliğini artırın, müşterilerinizle daha hızlı, daha kişisel ve daha etkili bir iletişim kurun.",
     "f1Title": "Otomatik Giden Çağrılar",
     "f1Description": "Kişiye özel çağrılar ile bilgi verme, randevu hatırlatma veya anket yapma imkânı.",
-
     "f2Title": "Akıllı Çağrı Karşılama",
     "f2Description": "Gelen çağrılarda doğru yönlendirme ve anında çözümler sunar.",
-
     "f3Title": "7/24 Hizmet",
     "f3Description": "Gecesi-gündüzü olmayan kesintisiz destek sistemi.",
-
     "f4Title": "Maliyet ve Zaman Tasarrufu",
     "f4Description": "Operasyonel giderleri düşürürken verimliliği artırın.",
-
     "f5Title": "Kişiselleştirilmiş İletişim",
     "f5Description": "Müşteri geçmişine dayalı kişisel iletişim deneyimi.",
-
     "f6Title": "Çok Dilli Destek",
     "f6Description": "Global müşterilere ana dillerinde kaliteli hizmet sunun.",
     "section2Title": "DtecAI Voice Akıllı Çağrı Asistanı",
-    "section2Description": "DtecAI Voice, gelişmiş doğal dil işleme (NLP) teknolojileri sayesinde müşterilerin söylediklerini sadece algılamakla kalmaz, onların niyetlerini de anlayarak hızlı ve doğru çözümler sunar.\nİnsan benzeri diyalog yetenekleri sayesinde çağrı merkezinizde bekleme sürelerini minimuma indirir, kullanıcı memnuniyetini maksimize eder. Ayrıca her konuşmayı analiz eder, böylece süreçlerinizi sürekli optimize eder",
+    "section2Description": "DtecAI Voice, gelişmiş doğal dil işleme (NLP) teknolojileri sayesinde müşterilerin söylediklerini sadece algılamakla kalmaz, onların niyetlerini de anlayarak hızlı ve doğru çözümler sunar.\nİnsan benzeri diyalog yetenekleri sayesinde çağrı merkezinizde bekleme sürelerini minimuma indirir, kullanıcı memnuniyetini maksimize eder.Ayrıca her konuşmayı analiz eder, böylece süreçlerinizi sürekli optimize eder",
     "section3Title": "Geleceğin İletişim Modeli: Otonom Çağrılar",
     "section3Description": "DtecAI, manuel işlem gerektirmeden müşterilere kişiselleştirilmiş aramalar yapar. Randevu onayı, ödeme hatırlatma, kampanya bilgilendirme veya anket gibi işlemleri yapay zekâ destekli çağrılarla otonom şekilde gerçekleştirir. Konuşmalar doğal ve akıcı olduğundan müşteriler gerçek bir temsilciyle iletişim kuruyormuş gibi hisseder, böylece kullanıcı deneyimi üst düzeye çıkar.",
-   
-  "section4Title":"Sürekli Öğrenen Yapay Zeka",
+    "section4Title": "Sürekli Öğrenen Yapay Zeka",
     "section4Description": "DtecAI Call Center, her müşteri etkileşiminden öğrenerek kendini sürekli geliştirir. Sistem, verilen yanıtları analiz eder, müşteri memnuniyeti skorlarını değerlendirir ve yeni müşteri davranışlarına hızla uyum sağlar. Böylece zaman içinde daha kişisel, daha hızlı ve daha doğru bir iletişim deneyimi sunarak müşteri ilişkilerini güçlendirir."
-  
-  
-  },"AboutPage":{
-    "title":"Her Kelimeyle\nYeni Bir Deneyim",
-    "description":"Dtec’e hoş geldiniz. Sesin gücünü merkeze alarak markaların ve kullanıcıların buluştuğu yeni bir etkileşim çağı başlatıyoruz. Sesli asistanlarımız, her kelimeyi markanızın benzersiz kimliğini yansıtacak şekilde yorumlar; kullanıcılarla kurduğunuz bağı kişiselleştirilmiş, tutarlı ve unutulmaz kılar.",
-    "features1title":"Misyonumuz​",
-    "features1description":"Görsel kimliğinizin ötesine taşınan, unutulmaz bir işitsel varlık inşa etmenize yardımcı oluyoruz. En yeni ses asistanı teknolojilerimizle markaların hedef kitleleriyle doğrudan ve empatik bir bağ kurmasını sağlıyor; her etkileşimi kişiselleştirerek müşteri sadakatini ve memnuniyetini artırıyoruz.",
-    "features2title":"Vizyonumuz",
-    "features2description":"Konuşmanın sınır tanımadığı, her cihazın ve markanın insan sesine anlam kazandırdığı bir evren tasarlıyoruz. Dtec olarak, insan ve teknoloji arasındaki engelleri kaldırıp, ses tabanlı etkileşimi günlük hayatın merkezine yerleştirerek geleceğin dijital deneyimlerini bugünden inşa ediyoruz."
+  },
+  "AboutPage": {
+    "title": "Her Kelimeyle\nYeni Bir Deneyim",
+    "description": "Dtec’e hoş geldiniz. Sesin gücünü merkeze alarak markaların ve kullanıcıların buluştuğu yeni bir etkileşim çağı başlatıyoruz. Sesli asistanlarımız, her kelimeyi markanızın benzersiz kimliğini yansıtacak şekilde yorumlar; kullanıcılarla kurduğunuz bağı kişiselleştirilmiş, tutarlı ve unutulmaz kılar.",
+    "features1title": "Misyonumuz​",
+    "features1description": "Görsel kimliğinizin ötesine taşınan, unutulmaz bir işitsel varlık inşa etmenize yardımcı oluyoruz. En yeni ses asistanı teknolojilerimizle markaların hedef kitleleriyle doğrudan ve empatik bir bağ kurmasını sağlıyor; her etkileşimi kişiselleştirerek müşteri sadakatini ve memnuniyetini artırıyoruz.",
+    "features2title": "Vizyonumuz",
+    "features2description": "Konuşmanın sınır tanımadığı, her cihazın ve markanın insan sesine anlam kazandırdığı bir evren tasarlıyoruz. Dtec olarak, insan ve teknoloji arasındaki engelleri kaldırıp, ses tabanlı etkileşimi günlük hayatın merkezine yerleştirerek geleceğin dijital deneyimlerini bugünden inşa ediyoruz."
   }
 }

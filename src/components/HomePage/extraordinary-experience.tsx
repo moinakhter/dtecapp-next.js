@@ -57,19 +57,19 @@ export default function ComparisonSection() {
     <>
       <div className="relative h-full w-full overflow-visible">
         <div className="absolute inset-0 z-0 pointer-events-none overflow-visible">
-          <ScrollAnimatedLogo >
-     <div className="relative w-[320px] h-[320px] sm:w-[544px] sm:h-[544px] lg:w-[744px] lg:h-[744px] md:w-[600px] md:h-[600px] z-10">
-        <Image
-          src="/images/logo/DTEC_WhiteMode.png"
-          alt="DTEC Logo"
-          fill
-          className="object-contain"
-        />
-      </div>
-            </ScrollAnimatedLogo>
+          <ScrollAnimatedLogo>
+            <div className="relative w-[320px] h-[320px] sm:w-[544px] sm:h-[544px] lg:w-[744px] lg:h-[744px] md:w-[600px] md:h-[600px] z-10">
+              <Image
+                src="/images/logo/DTEC_WhiteMode.png"
+                alt="DTEC Logo"
+                fill
+                className="object-contain"
+              />
+            </div>
+          </ScrollAnimatedLogo>
         </div>
         <section className="relative z-10 w-full py-24">
-          <SpotlightBg className="dark:absolute hidden" />
+          <SpotlightBg className="dark:absolute  dark:visible  invisible " />
           {/* Content */}
           <div className="container relative z-10 px-5">
             <div className="text-center mb-[96px]">
@@ -160,13 +160,15 @@ function FeatureItem({
       whileInView={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
       viewport={{ once: true }}
-      className="flex items-start gap-4"
+      className="flex items-start  gap-4"
     >
       <div className="mt-1">
-        <Icon className="w-8 h-8 hover:text-secondary transition-all duration-500" />
+        <Icon className="w-8 h-8  hover:text-secondary transition-all duration-300" />
       </div>
-      <div className="flex-1 flex flex-col gap-1">
-        <h4 className="text-base font-bold">{title}</h4>
+      <div className="flex-1 flex group flex-col gap-1">
+        <h4 className="text-base  hover:text-secondary transition-all duration-300 font-bold">
+          {title}
+        </h4>
         <p className="text-sm font-light">{description}</p>
       </div>
     </motion.div>

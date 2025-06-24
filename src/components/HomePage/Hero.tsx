@@ -10,7 +10,7 @@ export const Hero = () => {
 
   return (
     <section className="relative md:p-0 p-2 h-full xl:h-full lg:min-h-screen text-center flex items-center flex-col justify-between w-full overflow-hidden bg-background text-foreground">
-<FloatingBalls />
+      <FloatingBalls />
 
       {/* Main Content */}
       <div className="z-40 flex items-center justify-center flex-col h-full w-full">

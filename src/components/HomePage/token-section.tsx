@@ -2,6 +2,7 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { useTranslations } from "next-intl";
+import TextGradientWhite from "../common/text-gradient-white";
 
 export default function TokenSection() {
 const t = useTranslations("HomePage.TokenSection");
@@ -16,15 +17,15 @@ const features = Object.values(t.raw("features")) as {
       <div className="container space-y-20 relative z-10 px-4 pt-16">
         {/* Header */}
         <div className="text-center max-w-[900px] mx-auto">
-          <h2 className="md:text-4xl text-2xl lg:text-[56px] font-black mb-8 whitespace-pre-line">
+          <TextGradientWhite className="md:text-4xl text-2xl lg:text-[56px] font-black mb-8 whitespace-pre-line">
             {t("header")}
-          </h2>
+          </TextGradientWhite>
           <p className="text-base mb-12 mx-auto">{t("description")}</p>
 
           <Button
             variant="outline"
             size="lg"
-            className="border bg-transparent border-accent hover:text-white transition-all duration-300"
+            className="border bg-transparent  hover:bg-secondary border-accent hover:text-white transition-all duration-300"
           >
             {t("cta")}
             <span className="rotate-[-45deg] inline-block">→</span>
@@ -84,7 +85,10 @@ function TokenFeatureCard({
         </h3>
         <p className="text-base font-light">{description}</p>
       </div>
-      <div className="w-full h-[2px] bg-black dark:bg-white group-hover:bg-secondary transition-colors duration-300 mt-auto" />
+       <div className="relative  overflow-hidden mt-auto">
+          <div className="w-full h-px bg-border" />
+          <div className="absolute top-0 left-0 h-px bg-secondary w-0 group-hover:w-full transition-all duration-500 ease-out" />
+        </div>
     </motion.div>
   );
 }

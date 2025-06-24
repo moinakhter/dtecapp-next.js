@@ -18,6 +18,7 @@ import {
 import { useTranslations } from "next-intl";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import MindsBanner from "@/components/HomePage/minds-meet";
+import FloatingBalls from "@/components/common/FloatingBalls";
 
 export default function CarAssistantPage() {
   const t = useTranslations("ai-assistant");
@@ -68,8 +69,11 @@ export default function CarAssistantPage() {
 
   return (
     <div className="min-h-screen bg-background">
+      
+      <FloatingBalls />
+
       {/* Hero Section */}
-      <SectionWrapper className="relative mt-[90px] overflow-hidden">
+      <SectionWrapper className="relative mt-[90px] bg-transparent overflow-hidden">
         {/* Background Grid Pattern */}
 
         <div className="container relative z-10">

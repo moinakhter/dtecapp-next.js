@@ -22,78 +22,77 @@ import { useTranslations } from "next-intl";
 
 export default function DtecAssistants() {
   const [activeCard, setActiveCard] = useState("car");
-const t = useTranslations("HomePage.Dtec Assistants");
+  const t = useTranslations("HomePage.Dtec Assistants");
 
-const cards = [
-  {
-    id: "car",
-    title: t("car.title"),
-    description: t("car.description"),
-    image: "/images/Home/dtec-assistants/car.png",
-    link: "#",
-    features: [
-      {
-        icon: <MessageSquareText className="h-5 w-5" />,
-        text: t("car.features.f1"),
-      },
-      {
-        icon: <ScanFace className="h-5 w-5" />,
-        text: t("car.features.f2"),
-      },
-      {
-        icon: <Phone className="h-5 w-5" />,
-        text: t("car.features.f3"),
-      },
-      {
-        icon: <Cpu className="h-5 w-5" />,
-        text: t("car.features.f4"),
-      },
-    ],
-  },
-  {
-    id: "shopping",
-    title: t("shopping.title"),
-    description: t("shopping.description"),
-    image: "/images/Home/dtec-assistants/women-shopping.png",
-    link: "#",
-    features: [
-      {
-        icon: <Code className="h-5 w-5" />,
-        text: t("shopping.features.f1"),
-      },
-      {
-        icon: <User className="h-5 w-5" />,
-        text: t("shopping.features.f2"),
-      },
-      {
-        icon: <Shield className="h-5 w-5" />,
-        text: t("shopping.features.f3"),
-      },
-    ],
-  },
-  {
-    id: "home",
-    title: t("home.title"),
-    description: t("home.description"),
-    image: "/images/Home/dtec-assistants/smarthome.png",
-    link: "#",
-    features: [
-      {
-        icon: <Layers className="h-5 w-5" />,
-        text: t("home.features.f1"),
-      },
-      {
-        icon: <Zap className="h-5 w-5" />,
-        text: t("home.features.f2"),
-      },
-      {
-        icon: <Cpu className="h-5 w-5" />,
-        text: t("home.features.f3"),
-      },
-    ],
-  },
-];
-
+  const cards = [
+    {
+      id: "car",
+      title: t("car.title"),
+      description: t("car.description"),
+      image: "/images/Home/dtec-assistants/car.png",
+      link: "/products/car-assistant",
+      features: [
+        {
+          icon: <MessageSquareText className="h-5 w-5" />,
+          text: t("car.features.f1"),
+        },
+        {
+          icon: <ScanFace className="h-5 w-5" />,
+          text: t("car.features.f2"),
+        },
+        {
+          icon: <Phone className="h-5 w-5" />,
+          text: t("car.features.f3"),
+        },
+        {
+          icon: <Cpu className="h-5 w-5" />,
+          text: t("car.features.f4"),
+        },
+      ],
+    },
+    {
+      id: "shopping",
+      title: t("shopping.title"),
+      description: t("shopping.description"),
+      image: "/images/Home/dtec-assistants/women-shopping.png",
+      link: "/products/shopping-assistant",
+      features: [
+        {
+          icon: <Code className="h-5 w-5" />,
+          text: t("shopping.features.f1"),
+        },
+        {
+          icon: <User className="h-5 w-5" />,
+          text: t("shopping.features.f2"),
+        },
+        {
+          icon: <Shield className="h-5 w-5" />,
+          text: t("shopping.features.f3"),
+        },
+      ],
+    },
+    {
+      id: "home",
+      title: t("home.title"),
+      description: t("home.description"),
+      image: "/images/Home/dtec-assistants/smarthome.png",
+      link: "/products/home-assistant",
+      features: [
+        {
+          icon: <Layers className="h-5 w-5" />,
+          text: t("home.features.f1"),
+        },
+        {
+          icon: <Zap className="h-5 w-5" />,
+          text: t("home.features.f2"),
+        },
+        {
+          icon: <Cpu className="h-5 w-5" />,
+          text: t("home.features.f3"),
+        },
+      ],
+    },
+  ];
 
   return (
     <div className="w-full bg-white dark:bg-[#0B0B0B] py-[128px] ">
@@ -102,10 +101,13 @@ const cards = [
         <div className="text-center mb-10 md:mb-24">
           <TextGradientWhite text={t("title")} />
 
-{t("description").split("\n").map((line, i) => (
-  <p className="text-2xl font-light opacity-60 "key={i}>{line}</p>
-))}
- 
+          {t("description")
+            .split("\n")
+            .map((line, i) => (
+              <p className="text-2xl font-light opacity-60 " key={i}>
+                {line}
+              </p>
+            ))}
         </div>
         {/* Expanding Cards */}
         <div className="flex h-[500px] w-full gap-2.5 mx-auto">
@@ -116,19 +118,20 @@ const cards = [
               <motion.div
                 key={card.id}
                 className={cn(
-                  "relative rounded-2xl overflow-hidden cursor-pointer",
-                  {
-                    "flex-1": isActive,
-                    "flex-0.1": !isActive,
-                  }
+                  "relative rounded-2xl overflow-hidden cursor-pointer"
                 )}
                 onMouseEnter={() => setActiveCard(card.id)}
                 animate={{
-                  flex: isActive ? 1 : 0.1,
+                  width: isActive ? ["20%", "62%", "60%"] : "20%",
                 }}
                 transition={{
-                  duration: 0.5,
+                  duration: isActive ? 0.8 : 0.4,
                   ease: "easeInOut",
+                  times: isActive ? [0, 0.6, 1] : undefined,
+                }}
+                style={{ minWidth: "5px" ,
+                  
+      
                 }}
               >
                 {/* Background Image */}
@@ -157,7 +160,7 @@ const cards = [
                           animate={{ opacity: 1, x: 0 }}
                           transition={{ duration: 0.3, delay: 0.2 }}
                         >
-                         {t("learnMore")}
+                          {t("learnMore")}
                         </motion.span>
                         <motion.span
                           initial={{ opacity: 0, x: 10 }}

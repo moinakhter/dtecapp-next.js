@@ -203,7 +203,7 @@ export default function Footer() {
             <Button
               type="submit"
               size="sm"
-              className="bg-secondary text-[13px] text-white font-normal rounded-[9.6px]"
+              className="bg-secondary text-[13px] hover:bg-accent text-white font-normal rounded-[9.6px]"
             >
               {t("newsletter_button")}
             </Button>

@@ -11,19 +11,17 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 @layer base {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     box-sizing: border-box;
   }
 }
- 
- 
 
 a {
   color: inherit;
   text-decoration: none;
 }
- 
-
 
 /* Responsive container */
 .container {
@@ -65,8 +63,8 @@ a {
   --blue-light: #5fc0fa;
   --blue: #3d7ee2;
   --blue-dark: #143773;
-  --background: #EEE;
-    --fade-end: #EEE;
+  --background: #eee;
+  --fade-end: #eee;
   --foreground: #212121;
   --icon-filter: invert(0%) brightness(0%);
   /* UI Tokens */
@@ -79,12 +77,12 @@ a {
   --button-bg: var(--primary);
   --button-text: var(--white);
   --border: #e5e5e5;
-  --card: #FAFAFA;
+  --card: #fafafa;
 }
 
 .dark {
-  --background: #0A0A0A;
-    --fade-end: rgba(20, 55, 115, 0);
+  --background: #0a0a0a;
+  --fade-end: rgba(20, 55, 115, 0);
   --foreground: #fafafa;
   --card: #212121;
   --border: #2a2a2a;
@@ -114,12 +112,36 @@ a {
   --color-button-text: var(--button-text);
 }
 
-
- 
-
-
- [data-slot="dropdown-menu-trigger"]:focus,
+[data-slot="dropdown-menu-trigger"]:focus,
 [data-slot="dropdown-menu-trigger"]:focus-visible {
   outline: none !important;
   box-shadow: none !important;
+}
+
+ 
+.double-radial-bg {
+  background:
+    radial-gradient(
+      98.83% 153.64% at 94.89% 1.17%,
+      rgba(20, 55, 115, 0.29) 0%,
+      rgba(255, 255, 255, 0) 50%
+    ),
+    radial-gradient(
+      98.83% 153.64% at 5% 95%,
+      rgba(61, 126, 226, 0.28) 0%,
+      rgba(255, 255, 255, 0.26) 50%
+    );
+}
+.dark .double-radial-bg {
+  background:
+    radial-gradient(
+      98.83% 153.64% at 5% 95%,
+      rgba(61, 126, 226, 1) 0%,
+      rgba(18, 18, 18, 0.26) 40%
+    ),
+    radial-gradient(
+      98.83% 153.64% at 94.89% 1.17%,
+      rgba(20, 55, 115, 1) 0%,
+      rgba(18, 18, 18, 0) 50%
+    );
 }
