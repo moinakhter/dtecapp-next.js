@@ -21,10 +21,11 @@ import { useTranslations } from "next-intl";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import MindsBanner from "@/components/HomePage/minds-meet";
 import FloatingBalls from "@/components/common/FloatingBalls";
+import FadeText from "@/components/common/FadeText";
 
 export default function CarAssistantPage() {
   const t = useTranslations("car-assistant");
- 
+
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -80,25 +81,24 @@ export default function CarAssistantPage() {
   ];
 
   return (
-    <div className="min-h-screen   ">
-
+    <div className="min-h-screen">
       <FloatingBalls />
       {/* Hero Section */}
-      <SectionWrapper className="relative bg-transparent mt-[90px] overflow-hidden">
+      <SectionWrapper className="relative   mt-[90px] overflow-hidden">
         {/* Background Grid Pattern */}
 
         <div className="container relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Left Content */}
             <div className="space-y-8">
-              <div className="space-y-6">
-                <TextGradientWhite className="text-3xl md:text-7xl font-bold  ">
-                  Yeniden
-                  <br />
-                  Tanımlanan
-                  <br />
-                  Sürüş Deneyimi
-                </TextGradientWhite>
+              <TextGradientWhite className="text-3xl md:text-7xl font-bold  ">
+                Yeniden
+                <br />
+                Tanımlanan
+                <br />
+                Sürüş Deneyimi
+              </TextGradientWhite>
+              <FadeText delay={0.2}>
                 <p className="text-base font-light  max-w-xl">
                   Araç Asistanımız, yolculuğunuzu boyunca yanınızda olan akıllı
                   bir yol arkadaşıdır. Sesli komutlarla araçlarınızın tüm
@@ -106,7 +106,7 @@ export default function CarAssistantPage() {
                   en üst düzeyde çıkarır, dikkatinizi yoldan ayırmayacak şekilde
                   destek sunar.
                 </p>
-              </div>
+              </FadeText>
             </div>
 
             {/* Right Content - Car Image */}
@@ -128,8 +128,7 @@ export default function CarAssistantPage() {
 
       <LogosTicker />
 
-      {/* Main Features SectionWrapper */}
-      <SectionWrapper className=" mx-auto">
+      <SectionWrapper className=" relative z-10 mx-auto">
         <motion.div
           className="grid grid-cols-1 md:grid-cols-2  container  lg:grid-cols-3 gap-12 lg:gap-[102px] mx-auto  md:place-items-stretch"
           initial="hidden"
@@ -150,7 +149,7 @@ export default function CarAssistantPage() {
               icon={feature.icon}
               title={feature.title}
               description={feature.description}
-                className="max-w-[320px]"
+              className="max-w-[320px]"
             />
           ))}
           <div className="lg:col-span-3 grid grid-cols-2 place-content-center gap-12">
@@ -175,43 +174,44 @@ export default function CarAssistantPage() {
           {/* Left Content */}
           <div className="lg:w-1/2 text-center lg:text-left">
             <TextGradientWhite text="Dtec GPT" className="mb-8 text-[90px] " />
-
-            <p className="font-light text-base max-w-[562px] mx-auto lg:mx-0">
-              {t("dtecgpt")}
-            </p>
+            <FadeText delay={0.2}>
+              <p className="font-light text-base max-w-[562px] mx-auto lg:mx-0">
+                {t("dtecgpt")}
+              </p>
+            </FadeText>
           </div>
 
           {/* Right Image */}
           <div className="lg:w-1/2 flex justify-center">
-            <div className="w-[512px] h-[512px] rounded-4xl overflow-hidden shadow-lg">
+            <div className="w-[512px] relative h-[512px] rounded-4xl overflow-hidden shadow-lg ">
               <Image
                 src="/images/Backgrounds/colorful-spiral.svg"
                 alt="DtecGPT"
                 width={512}
                 height={512}
-                className="object-cover w-full h-full shadow-[0_4px_24px_rgba(0,0,0,0.2)]"
+                className="object-cover w-full h-full shadow-[0_4px_24px_rgba(0,0,0,0.2)] dark:mix-blend-lighten"
               />
             </div>
           </div>
         </div>
       </SectionWrapper>
 
-      <div className=" py-[128px] relative">
+      <div className="relative">
         <motion.div
           style={{ scale }}
           className="absolute -z-0  w-[50vw] h-[50vw] bg-secondary opacity-50 rounded-full blur-[200px] left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2"
         />
 
-        <SectionWrapper className="w-full relative rounded-3xl ">
+        <SectionWrapper className="w-full max-w-[1184px] p-[92px]  mx-auto z-10 relative rounded-4xl ">
           <Image
             src="/images/Backgrounds/shape1.svg"
             alt="Minds Meet Background"
             fill
-            className="relative   object-cover bg-black  rounded-3xl  overflow-hidden"
+            className="relative  object-cover bg-black  rounded-4xl  overflow-hidden"
           />
 
           {/* Content */}
-          <div className="relative z-10 text-center">
+          <div className="relative z-10 text-center flex flex-col items-center justify-center ">
             <TextGradientWhite
               text={t("ComplexQuestionsTitle1")}
               className="md:text-4xl text-2xl lg:text-[64px] font-bold  text-white"
@@ -220,17 +220,18 @@ export default function CarAssistantPage() {
               text={t("ComplexQuestionsTitle2")}
               className="md:text-4xl text-2xl mb-8 lg:text-[64px] font-bold  text-white"
             />
-
-            {t("dtecgptDescription")
-              .split("\n")
-              .map((line, i) => (
-                <p
-                  className="font-light text-base text-white mb-3 max-w-[720px]"
-                  key={i}
-                >
-                  {line}
-                </p>
-              ))}
+            <FadeText delay={0.2}>
+              {t("dtecgptDescription")
+                .split("\n")
+                .map((line, i) => (
+                  <p
+                    className="font-light text-base   text-white mb-3 max-w-[720px]"
+                    key={i}
+                  >
+                    {line}
+                  </p>
+                ))}
+            </FadeText>
           </div>
         </SectionWrapper>
       </div>
@@ -245,15 +246,16 @@ export default function CarAssistantPage() {
               text="Güvenli ve Verimli Sürüş Deneyimi"
               className="mb-8 text-[56px] font-black "
             />
-
-            <p className="font-light text-base max-w-[575px] mx-auto lg:mx-0">
-              Araç Asistanı, manuel dikkat dağıtıcıları ortadan kaldırarak
-              tamamen eller serbest bir kontrol sunar. Kritik uyarıları ve acil
-              durum bildirimlerini sesli olarak iletir; çoklu görev yapma
-              yeteneği sayesinde rota, iletişim veya eğlence işlemlerinizi
-              kesintisiz yönetmenizi sağlar. Böylece hem güvenliğiniz hem de
-              yolculuğunuzun verimliliği en üst düzeye çıkar.
-            </p>
+            <FadeText delay={0.2}>
+              <p className="font-light text-base max-w-[575px] mx-auto lg:mx-0">
+                Araç Asistanı, manuel dikkat dağıtıcıları ortadan kaldırarak
+                tamamen eller serbest bir kontrol sunar. Kritik uyarıları ve
+                acil durum bildirimlerini sesli olarak iletir; çoklu görev yapma
+                yeteneği sayesinde rota, iletişim veya eğlence işlemlerinizi
+                kesintisiz yönetmenizi sağlar. Böylece hem güvenliğiniz hem de
+                yolculuğunuzun verimliliği en üst düzeye çıkar.
+              </p>
+            </FadeText>
           </div>
 
           {/* Right Image */}
@@ -268,7 +270,7 @@ export default function CarAssistantPage() {
           </div>
         </div>
       </SectionWrapper>
-      <MindsBanner  />
+      <MindsBanner />
 
       {/* Footer Section */}
     </div>

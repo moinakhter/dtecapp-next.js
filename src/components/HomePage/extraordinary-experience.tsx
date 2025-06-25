@@ -13,6 +13,8 @@ import { SpotlightBg } from "../common/RadialBlueGlow";
 import ScrollAnimatedLogo from "../common/AnimatedLogo";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
+import TextGradientWhite from "../common/text-gradient-white";
+import FadeText from "../common/FadeText";
 
 export default function ComparisonSection() {
   const t = useTranslations("HomePage.Comparison Section");
@@ -73,10 +75,13 @@ export default function ComparisonSection() {
           {/* Content */}
           <div className="container relative z-10 px-5">
             <div className="text-center mb-[96px]">
-              <h2 className="dark:text-transparent dark:bg-clip-text dark:bg-[linear-gradient(311deg,_#FAFAFA_14%,_#CDCDCD_36%,_#999999_52%,_#E2E2E2_69%,_#FAFAFA_89%)] mb-2.5 text-[56px] font-black">
+              <TextGradientWhite className="dark:text-transparent dark:bg-clip-text dark:bg-[linear-gradient(311deg,_#FAFAFA_14%,_#CDCDCD_36%,_#999999_52%,_#E2E2E2_69%,_#FAFAFA_89%)] mb-2.5 text-[56px] font-black">
                 {t("title")}
-              </h2>
+              </TextGradientWhite>
+              <FadeText delay={0.2}>
+
               <p className="text-2xl font-light ">{t("description")}</p>
+              </FadeText>
             </div>
 
             <motion.div

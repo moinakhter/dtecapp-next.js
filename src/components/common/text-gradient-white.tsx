@@ -1,4 +1,5 @@
 import React from "react";
+import FadeText from "./FadeText";
 
 const TextGradientWhite = ({
   text,
@@ -10,6 +11,8 @@ const TextGradientWhite = ({
   children?: React.ReactNode;
 } = {}) => {
   return (
+              <FadeText>
+
     <h2
       className={`${className} lg:leading-[1.1] font-black 
         dark:text-transparent dark:bg-clip-text dark:bg-[linear-gradient(311deg,_#FAFAFA_14%,_#CDCDCD_36%,_#999999_52%,_#E2E2E2_69%,_#FAFAFA_89%)] 
@@ -18,6 +21,7 @@ const TextGradientWhite = ({
       {text}
       {children}
     </h2>
+    </FadeText>
   );
 };
 

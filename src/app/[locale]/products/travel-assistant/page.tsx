@@ -17,6 +17,8 @@ import {
   ShieldIcon,
   ThinPlaneIcon,
 } from "@/components/common/Icons";
+import FloatingBalls from "@/components/common/FloatingBalls";
+import FadeText from "@/components/common/FadeText";
 
 export default function CarAssistantPage() {
   const t = useTranslations("travel-assistant");
@@ -51,7 +53,9 @@ export default function CarAssistantPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen">
+      <FloatingBalls />
+
       {/* Hero Section */}
       <SectionWrapper className="relative mt-[90px] overflow-hidden">
         <div className="container relative z-10">
@@ -62,9 +66,12 @@ export default function CarAssistantPage() {
                 <TextGradientWhite className="text-3xl md:text-7xl font-bold  ">
                   {t("heroTitle")}
                 </TextGradientWhite>
+                <FadeText delay={0.2}>
+
                 <p className="text-base font-light  max-w-xl">
                   {t("heroDescription")}
                 </p>
+                </FadeText>
               </div>
             </div>
 
@@ -72,7 +79,7 @@ export default function CarAssistantPage() {
             <div className="relative">
               <div className="relative  rounded-3xl p-8 overflow-hidden">
                 <Image
-                  src="/images/Home/dtec-assistants/women-shopping.png"
+                  src="/images/Home/dtec-assistants/women-booking-plane.png"
                   alt="DTEC Car Assistant"
                   width={577}
                   height={363}
@@ -88,7 +95,8 @@ export default function CarAssistantPage() {
       <LogosTicker />
 
       {/* Main Features SectionWrapper */}
-      <SectionWrapper className=" mx-auto">
+          <SectionWrapper className=" relative z-10 mx-auto">
+
         <motion.div
           className="grid grid-cols-1 md:grid-cols-2  container  lg:grid-cols-3 gap-12 lg:gap-[102px] mx-auto  md:place-items-stretch"
           initial="hidden"

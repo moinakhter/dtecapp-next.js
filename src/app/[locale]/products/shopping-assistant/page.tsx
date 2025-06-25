@@ -23,10 +23,11 @@ import {
   SuitCaseIcon,
   TwoSideArrowIcon,
 } from "@/components/common/Icons";
+import FloatingBalls from "@/components/common/FloatingBalls";
 
 export default function CarAssistantPage() {
   const t = useTranslations("shopping-assistant");
- 
+
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -72,9 +73,11 @@ export default function CarAssistantPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen ">
+      <FloatingBalls />
+
       {/* Hero Section */}
-      <SectionWrapper className="relative mt-[90px] overflow-hidden">
+      <SectionWrapper className="relative  bg-transparent mt-[90px] overflow-hidden">
         {/* Background Grid Pattern */}
 
         <div className="container relative z-10">
@@ -111,7 +114,7 @@ export default function CarAssistantPage() {
       <LogosTicker />
 
       {/* Main Features SectionWrapper */}
-      <SectionWrapper className=" mx-auto">
+      <SectionWrapper className=" relative z-10 mx-auto">
         <motion.div
           className="grid grid-cols-1 md:grid-cols-2  container  lg:grid-cols-3 gap-12 lg:gap-[102px] mx-auto  md:place-items-stretch"
           initial="hidden"
@@ -132,8 +135,7 @@ export default function CarAssistantPage() {
               icon={feature.icon}
               title={feature.title}
               description={feature.description}
-                              className="max-w-[320px]"
-
+              className="max-w-[320px]"
             />
           ))}
           <div className="lg:col-span-3 grid grid-cols-2 place-content-center gap-12">
@@ -150,7 +152,7 @@ export default function CarAssistantPage() {
         </motion.div>
       </SectionWrapper>
 
-      <SectionWrapper className="relative w-full py-24 px-4 flex justify-center items-center  ">
+      <SectionWrapper className="relative  w-full  px-4 flex justify-center items-center  ">
         <div
           ref={ref}
           className="container mx-auto flex flex-col-reverse lg:flex-row items-center gap-12 px-4"
@@ -166,31 +168,35 @@ export default function CarAssistantPage() {
 
           {/* Right Image */}
           <div className="lg:w-1/2 flex justify-center">
-            <div className="w-[512px] h-[512px] rounded-4xl overflow-hidden shadow-lg">
+            <div className="w-[512px] relative h-[512px] rounded-4xl overflow-hidden shadow-lg ">
               <Image
                 src="/images/Backgrounds/colorful-spiral.svg"
                 alt="DtecGPT"
                 width={512}
                 height={512}
-                className="object-cover w-full h-full shadow-[0_4px_24px_rgba(0,0,0,0.2)]"
+                className="object-cover w-full h-full shadow-[0_4px_24px_rgba(0,0,0,0.2)] dark:mix-blend-lighten"
               />
+
+              <div className="absolute inset-0  " />
             </div>
           </div>
         </div>
       </SectionWrapper>
 
-      <div className=" py-[128px] relative">
+      <div className="  relative">
         <motion.div
           style={{ scale }}
           className="absolute -z-0  w-[50vw] h-[50vw] bg-secondary opacity-50 rounded-full blur-[200px] left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2"
         />
 
-        <SectionWrapper className="w-full relative rounded-3xl ">
+            <SectionWrapper className="w-full max-w-[1184px] p-[92px]  mx-auto z-10 relative rounded-4xl ">
+
           <Image
             src="/images/Backgrounds/shape2.svg"
             alt="Minds Meet Background"
             fill
-            className="relative   object-cover bg-black  rounded-3xl  overflow-hidden"
+                       className="relative  object-cover bg-black  rounded-4xl  overflow-hidden"
+
           />
 
           {/* Content */}
@@ -248,7 +254,7 @@ export default function CarAssistantPage() {
           </div>
         </div>
       </SectionWrapper>
-      <MindsBanner   />
+      <MindsBanner />
 
       {/* Footer Section */}
     </div>

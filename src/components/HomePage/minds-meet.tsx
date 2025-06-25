@@ -17,7 +17,7 @@ export default function MindsBanner({
   const t = useTranslations("HomePage");
   
   return (
-    <SectionWrapper className="w-full py-12  ">
+    <SectionWrapper className="w-full py-12 hover:drop-shadow-sm  hover:drop-shadow-secondary transition-all duration-100 ease-in-out">
       <div className="container px-4">
         <div className="relative w-full flex items-center justify-center max-w-[1184px] h-[384px] mx-auto">
           <Image

@@ -1,7 +1,10 @@
 "use client";
+import FadeText from "@/components/common/FadeText";
 import FeatureCard from "@/components/common/FeatureCard";
+import FloatingBalls from "@/components/common/FloatingBalls";
 import SectionWrapper from "@/components/common/SectionWrapper";
 import TextGradientWhite from "@/components/common/text-gradient-white";
+import MindsBanner from "@/components/HomePage/minds-meet";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import React from "react";
@@ -47,63 +50,69 @@ export default function AboutPage() {
     },
   ];
 
-  const awards = [
+  const awards1 = [
     {
       logo: "/images/Hero/logos/tübitak_logo_beyaz.png",
-      title: "TÜBİTAK",
-      description:
-        '1507 ARGE Programından "7180493" Numaralı "Yapay Zeka Teknolojisine Sahip Hologram Görüntüsüyle Araç İçerisinde Yer Alacak, Yerli Otomobil Ve Tüm Araçlarda Kullanılabilecek Sesli Kontrol Ve Araç Asistanı Sistemi" İsimli Projeyle Destek Almış Ve Başarılı Şekilde Tamamlanmıştır.',
-    },
-    {
-      logo: "/images/Hero/logos/oib.svg",
-      title: "OIB",
-      description:
-        'OIB\'in düzenlediği "Otomotivde geleceğin tasarımı yarışması"nda dereceye girerek ödül almıştır.',
+      title: t("award1_title"),
+      description: t("award1_description"),
     },
     {
       logo: "/images/Hero/logos/kosgeb_logo_beyaz.png",
-      title: "KOSGEB",
-      description:
-        "Projemiz KOSGEB işbirliği programından Kurul karar no: 2020-56038-30/1 ile destek almıştır ve proje başarılı şekilde tamamlanmıştır.",
-    },
-    {
-      logo: "/images/Hero/logos/togg.svg",
-      title: "TOGG",
-      description:
-        "TOGG’un düzenlediği mobility programında 850 girişim arasından ilk 10’a girmiştir ve TOGG yerli otomobili için geliştirmeler devam etmektedir.",
-    },
-    {
-      logo: "/images/Hero/logos/btm.svg",
-      title: "BTM",
-      description:
-        "2023 BTM Bilgiyi Ticarileştirme Merkezi programına seçilmiştir.",
+      title: t("award2_title"),
+      description: t("award2_description"),
     },
     {
       logo: "/images/Hero/logos/itu-cekirdek-beyaz.png",
-      title: "İTÜ Çekirdek",
-      description:
-        "Projemiz, İTÜ çekirdek 2021 programına seçilmiş ve BIG BANG sahnesinde ödül almıştır.",
-    },
-    {
-      logo: "/images/Hero/logos/teknofest_logo_beyaz 1.png",
-      title: "TEKNOFEST",
-      description: "2023 Teknofest yarışmasında finale kalınmıştır.",
+      title: t("award3_title"),
+      description: t("award3_description"),
     },
   ];
 
+  const awards2 = [
+    {
+      logo: "/images/Hero/logos/oib.svg",
+      title: t("award4_title"),
+      description: t("award4_description"),
+    },
+    {
+      logo: "/images/Hero/logos/togg.svg",
+      title: t("award5_title"),
+      description: t("award5_description"),
+    },
+    {
+      logo: "/images/Hero/logos/btm.svg",
+      title: t("award6_title"),
+      description: t("award6_description"),
+    },
+    {
+      logo: "/images/Hero/logos/teknofest_logo_beyaz 1.png",
+      title: t("award7_title"),
+      description: t("award7_description"),
+    },
+  ];
+  const patents = [
+    { text: t("patent1") },
+    { text: t("patent2") },
+    { text: t("patent3") },
+  ];
+
   return (
-    <>
+    <div className="min-h-screen flex flex-col gap-[100px] ">
       <SectionWrapper>
-        <div className="z-40 flex items-center justify-center flex-col h-full w-full">
-          <div className="text-center my-[118px] max-w-5xl">
-            <TextGradientWhite className="lg:text-8xl md:text-6xl text-4xl font-extrabold leading-tight mb-8 text-center dark:text-transparent dark:bg-clip-text dark:bg-[linear-gradient(311deg,_#FAFAFA_14%,_#CDCDCD_36%,_#999999_52%,_#E2E2E2_69%,_#FAFAFA_89%)]">
+        <FloatingBalls />
+
+        <div className=" relative z-10 flex items-center min-h-screen justify-center flex-col  md:mt-0 mt-[90px]  h-full w-full">
+          <div className="text-center m-auto max-w-5xl">
+            <TextGradientWhite className="lg:text-8xl md:text-6xl text-4xl font-extrabold leading-tight mb-8 text-center ">
               {t("title")}
             </TextGradientWhite>
-            <p className="lg:text-xl md:text-lg text-base font-light  ]">
-              {t("description")}
-            </p>
+            <FadeText delay={0.2}>
+              <p className="lg:text-xl md:text-lg text-base font-light  ]">
+                {t("description")}
+              </p>
+            </FadeText>
           </div>
-          <div className="flex container  items-center justify-between  w-full  gap-24   ">
+          <div className="flex container  items-center lg:flex-nowrap flex-wrap   justify-between  w-full  gap-24   ">
             <FeatureCard
               title={t("features1title")}
               description={t("features1description")}
@@ -115,57 +124,145 @@ export default function AboutPage() {
           </div>
         </div>
       </SectionWrapper>
-      <SectionWrapper className="flex container flex-col items-center py-[128px]">
-        <TextGradientWhite className="text-center text-4xl font-bold mb-16">
+
+      <SectionWrapper className="flex container h-full  z-10 flex-col items-center ">
+        <TextGradientWhite className="text-center lg:text-[56px] text-4xl font-black mb-16">
           Dtec Ekibi
         </TextGradientWhite>
-        <div className="grid grid-cols-4 gap-16 container ">
+        <div className=" flex items-center h-full justify-center flex-wrap  gap-16 container ">
           {teamMembers.map((member, index) => (
             <div
               key={index}
               className="flex flex-col max-w-[240px] w-full items-center text-center"
             >
-              <div className="w-48 h-48 relative mb-4 rounded-2xl overflow-hidden">
+              <div className="w-[240px] h-[280px] relative mb-4 rounded-2xl overflow-hidden">
                 <Image
                   src={member.image}
                   alt={member.name}
                   fill
-                  className="object-cover"
+                  className="object-cover rounded-2xl"
                 />
               </div>
-              <h3 className="text-lg font-semibold">{member.name}</h3>
-              <p className="text-sm text-gray-400">{member.role}</p>
+              <h3 className="text-base font-medium">{member.name}</h3>
+              <p className="text-[13px]  font-light">{member.role}</p>
             </div>
           ))}
         </div>
       </SectionWrapper>
-      <SectionWrapper className="flex container flex-col items-center py-[128px]">
-        <h2 className="text-center text-4xl font-bold mb-8">
+
+      <SectionWrapper className="flex flex-col md:py-[200px] relative  gap-[64px] items-center justify-center ">
+        <TextGradientWhite className="text-center lg:text-[56px] text-4xl font-black ">
           Kazandığımız Yarışmalar & Ödüller
-        </h2>
-        <h3 className="text-center text-lg text-gray-400 mb-16">
+        </TextGradientWhite>
+
+        <h3 className="text-center text-2xl font-medium  md:mb-16">
           Dtec Araç Asistanı
         </h3>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-7xl mx-auto px-4">
-          {awards.map((award, index) => (
-            <div key={index} className="flex items-start gap-4">
-              <div className="w-16 h-16 relative flex-shrink-0">
-                <Image
-                  src={award.logo}
-                  alt={award.title}
-                  fill
-                  className="object-contain"
-                />
+   <div className="grid grid-cols-1 lg:grid-cols-2 md:gap-12 max-w-7xl mx-auto px-4 items-start">
+  {/* LEFT COLUMN */}
+  <div className="flex flex-col gap-12">
+    {awards1.map((award, index) => (
+      <div key={index} className="flex flex-col md:flex-row items-start md:gap-6">
+        {/* Image Container */}
+        <div className=" md:w-[128px] w-[200px]   aspect-square relative flex-shrink-0 mx-auto md:mx-0">
+          <Image
+            src={award.logo}
+            alt={award.title}
+            fill
+            className="object-contain lg:object-top object-center invert dark:invert-0"
+          />
+        </div>
+
+        {/* Text */}
+        <div className="group flex-1 text-center md:text-left">
+          <h4 className="text-xl font-medium md:mb-2 md:block hidden">{award.title}</h4>
+          <p className="text-base font-light md:mt-2.5">{award.description}</p>
+
+          <div className="relative overflow-hidden mt-6">
+            <div className="w-full h-px bg-border" />
+            <div className="absolute top-0 left-0 h-px bg-secondary w-0 group-hover:w-full transition-all duration-500 ease-out" />
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+
+  {/* RIGHT COLUMN */}
+  <div className="flex flex-col gap-12">
+    {awards2.map((award, index) => (
+      <div key={index} className="flex flex-col md:flex-row items-start gap-6">
+        {/* Image Container */}
+        <div className="md:w-[128px] w-[200px]    aspect-square relative flex-shrink-0 mx-auto md:mx-0">
+          <Image
+            src={award.logo}
+            alt={award.title}
+            fill
+            className="object-contain  lg:object-top object-center invert dark:invert-0"
+          />
+        </div>
+
+        {/* Text */}
+       <div className="group flex-1 text-center md:text-left">
+          <h4 className="text-xl font-medium md:mb-2 md:block hidden">{award.title}</h4>
+          <p className="text-base font-light md:mt-2.5">{award.description}</p>
+
+          <div className="relative overflow-hidden mt-6">
+            <div className="w-full h-px bg-border" />
+            <div className="absolute top-0 left-0 h-px bg-secondary w-0 group-hover:w-full transition-all duration-500 ease-out" />
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
+
+
+        <h3 className="text-center text-2xl font-medium  mt-16">
+          {t("tubTitle")}
+        </h3>
+        <div className="grid grid-cols-1   gap-12 max-w-7xl mx-auto px-4  items-stretch">
+          <div className="flex items-start justify-between gap-9 max-w-[676px]  mx-auto">
+            <div className="w-[128px] h-full relative flex-shrink-0">
+              <Image
+                src="/images/Hero/logos/tübitak_logo_beyaz.png"
+                alt="TÜBİTAK Logo"
+                fill
+                className="object-contain  object-top   w-[128px] invert dark:invert-0"
+              />
+            </div>
+            <div className="group w-full">
+              <h4 className="text-xl font-medium mb-2">TÜBİTAK</h4>
+              <p className="text-base font-light mt-2.5">
+                {t("tubitakDescription")}
+              </p>
+
+              <div className="relative overflow-hidden mt-6">
+                <div className="w-full h-px bg-border" />
+                <div className="absolute top-0 left-0 h-px bg-secondary w-0 group-hover:w-full transition-all duration-500 ease-out" />
               </div>
-              <div>
-                <h4 className="text-lg font-semibold mb-2">{award.title}</h4>
-                <p className="text-sm text-gray-400">{award.description}</p>
+            </div>
+          </div>
+        </div>
+      </SectionWrapper>
+      <SectionWrapper className="w-full    flex flex-col items-center">
+        <TextGradientWhite className="lg:text-[56px]   font-extrabold mb-16 text-center">
+          {t("pointsTitle")}
+        </TextGradientWhite>
+
+        <div className="grid grid-cols-1  md:grid-cols-3 gap-12 max-w-7xl w-full items-stretch">
+          {patents.map((patent, index) => (
+            <div key={index} className="text-center h-full group pb-4">
+              <p className="text-base font-light ">{patent.text}</p>
+              <div className="relative overflow-hidden mt-6">
+                <div className="w-full h-px bg-border" />
+                <div className="absolute top-0 left-0 h-px bg-secondary w-0 group-hover:w-full transition-all duration-500 ease-out" />
               </div>
             </div>
           ))}
         </div>
       </SectionWrapper>
-    </>
+      <MindsBanner/>
+    </div>
   );
 }

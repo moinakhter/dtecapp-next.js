@@ -23,6 +23,73 @@ a {
   text-decoration: none;
 }
 
+@layer utilities {
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .animate-scroll {
+    animation: scroll 30s linear infinite;
+  }
+
+  /* Pause animation on hover */
+  .animate-scroll:hover {
+    animation-play-state: paused;
+  }
+
+  /* Advanced masking for logos container */
+  .logos-container {
+    mask-composite: intersect;
+    -webkit-mask-composite: intersect;
+  }
+
+  /* Alternative fade approach using clip-path */
+  .logos-fade {
+    clip-path: polygon(5% 0%, 95% 0%, 100% 100%, 0% 100%);
+  }
+}
+
+/* Ensure smooth scrolling and prevent layout shift */
+@media (prefers-reduced-motion: reduce) {
+  .animate-scroll {
+    animation: none;
+  }
+}
+
+/* Support for older browsers */
+@supports not (mask-image: linear-gradient(black, black)) {
+  .logos-container {
+    position: relative;
+  }
+
+  .logos-container::before,
+  .logos-container::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 80px;
+    z-index: 10;
+    pointer-events: none;
+  }
+
+  .logos-container::before {
+    left: 0;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.3), transparent);
+  }
+
+  .logos-container::after {
+    right: 0;
+    background: linear-gradient(to left, rgba(0, 0, 0, 0.3), transparent);
+  }
+}
+
+
 /* Responsive container */
 .container {
   max-width: 1184px;
@@ -144,4 +211,23 @@ a {
       rgba(20, 55, 115, 1) 0%,
       rgba(18, 18, 18, 0) 50%
     );
+}
+
+
+/* floating-balls.css */
+
+.ball-1 {
+  background: radial-gradient(circle, #3D7EE2 0%, #E6E6E600 100%);
+}
+
+.dark .ball-1 {
+  background: radial-gradient(circle, #3D7EE2 0%, #121212 100%);
+}
+
+.ball-2 {
+  background: radial-gradient(circle, #143773 0%, #FFFFFF00 100%);
+}
+
+.dark .ball-2 {
+  background: radial-gradient(circle, #143773 0%, #121212 100%);
 }

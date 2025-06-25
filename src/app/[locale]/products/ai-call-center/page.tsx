@@ -19,6 +19,7 @@ import { useTranslations } from "next-intl";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import MindsBanner from "@/components/HomePage/minds-meet";
 import FloatingBalls from "@/components/common/FloatingBalls";
+import FadeText from "@/components/common/FadeText";
 
 export default function CarAssistantPage() {
   const t = useTranslations("ai-assistant");
@@ -68,8 +69,7 @@ export default function CarAssistantPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
-      
+    <div className="min-h-screen ">
       <FloatingBalls />
 
       {/* Hero Section */}
@@ -84,9 +84,11 @@ export default function CarAssistantPage() {
                 <TextGradientWhite className="text-3xl md:text-7xl font-bold  ">
                   {t("heroTitle")}
                 </TextGradientWhite>
-                <p className="text-base font-light  max-w-xl">
-                  {t("heroDescription")}
-                </p>
+                <FadeText delay={0.2}>
+                  <p className="text-base font-light  max-w-xl">
+                    {t("heroDescription")}
+                  </p>
+                </FadeText>
               </div>
             </div>
 
@@ -110,7 +112,7 @@ export default function CarAssistantPage() {
       <LogosTicker />
 
       {/* Main Features SectionWrapper */}
-      <SectionWrapper className=" mx-auto">
+      <SectionWrapper className=" relative z-10 mx-auto">
         <motion.div
           className="grid grid-cols-1 md:grid-cols-2  container  lg:grid-cols-3 gap-12 lg:gap-[102px] mx-auto  md:place-items-stretch"
           initial="hidden"
@@ -159,17 +161,18 @@ export default function CarAssistantPage() {
               text={t("section2Title")}
               className="mb-8 text-[90px] "
             />
-
-            {t("section2Description")
-              .split("\n")
-              .map((line, i) => (
-                <p
-                  key={i}
-                  className="font-light text-base mb-4 max-w-[562px] mx-auto lg:mx-0"
-                >
-                  {line}
-                </p>
-              ))}
+            <FadeText delay={0.2}>
+              {t("section2Description")
+                .split("\n")
+                .map((line, i) => (
+                  <p
+                    key={i}
+                    className="font-light text-base mb-4 max-w-[562px] mx-auto lg:mx-0"
+                  >
+                    {line}
+                  </p>
+                ))}
+            </FadeText>
           </div>
 
           {/* Right Image */}
@@ -179,41 +182,43 @@ export default function CarAssistantPage() {
                 src="/images/Home/dtec-assistants/dtec-voice.png"
                 alt="DtecGPT"
                 width={512}
-                height={512} 
-                className="object-cover w-full h-full shadow-[0_4px_24px_rgba(0,0,0,0.2)]"
+                height={512}
+                className="object-cover w-full h-full shadow-[0_4px_24px_rgba(0,0,0,0.2)] dark:mix-blend-lighten"
               />
             </div>
           </div>
         </div>
       </SectionWrapper>
 
-      <div className=" py-[128px] relative">
+      <div className="  relative">
         <motion.div
           style={{ scale }}
           className="absolute -z-0  w-[50vw] h-[50vw] bg-secondary opacity-50 rounded-full blur-[200px] left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2"
         />
-        <SectionWrapper className="w-full relative rounded-3xl ">
+        <SectionWrapper className="w-full max-w-[1184px] p-[92px]  mx-auto z-10 relative rounded-4xl ">
           <Image
             src="/images/Backgrounds/shape4.svg"
             alt="Minds Meet Background"
             fill
-            className="relative   object-top object-cover bg-black  rounded-3xl  overflow-hidden"
+            className="relative   object-top object-cover bg-black  rounded-4xl  overflow-hidden"
           />
           <div className="relative flex-col flex gap-8 items-center justify-center z-10 text-center">
             <TextGradientWhite
               text={t("section3Title")}
               className="md:text-4xl text-2xl lg:text-[64px] mx-auto lg:max-w-5xl font-bold  text-white"
             />
-            {t("section3Description")
-              .split("\n")
-              .map((line, i) => (
-                <p
-                  className="font-light text-base text-white mb-3 lg:max-w-4xl"
-                  key={i}
-                >
-                  {line}
-                </p>
-              ))}
+            <FadeText delay={0.2}>
+              {t("section3Description")
+                .split("\n")
+                .map((line, i) => (
+                  <p
+                    className="font-light text-base text-white mb-3 lg:max-w-4xl"
+                    key={i}
+                  >
+                    {line}
+                  </p>
+                ))}
+            </FadeText>
           </div>
         </SectionWrapper>
       </div>
@@ -227,10 +232,12 @@ export default function CarAssistantPage() {
               text={t("section4Title")}
               className="mb-8 text-[56px] font-black "
             />
+<FadeText delay={0.2}>
 
             <p className="font-light text-base max-w-[575px] mx-auto lg:mx-0">
               {t("section4Description")}
             </p>
+            </FadeText>
           </div>
 
           {/* Right Image */}

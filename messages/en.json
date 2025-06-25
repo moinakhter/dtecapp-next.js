@@ -66,40 +66,31 @@
       "travel": "Travel Assistant"
     }
   },
+
   "HomePage": {
     "Hero": {
       "title": "Journey to the Future",
-
       "description": "Your All-in-One Smart Voice Assistant Solution",
-
       "counter1": "Award",
-
-      "counter2": "Partner",
-
+      "counter2": "Partnered Company",
       "counter3": "Happy Employee",
-
       "counter4": "Language Translation"
     },
-
-    "mindsmeet": "Where all minds meet",
-
+    "mindsmeet": "the place where all minds meet",
     "Dtec AI Call Center": {
       "title": "Dtec AI Call Center",
-
       "description": "Our Dtec AI Call Center solution revolutionizes customer experience by managing incoming and outgoing calls without human intervention!",
-
-      "sectionTitle": "The Future of Call Experience Has Started.",
-
-      "sectionDescription": "Revolutionize customer service with our AI-powered call center solution. DtecAI automatically manages incoming and outgoing calls, provides personalized service and Provides uninterrupted support 24/7.",
+      "sectionTitle": "The Future of Call Experience Has Begun.",
+      "sectionDescription": "Revolutionize customer service with our AI-powered call center solution. DtecAI automatically manages incoming and outgoing calls, provides personalized service, and offers 24/7 uninterrupted support.",
       "button": "Learn More",
       "features": {
         "f1": {
-          "title": "Intelligent Call Answering",
-          "description": "Correctly route and instantly resolve every call."
+          "title": "Smart Call Reception",
+          "description": "Accurate routing and instant resolution for every call."
         },
         "f2": {
-          "title": "Autonomous Outgoing Calls",
-          "description": "Information, reminders and surveys."
+          "title": "Autonomous Outbound Calls",
+          "description": "Notifications, reminders, and surveys."
         },
         "f3": {
           "title": "24/7 Service, Multilingual Support",
@@ -107,77 +98,76 @@
         },
         "f4": {
           "title": "Continuously Learning Intelligence",
-          "description": "A system that evolves with every interaction."
+          "description": "A system that improves with every interaction."
         }
       },
       "scalability": {
         "title": "Scalable Structure",
-        "description": "DtecAI can be flexibly adapted to any scale, from small teams to global operations. It responds to growing needs without the need for additional development."
+        "description": "DtecAI can flexibly adapt to all scales <bold>from small teams to global operations</bold>. It meets growing needs without additional development."
       },
       "security": {
-        "title": "Corporate Security Standards",
-        "description": "All communication and transaction records are encrypted and stored in accordance with international security standards. DtecAI takes your data privacy seriously."
+        "title": "Enterprise Security Standards",
+        "description": "All communications and transaction records are encrypted and stored in accordance with <bold>international security standards</bold>. DtecAI takes your data privacy seriously."
       },
       "howItWorks": {
-        "title": "How Does It Work?",
-        "subtitle": "Be present wherever your customers are with DtecAI.",
+        "title": "How It Works?",
+        "subtitle": "Be present with DtecAI wherever your customers are.",
         "columns": {
           "col1": {
             "title": "Instant Detection and Routing",
             "points": [
               "When a customer calls you, DtecAI automatically answers the call.",
-              "Analyzes the caller's needs in seconds.",
-              "Offers or routes the most accurate answer based on the topic."
+              "It analyzes the caller’s need <bold>within seconds</bold>.",
+              "Provides or routes <bold>the most accurate response</bold> based on the topic."
             ]
           },
           "col2": {
-            "title": "Listen, Understand and Respond with Artificial Intelligence",
+            "title": "Listen, Understand, and Respond with AI",
             "points": [
-              "Understands what the customer says and wants with NLP technology.",
-              "Offers a human-like, natural and fluent conversational experience.",
-              "Learns from every interaction and responds more accurately in the future."
+              "Understands what the customer says and wants with <bold>NLP technology</bold>.",
+              "Offers a <bold>natural and fluent conversation</bold> experience similar to a human.",
+              "Learns from each interaction to give <bold>more accurate responses in the future</bold>."
             ]
           },
           "col3": {
-            "title": "Efficient, Measurable and Always Ready",
+            "title": "Efficient, Measurable, and Always Ready",
             "points": [
-              "Calls such as appointment reminders, campaigns and surveys are carried out autonomously.",
-              "No incoming call goes unanswered by providing 24/7 service.",
-              "Reduces operational costs, increases customer satisfaction."
+              "<bold>Calls are autonomously made</bold> for appointment reminders, campaigns, and surveys.",
+              "With 24/7 service, <bold>no incoming call is left unanswered</bold>.",
+              "Reduces operational costs and <bold>increases customer satisfaction</bold>."
             ]
           }
         },
         "cta": {
-          "text": "Start using today!",
-          "button": "Request a Demo"
+          "text": "Start using it today!",
+          "button": "Request Demo"
         }
       },
       "automation": {
-        "title": "Automatic Process Flows",
-        "description": "Say goodbye to manual processes. E-mail, SMS or CRM entries triggered after each interaction with the customer are completely automated. Save time, reduce the margin of error."
+        "title": "Automated Process Flows",
+        "description": "Say goodbye to manual operations. <bold>Emails, SMS, or CRM entries triggered after each customer interaction are fully automated.</bold> Save time, eliminate errors."
       }
     },
     "Ecosystem": {
-      "title": "Ekosistem",
-      "description": " Thanks to its advanced natural language processing capabilities and high-level artificial intelligence features, Dtec not only understands the driver's voice commands, but also perceives the driver's mood, anticipates their needs and desires, and provides early solutions and services thanks to its built-in autonomous learning system and emotional consensus mechanism."
+      "title": "Ecosystem",
+      "description": "Thanks to its advanced natural language processing capabilities and high-level artificial intelligence features, Dtec not only understands the driver's voice commands but can also detect the driver's mood through its built-in autonomous learning system and emotional reconciliation mechanism, and proactively offer solutions and services by anticipating needs and requests."
     },
     "Dtec Assistants": {
       "title": "Dtec Assistants",
-      "description": "All-in-one intelligent voice assistants:\nGuidance with every command, comfort with every step.",
-
+      "description": "All-in-one smart voice assistants:\nGuidance with every command, comfort at every step.",
       "car": {
-        "title": "Dtec Vehicle Assistant",
-        "description": "It allows you to talk to vehicles as if there was a person in front of you. It interacts with you with voice recognition technology and quickly fulfills the information or commands you want.",
+        "title": "Dtec Car Assistant",
+        "description": "Enables conversation with vehicles as if talking to a human. It interacts with you through voice recognition technology and quickly executes the information or commands you request.",
         "features": {
           "f1": "Chat Module",
           "f2": "Face Recognition",
           "f3": "Phone Control",
-          "f4": "Vehicle Equipment Control"
+          "f4": "Vehicle Hardware Control"
         }
       },
       "shopping": {
         "title": "Dtec Shopping Assistant",
-        "description": "It is a shopping assistant that everyone can easily shop on e-commerce platforms by talking",
+        "description": "A shopping assistant where everyone can comfortably shop on e-commerce platforms by speaking.",
         "features": {
           "f1": "Advanced NLP capabilities",
           "f2": "Personalization and Customization",
@@ -186,52 +176,43 @@
       },
       "home": {
         "title": "Dtec Smart Home Assistant",
-        "description": "Specializes in data analysis, device management and user experience optimization by working with IoT devices.",
+        "description": "Specializes in data analysis, device management, and optimizing user experience by working in harmony with IoT devices.",
         "features": {
           "f1": "Seamless Integration with IoT Devices",
           "f2": "Context-Aware Intelligence",
           "f3": "Automation and Personalization"
         }
       },
-      "learnMore": "See in Detail"
+      "learnMore": "View Details"
     },
     "Comparison Section": {
       "title": "An Extraordinary Assistant Experience",
-      "description": "All-in-One Intelligent Voice Assistants.",
+      "description": "All-in-One Smart Voice Assistants.",
       "features": {
         "f1": {
           "title": "Natural Language Understanding (NLU)",
-
-          "description": "Speech understanding for intuitive user communication, context-rich interactions"
+          "description": "Speech comprehension for intuitive user communication, context-rich interactions"
         },
-
         "f2": {
           "title": "Multimodal Interaction",
-
-          "description": "Seamless transitions of voice, text, and visuals for flexible user interaction"
+          "description": "Seamless voice, text, and visual transitions for flexible user interaction"
         },
-
         "f3": {
-          "title": "Personalization and User Identification",
-
-          "description": "Learn and remember user preferences by tailoring responses to personalized interactions"
+          "title": "Personalization and User Recognition",
+          "description": "Learn and remember user preferences by tailoring responses to personalized interaction"
         },
-
         "f4": {
           "title": "Integration with Third-Party Services",
-
-          "description": "Connect to various services by creating a central hub for convenience"
+          "description": "Connect to various services to create a central hub for convenience"
         },
-
         "f5": {
           "title": "Context-Aware Task Continuity",
-
-          "description": "Context-aware for smooth interactions, reducing the need for repetition protect"
+          "description": "Maintain context for smooth interactions, reducing the need for repetition"
         }
       },
       "otherApplicationsTitle": "Other Applications",
       "limitations": {
-        "l1": "Basic and static reactions and responses.",
+        "l1": "Basic and static responses and answers.",
         "l2": "Single-mode interaction.",
         "l3": "Non-personalized experience",
         "l4": "Closed ecosystem",
@@ -240,7 +221,7 @@
     },
     "TokenSection": {
       "header": "Experience the Future of Mobility with Dtec Token!",
-      "description": "Dtec Token enables application control via voice commands via the blockchain-powered Dtec Assistant. Tokens are earned when the vehicle is charged or the assistant is used. These rewards can be spent freely within the system and used to create value. Mobility is now smarter, more profitable and more personal thanks to real-time data, artificial intelligence and secure blockchain integration.",
+      "description": "Dtec Token enables voice command control through the Dtec Assistant, which operates on blockchain infrastructure. You earn tokens when your vehicle is charged or when you use the assistant. These rewards can be freely spent within the system and used to create value. Thanks to real-time data, artificial intelligence, and secure blockchain integration, mobility is now smarter, more rewarding, and entirely personal.",
       "cta": "Learn More",
       "features": {
         "feature_1": {
@@ -249,7 +230,7 @@
         },
         "feature_2": {
           "title": "Artificial Intelligence Integration",
-          "description": "Assistant-powered, continuously evolving smart mobility ecosystem."
+          "description": "Assistant-supported, continuously evolving smart mobility ecosystem."
         },
         "feature_3": {
           "title": "Personalized Experience",
@@ -257,7 +238,7 @@
         },
         "feature_4": {
           "title": "Token Earning",
-          "description": "Earn tokens with charging transactions and assistant interactions, spend them however you want."
+          "description": "Earn tokens through charging and assistant interactions, use them as you wish."
         },
         "feature_5": {
           "title": "Real-Time Data",
@@ -265,39 +246,90 @@
         },
         "feature_6": {
           "title": "Blockchain Assurance",
-          "description": "Blockchain's transparent, secure and traceable transaction infrastructure."
+          "description": "The transparent, secure, and traceable transaction infrastructure of blockchain."
         }
       }
     }
-  },
-  "car-assistant": {
-    "title": "Redefining the Driving Experience",
-
-    "description": "Our Car Assistant is an intelligent companion that is with you throughout your journey. It maximizes your safety and comfort by providing access to all the functions of your vehicle with voice commands, and offers you every detail you need without taking your attention away from the road.",
-
-    "faceRecognitionTitle": "Face Recognition",
-    "faceRecognitionDescription": "It recognizes each driver individually and automatically activates the settings suitable for their profile.",
-
-    "moodBasedSuggestionsTitle": "Providing Suggestions Based on Emotion",
-    "moodBasedSuggestionsDescription": "It detects your mood while driving and suggests the most suitable music, weather or entertainment options for you.",
-
-    "voiceControlTitle": "Controlling Hardware with Voice",
-    "voiceControlDescription": "Phone, It allows you to control equipment such as air conditioning and media systems completely hands-free.",
-
-    "sendEmailTitle": "Sending E-mails",
-    "sendEmailDescription": "It allows you to easily send e-mails while in the vehicle, based on the driver's voice commands.",
-
-    "chatAndInfoTitle": "Chatting and Receiving Information",
-    "chatAndInfoDescription": "The Vehicle Assistant receives information and provides meaningful answers to questions by chatting naturally with the driver.",
-
-    "qaResponseTitle": "Answering Questions Asked",
-    "qaResponseDescription": "It provides instant and effective answers to questions asked by the driver.",
-
-    "translateTitle": "Translating in 22 Languages",
-    "translateDescription": "It provides effective communication during international travel or for multilingual users with its translation capability.",
-
-    "reminderTitle": "Reminder Recording",
-    "reminderDescription": "Records reminders on the date and time specified by the driver so that they do not forget important events.",
-    "dtecgpt": " Our DtecGPT combines natural language processing and context tracking. It interprets your complex questions like a human, providing a conversational experience with fluent and complete answers. It interprets your commands regarding vehicle functions and conveys all the information you need in a single touch."
   }
+,
+ 
+  "car-assistant": {
+    "title": "Redefined </br> Driving Experience",
+    "description": "Our Car Assistant is an intelligent companion that stays with you throughout your journey. It provides access to all vehicle functions via voice commands, maximizing your safety and comfort while offering every detail you need without taking your eyes off the road.",
+    "faceRecognitionTitle": "Face Recognition",
+    "faceRecognitionDescription": "Recognizes each driver individually and automatically activates settings suitable for their profile.",
+    "moodBasedSuggestionsTitle": "Mood-Based Suggestions",
+    "moodBasedSuggestionsDescription": "Detects your mood during the drive and suggests the most suitable music, weather, or entertainment options.",
+    "voiceControlTitle": "Control Devices by Voice",
+    "voiceControlDescription": "Allows completely hands-free control of devices like phone, air conditioning, and media systems.",
+    "sendEmailTitle": "Send Email",
+    "sendEmailDescription": "Allows easy email sending inside the vehicle based on the driver's voice commands.",
+    "chatAndInfoTitle": "Chat and Get Information",
+    "chatAndInfoDescription": "The Car Assistant chats naturally with the driver, providing information and meaningful answers to questions.",
+    "qaResponseTitle": "Answer Questions",
+    "qaResponseDescription": "Provides instant and effective answers to the driver's questions.",
+    "translateTitle": "Translate in 22 Languages",
+    "translateDescription": "With its translation ability, it enables effective communication for international travels or multilingual users.",
+    "reminderTitle": "Save Reminders",
+    "reminderDescription": "Saves reminders set by the driver to help them remember important events at the specified date and time.",
+    "dtecgpt": "Our developed DtecGPT combines natural language processing and context tracking. It understands your complex questions like a human and offers a conversational experience with fluent, comprehensive answers. It unifies all the information you need with a single touch while interpreting your vehicle-related commands.",
+    "ComplexQuestionsTitle1": "Responds to Complex Questions and ",
+    "ComplexQuestionsTitle2": "Your Conversations",
+    "dtecgptDescription": "Our Automatic Speech Recognition (ASR) and Natural Language Understanding (NLU) modules process your commands quickly and accurately, responding almost with human-like skill. This ensures the most appropriate action is instantly triggered for every request, and the system continuously improves to make your driving experience smoother."
+  },
+  "shopping-assistant": {
+    "heroTitle": "Easy Shopping Experience by Speaking",
+    "heroDescription": "The Dtec Shopping Assistant combines all stages from product search to cart creation and payment via voice commands in one flow. Users can find products, compare prices, and complete secure payment steps hands-free with a single sentence. This solution, which works seamlessly on both mobile apps and websites, simultaneously increases customer satisfaction and conversion rates.",
+    "f1title": "Natural Language Understanding",
+    "f1description": "Thanks to its advanced NLP (Natural Language Processing) model, it can understand users' natural spoken language, making the shopping experience more personal and interactive.",
+    "f2title": "Smart Filtering Features",
+    "f2description": "The AI-powered assistant offers users the ability to quickly and effectively find the products they want by understanding preferences such as color, size, and brand using powerful filtering algorithms.",
+    "f3title": "Smartphone and Browser Compatibility",
+    "f3description": "The Dtec Shopping Assistant works fully compatible with smartphones and web browsers, offering users a flawless shopping experience from any device.",
+    "f4title": "Secure Payment Transactions",
+    "f4description": "The Shopping Assistant supports various payment methods, ensuring secure and seamless payment processes and enabling purchases to be completed with credit cards or other options.",
+    "f5title": "Personalized Recommendations",
+    "f5description": "The assistant analyzes user behavior through its learning module to offer personalized product recommendations, ensuring users have a shopping experience tailored to their preferences.",
+    "f6title": "Multilingual Capability",
+    "f6description": "The Dtec Shopping Assistant operates in 22 different languages, catering to a global user base and providing optimal service to users from different regions and language groups.",
+    "dtecgpt": "Our advanced AI, DtecGPT, makes shopping intuitive by understanding and responding to human-like conversations. Thanks to this technology, shopping becomes not just a transaction but an intelligent conversational experience.",
+    "smartshopping": "Smart Shopping in Every Field",
+    "smartshoppingDescription": "The DTEC Shopping Assistant can be used in e-commerce sites, online markets, ticketing systems, and reservation applications, offering speed, convenience, accessibility, and personalized recommendations. It also facilitates access for visually impaired users. Positioned in the B2B model, our system is unique in its field.",
+    "se3title": "The Future of Voice Shopping",
+    "se3description": "The future of shopping is managed by voice. As the pioneer of this transformation, DTEC brings the comfort of shopping with voice commands to every area of e-commerce. This technology, which increases user interaction and conversion rates, offers a new growth path for brands."
+  },
+  "home-assistant": {
+    "heroTitle": "Smart Assistant for Your Home Comfort",
+    "heroDescription": "The DTEC Home Assistant offers the smartest way to manage your living space from a single center. Lights, heating/cooling systems, security cameras, and much more are under control with just one voice command. With energy efficiency and top-level security features, it increases your comfort and provides a peaceful environment.",
+    "f1title": "Home and Car Synchronization",
+    "f1description": "The Smart Home Assistant enables the creation of customized scenarios between home and car assistants, allowing seamless integration when leaving home or returning. This integration offers users a smooth home-car transition experience.",
+    "f2title": "Real-Time Information Management",
+    "f2description": "The Smart Home Assistant provides real-time data to users through security cameras, sensors, and devices inside the home. This allows users to monitor home events instantly and intervene when necessary.",
+    "f3title": "Mobile Compatibility and Accessibility",
+    "f3description": "Home and car assistants allow users to manage their homes and cars anytime, anywhere using their mobile devices. Users have the freedom to control their homes remotely.",
+    "f4title": "Advanced Data Security and Secure Communication",
+    "f4description": "The Smart Home Assistant uses strong encryption technologies to maximize the security of user data. Users' personal information is protected according to industry-standard security protocols in communications between home devices and external networks.",
+    "f5title": "Personalized Automation Scenarios",
+    "f5description": "The Smart Home Assistant offers the ability to create personalized automation scenarios based on users' predetermined preferences and routines. This allows users to manage their living spaces more effectively and personally.",
+    "HomeCallTitle": "Real-Time Connection and Up-to-Date Information",
+    "HomeCallDescription": "The Smart Home Assistant provides users with instant updates through real-time connections. For example, live images from security cameras at home, instant data from door or window sensors, and energy consumption information allow users to monitor their homes at all times. Integration with the Car Assistant enables users to access and control information from their vehicles even when away from home, offering a complete mobile lifestyle. This is a living experience combined with the powerful integration of home and car assistants.",
+    "se3title": "Smart Home & Car Assistant Integration",
+    "se3description": "The Smart Home Assistant not only limits users' home control to the interior but also allows interaction with their cars. This assistant can adjust the car's comfort settings according to predetermined preferences when leaving or returning home. For example, when approaching home, it can automatically open doors, turn on lights, and set the thermostat to the desired temperature. This integration offers users a continuous and seamless connection between their home and vehicles."
+  },
+  "travel-assistant": {
+    "heroTitle": "Embark on New Discoveries with the Travel Assistant",
+    "heroDescription": "Start your journeys with Dtec, your personal travel companion designed to make your travel planning smooth and enjoyable. Dtec helps you find online travel information, guides you at every step from booking plane tickets to discovering comfortable hotels, and serves as your personal expert throughout your travel.",
+    "f1Title": "Flight Assistance",
+    "f1Description": "For flight reservations, Dtec provides real-time information on schedules, airlines, and ticket prices. Whether you're looking for budget or luxury, Dtec ensures an effortless booking experience according to your preferences.",
+    "f2Title": "Hotel Recommendations",
+    "f2Description": "Ask Dtec for hotel recommendations, and it will create a list of comfortable options suitable for you. With Dtec, hotel images are displayed to help you visually select your accommodation.",
+    "f3Title": "Real-Time Updates",
+    "f3Description": "Stay always up to date with Dtec's real-time updates. Whether it's sudden flight changes or last-minute hotel deals, Dtec keeps you informed and provides flexibility in your travel plans.",
+    "f4Title": "Security and Privacy",
+    "f4Description": "Stay safe with Dtec's commitment to security and privacy. Your data is processed to the highest standards.",
+    "f5Title": "User-Friendly Interaction",
+    "f5Description": "Have natural conversations with Dtec. Ask for the cheapest flights or request a hotel with specific features. Dtec offers personalized recommendations based on your preferences."
+  }
+
+
 }

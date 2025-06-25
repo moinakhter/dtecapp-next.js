@@ -7,7 +7,7 @@ const SectionWrapper = ({children,className}:{
   
 }) => {
   return (
-    <section className={cn("w-full h-full flex items-center justify-center lg:py-[128px] lg:px-4 py-8 px-1  md:py-16 bg-background", className)}>
+    <section className={cn("w-full h-full flex items-center justify-center lg:py-24 lg:px-4 py-8 px-2  md:py-16", className)}>
         
       {children}
     </section>

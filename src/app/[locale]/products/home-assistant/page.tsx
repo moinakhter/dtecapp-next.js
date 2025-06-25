@@ -12,19 +12,18 @@ import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import MindsBanner from "@/components/HomePage/minds-meet";
 import {
   BillICon,
- 
   MobileIcon,
- 
   RefreshIcon,
   SettingsIcon,
- 
 } from "@/components/common/Icons";
 import { Lock } from "lucide-react";
 import ScrollAnimatedLogo from "@/components/common/AnimatedLogo";
+import FloatingBalls from "@/components/common/FloatingBalls";
+import FadeText from "@/components/common/FadeText";
 
 export default function CarAssistantPage() {
   const t = useTranslations("home-assistant");
- 
+
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -65,7 +64,9 @@ export default function CarAssistantPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen ">
+      <FloatingBalls />
+
       {/* Hero Section */}
       <SectionWrapper className="relative mt-[90px] overflow-hidden">
         <div className="container relative z-10">
@@ -73,12 +74,14 @@ export default function CarAssistantPage() {
             {/* Left Content */}
             <div className="space-y-8">
               <div className="space-y-6">
-                <TextGradientWhite className="text-3xl md:text-7xl font-bold  ">
+                <TextGradientWhite className="text-3xl md:text-7xl font-bold   ">
                   {t("heroTitle")}
                 </TextGradientWhite>
-                <p className="text-base font-light  max-w-xl">
-                  {t("heroDescription")}
-                </p>
+                <FadeText delay={0.2}>
+                  <p className="text-base font-light  max-w-xl">
+                    {t("heroDescription")}
+                  </p>
+                </FadeText>
               </div>
             </div>
 
@@ -86,8 +89,8 @@ export default function CarAssistantPage() {
             <div className="relative">
               <div className="relative  rounded-3xl p-8 overflow-hidden">
                 <Image
-                  src="/images/Home/dtec-assistants/women-shopping.png"
-                  alt="DTEC Car Assistant"
+                  src="/images/Home/dtec-assistants/smarthome.png"
+                  alt="DTEC smarthome Assistant"
                   width={577}
                   height={363}
                   className="w-full h-auto rounded-2xl relative z-10"
@@ -102,7 +105,7 @@ export default function CarAssistantPage() {
       <LogosTicker />
 
       {/* Main Features SectionWrapper */}
-      <SectionWrapper className=" mx-auto">
+      <SectionWrapper className=" relative z-10 mx-auto">
         <motion.div
           className="grid grid-cols-1 md:grid-cols-2  container  lg:grid-cols-3 gap-12 lg:gap-[102px] mx-auto  md:place-items-stretch"
           initial="hidden"
@@ -123,11 +126,10 @@ export default function CarAssistantPage() {
               icon={feature.icon}
               title={feature.title}
               description={feature.description}
-                              className="max-w-[320px]"
-
+              className="max-w-[320px]"
             />
           ))}
-          <div className="lg:col-span-3  grid grid-cols-2 place-content-center gap-12">
+          <div className="lg:col-span-3 w-full flex justify-between items-center gap-12">
             {features.slice(3).map((feature, index) => (
               <FeatureCard
                 key={5 + index}
@@ -152,14 +154,15 @@ export default function CarAssistantPage() {
               text={t("HomeCallTitle")}
               className="md:text-4xl text-2xl z-20 lg:text-[64px] font-bold mb-8"
             />
-            <p className="font-light text-base max-w-3xl">
-              {t("HomeCallDescription")}
-            </p>
+            <FadeText delay={0.2}>
+              <p className="font-light text-base max-w-3xl">
+                {t("HomeCallDescription")}
+              </p>
+            </FadeText>
           </ScrollAnimatedLogo>
         </div>
       </div>
 
- 
       <SectionWrapper className="relative w-full bg-transparent py-24 px-4 flex justify-center items-center  ">
         <div
           ref={ref}
@@ -171,10 +174,11 @@ export default function CarAssistantPage() {
               text={t("se3title")}
               className="mb-8 text-[56px] lg:max-w-md font-black "
             />
-
-            <p className="font-light text-base max-w-[575px] mx-auto lg:mx-0">
-              {t("se3description")}
-            </p>
+            <FadeText delay={0.2}>
+              <p className="font-light text-base max-w-[575px] mx-auto lg:mx-0">
+                {t("se3description")}
+              </p>
+            </FadeText>
           </div>
 
           {/* Right Image */}
@@ -184,12 +188,12 @@ export default function CarAssistantPage() {
               alt="DtecGPT"
               width={577}
               height={387}
-              className="  relative  "
+              className="relative rounded-2xl "
             />
           </div>
         </div>
       </SectionWrapper>
-      <MindsBanner   />
+      <MindsBanner />
 
       {/* Footer Section */}
     </div>

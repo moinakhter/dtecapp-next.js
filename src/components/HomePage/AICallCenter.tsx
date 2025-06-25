@@ -6,6 +6,7 @@ import { Button } from "../ui/button";
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import TextGradientWhite from "../common/text-gradient-white";
+import FadeText from "../common/FadeText";
 
 function AICallCenter() {
   const t = useTranslations("HomePage.Dtec AI Call Center");
@@ -42,18 +43,28 @@ function AICallCenter() {
           <TextGradientWhite className="text-4xl md:text-5xl font-extrabold mb-6">
             {t("title")}
           </TextGradientWhite>
+          <FadeText delay={0.2}>
           <p className="text-lg max-w-3xl mx-auto">{t("description")}</p>
+          </FadeText>
         </div>
 
         <div className="w-full flex flex-col items-center justify-between rounded-3xl border-2 border-secondary/95 p-[65px]  md:flex-row gap-10 double-radial-bg dark:double-radial-dark ">
           <div className="md:w-1/2 w-full relative">
             <div className="max-w-[372px]">
+              <FadeText>
+
+            
               <h3 className="text-2xl font-semibold mb-4">
                 {t("sectionTitle")}
               </h3>
+              </FadeText>
+              <FadeText>
+
               <p className="text-base leading-relaxed text-foreground/80">
                 {t("sectionDescription")}
               </p>
+              </FadeText>
+
             </div>
             <Button size="sm" variant="secondary" className="mt-6 text-white">
               {t("button")}{" "}
