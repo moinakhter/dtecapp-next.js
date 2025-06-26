@@ -1,23 +1,16 @@
 "use client";
 
-import { Moon, Sun, HomeIcon } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Moon, Sun, HomeIcon, X, Menu } from "lucide-react";
 import Link from "next/link";
-
-import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import Image from "next/image";
 import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
 import LocaleSwitcher from "./common/LocaleSwitcher";
 import DownloadButton from "./common/DownloadeLink";
 import { useTranslations } from "next-intl";
 import DtecTokenCard from "./common/DtecTokenCard";
 import { CarIcon, CartIcon, MicICon, ThinPlaneIcon } from "./common/Icons";
+import { usePathname } from "@/i18n/navigation";
 
 const productItems = [
   {
@@ -55,26 +48,28 @@ const productItems = [
 export default function Navbar() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [productsOpen, setProductsOpen] = useState(false);
+ 
   const t = useTranslations("Navbar");
-
+  const pathname = usePathname();
   useEffect(() => {
     setMounted(true);
   }, []);
-
   if (!mounted) return null;
+const closeAllMenus = () => {
+  setMenuOpen(false);
+  setProductsOpen(false);
+  
+};
 
-  const isDark = theme === "dark";
-  const toggleTheme = () => setTheme(isDark ? "light" : "dark");
+  const toggleTheme = () => setTheme(theme === "dark" ? "light" : "dark");
 
   return (
-    <nav
-      className="fixed top-8 left-0 right-0 z-50 bg-white/10 container
-     md:mx-auto border-[#808080]/15 border-[1px] backdrop-blur-[32px] rounded-2xl
-       transition-all duration-300 "
-    >
+    <nav className="fixed top-8 left-0 right-0 z-50 bg-white/10 container md:mx-auto border-[#808080]/15 border-[1px] backdrop-blur-[32px] rounded-2xl transition-all duration-300">
       <div className="mx-auto md:px-8 py-4 flex max-w-7xl items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="flex items-center">
+        <Link href="/"   onClick={closeAllMenus} className="flex items-center">
           <Image
             src="/images/logo/logo-light.svg"
             alt="DTEC Logo"
@@ -85,117 +80,160 @@ export default function Navbar() {
           />
         </Link>
 
-        {/* Navigation Links */}
-        <div className="hidden items-center !space-x-[36px] md:flex">
+        {/* Desktop Menu */}
+        <div className="hidden md:flex items-center space-x-10">
           {/* Products Dropdown */}
-          <DropdownMenu>
-            <DropdownMenuTrigger className="flex items-center space-x-1 transition-colors hover:text-primary group  !focus-within:outline-none">
-              <span>{t("products")}</span>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent
-              className="border-none  w-full max-w-[455px] md:block hidden overflow-visible drop-shadow-[0_0_5px_#3D7EE2]   bg-transparent "
-              align="center"
-              sideOffset={50}
+          <div className="relative">
+            <button
+              onClick={() => setProductsOpen(!productsOpen)}
+              className="flex items-center space-x-1 hover:text-primary transition-colors group"
             >
-              {/* Top Notch */}
-              <div className="absolute -top-1 left-1/2 -translate-x-1/2 rounded-xl w-10 h-10 bg-[#16191A] rotate-45  z-20" />
-
-              <div
-                className="flex justify-between items-end gap-8 w-full p-6 [background:linear-gradient(135deg,_#1C1F22_0%,_#121212_100%)] rounded-2xl z-10 relative
-                  transition-all duration-300 hover:[background:radial-gradient(100%_100%_at_0%_100%,rgba(61,126,226,0.2)_0%,#16191A_30%,#16191A_100%),radial-gradient(60%_60%_at_50%_100%,rgba(61,126,226,0.15)_0%,#16191A_20%,#16191A_100%)]
-
-              
-              "
-              >
-                {/* Left menu */}
-                <div className="w-fit">
-                  <div className="text-[10px] font-medium text-[#FAFAFA] pb-6">
-                    Ürünlerimiz
+              <span>{t("products")}</span>
+            </button>
+            {productsOpen && (
+              <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[455px] bg-transparent z-20 drop-shadow-[0_0_5px_#3D7EE2]">
+                <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-10 h-10 bg-[#16191A] rotate-45 z-20" />
+                <div className="flex justify-between items-end gap-8 w-full p-6 rounded-2xl relative transition-all duration-300 bg-gradient-to-br from-[#1C1F22] to-[#121212] hover:bg-[radial-gradient(100%_100%_at_0%_100%,rgba(61,126,226,0.2)_0%,#16191A_30%,#16191A_100%),radial-gradient(60%_60%_at_50%_100%,rgba(61,126,226,0.15)_0%,#16191A_20%,#16191A_100%)]">
+                  <div>
+                    <div className="text-[10px] font-medium text-[#FAFAFA] pb-6">
+                      Ürünlerimiz
+                    </div>
+                    <div className="grid grid-cols-1 gap-4">
+                      {productItems.map((item) => (
+                        <Link
+                          key={item.key}
+                          href={item.href}
+                           onClick={closeAllMenus}
+                          className={`flex items-center text-[13px] gap-3 group rounded-lg transition-colors
+    ${pathname === item.href ? "text-secondary" : "text-white"}
+  `}
+                        >
+                          <item.icon
+                            className={`h-5 w-5 ${
+                              pathname === item.href
+                                ? "text-secondary"
+                                : "text-white"
+                            } group-hover:text-secondary`}
+                          />
+                          <span
+                            className={`${
+                              pathname === item.href
+                                ? "text-secondary"
+                                : "text-white"
+                            } group-hover:text-secondary`}
+                          >
+                            {item.title}
+                          </span>
+                        </Link>
+                      ))}
+                    </div>
                   </div>
-                  <div className="grid grid-cols-1 gap-4 ">
-                    {productItems.map((item) => (
-                      <Link
-                        key={item.key}
-                        href={item.href}
-                        className="flex items-center text-[13px] gap-3 group   rounded-lg   transition-colors"
-                      >
-                        <item.icon className="h-5 w-5 text-white group-hover:text-secondary" />
-
-                        <span className="text-[13px] group-hover:text-secondary  text-white">
-                          {item.title}
-                        </span>
-                      </Link>
-                    ))}
-                  </div>
+                  <DtecTokenCard
+                    text="text-xs"
+                    className="w-[172px] h-[120px]"
+                  />
                 </div>
-
-                {/* Right card */}
-                <DtecTokenCard text="text-xs" className="w-[172px] h-[120px]" />
               </div>
-            </DropdownMenuContent>
-          </DropdownMenu>
+            )}
+          </div>
 
-          <Link href="/about" className="transition-colors  hover:text-primary">
+          <Link href="/about"   onClick={closeAllMenus} className="hover:text-primary transition-colors">
             {t("about")}
           </Link>
 
-          <DropdownMenu>
-            <DropdownMenuTrigger className="flex items-center space-x-1 transition-colors hover:text-primary">
-              <span>Dtec Token</span>
-              <span className="rotate-[-45deg] inline-block">→</span>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="bg-card border-border">
-              <DropdownMenuItem className="hover:bg-primary/10 hover:text-primary">
-                {t("tokenInfo")}
-              </DropdownMenuItem>
-              <DropdownMenuItem className="hover:bg-primary/10 hover:text-primary">
-                {t("whitepaper")}
-              </DropdownMenuItem>
-              <DropdownMenuItem className="hover:bg-primary/10 hover:text-primary">
-                {t("tokenomics")}
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+         <a
+  href="https://dtec.space"
+  target="_blank"
+  rel="noopener noreferrer"   onClick={closeAllMenus}
+className="hover:text-primary transition-colors"
+>
+  <span>Dtec Token</span>
+  <span className="rotate-[-45deg] inline-block">→</span>
+</a>
+
         </div>
 
-        {/* Right Side Controls */}
-        <div className="flex items-center !space-x-6">
-          {/* Language Selector */}
+        {/* Desktop Right Controls */}
+        <div className="hidden md:flex items-center space-x-6">
           <LocaleSwitcher />
-
-          {/* Theme Toggle */}
           <button
             onClick={toggleTheme}
-            className="!hover:bg-transparent cursor-pointer hover:text-accent transition-colors"
+            className="cursor-pointer hover:text-accent transition-colors"
           >
-            {isDark ? (
+            {theme === "dark" ? (
               <Sun className="h-5 w-5" />
             ) : (
               <Moon className="h-5 w-5" />
             )}
           </button>
-
-          {/* Download Assistant Button */}
           <DownloadButton title={t("Download")} />
         </div>
 
-        {/* Mobile Menu Button */}
-        <Button variant="ghost" size="icon" className="md:hidden">
-          <svg
-            className="h-6 w-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M4 6h16M4 12h16M4 18h16"
-            />
-          </svg>
-        </Button>
+        {/* Mobile Menu Toggle */}
+        <button onClick={() => setMenuOpen(!menuOpen)} className="md:hidden">
+          {menuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+        </button>
       </div>
+
+      {/* Mobile Menu */}
+      {menuOpen && (
+        <div className="md:hidden flex flex-col justify-center items-center space-y-4 px-6 pb-6">
+          <button
+            onClick={() => setProductsOpen(!productsOpen)}
+            className="text-left hover:text-primary"
+          >
+            {t("products")}
+          </button>
+          {productsOpen && (
+            <div className="pl-4 flex flex-col space-y-2">
+              {productItems.map((item) => (
+                <Link
+                  key={item.key}
+                  href={item.href}
+                    onClick={closeAllMenus}
+                  className="flex items-center text-[13px] gap-3 group hover:text-secondary transition-colors"
+                >
+                  <item.icon className="h-5 w-5 text-white group-hover:text-secondary" />
+                  <span className="text-[13px]">{item.title}</span>
+                </Link>
+              ))}
+            </div>
+          )}
+
+          <Link href="/about"
+            onClick={closeAllMenus}
+          className="hover:text-primary transition-colors">
+            {t("about")}
+          </Link>
+
+          <a
+            href="https://dtectoken.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center space-x-1 hover:text-primary transition-colors"
+          >
+            <span>Dtec Token</span>
+            <span className="rotate-[-45deg] inline-block">→</span>
+          </a>
+
+          {/* Mobile Right Controls */}
+          <div className="flex  gap-4 items-center space-4 pt-4 border-t border-border mt-4">
+            <LocaleSwitcher />
+            <button
+              onClick={toggleTheme}
+              className="flex items-center space-x-2 hover:text-accent transition-colors"
+            >
+              {theme === "dark" ? (
+                <Sun className="h-5 w-5" />
+              ) : (
+                <Moon className="h-5 w-5" />
+              )}
+ 
+            </button>
+            <DownloadButton title={t("Download")} />
+          </div>
+        </div>
+      )}
     </nav>
   );
 }
