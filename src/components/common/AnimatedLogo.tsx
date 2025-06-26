@@ -23,7 +23,7 @@ export default function ScrollAnimatedLogo({
   return (
     <div
       ref={ref}
-      className={`absolute inset-0 flex items-center top-[300px] md:top-[200px]  sm:-top-12  justify-center overflow-visible pointer-events-none ${className}`}
+      className={`absolute inset-0 flex items-center -top-[400px] md:top-[200px]  sm:-top-12  justify-center overflow-visible pointer-events-none ${className}`}
     >
       {/* Animated rings */}
       <motion.svg

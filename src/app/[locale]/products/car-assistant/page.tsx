@@ -84,11 +84,11 @@ export default function CarAssistantPage() {
     <div className="min-h-screen">
       <FloatingBalls />
       {/* Hero Section */}
-      <SectionWrapper className="relative   mt-[90px] overflow-hidden">
+      <SectionWrapper className="relative  mt-[90px] overflow-hidden">
         {/* Background Grid Pattern */}
 
         <div className="container relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 md:gap-12 items-center">
             {/* Left Content */}
             <div className="space-y-8">
               <TextGradientWhite className="text-3xl md:text-7xl font-bold  ">
@@ -117,7 +117,7 @@ export default function CarAssistantPage() {
                   alt="DTEC Car Assistant"
                   width={577}
                   height={363}
-                  className="w-full h-auto rounded-2xl relative z-10"
+                  className="w-full max-w-[577px] h-auto rounded-2xl relative z-10"
                   priority
                 />
               </div>

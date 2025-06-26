@@ -74,13 +74,13 @@ export default function ComparisonSection() {
           <SpotlightBg className="dark:absolute  dark:visible  invisible " />
           {/* Content */}
           <div className="container relative z-10 px-5">
-            <div className="text-center mb-[96px]">
-              <TextGradientWhite className="dark:text-transparent dark:bg-clip-text dark:bg-[linear-gradient(311deg,_#FAFAFA_14%,_#CDCDCD_36%,_#999999_52%,_#E2E2E2_69%,_#FAFAFA_89%)] mb-2.5 text-[56px] font-black">
+            <div className="text-center md:mb-[96px] mb-10">
+              <TextGradientWhite className="dark:text-transparent dark:bg-clip-text dark:bg-[linear-gradient(311deg,_#FAFAFA_14%,_#CDCDCD_36%,_#999999_52%,_#E2E2E2_69%,_#FAFAFA_89%)]   font-black">
                 {t("title")}
               </TextGradientWhite>
               <FadeText delay={0.2}>
 
-              <p className="text-2xl font-light ">{t("description")}</p>
+              <p className="md:text-2xl text-base font-light ">{t("description")}</p>
               </FadeText>
             </div>
 
@@ -92,7 +92,7 @@ export default function ComparisonSection() {
               className="flex flex-col md:flex-row justify-center gap-8 mx-auto"
             >
               {/* DTEC Features */}
-              <div className="w-full max-w-[552px] group md:w-1/2 p-12 dark:bg-[#121212] bg-[#FAFAFA] rounded-2xl border-[#212121]/30 border-2 hover:border-secondary">
+              <div className="w-full max-w-[552px] group md:w-1/2 px-6 py-10 lg:p-12 dark:bg-[#121212] bg-[#FAFAFA] rounded-2xl border-[#212121]/30 border-2 hover:border-secondary">
                 <div className="flex flex-col gap-2.5 mb-8">
                   <div className="flex gap-2">
                     <Image
@@ -120,9 +120,9 @@ export default function ComparisonSection() {
               </div>
 
               {/* Other Applications */}
-              <div className="w-full md:w-1/2 max-w-[552px] p-12 dark:bg-[#121212] bg-[#FAFAFA]   border-[#212121]/30 border-2 hover:border-secondary  rounded-2xl">
+              <div className="w-full md:w-1/2 max-w-[552px] px-6 py-10 lg:p-12   dark:bg-[#121212] bg-[#FAFAFA]   border-[#212121]/30 border-2 hover:border-secondary  rounded-2xl">
                 <div className="flex flex-col gap-2.5 mb-8">
-                  <h3 className="text-3xl font-medium ">
+                  <h3 className="md:text-3xl text-xl font-medium ">
                     {t("otherApplicationsTitle")}
                   </h3>
                 </div>
@@ -131,7 +131,7 @@ export default function ComparisonSection() {
                   {limitations.map((limitation, index) => (
                     <div key={index} className="flex items-start gap-2">
                       <span className="">•</span>
-                      <p className="text-base font-light ">{limitation}</p>
+                      <p className="lg:text-base text-sm font-light ">{limitation}</p>
                     </div>
                   ))}
                 </div>
@@ -141,7 +141,7 @@ export default function ComparisonSection() {
         </section>
 
         <div className="lg:h-[1032px] md:h-[1032px] h-[600px]"></div>
-        {/* Token Section or anything else */}
+      
         <TokenSection />
       </div>
     </>
@@ -171,10 +171,10 @@ function FeatureItem({
         <Icon className="w-8 h-8  hover:text-secondary transition-all duration-300" />
       </div>
       <div className="flex-1 flex group flex-col gap-1">
-        <h4 className="text-base  hover:text-secondary transition-all duration-300 font-bold">
+        <h4 className="md:text-base text-sm  hover:text-secondary transition-all duration-300 font-bold">
           {title}
         </h4>
-        <p className="text-sm font-light">{description}</p>
+        <p className="md:text-sm text-xs font-light">{description}</p>
       </div>
     </motion.div>
   );

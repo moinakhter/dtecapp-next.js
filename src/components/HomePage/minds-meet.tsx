@@ -17,21 +17,21 @@ export default function MindsBanner({
   const t = useTranslations("HomePage");
   
   return (
-    <SectionWrapper className="w-full py-12 hover:drop-shadow-sm  hover:drop-shadow-secondary transition-all duration-100 ease-in-out">
+    <SectionWrapper className="w-full py-12 hover:drop-shadow-sm px-4 hover:drop-shadow-secondary transition-all duration-100 ease-in-out">
       <div className="container px-4">
-        <div className="relative w-full flex items-center justify-center max-w-[1184px] h-[384px] mx-auto">
+        <div className="relative w-full flex items-center justify-center md:max-w-[1184px]    h-[384px] mx-auto">
           <Image
             src={img || "/images/Backgrounds/shape.svg"}
             alt="Minds Meet Background"
             fill
-            className="relative  bg-black h-full rounded-3xl   overflow-hidden"
+            className="relative  bg-black h-full rounded-3xl object-cover   overflow-hidden"
           />
 
           {/* Content */}
           <div className="relative z-10 text-center">
             <TextGradientWhite
               text={text ? text : t("mindsmeet")}
-              className="md:text-4xl text-2xl lg:text-5xl font-bold  text-white"
+              className="md:text-4xl sm:text-2xl text-2xl lg:text-5xl mx-1 font-bold  text-white"
             />
              {children}
           </div>

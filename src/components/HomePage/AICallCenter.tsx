@@ -44,27 +44,23 @@ function AICallCenter() {
             {t("title")}
           </TextGradientWhite>
           <FadeText delay={0.2}>
-          <p className="text-lg max-w-3xl mx-auto">{t("description")}</p>
+            <p className="text-lg max-w-3xl mx-auto">{t("description")}</p>
           </FadeText>
         </div>
 
-        <div className="w-full flex flex-col items-center justify-between rounded-3xl border-2 border-secondary/95 p-[65px]  md:flex-row gap-10 double-radial-bg dark:double-radial-dark ">
+        <div className="w-full flex flex-col items-center  justify-between rounded-3xl border-2 border-secondary/95 md:p-[65px] p-4 md:flex-row gap-10 double-radial-bg dark:double-radial-dark ">
           <div className="md:w-1/2 w-full relative">
             <div className="max-w-[372px]">
               <FadeText>
-
-            
-              <h3 className="text-2xl font-semibold mb-4">
-                {t("sectionTitle")}
-              </h3>
+                <h3 className="text-2xl font-semibold mb-4">
+                  {t("sectionTitle")}
+                </h3>
               </FadeText>
               <FadeText>
-
-              <p className="text-base leading-relaxed text-foreground/80">
-                {t("sectionDescription")}
-              </p>
+                <p className="text-base leading-relaxed text-foreground/80">
+                  {t("sectionDescription")}
+                </p>
               </FadeText>
-
             </div>
             <Button size="sm" variant="secondary" className="mt-6 text-white">
               {t("button")}{" "}
@@ -114,10 +110,9 @@ function AICallCenter() {
           </motion.div>
         </div>
 
-        <div className="w-full flex flex-col md:flex-row gap-10">
+        <div className="w-full flex flex-col  md:flex-row gap-10">
           <motion.div
-            className="p-6 bg-card dark:bg-[radial-gradient(90%_90%_at_top,_#121212_59%,_#003FA1_150%)]
- w-[300px] rounded-3xl border border-border shadow-md flex items-center justify-center flex-col text-center"
+            className="p-6 mx-auto bg-card dark:bg-[radial-gradient(90%_90%_at_top,_#121212_59%,_#003FA1_150%)]  w-full md:w-[300px] rounded-3xl border border-border shadow-md flex items-center justify-center flex-col text-center"
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: "easeOut", delay: 0.1 }}
@@ -137,7 +132,7 @@ function AICallCenter() {
           </motion.div>
 
           <motion.div
-            className="w-[420px]  rounded-3xl border border-border shadow-md overflow-hidden"
+            className="max-w-[420px] w-full mx-auto   rounded-3xl border border-border shadow-md overflow-hidden"
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
@@ -152,7 +147,7 @@ function AICallCenter() {
             />
           </motion.div>
 
-          <div className="p-6 bg-card max-w-[416px]  dark:bg-[radial-gradient(90%_100%_at_top,_#121212_49%,_#003FA1_150%)] rounded-3xl border border-border shadow-md">
+          <div className="p-6 bg-card md:max-w-[416px] w-full mx-auto  dark:bg-[radial-gradient(90%_100%_at_top,_#121212_49%,_#003FA1_150%)] rounded-3xl border border-border shadow-md">
             <Image
               src="/images/Icons/security.png"
               alt="Security"
@@ -175,7 +170,7 @@ function AICallCenter() {
         </div>
 
         <motion.div
-          className="w-full p-[64px] space-y-[64px] dark:bg-[radial-gradient(97.15%_108.81%_at_50%_139.84%,_#3D7EE2_0%,_#000000_100%)] bg-[radial-gradient(86.63%_97.02%_at_50%_151.62%,_#8FBBFF_0%,_#FFFFFF_100%)]  rounded-3xl border border-border shadow-md"
+          className="w-full md:p-[64px] py-8 px-2 space-y-[64px] dark:bg-[radial-gradient(97.15%_108.81%_at_50%_139.84%,_#3D7EE2_0%,_#000000_100%)] bg-[radial-gradient(86.63%_97.02%_at_50%_151.62%,_#8FBBFF_0%,_#FFFFFF_100%)]  rounded-3xl border border-border shadow-md"
           initial={{ opacity: 0, y: 60 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
@@ -183,10 +178,10 @@ function AICallCenter() {
         >
           <div className="flex items-center justify-between">
             <div>
-              <TextGradientWhite className="text-3xl md:text-[24px] font-extrabold mb-4">
+              <TextGradientWhite className="text-3xl md:text-start text-center md:text-[24px] font-extrabold mb-4">
                 {t("howItWorks.title")}
               </TextGradientWhite>
-              <p className="text-[16px] font-light">
+              <p className="text-[16px] md:text-start text-center font-light">
                 {t("howItWorks.subtitle")}
               </p>
             </div>
@@ -195,6 +190,7 @@ function AICallCenter() {
               alt="How It Works"
               width={132}
               height={48}
+              className=" hidden md:block"
               style={{ filter: "var(--icon-filter)" }}
             />
           </div>
@@ -254,7 +250,7 @@ function AICallCenter() {
           </div>
         </motion.div>
 
-        <div className="flex flex-col md:flex-row gap-10">
+        <div className="flex flex-col   md:flex-row gap-10">
           <motion.div
             className="w-full relative flex items-center justify-center p-10 bg-card rounded-2xl border border-border shadow-md"
             initial={{ opacity: 0, y: 40 }}

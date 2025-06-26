@@ -19,6 +19,7 @@ import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 import TextGradientWhite from "../common/text-gradient-white";
 import { useTranslations } from "next-intl";
+import SectionWrapper from "../common/SectionWrapper";
 
 export default function DtecAssistants() {
   const [activeCard, setActiveCard] = useState("car");
@@ -95,16 +96,16 @@ export default function DtecAssistants() {
   ];
 
   return (
-    <div className="w-full bg-white dark:bg-[#0B0B0B] py-[128px] ">
+    <SectionWrapper className="w-full bg-white dark:bg-[#0B0B0B]   ">
       <div className="container mx-auto">
         {/* Header */}
         <div className="text-center mb-10 md:mb-24">
-          <TextGradientWhite text={t("title")} />
+          <TextGradientWhite className="" text={t("title")} />
 
           {t("description")
             .split("\n")
             .map((line, i) => (
-              <p className="text-2xl font-light opacity-60 " key={i}>
+              <p className="md:text-2xl text-base font-light opacity-60 " key={i}>
                 {line}
               </p>
             ))}
@@ -147,7 +148,7 @@ export default function DtecAssistants() {
                 </div>
 
                 {/* Content */}
-                <div className="relative h-full flex   flex-col justify-between px-9 pb-8 pt-5 z-10">
+                <div className="relative h-full flex   flex-col justify-between p-2 md:px-9 md:pb-8 md:pt-5 z-10">
                   {/* Top Right Link - Only visible when active */}
                   {isActive && (
                     <div className="flex justify-end">
@@ -181,7 +182,7 @@ export default function DtecAssistants() {
                     {isActive && (
                       <div className="relative overflow-hidden lg:mb-0 mb-10  h-[4rem]">
                         <motion.h3
-                          className="absolute top-0 left-0 text-3xl font-medium  text-neutral-50"
+                          className="absolute top-0 left-0 md:text-3xl text-xl font-medium  text-neutral-50"
                           initial={{ x: "100%", opacity: 0 }}
                           animate={{ x: 0, opacity: 1 }}
                           transition={{
@@ -198,7 +199,7 @@ export default function DtecAssistants() {
                     {/* Description - Only visible when active */}
                     {isActive && (
                       <motion.p
-                        className="text-neutral-50/80 font-light text-base mb-8 max-w-xl"
+                        className="text-neutral-50/80 font-light md:text-base text-sm mb-8 max-w-xl"
                         initial={{ opacity: 0, x: 50 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.4, delay: 0.2 }}
@@ -209,7 +210,7 @@ export default function DtecAssistants() {
 
                     {/* Features - Only visible when active */}
                     {isActive && (
-                      <div className="flex flex-wrap gap-6">
+                      <div className="flex flex-wrap gap-2 md:gap-6">
                         {card.features.map((feature, i) => (
                           <motion.div
                             key={i}
@@ -233,6 +234,6 @@ export default function DtecAssistants() {
           })}
         </div>
       </div>
-    </div>
+    </SectionWrapper>
   );
 }

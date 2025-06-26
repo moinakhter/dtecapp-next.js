@@ -17,10 +17,10 @@ const features = Object.values(t.raw("features")) as {
       <div className="container space-y-20 relative z-10 px-4 pt-16">
         {/* Header */}
         <div className="text-center max-w-[900px] mx-auto">
-          <TextGradientWhite className="md:text-4xl text-2xl lg:text-[56px] font-black mb-8 whitespace-pre-line">
+          <TextGradientWhite className=" font-black mb-8 whitespace-pre-line">
             {t("header")}
           </TextGradientWhite>
-          <p className="text-base mb-12 mx-auto">{t("description")}</p>
+          <p className="md:text-base text-sm mb-12 mx-auto">{t("description")}</p>
 
           <Button
             variant="outline"
