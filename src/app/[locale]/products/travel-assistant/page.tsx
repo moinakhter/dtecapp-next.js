@@ -22,7 +22,6 @@ import FadeText from "@/components/common/FadeText";
 
 export default function CarAssistantPage() {
   const t = useTranslations("travel-assistant");
- 
 
   const features = [
     {
@@ -53,31 +52,26 @@ export default function CarAssistantPage() {
   ];
 
   return (
-    <div className="min-h-screen">
-      <FloatingBalls />
-
+    <>
       {/* Hero Section */}
-      <SectionWrapper className="relative mt-[90px] overflow-hidden">
+      <section className="relative md:p-0 p-2   lg:min-h-screen w-full  ">
+        <FloatingBalls />
         <div className="container relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* Left Content */}
-            <div className="space-y-8">
-              <div className="space-y-6">
-                <TextGradientWhite className="text-3xl md:text-7xl font-bold  ">
-                  {t("heroTitle")}
-                </TextGradientWhite>
-                <FadeText delay={0.2}>
-
+          <div className="grid  md:mt-[250px] mt-[160px] grid-cols-1 lg:grid-cols-2 lg:gap-12 gap-5 items-center">
+            <div className="space-y-8  md:text-start text-center">
+              <TextGradientWhite className="text-3xl md:text-7xl font-bold  ">
+                {t("heroTitle")}
+              </TextGradientWhite>
+              <FadeText delay={0.2}>
                 <p className="text-base font-light  max-w-xl">
                   {t("heroDescription")}
                 </p>
-                </FadeText>
-              </div>
+              </FadeText>
             </div>
 
             {/* Right Content - Car Image */}
             <div className="relative">
-              <div className="relative  rounded-3xl p-8 overflow-hidden">
+              <div className="relative  rounded-3xl md:p-8 overflow-hidden">
                 <Image
                   src="/images/Home/dtec-assistants/women-booking-plane.png"
                   alt="DTEC Car Assistant"
@@ -90,15 +84,14 @@ export default function CarAssistantPage() {
             </div>
           </div>
         </div>
-      </SectionWrapper>
+      </section>
 
       <LogosTicker />
 
       {/* Main Features SectionWrapper */}
-          <SectionWrapper className=" relative z-10 mx-auto">
-
+      <SectionWrapper className=" relative z-10 mx-auto">
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2  container  lg:grid-cols-3 gap-12 lg:gap-[102px] mx-auto  md:place-items-stretch"
+          className="flex items-center justify-center flex-wrap container   gap-12 lg:gap-[102px] mx-auto  md:place-items-stretch"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
@@ -117,11 +110,10 @@ export default function CarAssistantPage() {
               icon={feature.icon}
               title={feature.title}
               description={feature.description}
-                              className="max-w-[320px]"
-
+              className="max-w-[320px]"
             />
           ))}
-          <div className="lg:col-span-3  grid grid-cols-2 place-content-center gap-12">
+          <div className="flex items-center flex-wrap w-full justify-around gap-12">
             {features.slice(3).map((feature, index) => (
               <FeatureCard
                 key={5 + index}
@@ -135,9 +127,9 @@ export default function CarAssistantPage() {
         </motion.div>
       </SectionWrapper>
 
-      <MindsBanner   />
+      <MindsBanner />
 
       {/* Footer Section */}
-    </div>
+    </>
   );
 }

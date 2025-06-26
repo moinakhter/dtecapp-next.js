@@ -26,7 +26,7 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} className={Celias.className} suppressHydrationWarning>
         <body
-          className="bg-background text-foreground font-normal text-[13px] antialiased w-full h-full flex items-center justify-start flex-col"
+          className="bg-background text-foreground font-normal text-[13px] antialiased w-full h-full flex items-center justify-start flex-col overflow-hidden"
           suppressHydrationWarning
         >
       <ThemeProvider

@@ -69,45 +69,39 @@ export default function CarAssistantPage() {
   ];
 
   return (
-    <div className="min-h-screen ">
-      <FloatingBalls />
-
-      {/* Hero Section */}
-      <SectionWrapper className="relative mt-[90px] bg-transparent overflow-hidden">
-        {/* Background Grid Pattern */}
-
+    <>
+      
+      <section className="relative md:p-0 p-2 lg:min-h-screen w-full  ">
+        <FloatingBalls />
         <div className="container relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* Left Content */}
-            <div className="space-y-8">
-              <div className="space-y-6">
-                <TextGradientWhite className="text-3xl md:text-7xl font-bold  ">
-                  {t("heroTitle")}
-                </TextGradientWhite>
-                <FadeText delay={0.2}>
-                  <p className="text-base font-light  max-w-xl">
-                    {t("heroDescription")}
-                  </p>
-                </FadeText>
-              </div>
+          <div className="grid  md:mt-[250px] mt-[160px] grid-cols-1 lg:grid-cols-2 lg:gap-12 gap-5 items-center">
+            <div className="space-y-8  md:text-start text-center">
+              <TextGradientWhite className="text-3xl md:text-7xl font-bold  ">
+                {t("heroTitle")}
+              </TextGradientWhite>
+              <FadeText delay={0.2}>
+                <p className="text-base font-light  max-w-xl">
+                  {t("heroDescription")}
+                </p>
+              </FadeText>
             </div>
+       
 
-            {/* Right Content - Car Image */}
-            <div className="relative">
-              <div className="relative  rounded-3xl p-8 overflow-hidden">
-                <Image
-                  src="/images/Photorealistic-Digital-Artwork.png"
-                  alt="DTEC Car Assistant"
-                  width={577}
-                  height={363}
-                  className="w-full h-auto rounded-2xl relative z-10"
-                  priority
-                />
-              </div>
-            </div>
+          {/* Right Content - Car Image */}
+
+          <div className="relative mt-10 md:mt-0 rounded-3xl  md:p-8  overflow-hidden">
+            <Image
+              src="/images/Photorealistic-Digital-Artwork.png"
+              alt="DTEC Car Assistant"
+              width={577}
+              height={363}
+              className="w-full h-auto rounded-2xl relative z-10"
+              priority
+            />
           </div>
+             </div>
         </div>
-      </SectionWrapper>
+      </section>
 
       <LogosTicker />
 
@@ -150,7 +144,7 @@ export default function CarAssistantPage() {
         </motion.div>
       </SectionWrapper>
 
-      <SectionWrapper className="relative w-full py-24 px-4 flex justify-center items-center  ">
+      <SectionWrapper className="relative w-full  flex justify-center items-center  ">
         <div
           ref={ref}
           className="container mx-auto flex flex-col-reverse lg:flex-row items-center gap-12 px-4"
@@ -159,7 +153,7 @@ export default function CarAssistantPage() {
           <div className="lg:w-1/2 text-center lg:text-left">
             <TextGradientWhite
               text={t("section2Title")}
-              className="mb-8 text-[90px] "
+              className="mb-8   "
             />
             <FadeText delay={0.2}>
               {t("section2Description")
@@ -167,7 +161,7 @@ export default function CarAssistantPage() {
                 .map((line, i) => (
                   <p
                     key={i}
-                    className="font-light text-base mb-4 max-w-[562px] mx-auto lg:mx-0"
+                    className="font-light text-sm md:text-base mb-4 max-w-[562px] mx-auto lg:mx-0"
                   >
                     {line}
                   </p>
@@ -176,14 +170,15 @@ export default function CarAssistantPage() {
           </div>
 
           {/* Right Image */}
-          <div className="lg:w-1/2 flex justify-center">
-            <div className="w-[512px] h-[512px] rounded-4xl overflow-hidden shadow-lg">
-              <Image
+            <div className="lg:w-1/2 flex justify-center">
+            <div className="w-full max-w-[512px] relative h-auto aspect-square rounded-4xl overflow-hidden shadow-lg ">
+             <Image
                 src="/images/Home/dtec-assistants/dtec-voice.png"
                 alt="DtecGPT"
                 width={512}
                 height={512}
-                className="object-cover w-full h-full shadow-[0_4px_24px_rgba(0,0,0,0.2)] dark:mix-blend-lighten"
+                              className="object-cover w-full h-full shadow-[0_4px_24px_rgba(0,0,0,0.2)] dark:mix-blend-lighten"
+
               />
             </div>
           </div>
@@ -195,7 +190,7 @@ export default function CarAssistantPage() {
           style={{ scale }}
           className="absolute -z-0  w-[50vw] h-[50vw] bg-secondary opacity-50 rounded-full blur-[200px] left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2"
         />
-        <SectionWrapper className="w-full max-w-[1184px] p-[92px]  mx-auto z-10 relative rounded-4xl ">
+        <SectionWrapper className=" w-[95%] md:max-w-[1184px] lg:mt-0 mt-10 py-10 px-4 lg:p-[92px]  mx-auto z-10 relative rounded-4xl ">
           <Image
             src="/images/Backgrounds/shape4.svg"
             alt="Minds Meet Background"
@@ -205,14 +200,14 @@ export default function CarAssistantPage() {
           <div className="relative flex-col flex gap-8 items-center justify-center z-10 text-center">
             <TextGradientWhite
               text={t("section3Title")}
-              className="md:text-4xl text-2xl lg:text-[64px] mx-auto lg:max-w-5xl font-bold  text-white"
+              className=" lg:text-[64px] mx-auto lg:max-w-5xl font-bold  text-white"
             />
             <FadeText delay={0.2}>
               {t("section3Description")
                 .split("\n")
                 .map((line, i) => (
                   <p
-                    className="font-light text-base text-white mb-3 lg:max-w-4xl"
+                    className="font-light md:text-base text-sm text-white mb-3 lg:max-w-4xl"
                     key={i}
                   >
                     {line}
@@ -222,7 +217,7 @@ export default function CarAssistantPage() {
           </div>
         </SectionWrapper>
       </div>
-      <SectionWrapper className="relative w-full bg-transparent py-24 px-4 flex justify-center items-center  ">
+      <SectionWrapper className="relative w-full bg-transparent md:py-0 py-10 flex justify-center items-center  ">
         <div
           ref={ref}
           className="container   flex flex-col-reverse lg:flex-row justify-between items-center gap-8 px-4"
@@ -230,13 +225,12 @@ export default function CarAssistantPage() {
           <div className="lg:w-1/2 text-center lg:text-left">
             <TextGradientWhite
               text={t("section4Title")}
-              className="mb-8 text-[56px] font-black "
+              className="mb-8   font-black "
             />
-<FadeText delay={0.2}>
-
-            <p className="font-light text-base max-w-[575px] mx-auto lg:mx-0">
-              {t("section4Description")}
-            </p>
+            <FadeText delay={0.2}>
+              <p className="font-light text-sm md:text-base max-w-[575px] mx-auto lg:mx-0">
+                {t("section4Description")}
+              </p>
             </FadeText>
           </div>
 
@@ -253,6 +247,6 @@ export default function CarAssistantPage() {
         </div>
       </SectionWrapper>
       <MindsBanner />
-    </div>
+    </>
   );
 }

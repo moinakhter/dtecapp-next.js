@@ -21,7 +21,7 @@ function FeatureCard({
         }}
         transition={{ duration: 0.6, ease: "easeOut" }}
     className={cn(
-        "group   w-full flex gap-[24px] md:text-start text-center flex-col h-full",
+        "group   w-full flex gap-[24px] md:text-start md:mx-0 mx-auto text-center flex-col h-full",
         className 
       )}
       >

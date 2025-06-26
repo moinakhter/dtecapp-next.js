@@ -24,8 +24,9 @@ import {
   TwoSideArrowIcon,
 } from "@/components/common/Icons";
 import FloatingBalls from "@/components/common/FloatingBalls";
+import FadeText from "@/components/common/FadeText";
 
-export default function CarAssistantPage() {
+export default function ShoppingAssistantPage() {
   const t = useTranslations("shopping-assistant");
 
   const ref = useRef(null);
@@ -73,30 +74,24 @@ export default function CarAssistantPage() {
   ];
 
   return (
-    <div className="min-h-screen ">
-      <FloatingBalls />
-
-      {/* Hero Section */}
-      <SectionWrapper className="relative  bg-transparent mt-[90px] overflow-hidden">
-        {/* Background Grid Pattern */}
+    <>
+      <section className="relative md:p-0 p-2   lg:min-h-screen w-full  ">
+        <FloatingBalls />
 
         <div className="container relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* Left Content */}
-            <div className="space-y-8">
-              <div className="space-y-6">
-                <TextGradientWhite className="text-3xl md:text-7xl font-bold  ">
-                  {t("heroTitle")}
-                </TextGradientWhite>
-                <p className="text-base font-light  max-w-xl">
-                  {t("heroDescription")}
-                </p>
-              </div>
+          <div className="grid  md:mt-[250px] mt-[160px] grid-cols-1 lg:grid-cols-2 lg:gap-12 gap-5 items-center">
+            <div className="space-y-8  md:text-start text-center">
+              <TextGradientWhite className="text-3xl md:text-7xl font-bold  ">
+                {t("heroTitle")}
+              </TextGradientWhite>
+              <p className="text-base font-light  max-w-xl">
+                {t("heroDescription")}
+              </p>
             </div>
 
             {/* Right Content - Car Image */}
             <div className="relative">
-              <div className="relative  rounded-3xl p-8 overflow-hidden">
+              <div className="relative  rounded-3xl md:p-8  overflow-hidden">
                 <Image
                   src="/images/Home/dtec-assistants/women-shopping.png"
                   alt="DTEC Car Assistant"
@@ -109,7 +104,7 @@ export default function CarAssistantPage() {
             </div>
           </div>
         </div>
-      </SectionWrapper>
+      </section>
 
       <LogosTicker />
 
@@ -159,16 +154,20 @@ export default function CarAssistantPage() {
         >
           {/* Left Content */}
           <div className="lg:w-1/2 text-center lg:text-left">
-            <TextGradientWhite text="Dtec GPT" className="mb-8 text-[90px] " />
-
-            <p className="font-light text-base max-w-[562px] mx-auto lg:mx-0">
-              {t("dtecgpt")}
-            </p>
+            <TextGradientWhite
+              text="Dtec GPT"
+              className="mb-8 lg:text-[90px] text-5xl"
+            />
+            <FadeText delay={0.2}>
+              <p className="font-light text-base max-w-[562px] mx-auto lg:mx-0">
+                {t("dtecgpt")}
+              </p>
+            </FadeText>
           </div>
 
           {/* Right Image */}
           <div className="lg:w-1/2 flex justify-center">
-            <div className="w-[512px] relative h-[512px] rounded-4xl overflow-hidden shadow-lg ">
+            <div className="w-full max-w-[512px] relative h-auto aspect-square rounded-4xl overflow-hidden shadow-lg ">
               <Image
                 src="/images/Backgrounds/colorful-spiral.svg"
                 alt="DtecGPT"
@@ -176,41 +175,38 @@ export default function CarAssistantPage() {
                 height={512}
                 className="object-cover w-full h-full shadow-[0_4px_24px_rgba(0,0,0,0.2)] dark:mix-blend-lighten"
               />
-
-              <div className="absolute inset-0  " />
             </div>
           </div>
         </div>
       </SectionWrapper>
 
-      <div className="  relative">
+      <div className="relative w-full">
         <motion.div
           style={{ scale }}
           className="absolute -z-0  w-[50vw] h-[50vw] bg-secondary opacity-50 rounded-full blur-[200px] left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2"
         />
 
-            <SectionWrapper className="w-full max-w-[1184px] p-[92px]  mx-auto z-10 relative rounded-4xl ">
-
+        <SectionWrapper className="w-full  lg:max-w-[1184px]  max-w-[95%]  py-6 px-4 md:px-[92px] mx-auto z-10 relative rounded-4xl ">
           <Image
             src="/images/Backgrounds/shape2.svg"
             alt="Minds Meet Background"
             fill
-                       className="relative  object-cover bg-black  rounded-4xl  overflow-hidden"
-
+            className="relative  md:max-w-[1184px]   object-cover bg-black  rounded-4xl  overflow-hidden"
           />
 
           {/* Content */}
-          <div className="relative z-10 text-center">
+             <div className="relative z-10 text-center flex flex-col items-center justify-center ">
+
             <TextGradientWhite
               text={t("smartshopping")}
-              className="md:text-4xl text-2xl lg:text-[64px] font-bold mb-8  text-white"
+              className="  lg:text-[64px] font-bold mb-8  text-white"
             />
 
             {t("smartshoppingDescription")
               .split("\n")
               .map((line, i) => (
                 <p
-                  className="font-light text-base text-white  max-w-[720px]"
+                  className="font-light md:text-base  text-sm text-white  max-w-[720px]"
                   key={i}
                 >
                   {line}
@@ -234,10 +230,10 @@ export default function CarAssistantPage() {
           <div className="lg:w-1/2 text-center lg:text-left">
             <TextGradientWhite
               text={t("se3title")}
-              className="mb-8 text-[56px] font-black "
+              className="mb-8   font-black "
             />
 
-            <p className="font-light text-base max-w-[575px] mx-auto lg:mx-0">
+            <p className="font-light w-full text-sm md:text-base max-w-[575px] mx-auto lg:mx-0">
               {t("se3description")}
             </p>
           </div>
@@ -249,7 +245,7 @@ export default function CarAssistantPage() {
               alt="DtecGPT"
               width={577}
               height={387}
-              className="  relative  "
+              className="  relative rounded-2xl  "
             />
           </div>
         </div>
@@ -257,6 +253,6 @@ export default function CarAssistantPage() {
       <MindsBanner />
 
       {/* Footer Section */}
-    </div>
+    </>
   );
 }

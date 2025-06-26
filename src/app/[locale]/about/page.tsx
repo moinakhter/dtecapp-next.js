@@ -97,17 +97,17 @@ export default function AboutPage() {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col gap-[100px] ">
-      <SectionWrapper>
+    <>
+      <section className="relative md:p-0 p-2   lg:min-h-screen w-full  ">
         <FloatingBalls />
 
-        <div className=" relative z-10 flex items-center min-h-screen justify-center flex-col  md:mt-0 mt-[90px]  h-full w-full">
+        <div className=" md:mt-[0px] mt-[160px] relative z-10 flex items-center min-h-screen justify-center flex-col md:gap-0 gap-24   h-full w-full">
           <div className="text-center m-auto max-w-5xl">
             <TextGradientWhite className="lg:text-8xl md:text-6xl text-4xl font-extrabold leading-tight mb-8 text-center ">
               {t("title")}
             </TextGradientWhite>
             <FadeText delay={0.2}>
-              <p className="lg:text-xl md:text-lg text-base font-light  ]">
+              <p className="lg:text-xl md:text-lg text-base font-light">
                 {t("description")}
               </p>
             </FadeText>
@@ -123,10 +123,10 @@ export default function AboutPage() {
             />
           </div>
         </div>
-      </SectionWrapper>
+      </section>
 
-      <SectionWrapper className="flex container h-full  z-10 flex-col items-center ">
-        <TextGradientWhite className="text-center lg:text-[56px] text-4xl font-black mb-16">
+      <SectionWrapper >
+        <TextGradientWhite className="text-center    font-black mb-16">
           Dtec Ekibi
         </TextGradientWhite>
         <div className=" flex items-center h-full justify-center flex-wrap  gap-16 container ">
@@ -150,8 +150,8 @@ export default function AboutPage() {
         </div>
       </SectionWrapper>
 
-      <SectionWrapper className="flex flex-col md:py-[200px] relative  gap-[64px] items-center justify-center ">
-        <TextGradientWhite className="text-center lg:text-[56px] text-4xl font-black ">
+      <SectionWrapper className="flex flex-col mt-20 relative  gap-2 md:gap-[64px] items-center justify-center ">
+        <TextGradientWhite className="text-center font-black ">
           Kazandığımız Yarışmalar & Ödüller
         </TextGradientWhite>
 
@@ -159,76 +159,118 @@ export default function AboutPage() {
           Dtec Araç Asistanı
         </h3>
 
-   <div className="grid grid-cols-1 lg:grid-cols-2 md:gap-12 max-w-7xl mx-auto px-4 items-start">
-  {/* LEFT COLUMN */}
-  <div className="flex flex-col gap-12">
-    {awards1.map((award, index) => (
-      <div key={index} className="flex flex-col md:flex-row items-start md:gap-6">
-        {/* Image Container */}
-        <div className=" md:w-[128px] w-[200px]   aspect-square relative flex-shrink-0 mx-auto md:mx-0">
-          <Image
-            src={award.logo}
-            alt={award.title}
-            fill
-            className="object-contain lg:object-top object-center invert dark:invert-0"
-          />
-        </div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 md:gap-12 max-w-7xl mx-auto px-4 items-start">
+          {/* LEFT COLUMN */}
+          <div className="flex flex-col gap-12">
+            {awards1.map((award, index) => (
+              <div
+                key={index}
+                className="flex flex-col md:flex-row items-start md:gap-6"
+              >
+                {/* Image Container */}
+                <div className=" md:w-[128px] w-[200px]   aspect-square relative flex-shrink-0 mx-auto md:mx-0">
+                  <Image
+                    src={award.logo}
+                    alt={award.title}
+                    fill
+                    className="object-contain lg:object-top object-center invert dark:invert-0"
+                  />
+                </div>
 
-        {/* Text */}
-        <div className="group flex-1 text-center md:text-left">
-          <h4 className="text-xl font-medium md:mb-2 md:block hidden">{award.title}</h4>
-          <p className="text-base font-light md:mt-2.5">{award.description}</p>
+                {/* Text */}
+                <div className="group flex-1 text-center md:text-left">
+                  <h4 className="text-xl font-medium md:mb-2 md:block hidden">
+                    {award.title}
+                  </h4>
+                  <p className="text-base font-light md:mt-2.5">
+                    {award.description}
+                  </p>
 
-          <div className="relative overflow-hidden mt-6">
-            <div className="w-full h-px bg-border" />
-            <div className="absolute top-0 left-0 h-px bg-secondary w-0 group-hover:w-full transition-all duration-500 ease-out" />
+                  <div className="relative overflow-hidden mt-6">
+                    <div className="w-full h-px bg-border" />
+                    <div className="absolute top-0 left-0 h-px bg-secondary w-0 group-hover:w-full transition-all duration-500 ease-out" />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* RIGHT COLUMN */}
+          <div className="flex flex-col gap-12">
+            {awards2.map((award, index) => (
+              <div
+                key={index}
+                className="flex flex-col md:flex-row items-start gap-6"
+              >
+                {/* Image Container */}
+                <div className="md:w-[128px] w-[200px]    aspect-square relative flex-shrink-0 mx-auto md:mx-0">
+                  <Image
+                    src={award.logo}
+                    alt={award.title}
+                    fill
+                    className="object-contain  lg:object-top object-center invert dark:invert-0"
+                  />
+                </div>
+
+                {/* Text */}
+                <div className="group flex-1 text-center md:text-left">
+                  <h4 className="text-xl font-medium md:mb-2 md:block hidden">
+                    {award.title}
+                  </h4>
+                  <p className="text-base font-light md:mt-2.5">
+                    {award.description}
+                  </p>
+
+                  <div className="relative overflow-hidden mt-6">
+                    <div className="w-full h-px bg-border" />
+                    <div className="absolute top-0 left-0 h-px bg-secondary w-0 group-hover:w-full transition-all duration-500 ease-out" />
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
-      </div>
-    ))}
-  </div>
-
-  {/* RIGHT COLUMN */}
-  <div className="flex flex-col gap-12">
-    {awards2.map((award, index) => (
-      <div key={index} className="flex flex-col md:flex-row items-start gap-6">
-        {/* Image Container */}
-        <div className="md:w-[128px] w-[200px]    aspect-square relative flex-shrink-0 mx-auto md:mx-0">
-          <Image
-            src={award.logo}
-            alt={award.title}
-            fill
-            className="object-contain  lg:object-top object-center invert dark:invert-0"
-          />
-        </div>
-
-        {/* Text */}
-       <div className="group flex-1 text-center md:text-left">
-          <h4 className="text-xl font-medium md:mb-2 md:block hidden">{award.title}</h4>
-          <p className="text-base font-light md:mt-2.5">{award.description}</p>
-
-          <div className="relative overflow-hidden mt-6">
-            <div className="w-full h-px bg-border" />
-            <div className="absolute top-0 left-0 h-px bg-secondary w-0 group-hover:w-full transition-all duration-500 ease-out" />
-          </div>
-        </div>
-      </div>
-    ))}
-  </div>
-</div>
-
 
         <h3 className="text-center text-2xl font-medium  mt-16">
           {t("tubTitle")}
         </h3>
-        <div className="grid grid-cols-1   gap-12 max-w-7xl mx-auto px-4  items-stretch">
+          <div
+       
+                className="flex flex-col md:flex-row items-start gap-6"
+              >
+                {/* Image Container */}
+                <div className="md:w-[128px] w-[200px]    aspect-square relative flex-shrink-0 mx-auto md:mx-0">
+                  <Image
+                  src="/images/Hero/logos/tübitak_logo_beyaz.png"
+                alt="TÜBİTAK Logo"
+                    fill
+                    className="object-contain  lg:object-top object-center invert dark:invert-0"
+                  />
+                </div>
+
+                {/* Text */}
+                <div className="group flex-1 text-center md:text-left">
+                  <h4 className="text-xl font-medium md:mb-2 md:block hidden">
+                 TÜBİTAK
+                  </h4>
+                  <p className="text-base font-light md:mt-2.5">
+                            {t("tubitakDescription")}
+                  </p>
+
+                  <div className="relative overflow-hidden mt-6">
+                    <div className="w-full h-px bg-border" />
+                    <div className="absolute top-0 left-0 h-px bg-secondary w-0 group-hover:w-full transition-all duration-500 ease-out" />
+                  </div>
+                </div>
+              </div>
+        {/* <div className="grid grid-cols-1   gap-12 max-w-7xl mx-auto px-4  items-stretch">
           <div className="flex items-start justify-between gap-9 max-w-[676px]  mx-auto">
-            <div className="w-[128px] h-full relative flex-shrink-0">
+            <div className="md:w-[128px] w-[200px]   h-full relative flex-shrink-0">
               <Image
                 src="/images/Hero/logos/tübitak_logo_beyaz.png"
                 alt="TÜBİTAK Logo"
                 fill
-                className="object-contain  object-top   w-[128px] invert dark:invert-0"
+                className="object-contain  object-top   md:w-[128px] w-[200px]   invert dark:invert-0"
               />
             </div>
             <div className="group w-full">
@@ -243,10 +285,10 @@ export default function AboutPage() {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </SectionWrapper>
       <SectionWrapper className="w-full    flex flex-col items-center">
-        <TextGradientWhite className="lg:text-[56px]   font-extrabold mb-16 text-center">
+        <TextGradientWhite className="   font-extrabold mb-16 text-center">
           {t("pointsTitle")}
         </TextGradientWhite>
 
@@ -262,7 +304,7 @@ export default function AboutPage() {
           ))}
         </div>
       </SectionWrapper>
-      <MindsBanner/>
-    </div>
+      <MindsBanner />
+    </>
   );
 }

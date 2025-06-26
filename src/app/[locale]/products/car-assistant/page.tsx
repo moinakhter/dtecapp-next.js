@@ -81,16 +81,16 @@ export default function CarAssistantPage() {
   ];
 
   return (
-    <div className="min-h-screen">
-      <FloatingBalls />
-      {/* Hero Section */}
-      <SectionWrapper className="relative  mt-[90px] overflow-hidden">
+    <>
+    
+      <section className="relative md:p-0 p-2   lg:min-h-screen w-full  ">
+        <FloatingBalls />
         {/* Background Grid Pattern */}
 
         <div className="container relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 md:gap-12 items-center">
+          <div className="grid  md:mt-[250px] mt-[160px] grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Left Content */}
-            <div className="space-y-8">
+            <div className="space-y-8 md:text-start text-center">
               <TextGradientWhite className="text-3xl md:text-7xl font-bold  ">
                 Yeniden
                 <br />
@@ -111,7 +111,7 @@ export default function CarAssistantPage() {
 
             {/* Right Content - Car Image */}
             <div className="relative">
-              <div className="relative  rounded-3xl p-8 overflow-hidden">
+              <div className="relative rounded-3xl md:p-8 overflow-hidden">
                 <Image
                   src="/images/Home/dtec-assistants/car.png"
                   alt="DTEC Car Assistant"
@@ -124,13 +124,13 @@ export default function CarAssistantPage() {
             </div>
           </div>
         </div>
-      </SectionWrapper>
+      </section>
 
       <LogosTicker />
 
-      <SectionWrapper className=" relative z-10 mx-auto">
+      <SectionWrapper className="relative z-10 mx-auto">
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2  container  lg:grid-cols-3 gap-12 lg:gap-[102px] mx-auto  md:place-items-stretch"
+          className="   container flex items-center justify-center flex-wrap  gap-12 lg:gap-[102px] mx-auto  "
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
@@ -152,7 +152,7 @@ export default function CarAssistantPage() {
               className="max-w-[320px]"
             />
           ))}
-          <div className="lg:col-span-3 grid grid-cols-2 place-content-center gap-12">
+          <div className="flex items-center flex-wrap justify-around w-full gap-12">
             {features.slice(6).map((feature, index) => (
               <FeatureCard
                 key={6 + index}
@@ -166,14 +166,17 @@ export default function CarAssistantPage() {
         </motion.div>
       </SectionWrapper>
 
-      <SectionWrapper className="relative w-full py-24 px-4 flex justify-center items-center  ">
+      <SectionWrapper className="relative w-full py-24 px-4 sm:px-8 flex justify-center items-center">
         <div
           ref={ref}
           className="container mx-auto flex flex-col-reverse lg:flex-row items-center gap-12 px-4"
         >
           {/* Left Content */}
           <div className="lg:w-1/2 text-center lg:text-left">
-            <TextGradientWhite text="Dtec GPT" className="mb-8 text-[90px] " />
+            <TextGradientWhite
+              text="Dtec GPT"
+              className="mb-8 lg:text-[90px] text-5xl"
+            />
             <FadeText delay={0.2}>
               <p className="font-light text-base max-w-[562px] mx-auto lg:mx-0">
                 {t("dtecgpt")}
@@ -183,7 +186,7 @@ export default function CarAssistantPage() {
 
           {/* Right Image */}
           <div className="lg:w-1/2 flex justify-center">
-            <div className="w-[512px] relative h-[512px] rounded-4xl overflow-hidden shadow-lg ">
+            <div className="w-full max-w-[512px] relative h-auto aspect-square rounded-4xl overflow-hidden shadow-lg ">
               <Image
                 src="/images/Backgrounds/colorful-spiral.svg"
                 alt="DtecGPT"
@@ -196,36 +199,36 @@ export default function CarAssistantPage() {
         </div>
       </SectionWrapper>
 
-      <div className="relative">
+      <div className="relative w-full">
         <motion.div
           style={{ scale }}
           className="absolute -z-0  w-[50vw] h-[50vw] bg-secondary opacity-50 rounded-full blur-[200px] left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2"
         />
 
-        <SectionWrapper className="w-full max-w-[1184px] p-[92px]  mx-auto z-10 relative rounded-4xl ">
+        <SectionWrapper className="w-full  lg:max-w-[1184px]  max-w-[95%]  py-6 px-4 md:px-[92px] mx-auto z-10 relative rounded-4xl ">
           <Image
             src="/images/Backgrounds/shape1.svg"
             alt="Minds Meet Background"
             fill
-            className="relative  object-cover bg-black  rounded-4xl  overflow-hidden"
+            className="relative  md:max-w-[1184px]   object-cover bg-black  rounded-4xl  overflow-hidden"
           />
 
           {/* Content */}
           <div className="relative z-10 text-center flex flex-col items-center justify-center ">
             <TextGradientWhite
               text={t("ComplexQuestionsTitle1")}
-              className="md:text-4xl text-2xl lg:text-[64px] font-bold  text-white"
+              className="md:text-4xl text-[2rem] lg:text-[64px] font-bold  text-white"
             />
             <TextGradientWhite
               text={t("ComplexQuestionsTitle2")}
-              className="md:text-4xl text-2xl mb-8 lg:text-[64px] font-bold  text-white"
+              className="md:text-4xl text-[2rem] mb-8 lg:text-[64px] font-bold  text-white"
             />
             <FadeText delay={0.2}>
               {t("dtecgptDescription")
                 .split("\n")
                 .map((line, i) => (
                   <p
-                    className="font-light text-base   text-white mb-3 max-w-[720px]"
+                    className="font-light md:text-base  text-sm text-white mb-3 max-w-[720px]"
                     key={i}
                   >
                     {line}
@@ -244,10 +247,10 @@ export default function CarAssistantPage() {
           <div className="lg:w-1/2 text-center lg:text-left">
             <TextGradientWhite
               text="Güvenli ve Verimli Sürüş Deneyimi"
-              className="mb-8 text-[56px] font-black "
+              className="mb-8   font-black "
             />
             <FadeText delay={0.2}>
-              <p className="font-light text-base max-w-[575px] mx-auto lg:mx-0">
+              <p className="font-light md:text-base text-sm max-w-[575px] mx-auto lg:mx-0">
                 Araç Asistanı, manuel dikkat dağıtıcıları ortadan kaldırarak
                 tamamen eller serbest bir kontrol sunar. Kritik uyarıları ve
                 acil durum bildirimlerini sesli olarak iletir; çoklu görev yapma
@@ -273,6 +276,6 @@ export default function CarAssistantPage() {
       <MindsBanner />
 
       {/* Footer Section */}
-    </div>
+    </>
   );
 }

@@ -50,26 +50,25 @@ export default function Navbar() {
   const [mounted, setMounted] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [productsOpen, setProductsOpen] = useState(false);
- 
+
   const t = useTranslations("Navbar");
   const pathname = usePathname();
   useEffect(() => {
     setMounted(true);
   }, []);
   if (!mounted) return null;
-const closeAllMenus = () => {
-  setMenuOpen(false);
-  setProductsOpen(false);
-  
-};
+  const closeAllMenus = () => {
+    setMenuOpen(false);
+    setProductsOpen(false);
+  };
 
   const toggleTheme = () => setTheme(theme === "dark" ? "light" : "dark");
 
   return (
-    <nav className="fixed top-8 left-0 right-0 z-50 bg-white/10 container md:mx-auto border-[#808080]/15 border-[1px] backdrop-blur-[32px] rounded-2xl transition-all duration-300">
+    <nav className="fixed top-8 left-0 right-0 z-50   bg-white/10 container md:mx-auto border-[#808080]/15 border-[1px] backdrop-blur-[32px] rounded-2xl transition-all duration-300">
       <div className="mx-auto md:px-8 py-4 flex max-w-7xl items-center justify-between">
         {/* Logo */}
-        <Link href="/"   onClick={closeAllMenus} className="flex items-center">
+        <Link href="/" onClick={closeAllMenus} className="flex items-center">
           <Image
             src="/images/logo/logo-light.svg"
             alt="DTEC Logo"
@@ -103,7 +102,7 @@ const closeAllMenus = () => {
                         <Link
                           key={item.key}
                           href={item.href}
-                           onClick={closeAllMenus}
+                          onClick={closeAllMenus}
                           className={`flex items-center text-[13px] gap-3 group rounded-lg transition-colors
     ${pathname === item.href ? "text-secondary" : "text-white"}
   `}
@@ -137,20 +136,24 @@ const closeAllMenus = () => {
             )}
           </div>
 
-          <Link href="/about"   onClick={closeAllMenus} className="hover:text-primary transition-colors">
+          <Link
+            href="/about"
+            onClick={closeAllMenus}
+            className="hover:text-primary transition-colors"
+          >
             {t("about")}
           </Link>
 
-         <a
-  href="https://dtec.space"
-  target="_blank"
-  rel="noopener noreferrer"   onClick={closeAllMenus}
-className="hover:text-primary transition-colors"
->
-  <span>Dtec Token</span>
-  <span className="rotate-[-45deg] inline-block">→</span>
-</a>
-
+          <a
+            href="https://dtec.space"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={closeAllMenus}
+            className="hover:text-primary transition-colors"
+          >
+            <span>Dtec Token</span>
+            <span className="rotate-[-45deg] inline-block">→</span>
+          </a>
         </div>
 
         {/* Desktop Right Controls */}
@@ -190,7 +193,7 @@ className="hover:text-primary transition-colors"
                 <Link
                   key={item.key}
                   href={item.href}
-                    onClick={closeAllMenus}
+                  onClick={closeAllMenus}
                   className="flex items-center text-[13px] gap-3 group hover:text-secondary transition-colors"
                 >
                   <item.icon className="h-5 w-5 text-white group-hover:text-secondary" />
@@ -200,9 +203,11 @@ className="hover:text-primary transition-colors"
             </div>
           )}
 
-          <Link href="/about"
+          <Link
+            href="/about"
             onClick={closeAllMenus}
-          className="hover:text-primary transition-colors">
+            className="hover:text-primary transition-colors"
+          >
             {t("about")}
           </Link>
 
@@ -228,7 +233,6 @@ className="hover:text-primary transition-colors"
               ) : (
                 <Moon className="h-5 w-5" />
               )}
- 
             </button>
             <DownloadButton title={t("Download")} />
           </div>
