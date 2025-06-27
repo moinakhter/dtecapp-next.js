@@ -2,11 +2,12 @@
 import React from "react";
 import SectionWrapper from "../common/SectionWrapper";
 import Image from "next/image";
-import { Button } from "../ui/button";
+import { Button, buttonVariants } from "../ui/button";
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import TextGradientWhite from "../common/text-gradient-white";
 import FadeText from "../common/FadeText";
+import { Link } from "@/i18n/navigation";
 
 function AICallCenter() {
   const t = useTranslations("HomePage.Dtec AI Call Center");
@@ -62,10 +63,16 @@ function AICallCenter() {
                 </p>
               </FadeText>
             </div>
-            <Button size="sm" variant="secondary" className="mt-6 text-white">
-              {t("button")}{" "}
-              <span className="rotate-[-45deg] inline-block">→</span>
-            </Button>
+            <Link
+              href="/products/ai-call-center"
+              className={buttonVariants({
+                variant: "secondary",
+                size: "sm",
+                className: "mt-6 text-white",
+              })}
+            >
+              {t("button")} <span className="rotate-[-45deg] inline-block">→</span>
+            </Link>
           </div>
 
           <motion.div

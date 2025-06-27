@@ -10,13 +10,41 @@ import { useTranslations } from "next-intl";
 import DtecTokenCard from "./common/DtecTokenCard";
 
 const socialLinks = [
-  { icon: "/images/Icons/SOCIAL/X.svg", href: "https://twitter.com/dtec", label: "Twitter" },
-  { icon: "/images/Icons/SOCIAL/Facebook.svg", href: "https://facebook.com/dtec", label: "Facebook" },
-  { icon: "/images/Icons/SOCIAL/linkedin.svg", href: "https://linkedin.com/company/dtec", label: "LinkedIn" },
-  { icon: "/images/Icons/SOCIAL/discord.svg", href: "https://discord.gg/dtec", label: "Discord" },
-  { icon: "/images/Icons/SOCIAL/instagram.svg", href: "https://instagram.com/dtec", label: "Instagram" },
-  { icon: "/images/Icons/SOCIAL/youtube.svg", href: "https://youtube.com/dtec", label: "YouTube" },
-  { icon: "/images/Icons/SOCIAL/telegram.svg", href: "https://t.me/dtec", label: "Telegram" },
+  {
+    icon: "/images/Icons/SOCIAL/X.svg",
+    href: "https://twitter.com/dtec",
+    label: "Twitter",
+  },
+  {
+    icon: "/images/Icons/SOCIAL/Facebook.svg",
+    href: "https://facebook.com/dtec",
+    label: "Facebook",
+  },
+  {
+    icon: "/images/Icons/SOCIAL/linkedin.svg",
+    href: "https://linkedin.com/company/dtec",
+    label: "LinkedIn",
+  },
+  {
+    icon: "/images/Icons/SOCIAL/discord.svg",
+    href: "https://discord.gg/dtec",
+    label: "Discord",
+  },
+  {
+    icon: "/images/Icons/SOCIAL/instagram.svg",
+    href: "https://instagram.com/dtec",
+    label: "Instagram",
+  },
+  {
+    icon: "/images/Icons/SOCIAL/youtube.svg",
+    href: "https://youtube.com/dtec",
+    label: "YouTube",
+  },
+  {
+    icon: "/images/Icons/SOCIAL/telegram.svg",
+    href: "https://t.me/dtec",
+    label: "Telegram",
+  },
 ];
 
 export default function Footer() {
@@ -35,12 +63,6 @@ export default function Footer() {
       { name: t("products.shopping"), href: "/products/shopping-assistant" },
       { name: t("products.home"), href: "/products/home-assistant" },
       { name: t("products.travel"), href: "/products/travel-assistant" },
-    ],
-    legal: [
-      { key: "terms", href: "/terms" },
-      { key: "privacy", href: "/privacy" },
-      { key: "kvkk", href: "/kvkk" },
-      { key: "all_rights", href: "/rights" },
     ],
   };
 
@@ -62,7 +84,11 @@ export default function Footer() {
             </Link>
             <div className="flex flex-wrap justify-center lg:justify-start gap-6">
               {socialLinks.map((social) => (
-                <Link key={social.label} href={social.href} aria-label={social.label}>
+                <Link
+                  key={social.label}
+                  href={social.href}
+                  aria-label={social.label}
+                >
                   <Image
                     src={social.icon}
                     width={24}
@@ -79,7 +105,9 @@ export default function Footer() {
           <div className="flex flex-col sm:flex-row gap-8 justify-center items-center lg:items-start lg:justify-start">
             {/* Products */}
             <div className="text-center lg:text-left">
-              <h3 className="font-medium text-base mb-4">{t("productstitle")}</h3>
+              <h3 className="font-medium text-base mb-4">
+                {t("productstitle")}
+              </h3>
               <ul className="space-y-3">
                 {footerLinks.products.map((link) => (
                   <li key={link.name}>
@@ -93,9 +121,10 @@ export default function Footer() {
                 ))}
               </ul>
             </div>
-      <div  >
-              <Link href="/about" className="font-medium text-base  mb-4">{t("about")}</Link>
-               
+            <div>
+              <Link href="/about" className="font-medium text-base  mb-4">
+                {t("about")}
+              </Link>
             </div>
             {/* Contact */}
             <div className="text-center lg:text-left">
@@ -104,9 +133,11 @@ export default function Footer() {
                 <div className="flex items-start justify-center lg:justify-start gap-2">
                   <MapPin className="h-4 w-4 flex-shrink-0" />
                   <div className="text-[13px] w-full">
-                    {t("address").split("\n").map((line, i) => (
-                      <p key={i}>{line}</p>
-                    ))}
+                    {t("address")
+                      .split("\n")
+                      .map((line, i) => (
+                        <p key={i}>{line}</p>
+                      ))}
                   </div>
                 </div>
                 <div className="flex items-center justify-center lg:justify-start gap-2">
@@ -151,12 +182,15 @@ export default function Footer() {
           </form>
 
           <p className="text-center text-sm font-light mt-6">
-            {t.raw("newsletter_note").split("\n").map((line: string, i: number) => (
-              <span key={`${i}-${line}`}>
-                {line}
-                <br />
-              </span>
-            ))}
+            {t
+              .raw("newsletter_note")
+              .split("\n")
+              .map((line: string, i: number) => (
+                <span key={`${i}-${line}`}>
+                  {line}
+                  <br />
+                </span>
+              ))}
           </p>
         </div>
 
@@ -164,23 +198,32 @@ export default function Footer() {
         <div className="pt-[64px]">
           <div className="flex flex-col md:flex-row justify-center items-center gap-4 text-center">
             <div className="flex flex-wrap justify-center gap-6 text-[13px]">
-              {footerLinks.legal.map((link) => (
-                <Link
-                  key={link.key}
-                  href={link.href}
-                  className="hover:text-primary font-medium transition-colors duration-200"
-                >
-                  {t(`legal.${link.key}`)}
-                </Link>
-              ))}
+              <Link
+                href="/privacy.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="!hover:text-primary font-medium transition-colors duration-200"
+              >
+                {t(`legal.privacy`)}
+              </Link>
+              <p className="hover:text-primary font-medium transition-colors duration-200">
+                {t(`legal.all_rights`)}
+              </p>
             </div>
-            <div className="text-sm">© 2025 DTEC</div>
+            <div className="text-sm">© {
+              new Date().getFullYear() 
+              } DTEC</div>
           </div>
         </div>
       </div>
 
       <div className="h-[190px] mt-[64px] w-full relative">
-        <Image src="/images/Backgrounds/dtec-bottom.svg" alt="background" fill className="stroke-[#808080]" />
+        <Image
+          src="/images/Backgrounds/dtec-bottom.svg"
+          alt="background"
+          fill
+          className="stroke-[#808080]"
+        />
       </div>
     </footer>
   );
