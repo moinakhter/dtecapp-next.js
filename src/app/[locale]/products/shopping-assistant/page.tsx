@@ -195,8 +195,7 @@ export default function ShoppingAssistantPage() {
           />
 
           {/* Content */}
-             <div className="relative z-10 text-center flex flex-col items-center justify-center ">
-
+          <div className="relative z-10 text-center flex flex-col items-center justify-center ">
             <TextGradientWhite
               text={t("smartshopping")}
               className="  lg:text-[64px] font-bold mb-8  text-white"

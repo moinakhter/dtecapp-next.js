@@ -3,25 +3,7 @@
     "language": "tr",
     "title": "Turkish translation of the home page messages."
   },
-  "Manifest": {
-    "name": "DTEC - Smart Voice Assistant Platform",
-    "shortName": "DTEC",
-    "description": "All-in-One Smart Voice Assistants. Experience the future of mobility with car, home, shopping and travel assistants.",
-    "shortcuts": {
-      "carAssistant": "Car Assistant",
-      "carAssistantShort": "Car",
-      "carAssistantDesc": "Voice interaction with vehicles",
-      "homeAssistant": "Smart Home Assistant",
-      "homeAssistantShort": "Home",
-      "homeAssistantDesc": "Control your home with voice commands",
-      "shoppingAssistant": "Shopping Assistant",
-      "shoppingAssistantShort": "Shopping",
-      "shoppingAssistantDesc": "Shop with voice commands",
-      "dtecToken": "DTEC Token",
-      "dtecTokenShort": "Token",
-      "dtecTokenDesc": "Blockchain-based token system"
-    }
-  },
+  
   "LocaleSwitcher": {
     "locale": "EN"
   },
@@ -248,7 +230,7 @@
     }
   },
   "car-assistant": {
-    "title": "Yeniden </br> Tanımlanan </br> Sürüş Deneyimi​",
+    "title": "Yeniden\nTanımlanan\nSürüş Deneyimi",
     "description": "Araç Asistanımız, yolculuğunuz boyunca yanınızda olan zeki bir yol arkadaşıdır. Sesli komutlarla aracınızın tüm fonksiyonlarına erişim sağlayarak güvenliğinizi ve konforunuzu en üst düzeye çıkarır, dikkatinizi yoldan ayırmadan ihtiyacınız olan her detayı sunar.",
     "faceRecognitionTitle": "Yüz Tanıma",
     "faceRecognitionDescription": "Her sürücüyü bire bir tanır ve profiline uygun ayarları otomatik olarak devreye alır.",
@@ -266,10 +248,12 @@
     "translateDescription": "Çeviri yapma yeteneğiyle uluslararası seyahatlerde veya çok dilli kullanıcılar için etkili iletişim sağlar.",
     "reminderTitle": "Hatırlatma Kaydetme",
     "reminderDescription": "Sürücünün belirlediği tarih ve saatte hatırlatmaları kaydederek önemli etkinlikleri unutmamalarını sağlar.",
-    "dtecgpt": " Geliştirdiğimiz DtecGPT, doğal dil işleme ve bağlam takibini bir araya getirir. Karmaşık sorularınızı insan gibi anlamlandırır, akıcı ve bütünlüklü yanıtlarla bir sohbet deneyimi sunar. Araç fonksiyonlarıyla ilgili komutlarınızı yorumlarken ihtiyacınız olan tüm bilgiyi tek bir dokunuşta birleşik şekilde aktarır.",
+    "dtecgpt": "Geliştirdiğimiz DtecGPT, doğal dil işleme ve bağlam takibini bir araya getirir. Karmaşık sorularınızı insan gibi anlamlandırır, akıcı ve bütünlüklü yanıtlarla bir sohbet deneyimi sunar. Araç fonksiyonlarıyla ilgili komutlarınızı yorumlarken ihtiyacınız olan tüm bilgiyi tek bir dokunuşta birleşik şekilde aktarır.",
     "ComplexQuestionsTitle1": "Karmaşık Soruları ve ",
     "ComplexQuestionsTitle2": "Sohbetlerinize Karşılık Verir",
-    "dtecgptDescription": "Otomatik Konuşma Tanıma (ASR) ve Doğal Dil Anlama (NLU) modüllerimiz, komutlarınızı hızlı ve doğru biçimde işler; neredeyse insan becerisiyle karşılık verir.\nBu sayede her talebinizde en uygun aksiyon anında tetiklenir, sistem kendini sürekli geliştirerek sürüş deneyiminizi daha akıcı hale getirir."
+    "dtecgptDescription": "Otomatik Konuşma Tanıma (ASR) ve Doğal Dil Anlama (NLU) modüllerimiz, komutlarınızı hızlı ve doğru biçimde işler; neredeyse insan becerisiyle karşılık verir.\nBu sayede her talebinizde en uygun aksiyon anında tetiklenir, sistem kendini sürekli geliştirerek sürüş deneyiminizi daha akıcı hale getirir.",
+    "SafeExperienceTitle": "Güvenli ve Verimli Sürüş Deneyimi",
+    "SafeExperienceDesc": "Araç Asistanı, manuel dikkat dağıtıcıları ortadan kaldırarak tamamen eller serbest bir kontrol sunar. Kritik uyarıları ve acil durum bildirimlerini sesli olarak iletir; çoklu görev yapma yeteneği sayesinde rota, iletişim veya eğlence işlemlerinizi kesintisiz yönetmenizi sağlar. Böylece hem güvenliğiniz hem de yolculuğunuzun verimliliği en üst düzeye çıkar."
   },
   "shopping-assistant": {
     "heroTitle": "  Konuşarak Kolay Alışveriş Deneyimi",
@@ -351,10 +335,14 @@
     "description": "Dtec’e hoş geldiniz. Sesin gücünü merkeze alarak markaların ve kullanıcıların buluştuğu yeni bir etkileşim çağı başlatıyoruz. Sesli asistanlarımız, her kelimeyi markanızın benzersiz kimliğini yansıtacak şekilde yorumlar; kullanıcılarla kurduğunuz bağı kişiselleştirilmiş, tutarlı ve unutulmaz kılar.",
     "features1title": "Misyonumuz​",
     "features1description": "Görsel kimliğinizin ötesine taşınan, unutulmaz bir işitsel varlık inşa etmenize yardımcı oluyoruz. En yeni ses asistanı teknolojilerimizle markaların hedef kitleleriyle doğrudan ve empatik bir bağ kurmasını sağlıyor; her etkileşimi kişiselleştirerek müşteri sadakatini ve memnuniyetini artırıyoruz.",
-    "features2title": "Vizyonumuz",
-    "features2description": "Konuşmanın sınır tanımadığı, her cihazın ve markanın insan sesine anlam kazandırdığı bir evren tasarlıyoruz. Dtec olarak, insan ve teknoloji arasındaki engelleri kaldırıp, ses tabanlı etkileşimi günlük hayatın merkezine yerleştirerek geleceğin dijital deneyimlerini bugünden inşa ediyoruz."
- ,
+    "DetcTeam":"Dtec Ekibi",
+    "Awards":"Kazandığımız Yarışmalar & Ödüller",
+    "awards1": "Dtec Araç Asistanı",
+    "awards2": "Dtec Alışveriş Asistanı",
+   
     "award1_title": "TÜBİTAK",
+    "features2title": "Vizyonumuz",
+    "features2description": "Konuşmanın sınır tanımadığı, her cihazın ve markanın insan sesine anlam kazandırdığı bir evren tasarlıyoruz. Dtec olarak, insan ve teknoloji arasındaki engelleri kaldırıp, ses tabanlı etkileşimi günlük hayatın merkezine yerleştirerek geleceğin dijital deneyimlerini bugünden inşa ediyoruz.",
     "award1_description": "1507 ARGE Programından \"7180493\" Numaralı \"Yapay Zeka Teknolojisine Sahip Hologram Görüntüsüyle Araç İçerisinde Yer Alacak, Yerli Otomobil Ve Tüm Araçlarda Kullanılabilecek Sesli Kontrol Ve Araç Asistanı Sistemi\" İsimli Projeyle Destek Almış Ve Başarılı Şekilde Tamamlanmıştır.",
 
     "award2_title": "KOSGEB",
@@ -374,15 +362,12 @@
 
     "award7_title": "TEKNOFEST",
     "award7_description": "2023 Teknofest yarışmasında finale kalınmıştır.",
-    "tubTitle":"Dtec Alışveriş Asistanı",
-    "tubitakDescription":"Tübitak 1507 ARGE Programından \"7230004\" Numarası \"Alışveriş Platformlarında Çalışabilen Yapay Zeka Alışveriş Asistanı\" İsmiyle Destek Almaya Hak Kazanmıştır. Proje Devam Etmektedir.",
-     
+   
+    "tubitakDescription": "Tübitak 1507 ARGE Programından \"7230004\" Numarası \"Alışveriş Platformlarında Çalışabilen Yapay Zeka Alışveriş Asistanı\" İsmiyle Destek Almaya Hak Kazanmıştır. Proje Devam Etmektedir.",
+
     "pointsTitle": "Sahip Olduğumuz Patentler",
     "patent1": "2017/12836 sayılı “VIP Akıllı Araç Sistemi” isimli patent 22.08.2022 tarihinde alınmıştır, patent ile ilgili tüm haklar tarafımıza aittir.",
     "patent2": "PCT/TR2022/050946 Sayılı “Yapay Zekalı Akıllı Araç Asistanı” İsimli Uluslararası Patent Başvurusu 05.09.2022 Tarihinde Yapılmıştır. İlk İnceleme Olumlu Gelmiştir. Fikirle İlgili Kısmı Haklara Sahip Bulunmaktayız.",
     "patent3": "2023/006162 sayılı “Yapay Zekalı Akıllı Araç Asistanı Sistemi” isimli patent başvurusu Türk Patent ve Marka Kurumu tarafından onaylanmıştır."
   }
-  
- 
-  
 }

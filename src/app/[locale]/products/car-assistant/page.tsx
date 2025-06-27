@@ -82,7 +82,6 @@ export default function CarAssistantPage() {
 
   return (
     <>
-    
       <section className="relative md:p-0 p-2   lg:min-h-screen w-full  ">
         <FloatingBalls />
         {/* Background Grid Pattern */}
@@ -92,19 +91,18 @@ export default function CarAssistantPage() {
             {/* Left Content */}
             <div className="space-y-8 md:text-start text-center">
               <TextGradientWhite className="text-3xl md:text-7xl font-bold  ">
-                Yeniden
-                <br />
-                Tanımlanan
-                <br />
-                Sürüş Deneyimi
+                {t("title")
+                  .split("\n")
+                  .map((line, index) => (
+                    <span key={index}>
+                      {line}
+                      <br />
+                    </span>
+                  ))}
               </TextGradientWhite>
               <FadeText delay={0.2}>
                 <p className="text-base font-light  max-w-xl">
-                  Araç Asistanımız, yolculuğunuzu boyunca yanınızda olan akıllı
-                  bir yol arkadaşıdır. Sesli komutlarla araçlarınızın tüm
-                  fonksiyonlarına erişim sağlayarak güvenliğinizi ve konforunuzu
-                  en üst düzeyde çıkarır, dikkatinizi yoldan ayırmayacak şekilde
-                  destek sunar.
+                  {t("description")}
                 </p>
               </FadeText>
             </div>
@@ -210,18 +208,18 @@ export default function CarAssistantPage() {
             src="/images/Backgrounds/shape1.svg"
             alt="Minds Meet Background"
             fill
-            className="relative  md:max-w-[1184px]   object-cover bg-black  rounded-4xl  overflow-hidden"
+            className="relative  md:max-w-[1184px] object-cover bg-black  rounded-4xl  overflow-hidden"
           />
 
           {/* Content */}
           <div className="relative z-10 text-center flex flex-col items-center justify-center ">
             <TextGradientWhite
               text={t("ComplexQuestionsTitle1")}
-              className="md:text-4xl text-[2rem] lg:text-[64px] font-bold  text-white"
+              className="md:text-4xl text-[2rem]   font-bold  text-white"
             />
             <TextGradientWhite
               text={t("ComplexQuestionsTitle2")}
-              className="md:text-4xl text-[2rem] mb-8 lg:text-[64px] font-bold  text-white"
+              className="md:text-4xl text-[2rem] mb-8  font-bold  text-white"
             />
             <FadeText delay={0.2}>
               {t("dtecgptDescription")
@@ -241,22 +239,17 @@ export default function CarAssistantPage() {
       <SectionWrapper className="relative w-full bg-transparent py-24 px-4 flex justify-center items-center  ">
         <div
           ref={ref}
-          className="container   flex flex-col-reverse lg:flex-row justify-between items-center gap-8 px-4"
+          className="container flex flex-col-reverse lg:flex-row justify-between items-center gap-8 px-4"
         >
           {/* Left Content */}
           <div className="lg:w-1/2 text-center lg:text-left">
             <TextGradientWhite
-              text="Güvenli ve Verimli Sürüş Deneyimi"
+              text={t("SafeExperienceTitle")}
               className="mb-8   font-black "
             />
             <FadeText delay={0.2}>
               <p className="font-light md:text-base text-sm max-w-[575px] mx-auto lg:mx-0">
-                Araç Asistanı, manuel dikkat dağıtıcıları ortadan kaldırarak
-                tamamen eller serbest bir kontrol sunar. Kritik uyarıları ve
-                acil durum bildirimlerini sesli olarak iletir; çoklu görev yapma
-                yeteneği sayesinde rota, iletişim veya eğlence işlemlerinizi
-                kesintisiz yönetmenizi sağlar. Böylece hem güvenliğiniz hem de
-                yolculuğunuzun verimliliği en üst düzeye çıkar.
+                {t("SafeExperienceDesc")}
               </p>
             </FadeText>
           </div>
@@ -274,8 +267,6 @@ export default function CarAssistantPage() {
         </div>
       </SectionWrapper>
       <MindsBanner />
-
-      {/* Footer Section */}
     </>
   );
 }

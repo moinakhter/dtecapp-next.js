@@ -127,7 +127,7 @@ export default function AboutPage() {
 
       <SectionWrapper>
         <TextGradientWhite className="text-center    font-black mb-16">
-          Dtec Ekibi
+          {t("DetcTeam")}
         </TextGradientWhite>
         <div className=" flex items-center h-full justify-center flex-wrap  gap-16 container ">
           {teamMembers.map((member, index) => (
@@ -152,11 +152,11 @@ export default function AboutPage() {
 
       <SectionWrapper className="flex flex-col mt-20 relative  gap-2 md:gap-[64px] items-center justify-center ">
         <TextGradientWhite className="text-center font-black ">
-          Kazandığımız Yarışmalar & Ödüller
+          {t("Awards")}
         </TextGradientWhite>
 
         <h3 className="text-center text-2xl font-medium  md:mb-16">
-          Dtec Araç Asistanı
+          {t("awards1")}
         </h3>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 md:gap-12 max-w-7xl mx-auto px-4 items-start">
@@ -232,7 +232,7 @@ export default function AboutPage() {
         </div>
 
         <h3 className="text-center text-2xl font-medium  mt-16">
-          {t("tubTitle")}
+          {t("awards2")}
         </h3>
         <div className="flex flex-col md:flex-row items-start gap-6">
           {/* Image Container */}
@@ -260,29 +260,6 @@ export default function AboutPage() {
             </div>
           </div>
         </div>
-        {/* <div className="grid grid-cols-1   gap-12 max-w-7xl mx-auto px-4  items-stretch">
-          <div className="flex items-start justify-between gap-9 max-w-[676px]  mx-auto">
-            <div className="md:w-[128px] w-[200px]   h-full relative flex-shrink-0">
-              <Image
-                src="/images/Hero/logos/tübitak_logo_beyaz.png"
-                alt="TÜBİTAK Logo"
-                fill
-                className="object-contain  object-top   md:w-[128px] w-[200px]   invert dark:invert-0"
-              />
-            </div>
-            <div className="group w-full">
-              <h4 className="text-xl font-medium mb-2">TÜBİTAK</h4>
-              <p className="text-base font-light mt-2.5">
-                {t("tubitakDescription")}
-              </p>
-
-              <div className="relative overflow-hidden mt-6">
-                <div className="w-full h-px bg-border" />
-                <div className="absolute top-0 left-0 h-px bg-secondary w-0 group-hover:w-full transition-all duration-500 ease-out" />
-              </div>
-            </div>
-          </div>
-        </div> */}
       </SectionWrapper>
       <SectionWrapper className="w-full    flex flex-col items-center">
         <TextGradientWhite className="   font-extrabold mb-16 text-center">

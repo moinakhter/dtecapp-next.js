@@ -13,7 +13,7 @@ const LogosTicker = () => {
     { src: "/images/Hero/logos/btm.svg", alt: "BTM" },
     { src: "/images/Hero/logos/oib.svg", alt: "OIB" },
     { src: "/images/Hero/logos/togg.svg", alt: "TOGG" },
-    { src: "/images/Hero/logos/tübitak_logo_beyaz.svg", alt: "TÜBİTAK" },
+    { src: "/images/Hero/logos/teknofest_logo_beyaz 1.svg", alt: "TÜBİTAK" },
   ];
   // Double the logos for seamless loop
   const duplicatedLogos = [...logos, ...logos];

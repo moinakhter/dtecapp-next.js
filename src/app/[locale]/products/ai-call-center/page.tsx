@@ -70,7 +70,6 @@ export default function CarAssistantPage() {
 
   return (
     <>
-      
       <section className="relative md:p-0 p-2 lg:min-h-screen w-full  ">
         <FloatingBalls />
         <div className="container relative z-10">
@@ -85,21 +84,20 @@ export default function CarAssistantPage() {
                 </p>
               </FadeText>
             </div>
-       
 
-          {/* Right Content - Car Image */}
+            {/* Right Content - Car Image */}
 
-          <div className="relative mt-10 md:mt-0 rounded-3xl  md:p-8  overflow-hidden">
-            <Image
-              src="/images/Photorealistic-Digital-Artwork.png"
-              alt="DTEC Car Assistant"
-              width={577}
-              height={363}
-              className="w-full h-auto rounded-2xl relative z-10"
-              priority
-            />
+            <div className="relative mt-10 md:mt-0 rounded-3xl  md:p-8  overflow-hidden">
+              <Image
+                src="/images/Photorealistic-Digital-Artwork.png"
+                alt="DTEC Car Assistant"
+                width={577}
+                height={363}
+                className="w-full h-auto rounded-2xl relative z-10"
+                priority
+              />
+            </div>
           </div>
-             </div>
         </div>
       </section>
 
@@ -151,10 +149,7 @@ export default function CarAssistantPage() {
         >
           {/* Left Content */}
           <div className="lg:w-1/2 text-center lg:text-left">
-            <TextGradientWhite
-              text={t("section2Title")}
-              className="mb-8   "
-            />
+            <TextGradientWhite text={t("section2Title")} className="mb-8   " />
             <FadeText delay={0.2}>
               {t("section2Description")
                 .split("\n")
@@ -170,15 +165,14 @@ export default function CarAssistantPage() {
           </div>
 
           {/* Right Image */}
-            <div className="lg:w-1/2 flex justify-center">
+          <div className="lg:w-1/2 flex justify-center">
             <div className="w-full max-w-[512px] relative h-auto aspect-square rounded-4xl overflow-hidden shadow-lg ">
-             <Image
+              <Image
                 src="/images/Home/dtec-assistants/dtec-voice.png"
                 alt="DtecGPT"
                 width={512}
                 height={512}
-                              className="object-cover w-full h-full shadow-[0_4px_24px_rgba(0,0,0,0.2)] dark:mix-blend-lighten"
-
+                className="object-cover w-full h-full shadow-[0_4px_24px_rgba(0,0,0,0.2)] dark:mix-blend-lighten"
               />
             </div>
           </div>

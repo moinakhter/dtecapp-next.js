@@ -82,18 +82,17 @@ export default function CarAssistantPage() {
             </div>
 
             {/* Right Content - Car Image */}
-         
-              <div className="relative  rounded-3xl md:p-8  overflow-hidden">
-                <Image
-                  src="/images/Home/dtec-assistants/smarthome.png"
-                  alt="DTEC smarthome Assistant"
-                  width={577}
-                  height={363}
-                  className="w-full h-auto rounded-2xl relative z-10"
-                  priority
-                />
-              </div>
-         
+
+            <div className="relative  rounded-3xl md:p-8  overflow-hidden">
+              <Image
+                src="/images/Home/dtec-assistants/smarthome.png"
+                alt="DTEC smarthome Assistant"
+                width={577}
+                height={363}
+                className="w-full h-auto rounded-2xl relative z-10"
+                priority
+              />
+            </div>
           </div>
         </div>
       </section>
@@ -125,7 +124,7 @@ export default function CarAssistantPage() {
               className="max-w-[320px]"
             />
           ))}
-          <div className="  w-full flex lg:flex-row  flex-wrap flex-col justify-center items-center gap-12">
+          <div className="w-full flex lg:flex-row  flex-wrap flex-col justify-center items-center gap-12">
             {features.slice(3).map((feature, index) => (
               <FeatureCard
                 key={5 + index}

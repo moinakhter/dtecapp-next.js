@@ -3,25 +3,7 @@
     "language": "tr",
     "title": "Turkish translation of the home page messages."
   },
-  "Manifest": {
-    "name": "DTEC - Smart Voice Assistant Platform",
-    "shortName": "DTEC",
-    "description": "All-in-One Smart Voice Assistants. Experience the future of mobility with car, home, shopping and travel assistants.",
-    "shortcuts": {
-      "carAssistant": "Car Assistant",
-      "carAssistantShort": "Car",
-      "carAssistantDesc": "Voice interaction with vehicles",
-      "homeAssistant": "Smart Home Assistant",
-      "homeAssistantShort": "Home",
-      "homeAssistantDesc": "Control your home with voice commands",
-      "shoppingAssistant": "Shopping Assistant",
-      "shoppingAssistantShort": "Shopping",
-      "shoppingAssistantDesc": "Shop with voice commands",
-      "dtecToken": "DTEC Token",
-      "dtecTokenShort": "Token",
-      "dtecTokenDesc": "Blockchain-based token system"
-    }
-  },
+ 
   "LocaleSwitcher": {
     "locale": "TR"
   },
@@ -250,11 +232,9 @@
         }
       }
     }
-  }
-,
- 
+  },
   "car-assistant": {
-    "title": "Redefined </br> Driving Experience",
+    "title": "Redefined\nDriving\nExperience",
     "description": "Our Car Assistant is an intelligent companion that stays with you throughout your journey. It provides access to all vehicle functions via voice commands, maximizing your safety and comfort while offering every detail you need without taking your eyes off the road.",
     "faceRecognitionTitle": "Face Recognition",
     "faceRecognitionDescription": "Recognizes each driver individually and automatically activates settings suitable for their profile.",
@@ -275,7 +255,9 @@
     "dtecgpt": "Our developed DtecGPT combines natural language processing and context tracking. It understands your complex questions like a human and offers a conversational experience with fluent, comprehensive answers. It unifies all the information you need with a single touch while interpreting your vehicle-related commands.",
     "ComplexQuestionsTitle1": "Responds to Complex Questions and ",
     "ComplexQuestionsTitle2": "Your Conversations",
-    "dtecgptDescription": "Our Automatic Speech Recognition (ASR) and Natural Language Understanding (NLU) modules process your commands quickly and accurately, responding almost with human-like skill. This ensures the most appropriate action is instantly triggered for every request, and the system continuously improves to make your driving experience smoother."
+    "dtecgptDescription": "Our Automatic Speech Recognition (ASR) and Natural Language Understanding (NLU) modules process your commands quickly and accurately, responding almost with human-like skill. This ensures the most appropriate action is instantly triggered for every request, and the system continuously improves to make your driving experience smoother.",
+    "SafeExperienceTitle": "Safe and Efficient Driving Experience",
+    "SafeExperienceDesc": "Vehicle Assistant offers completely hands-free control by eliminating manual distractions. It voice-activates critical alerts and emergency notifications; and thanks to its multitasking ability, it allows you to manage your route, communication or entertainment without interruption. This maximizes both your safety and the efficiency of your journey."
   },
   "shopping-assistant": {
     "heroTitle": "Easy Shopping Experience by Speaking",
@@ -329,69 +311,69 @@
     "f4Description": "Stay safe with Dtec's commitment to security and privacy. Your data is processed to the highest standards.",
     "f5Title": "User-Friendly Interaction",
     "f5Description": "Have natural conversations with Dtec. Ask for the cheapest flights or request a hotel with specific features. Dtec offers personalized recommendations based on your preferences."
+  },
+  "ai-assistant": {
+    "heroTitle": "Artificial Intelligence Powered Call Center Experience",
+    "heroDescription": "Our Dtec AI Call Center solution revolutionizes the customer experience by managing incoming and outgoing calls without human intervention. Increase the efficiency of your business and communicate with your customers faster, more personally and effectively with AI-powered calls.",
+    "f1Title": "Automatic Outgoing Calls",
+    "f1Description": "Provide information, appointment reminders or surveys with personalized calls.",
+    "f2Title": "Smart Call Response",
+    "f2Description": "Provides correct routing and instant solutions for incoming calls.",
+    "f3Title": "24/7 Service",
+    "f3Description": "Uninterrupted support system that does not require day or night.",
+    "f4Title": "Cost and Time Savings",
+    "f4Description": "Increase efficiency while reducing operational costs.",
+    "f5Title": "Personalized Communication",
+    "f5Description": "Personal communication experience based on customer history.",
+    "f6Title": "Multilingual Support",
+    "f6Description": "Provide quality service to global customers in their native language.",
+    "section2Title": "DtecAI Voice Intelligent Call Assistant",
+    "section2Description": "DtecAI Voice not only understands what customers say, but also understands their intentions, thanks to advanced natural language processing (NLP) technologies, and provides fast and accurate solutions.\nWith its human-like dialogue capabilities, it minimizes waiting times in your call center and maximizes user satisfaction. It also analyzes every conversation, thus continuously optimizing your processes",
+    "section3Title": "Communication Model of the Future: Autonomous Calls",
+    "section3Description": "DtecAI makes personalized calls to customers without requiring manual action. It autonomously performs operations such as appointment confirmation, payment reminder, campaign information or survey with AI-powered calls. Since conversations are natural and fluid, customers feel like they are communicating with a real representative, thus maximizing the user experience.",
+    "section4Title": "Continuous Learning Artificial Intelligence",
+    "section4Description": "DtecAI Call Center constantly improves itself by learning from every customer interaction. The system analyzes the responses, evaluates customer satisfaction scores and quickly adapts to new customer behaviors. Thus, it strengthens customer relationships by providing a more personal, faster and more accurate communication experience over time."
+  },
+  "AboutPage": {
+    "title": "A New Experience\nWith Every Word",
+    "description": "Welcome to Dtec. We are ushering in a new era of interaction where brands and users meet through the power of voice. Our voice assistants interpret every word to reflect your brand’s unique identity, making the connection you build with users personalized, consistent, and unforgettable.",
+    "DetcTeam": "Dtec Team",
+    "Awards": "Competitions and Awards We Won",
+    "awards1": "Dtec Vehicle Assistant",
+    "awards2": "Dtec Shopping Assistant",
+    "features1title": "Our Mission",
+    "features1description": "We help you build an unforgettable auditory presence that goes beyond your visual identity. With our cutting-edge voice assistant technologies, we enable brands to establish a direct and empathetic connection with their target audiences, personalizing every interaction to increase customer loyalty and satisfaction.",
+
+    "features2title": "Our Vision",
+    "features2description": "We envision a universe where conversation knows no boundaries, and every device and brand gives meaning to the human voice. As Dtec, we aim to break the barriers between humans and technology, placing voice-based interaction at the center of daily life and building the digital experiences of the future starting today.",
+
+    "award1_title": "TÜBİTAK",
+    "award1_description": "Supported by the TÜBİTAK 1507 R&D Program with Project Number \"7180493\" titled \"Voice Control and Vehicle Assistant System with Artificial Intelligence Hologram Technology for Use in Domestic Cars and All Vehicles.\" The project has been successfully completed.",
+
+    "award2_title": "KOSGEB",
+    "award2_description": "Our project was supported by the KOSGEB cooperation program with Board Decision No: 2020-56038-30/1 and was successfully completed.",
+
+    "award3_title": "İTÜ Çekirdek",
+    "award3_description": "Our project was selected for the İTÜ Çekirdek 2021 program and won an award on the BIG BANG stage.",
+
+    "award4_title": "OIB",
+    "award4_description": "Achieved an award-winning position in the 'Future Automotive Design Competition' organized by OIB.",
+
+    "award5_title": "TOGG",
+    "award5_description": "Ranked in the top 10 among 850 startups in the mobility program organized by TOGG. Development for the TOGG domestic car is ongoing.",
+
+    "award6_title": "BTM",
+    "award6_description": "Selected for the 2023 BTM (Commercialization of Knowledge Center) program.",
+
+    "award7_title": "TEKNOFEST",
+    "award7_description": "Reached the finals in the 2023 Teknofest competition.",
+
+    "tubTitle": "Dtec Shopping Assistant",
+    "tubitakDescription": "Awarded support under the TÜBİTAK 1507 R&D Program with Project Number \"7230004\" titled \"Artificial Intelligence Shopping Assistant Operable on Shopping Platforms.\" The project is currently ongoing.",
+
+    "pointsTitle": "Our Patents",
+    "patent1": "Patent No. 2017/12836 titled 'VIP Smart Vehicle System' was granted on 22.08.2022. All rights related to the patent belong to us.",
+    "patent2": "International patent application No. PCT/TR2022/050946 titled 'Artificial Intelligence Smart Vehicle Assistant' was filed on 05.09.2022. The initial review was positive. We hold the intellectual property rights for this idea.",
+    "patent3": "Patent application No. 2023/006162 titled 'Artificial Intelligence Smart Vehicle Assistant System' has been approved by the Turkish Patent and Trademark Office."
   }
-,"ai-assistant": {
-"heroTitle": "Artificial Intelligence Powered Call Center Experience",
-"heroDescription": "Our Dtec AI Call Center solution revolutionizes the customer experience by managing incoming and outgoing calls without human intervention. Increase the efficiency of your business and communicate with your customers faster, more personally and effectively with AI-powered calls.",
-"f1Title": "Automatic Outgoing Calls",
-"f1Description": "Provide information, appointment reminders or surveys with personalized calls.",
-"f2Title": "Smart Call Response",
-"f2Description": "Provides correct routing and instant solutions for incoming calls.",
-"f3Title": "24/7 Service",
-"f3Description": "Uninterrupted support system that does not require day or night.",
-"f4Title": "Cost and Time Savings",
-"f4Description": "Increase efficiency while reducing operational costs.",
-"f5Title": "Personalized Communication",
-"f5Description": "Personal communication experience based on customer history.",
-"f6Title": "Multilingual Support",
-"f6Description": "Provide quality service to global customers in their native language.",
-"section2Title": "DtecAI Voice Intelligent Call Assistant",
-"section2Description": "DtecAI Voice not only understands what customers say, but also understands their intentions, thanks to advanced natural language processing (NLP) technologies, and provides fast and accurate solutions.\nWith its human-like dialogue capabilities, it minimizes waiting times in your call center and maximizes user satisfaction. It also analyzes every conversation, thus continuously optimizing your processes",
-"section3Title": "Communication Model of the Future: Autonomous Calls",
-"section3Description": "DtecAI makes personalized calls to customers without requiring manual action. It autonomously performs operations such as appointment confirmation, payment reminder, campaign information or survey with AI-powered calls. Since conversations are natural and fluid, customers feel like they are communicating with a real representative, thus maximizing the user experience.",
-"section4Title": "Continuous Learning Artificial Intelligence",
-"section4Description": "DtecAI Call Center constantly improves itself by learning from every customer interaction. The system analyzes the responses, evaluates customer satisfaction scores and quickly adapts to new customer behaviors. Thus, it strengthens customer relationships by providing a more personal, faster and more accurate communication experience over time."
-},
-"AboutPage": {
-  "title": "A New Experience\nWith Every Word",
-  "description": "Welcome to Dtec. We are ushering in a new era of interaction where brands and users meet through the power of voice. Our voice assistants interpret every word to reflect your brand’s unique identity, making the connection you build with users personalized, consistent, and unforgettable.",
-  
-  "features1title": "Our Mission",
-  "features1description": "We help you build an unforgettable auditory presence that goes beyond your visual identity. With our cutting-edge voice assistant technologies, we enable brands to establish a direct and empathetic connection with their target audiences, personalizing every interaction to increase customer loyalty and satisfaction.",
-  
-  "features2title": "Our Vision",
-  "features2description": "We envision a universe where conversation knows no boundaries, and every device and brand gives meaning to the human voice. As Dtec, we aim to break the barriers between humans and technology, placing voice-based interaction at the center of daily life and building the digital experiences of the future starting today.",
-
-  "award1_title": "TÜBİTAK",
-  "award1_description": "Supported by the TÜBİTAK 1507 R&D Program with Project Number \"7180493\" titled \"Voice Control and Vehicle Assistant System with Artificial Intelligence Hologram Technology for Use in Domestic Cars and All Vehicles.\" The project has been successfully completed.",
-
-  "award2_title": "KOSGEB",
-  "award2_description": "Our project was supported by the KOSGEB cooperation program with Board Decision No: 2020-56038-30/1 and was successfully completed.",
-
-  "award3_title": "İTÜ Çekirdek",
-  "award3_description": "Our project was selected for the İTÜ Çekirdek 2021 program and won an award on the BIG BANG stage.",
-
-  "award4_title": "OIB",
-  "award4_description": "Achieved an award-winning position in the 'Future Automotive Design Competition' organized by OIB.",
-
-  "award5_title": "TOGG",
-  "award5_description": "Ranked in the top 10 among 850 startups in the mobility program organized by TOGG. Development for the TOGG domestic car is ongoing.",
-
-  "award6_title": "BTM",
-  "award6_description": "Selected for the 2023 BTM (Commercialization of Knowledge Center) program.",
-
-  "award7_title": "TEKNOFEST",
-  "award7_description": "Reached the finals in the 2023 Teknofest competition.",
-
-  "tubTitle": "Dtec Shopping Assistant",
-  "tubitakDescription": "Awarded support under the TÜBİTAK 1507 R&D Program with Project Number \"7230004\" titled \"Artificial Intelligence Shopping Assistant Operable on Shopping Platforms.\" The project is currently ongoing.",
-
-  "pointsTitle": "Our Patents",
-  "patent1": "Patent No. 2017/12836 titled 'VIP Smart Vehicle System' was granted on 22.08.2022. All rights related to the patent belong to us.",
-  "patent2": "International patent application No. PCT/TR2022/050946 titled 'Artificial Intelligence Smart Vehicle Assistant' was filed on 05.09.2022. The initial review was positive. We hold the intellectual property rights for this idea.",
-  "patent3": "Patent application No. 2023/006162 titled 'Artificial Intelligence Smart Vehicle Assistant System' has been approved by the Turkish Patent and Trademark Office."
-}
-
- 
-
 }
