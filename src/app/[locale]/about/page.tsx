@@ -125,7 +125,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <SectionWrapper >
+      <SectionWrapper>
         <TextGradientWhite className="text-center    font-black mb-16">
           Dtec Ekibi
         </TextGradientWhite>
@@ -234,35 +234,32 @@ export default function AboutPage() {
         <h3 className="text-center text-2xl font-medium  mt-16">
           {t("tubTitle")}
         </h3>
-          <div
-       
-                className="flex flex-col md:flex-row items-start gap-6"
-              >
-                {/* Image Container */}
-                <div className="md:w-[128px] w-[200px]    aspect-square relative flex-shrink-0 mx-auto md:mx-0">
-                  <Image
-                  src="/images/Hero/logos/tübitak_logo_beyaz.png"
-                alt="TÜBİTAK Logo"
-                    fill
-                    className="object-contain  lg:object-top object-center invert dark:invert-0"
-                  />
-                </div>
+        <div className="flex flex-col md:flex-row items-start gap-6">
+          {/* Image Container */}
+          <div className="md:w-[128px] w-[200px]    aspect-square relative flex-shrink-0 mx-auto md:mx-0">
+            <Image
+              src="/images/Hero/logos/tübitak_logo_beyaz.png"
+              alt="TÜBİTAK Logo"
+              fill
+              className="object-contain  lg:object-top object-center invert dark:invert-0"
+            />
+          </div>
 
-                {/* Text */}
-                <div className="group flex-1 text-center md:text-left">
-                  <h4 className="text-xl font-medium md:mb-2 md:block hidden">
-                 TÜBİTAK
-                  </h4>
-                  <p className="text-base font-light md:mt-2.5">
-                            {t("tubitakDescription")}
-                  </p>
+          {/* Text */}
+          <div className="group flex-1 text-center md:text-left">
+            <h4 className="text-xl font-medium md:mb-2 md:block hidden">
+              TÜBİTAK
+            </h4>
+            <p className="text-base font-light md:mt-2.5">
+              {t("tubitakDescription")}
+            </p>
 
-                  <div className="relative overflow-hidden mt-6">
-                    <div className="w-full h-px bg-border" />
-                    <div className="absolute top-0 left-0 h-px bg-secondary w-0 group-hover:w-full transition-all duration-500 ease-out" />
-                  </div>
-                </div>
-              </div>
+            <div className="relative overflow-hidden mt-6">
+              <div className="w-full h-px bg-border" />
+              <div className="absolute top-0 left-0 h-px bg-secondary w-0 group-hover:w-full transition-all duration-500 ease-out" />
+            </div>
+          </div>
+        </div>
         {/* <div className="grid grid-cols-1   gap-12 max-w-7xl mx-auto px-4  items-stretch">
           <div className="flex items-start justify-between gap-9 max-w-[676px]  mx-auto">
             <div className="md:w-[128px] w-[200px]   h-full relative flex-shrink-0">
