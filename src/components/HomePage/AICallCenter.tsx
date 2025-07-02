@@ -49,7 +49,7 @@ function AICallCenter() {
           </FadeText>
         </div>
 
-        <div className="w-full flex flex-col items-center  justify-between rounded-3xl border-2 border-secondary/95 md:p-[65px] p-4 md:flex-row gap-10 double-radial-bg dark:double-radial-dark ">
+        <div className="w-full flex flex-col items-center md:text-start text-center justify-between rounded-3xl border-2 border-secondary/95 md:p-[65px] p-4 md:flex-row gap-10 double-radial-bg dark:double-radial-dark ">
           <div className="md:w-1/2 w-full relative">
             <div className="max-w-[372px]">
               <FadeText>

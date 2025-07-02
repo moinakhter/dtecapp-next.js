@@ -3,11 +3,9 @@
     "language": "tr",
     "title": "Turkish translation of the home page messages."
   },
- 
   "LocaleSwitcher": {
     "locale": "TR"
   },
-
   "Error": {
     "description": "<p>We've unfortunately encountered an error.</p><p>You can try to <retry>reload the page</retry> you were visiting.</p>",
     "title": "Something went wrong!"
@@ -17,7 +15,6 @@
     "title": "Page not found",
     "backToHome": "Back to Home"
   },
-
   "Navbar": {
     "products": "Our products",
     "about": "About Us",
@@ -34,11 +31,8 @@
     "newsletter_note": "We respect your privacy. DTEC may use your information to send you relevant content and event information.\nYou can unsubscribe at any time.For more information, see our Privacy Policy.",
     "productstitle": "Our Products",
     "about": "About Us",
-
     "legal": {
-    
       "privacy": "Privacy Policy",
-     
       "all_rights": "All Rights Reserved"
     },
     "products": {
@@ -48,15 +42,17 @@
       "travel": "Travel Assistant"
     }
   },
-
   "HomePage": {
     "Hero": {
-      "title": "Journey to the Future",
-      "description": "Your All-in-One Smart Voice Assistant Solution",
+      "title1": "AI Powered Borderless ",
+      "title2": "Call Experience!",
+      "description": "Step into an extraordinary customer experience with <b> Dtec AI Call Center </b>: Take your service quality to the top with autonomous call management, instant solutions and 24/7 multilingual support. Increase efficiency and satisfaction with a system that becomes smarter in every interaction.",
       "counter1": "Award",
       "counter2": "Partnered Company",
       "counter3": "Happy Employee",
-      "counter4": "Language Translation"
+      "counter4": "Language Translation",
+      "learnmore": "Learn more",
+      "getDemo": "Request a demo"
     },
     "mindsmeet": "the place where all minds meet",
     "Dtec AI Call Center": {
@@ -343,37 +339,105 @@
     "awards2": "Dtec Shopping Assistant",
     "features1title": "Our Mission",
     "features1description": "We help you build an unforgettable auditory presence that goes beyond your visual identity. With our cutting-edge voice assistant technologies, we enable brands to establish a direct and empathetic connection with their target audiences, personalizing every interaction to increase customer loyalty and satisfaction.",
-
     "features2title": "Our Vision",
     "features2description": "We envision a universe where conversation knows no boundaries, and every device and brand gives meaning to the human voice. As Dtec, we aim to break the barriers between humans and technology, placing voice-based interaction at the center of daily life and building the digital experiences of the future starting today.",
-
     "award1_title": "TÜBİTAK",
     "award1_description": "Supported by the TÜBİTAK 1507 R&D Program with Project Number \"7180493\" titled \"Voice Control and Vehicle Assistant System with Artificial Intelligence Hologram Technology for Use in Domestic Cars and All Vehicles.\" The project has been successfully completed.",
-
     "award2_title": "KOSGEB",
     "award2_description": "Our project was supported by the KOSGEB cooperation program with Board Decision No: 2020-56038-30/1 and was successfully completed.",
-
     "award3_title": "İTÜ Çekirdek",
     "award3_description": "Our project was selected for the İTÜ Çekirdek 2021 program and won an award on the BIG BANG stage.",
-
     "award4_title": "OIB",
     "award4_description": "Achieved an award-winning position in the 'Future Automotive Design Competition' organized by OIB.",
-
     "award5_title": "TOGG",
     "award5_description": "Ranked in the top 10 among 850 startups in the mobility program organized by TOGG. Development for the TOGG domestic car is ongoing.",
-
     "award6_title": "BTM",
     "award6_description": "Selected for the 2023 BTM (Commercialization of Knowledge Center) program.",
-
     "award7_title": "TEKNOFEST",
     "award7_description": "Reached the finals in the 2023 Teknofest competition.",
-
     "tubTitle": "Dtec Shopping Assistant",
     "tubitakDescription": "Awarded support under the TÜBİTAK 1507 R&D Program with Project Number \"7230004\" titled \"Artificial Intelligence Shopping Assistant Operable on Shopping Platforms.\" The project is currently ongoing.",
-
     "pointsTitle": "Our Patents",
     "patent1": "Patent No. 2017/12836 titled 'VIP Smart Vehicle System' was granted on 22.08.2022. All rights related to the patent belong to us.",
     "patent2": "International patent application No. PCT/TR2022/050946 titled 'Artificial Intelligence Smart Vehicle Assistant' was filed on 05.09.2022. The initial review was positive. We hold the intellectual property rights for this idea.",
     "patent3": "Patent application No. 2023/006162 titled 'Artificial Intelligence Smart Vehicle Assistant System' has been approved by the Turkish Patent and Trademark Office."
+  },
+
+  "shopify-assistant": {
+    "title": "Shopify Assistant",
+    "description": "We store logged-in user data to improve the Assistant experience. Your shipping and default address may be used during the checkout process through the Assistant. You can view or request deletion of your data after <b>logging in.</b>",
+    "buttonText": "Download Dtec Shopify Extension",
+    "create": "Create an Account",
+    "title2": "How to Install DTEC Extension?",
+    "description2": "Use the DTEC Extension in your store by following the steps below.",
+
+    "step1": "Obtaining the DTEC Access Token",
+    "step1Details": [
+      "Register your account ",
+      "Log in to your account to retrieve the <strong>access token</strong>.",
+      "Copy the access token for use."
+    ],
+
+    "step2": "Install the Extension in Your Store",
+    "step2Details": [
+      "Log in to your <strong>Shopify Admin</strong>.",
+      "Go to <strong>Apps →</strong> Find and open your installed extension.",
+      "Ensure the extension is <strong>enabled</strong> for use."
+    ],
+
+    "step3": "Get Your Storefront API Access Token",
+    "step3Details": [
+      "Generate the Storefront API Access Token:",
+      "<span class='text-red-500'>Array [(error) => Missing required parameters ] Access Token not found, please reinstall the app to generate a new Storefront API access token.</span>",
+      "Copy your Storefront API Access Token."
+    ],
+
+    "step4": "Configure the Extension in Shopify Theme",
+    "step4Details": [
+      "Go to <strong>Online Store → Themes</strong>.",
+      "Click <strong>Customize</strong> on your active theme.",
+      "Navigate to the theme editor and add the app after the header to display it on every page.",
+      "Click <strong>Add Section</strong> or <strong>Add Block</strong> (depending on your extension type).",
+      "Look for your extension in the list and add it.",
+      "Adjust settings as needed and click <strong>Save</strong>."
+    ],
+
+    "step5": "Configure Extension Settings",
+    "step5Details": [
+      "1. Storefront API Key (Required)\n• Paste the <strong>Storefront API Access Token</strong> (from Step 2) to fetch products.",
+      "2. DTEC Access Token (Required)\n• Paste the <strong>DTEC Access Token</strong> (from Step 1).",
+      "3. Select Extension Language\n• Choose between <strong>English</strong> or <strong>Turkish</strong>.\n• This setting changes the extension’s UI language.",
+      "4. Customize Product Layout\n• Modify the <strong>HTML structure</strong> to change how products are displayed.\n• Access this in the <strong>extension settings</strong> under \"Product Layout\".",
+      "5. Set Product Display Limit\n• Adjust how many products are shown in search results.\n• After making changes, click <strong>\"Save\"</strong> to apply updates."
+    ],
+
+    "step6": "Test the Extension on Your Store",
+    "step6Details": [
+      "1. Visit your <strong>Shopify Storefront</strong>.",
+      "2. Navigate to the page where your extension is added.",
+      "3. Test the following:",
+      "• Product search functionality.",
+      "• Language selection working correctly.",
+      "• Product layout customization applied.",
+      "• Display limit restricting product count.",
+      "4. If needed, go back and adjust settings."
+    ],
+
+    "step7": "Troubleshooting Issues",
+    "step7Details": [
+      "Products not showing?",
+      "• Ensure your Storefront API Key is correctly added.",
+      "• Ensure your DTEC access token is correctly added.",
+      "• Verify the Read Products permission is enabled.",
+
+      "Language not changing?",
+      "• Refresh the page and check settings.",
+
+      "Layout changes not reflecting?",
+      "• Clear browser cache or test in incognito mode.",
+
+      "Product limit not working?",
+      "• Confirm the limit is set in extension settings."
+    ]
   }
 }

@@ -3,7 +3,6 @@
     "language": "tr",
     "title": "Turkish translation of the home page messages."
   },
-  
   "LocaleSwitcher": {
     "locale": "EN"
   },
@@ -33,9 +32,7 @@
     "productstitle": "Ürünlerimiz",
     "about": "Hakkımızda",
     "legal": {
-     
       "privacy": "Gizlilik Politikası",
-      
       "all_rights": "Tüm Hakları Saklıdır"
     },
     "products": {
@@ -47,12 +44,15 @@
   },
   "HomePage": {
     "Hero": {
-      "title": "Geleceğe Yolculuk",
-      "description": " Hepsi Bir Arada Akıllı Sesli Asistan Çözümünüz",
+      "title1": "AI ile Güçlendirilmiş Sınır Tanımayan ",
+      "title2": " Çağrı Deneyimi!",
+      "description": " <b>Dtec AI Call Center</b> ile sıra dışı bir müşteri deneyimine adım atın: Otonom çağrı yönetimi, anında çözüm ve 7/24 çok dilli destekle hizmet kalitenizi zirveye taşıyın. Her etkileşimde akıllanan sistemle verimlilik ve memnuniyeti katlayın.",
       "counter1": "Ödül",
       "counter2": "Anlaşmalı Firma",
       "counter3": "Mutlu Çalışan",
-      "counter4": "Dilde Çeviri"
+      "counter4": "Dilde Çeviri",
+      "learnmore": "Daha Fazla Bilgi Edinin",
+      "getDemo": "Demo Talep Edin"
     },
     "mindsmeet": "tüm zihinlerin buluştuğu yer",
     "Dtec AI Call Center": {
@@ -335,39 +335,114 @@
     "description": "Dtec’e hoş geldiniz. Sesin gücünü merkeze alarak markaların ve kullanıcıların buluştuğu yeni bir etkileşim çağı başlatıyoruz. Sesli asistanlarımız, her kelimeyi markanızın benzersiz kimliğini yansıtacak şekilde yorumlar; kullanıcılarla kurduğunuz bağı kişiselleştirilmiş, tutarlı ve unutulmaz kılar.",
     "features1title": "Misyonumuz​",
     "features1description": "Görsel kimliğinizin ötesine taşınan, unutulmaz bir işitsel varlık inşa etmenize yardımcı oluyoruz. En yeni ses asistanı teknolojilerimizle markaların hedef kitleleriyle doğrudan ve empatik bir bağ kurmasını sağlıyor; her etkileşimi kişiselleştirerek müşteri sadakatini ve memnuniyetini artırıyoruz.",
-    "DetcTeam":"Dtec Ekibi",
-    "Awards":"Kazandığımız Yarışmalar & Ödüller",
+    "DetcTeam": "Dtec Ekibi",
+    "Awards": "Kazandığımız Yarışmalar & Ödüller",
     "awards1": "Dtec Araç Asistanı",
     "awards2": "Dtec Alışveriş Asistanı",
-   
     "award1_title": "TÜBİTAK",
     "features2title": "Vizyonumuz",
     "features2description": "Konuşmanın sınır tanımadığı, her cihazın ve markanın insan sesine anlam kazandırdığı bir evren tasarlıyoruz. Dtec olarak, insan ve teknoloji arasındaki engelleri kaldırıp, ses tabanlı etkileşimi günlük hayatın merkezine yerleştirerek geleceğin dijital deneyimlerini bugünden inşa ediyoruz.",
     "award1_description": "1507 ARGE Programından \"7180493\" Numaralı \"Yapay Zeka Teknolojisine Sahip Hologram Görüntüsüyle Araç İçerisinde Yer Alacak, Yerli Otomobil Ve Tüm Araçlarda Kullanılabilecek Sesli Kontrol Ve Araç Asistanı Sistemi\" İsimli Projeyle Destek Almış Ve Başarılı Şekilde Tamamlanmıştır.",
-
     "award2_title": "KOSGEB",
     "award2_description": "Projemiz KOSGEB işbirliği programından Kurul karar no: 2020-56038-30/1 ile destek almıştır ve proje başarılı şekilde tamamlanmıştır.",
-
     "award3_title": "İTÜ Çekirdek",
     "award3_description": "Projemiz, İTÜ Çekirdek 2021 programına seçilmiş ve BIG BANG sahnesinde ödül almıştır.",
-
     "award4_title": "OIB",
     "award4_description": "OIB'in düzenlediği \"Otomotivde geleceğin tasarımı yarışması\"nda dereceye girerek ödül almıştır.",
-
     "award5_title": "TOGG",
     "award5_description": "TOGG’un düzenlediği mobility programında 850 girişim arasından ilk 10’a girmiştir ve TOGG yerli otomobili için geliştirmeler devam etmektedir.",
-
     "award6_title": "BTM",
     "award6_description": "2023 BTM Bilgiyi Ticarileştirme Merkezi programına seçilmiştir.",
-
     "award7_title": "TEKNOFEST",
     "award7_description": "2023 Teknofest yarışmasında finale kalınmıştır.",
-   
     "tubitakDescription": "Tübitak 1507 ARGE Programından \"7230004\" Numarası \"Alışveriş Platformlarında Çalışabilen Yapay Zeka Alışveriş Asistanı\" İsmiyle Destek Almaya Hak Kazanmıştır. Proje Devam Etmektedir.",
-
     "pointsTitle": "Sahip Olduğumuz Patentler",
     "patent1": "2017/12836 sayılı “VIP Akıllı Araç Sistemi” isimli patent 22.08.2022 tarihinde alınmıştır, patent ile ilgili tüm haklar tarafımıza aittir.",
     "patent2": "PCT/TR2022/050946 Sayılı “Yapay Zekalı Akıllı Araç Asistanı” İsimli Uluslararası Patent Başvurusu 05.09.2022 Tarihinde Yapılmıştır. İlk İnceleme Olumlu Gelmiştir. Fikirle İlgili Kısmı Haklara Sahip Bulunmaktayız.",
     "patent3": "2023/006162 sayılı “Yapay Zekalı Akıllı Araç Asistanı Sistemi” isimli patent başvurusu Türk Patent ve Marka Kurumu tarafından onaylanmıştır."
-  }
+  },
+"shopify-assistant": {
+"title": "Shopify Assistant",
+"description": "Asistan deneyimini iyileştirmek için oturum açmış kullanıcı verilerini saklıyoruz. Gönderim ve varsayılan adresiniz, Asistan aracılığıyla ödeme işlemi sırasında kullanılabilir. <b>Oturum açtıktan</b> sonra verilerinizi görüntüleyebilir veya silinmesini talep edebilirsiniz.",
+"buttonText": "Dtec Shopify Eklentisini İndirin",
+"create": "Hesap Oluştur",
+"title2": "DTEC Eklentisi Nasıl Kurulur?",
+"description2": "Aşağıdaki adımları izleyerek mağazanızda DTEC Eklentisini kullanın.",
+
+"step1": "DTEC Erişim Belirtecini Elde Etme",
+"step1Details": [
+"Hesabınızı kaydedin",
+"<strong>Erişim belirtecini</strong> almak için hesabınıza giriş yapın.",
+"Kullanım için erişim belirtecini kopyalayın."
+],
+
+"step2": "Eklentiyi Mağazanıza Yükleyin",
+"step2Details": [
+
+"Shopify Admin'inizde oturum açın.",
+"Uygulamalar →'a gidin ve yüklü eklentinizi bulun ve açın.",
+"Eklentinin kullanım için <strong>etkin</strong> olduğundan emin olun."
+],
+
+"step3": "Storefront API Erişim Belirtecinizi Alın",
+"step3Details": [
+
+"Storefront API Erişim Belirtecini Oluşturun:",
+"<span class='text-red-500'>Dizi [(error) => Gerekli parametreler eksik ] Erişim Belirteci bulunamadı, lütfen yeni bir Storefront API erişim belirteci oluşturmak için uygulamayı yeniden yükleyin.</span>",
+"Storefront API Erişim Belirtecinizi kopyalayın."
+
+],
+
+"step4": "Shopify Temasında Uzantıyı Yapılandırın",
+"step4Details": [
+
+"<strong>Çevrimiçi Mağaza → Temalar</strong>'a gidin.",
+"Etkin temanızda <strong>Özelleştir</strong>'e tıklayın.",
+"Tema düzenleyicisine gidin ve her sayfada görüntülemek için başlığın ardından uygulamayı ekleyin.",
+"<strong>Bölüm Ekle</strong> veya <strong>Blok Ekle</strong>'ye tıklayın (uzantı türünüze bağlı olarak).",
+"Listede uzantınızı arayın ve ekleyin.",
+"Gerektiği gibi ayarları yapın ve <strong>Kaydet</strong>'e tıklayın."
+],
+
+"step5": "Uzantı Ayarlarını Yapılandır",
+"step5Details": [
+
+"1. Storefront API Anahtarı (Gerekli)\n• Ürünleri almak için <strong>Storefront API Erişim Belirtecini</strong> (2. Adımdan) yapıştırın.",
+"2. DTEC Erişim Belirtecini (Gerekli)\n• <strong>DTEC Erişim Belirtecini</strong> (1. Adımdan) yapıştırın.",
+"3. Uzantı Dilini Seçin\n• <strong>İngilizce</strong> veya <strong>Türkçe</strong> arasında seçim yapın.\n• Bu ayar, uzantının kullanıcı arayüzü dilini değiştirir.",
+"4. Ürün Düzenini Özelleştirin\n• Ürünlerin nasıl görüntüleneceğini değiştirmek için <strong>HTML yapısını</strong> değiştirin.\n• Buna \"Ürün Düzeni\" altındaki <strong>uzantı ayarlarından</strong> erişin.",
+"5. Ürün Görüntüleme Sınırını Ayarlayın\n• Arama sonuçlarında kaç ürünün gösterileceğini ayarlayın.\n• Değişiklikleri yaptıktan sonra, <strong>\"Güncellemeleri uygulamak için\"Kaydet\"</strong>."
+],
+
+"step6": "Mağazanızda Eklentiyi Test Edin",
+"step6Details": [
+"1. <strong>Shopify Mağazanızı</strong> ziyaret edin.",
+"2. Eklentinizin eklendiği sayfaya gidin.",
+"3. Aşağıdakileri test edin:",
+"• Ürün arama işlevi.",
+"• Dil seçimi doğru şekilde çalışıyor.",
+"• Ürün düzeni özelleştirmesi uygulandı.",
+"• Ürün sayısını sınırlayan görüntüleme sınırı.",
+"4. Gerekirse geri dönün ve ayarları düzenleyin."
+
+],
+
+"step7": "Sorun Giderme",
+"step7Details": [
+
+"Ürünler gösterilmiyor mu?",
+"• Storefront API Anahtarınızın doğru şekilde eklendiğinden emin olun.",
+"• DTEC erişim belirtecinizin doğru şekilde eklendiğinden emin olun.",
+"• Ürünleri Oku izninin etkinleştirildiğini doğrulayın.",
+
+"Dil değişmiyor mu?",
+"• Sayfayı yenileyin ve ayarları kontrol edin.",
+
+"Düzen değişiklikleri yansıtmıyor mu?",
+"• Tarayıcı önbelleğini temizleyin veya gizli modda test edin.",
+
+"Ürün sınırı çalışmıyor mu?",
+"• Uzantı ayarlarında sınırın ayarlandığını doğrulayın."
+]
+}
 }

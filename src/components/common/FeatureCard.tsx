@@ -4,13 +4,12 @@ function FeatureCard({
   icon: Icon,
   title,
   description,
-  className
-
+  className,
 }: {
   icon?: React.ComponentType<{ className?: string }>;
   title: string;
   description: string;
-    className?: string;
+  className?: string;
 }) {
   return (
     <>
@@ -20,13 +19,13 @@ function FeatureCard({
           visible: { opacity: 1, y: 0 },
         }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-    className={cn(
-        "group   w-full flex gap-[24px] md:text-start md:mx-0 mx-auto text-center flex-col h-full",
-        className 
-      )}
+        className={cn(
+          "group w-full flex gap-[24px] md:text-start md:mx-0 mx-auto text-center flex-col h-full",
+          className
+        )}
       >
         <div className="flex flex-col space-y-4">
-          {/* Icon at the top */}
+         
           {Icon && (
             <div className="w-fit">
               <Icon className="h-6 w-6 text-foreground group-hover:text-secondary transition-colors" />

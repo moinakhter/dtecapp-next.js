@@ -44,12 +44,12 @@ export default function CounterCard({ value, label, index = 0 }: CounterCardProp
       className="
         relative 
         bg-white 
-        text-black 
+         h-[140px]
         shadow-md 
+        w-full
         rounded-xl 
         px-6 py-4 
-        min-w-[233px] 
-        h-[176px] 
+        dark:bg-[#1A1A1A]
         flex flex-col items-center justify-center
         transition-all duration-[800ms] 
         border border-transparent
