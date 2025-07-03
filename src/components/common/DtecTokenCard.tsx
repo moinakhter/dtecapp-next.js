@@ -4,10 +4,12 @@ import React from "react";
 
 const DtecTokenCard = ({
   className = "w-[258px] h-[180px]",
-  text="text-lg"
+  text="text-lg",
+ 
 }: {
   className?: string;
-  text?:string
+  text?:string,
+  children?: React.ReactNode;
 }) => {
   return (
     <Link
@@ -17,6 +19,7 @@ const DtecTokenCard = ({
           title="DTEC Token"
       className={`relative cursor-pointer  group rounded-xl overflow-hidden shadow-lg ${className}`}
     >
+  
       <Image
         src="/images/dtec-token.png"
         alt="DTEC Token"

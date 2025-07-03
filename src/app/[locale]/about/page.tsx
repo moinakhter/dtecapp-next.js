@@ -5,6 +5,7 @@ import FloatingBalls from "@/components/common/FloatingBalls";
 import SectionWrapper from "@/components/common/SectionWrapper";
 import TextGradientWhite from "@/components/common/text-gradient-white";
 import MindsBanner from "@/components/HomePage/minds-meet";
+import { Link } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import React from "react";
@@ -41,10 +42,15 @@ export default function AboutPage() {
       role: "Software Engineer",
       image: "/images/dtec-member.png",
       link: "https://www.linkedin.com/in/hasan-alani-sweng/",
+    },  {
+      name: "Ilham Asgarli",
+      role: "Mobil Application Developer",
+      image: "/images/dtec-member.png",
+      link: "https://www.linkedin.com/in/ilham-asgarli/?originalSubdomain=tr",
     },
     {
       name: "Zainab Salah",
-      role: "Full Stack Software Engineer",
+      role: "Full Stack Web Developer",
       image: "/images/dtec-member.png",
       link: "https://www.linkedin.com/in/zainab-salah-6169431b4/",
     },
@@ -131,8 +137,9 @@ export default function AboutPage() {
         </TextGradientWhite>
         <div className=" flex items-center h-full justify-center flex-wrap  gap-16 container ">
           {teamMembers.map((member, index) => (
-            <div
+            <Link
               key={index}
+              href={member.link}
               className="flex flex-col max-w-[240px] w-full items-center text-center"
             >
               <div className="w-[240px] h-[280px] relative mb-4 rounded-2xl overflow-hidden">
@@ -145,7 +152,7 @@ export default function AboutPage() {
               </div>
               <h3 className="text-base font-medium">{member.name}</h3>
               <p className="text-[13px]  font-light">{member.role}</p>
-            </div>
+            </Link>
           ))}
         </div>
       </SectionWrapper>

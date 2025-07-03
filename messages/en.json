@@ -21,7 +21,8 @@
     "tokenInfo": "Token Information",
     "whitepaper": "Whitepaper",
     "tokenomics": "Tokenomics",
-    "Download": "Download Assistant"
+    "Download": "Download Assistant",
+    "products2": "Our add -ons"
   },
   "Footer": {
     "contact": "Contact Us",
@@ -362,7 +363,6 @@
     "patent2": "International patent application No. PCT/TR2022/050946 titled 'Artificial Intelligence Smart Vehicle Assistant' was filed on 05.09.2022. The initial review was positive. We hold the intellectual property rights for this idea.",
     "patent3": "Patent application No. 2023/006162 titled 'Artificial Intelligence Smart Vehicle Assistant System' has been approved by the Turkish Patent and Trademark Office."
   },
-
   "shopify-assistant": {
     "title": "Shopify Assistant",
     "description": "We store logged-in user data to improve the Assistant experience. Your shipping and default address may be used during the checkout process through the Assistant. You can view or request deletion of your data after <b>logging in.</b>",
@@ -370,28 +370,24 @@
     "create": "Create an Account",
     "title2": "How to Install DTEC Extension?",
     "description2": "Use the DTEC Extension in your store by following the steps below.",
-
     "step1": "Obtaining the DTEC Access Token",
     "step1Details": [
       "Register your account ",
       "Log in to your account to retrieve the <strong>access token</strong>.",
       "Copy the access token for use."
     ],
-
     "step2": "Install the Extension in Your Store",
     "step2Details": [
       "Log in to your <strong>Shopify Admin</strong>.",
       "Go to <strong>Apps →</strong> Find and open your installed extension.",
       "Ensure the extension is <strong>enabled</strong> for use."
     ],
-
     "step3": "Get Your Storefront API Access Token",
     "step3Details": [
       "Generate the Storefront API Access Token:",
       "<span class='text-red-500'>Array [(error) => Missing required parameters ] Access Token not found, please reinstall the app to generate a new Storefront API access token.</span>",
       "Copy your Storefront API Access Token."
     ],
-
     "step4": "Configure the Extension in Shopify Theme",
     "step4Details": [
       "Go to <strong>Online Store → Themes</strong>.",
@@ -401,7 +397,6 @@
       "Look for your extension in the list and add it.",
       "Adjust settings as needed and click <strong>Save</strong>."
     ],
-
     "step5": "Configure Extension Settings",
     "step5Details": [
       "1. Storefront API Key (Required)\n• Paste the <strong>Storefront API Access Token</strong> (from Step 2) to fetch products.",
@@ -410,7 +405,6 @@
       "4. Customize Product Layout\n• Modify the <strong>HTML structure</strong> to change how products are displayed.\n• Access this in the <strong>extension settings</strong> under \"Product Layout\".",
       "5. Set Product Display Limit\n• Adjust how many products are shown in search results.\n• After making changes, click <strong>\"Save\"</strong> to apply updates."
     ],
-
     "step6": "Test the Extension on Your Store",
     "step6Details": [
       "1. Visit your <strong>Shopify Storefront</strong>.",
@@ -422,22 +416,19 @@
       "• Display limit restricting product count.",
       "4. If needed, go back and adjust settings."
     ],
-
     "step7": "Troubleshooting Issues",
     "step7Details": [
       "Products not showing?",
       "• Ensure your Storefront API Key is correctly added.",
       "• Ensure your DTEC access token is correctly added.",
       "• Verify the Read Products permission is enabled.",
-
       "Language not changing?",
       "• Refresh the page and check settings.",
-
       "Layout changes not reflecting?",
       "• Clear browser cache or test in incognito mode.",
-
       "Product limit not working?",
       "• Confirm the limit is set in extension settings."
-    ]
+    ],
+    "clicktoview": " Click for show full view ↗"
   }
 }

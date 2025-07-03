@@ -9,7 +9,13 @@ import LocaleSwitcher from "./common/LocaleSwitcher";
 import DownloadButton from "./common/DownloadeLink";
 import { useTranslations } from "next-intl";
 import DtecTokenCard from "./common/DtecTokenCard";
-import { CarIcon, CartIcon, MicICon, ThinPlaneIcon } from "./common/Icons";
+import {
+  CarIcon,
+  CartIcon,
+  MicICon,
+  ShopifyIcon,
+  ThinPlaneIcon,
+} from "./common/Icons";
 import { usePathname } from "@/i18n/navigation";
 
 const productItems = [
@@ -65,7 +71,7 @@ export default function Navbar() {
   const toggleTheme = () => setTheme(theme === "dark" ? "light" : "dark");
 
   return (
-    <nav className="fixed top-8 left-0 right-0 z-50   bg-white/10 container md:mx-auto border-[#808080]/15 border-[1px] backdrop-blur-[32px] rounded-2xl transition-all duration-300">
+    <nav className="fixed top-8 left-0 right-0 z-50 bg-white/10 container md:mx-auto border-[#808080]/15 border-[1px] backdrop-blur-[32px] rounded-2xl transition-all duration-300">
       <div className="mx-auto md:px-8 py-4 flex max-w-7xl items-center justify-between">
         {/* Logo */}
         <Link href="/" onClick={closeAllMenus} className="flex items-center">
@@ -90,12 +96,12 @@ export default function Navbar() {
               <span>{t("products")}</span>
             </button>
             {productsOpen && (
-              <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[455px] bg-transparent z-20 drop-shadow-[0_0_5px_#3D7EE2]">
+              <div className="absolute top-10 left-1/2  -translate-x-1/2 w-[455px] bg-transparent z-20 drop-shadow-[0_0_5px_#3D7EE2]">
                 <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-10 h-10 bg-[#FAFAFA] dark:bg-[#16191A] rotate-45 z-20" />
-                <div className="flex justify-between items-end gap-8 w-full p-6 rounded-2xl from-white to-white relative transition-all duration-300 bg-gradient-to-br dark:from-[#1C1F22] dark:to-[#121212] dark:hover:bg-[radial-gradient(100%_100%_at_0%_100%,rgba(61,126,226,0.2)_0%,#16191A_30%,#16191A_100%),radial-gradient(60%_60%_at_50%_100%,rgba(61,126,226,0.15)_0%,#16191A_20%,#16191A_100%)]">
+                <div className="flex justify-between   h-[269px]  items-start gap-8 w-full p-6 rounded-2xl from-white to-white relative transition-all duration-300 bg-gradient-to-br dark:from-[#1C1F22] dark:to-[#121212] dark:hover:bg-[radial-gradient(100%_100%_at_0%_100%,rgba(61,126,226,0.2)_0%,#16191A_30%,#16191A_100%),radial-gradient(60%_60%_at_50%_100%,rgba(61,126,226,0.15)_0%,#16191A_20%,#16191A_100%)]">
                   <div>
                     <div className="text-[10px] font-medium   pb-6">
-                      Ürünlerimiz
+                      {t("products")}
                     </div>
                     <div className="grid grid-cols-1 gap-4">
                       {productItems.map((item) => (
@@ -103,8 +109,9 @@ export default function Navbar() {
                           key={item.key}
                           href={item.href}
                           onClick={closeAllMenus}
-                          className={`flex items-center text-[13px] gap-3 group rounded-lg transition-colors
-    ${pathname === item.href ? "text-secondary" : ""}
+                          className={`flex items-center text-[13px] gap-3 group rounded-lg transition-colors ${
+                            pathname === item.href ? "text-secondary" : ""
+                          }
   `}
                         >
                           <item.icon
@@ -123,10 +130,40 @@ export default function Navbar() {
                       ))}
                     </div>
                   </div>
-                  <DtecTokenCard
-                    text="text-xs"
-                    className="w-[172px] h-[120px]"
-                  />
+                  <div className="flex flex-col justify-between h-full">
+                    <div>
+                      <div className="text-[10px] font-medium   pb-6">
+                        {t("products2")}
+                      </div>
+
+                      <Link
+                       href="/products/shopify-assistant"
+                        onClick={closeAllMenus}
+                        className={`flex items-center text-[13px] gap-3 group rounded-lg transition-colors ${
+                          pathname === "" ? "text-secondary" : ""
+                        } `}
+                      >
+                        <ShopifyIcon
+                          className={`h-5 w-5 ${
+                            pathname === "/products/shopify-assistant" ? "text-secondary" : ""
+                          } group-hover:text-secondary`}
+                        />
+                        <span
+                          className={`${
+                            pathname === "/products/shopify-assistant" ? "text-secondary" : ""
+                          } group-hover:text-secondary`}
+                        >
+                          Shopify
+                        </span>
+                      </Link>
+                    </div>
+
+                    {/* Bottom Section */}
+                    <DtecTokenCard
+                      text="text-xs"
+                      className="w-[172px] h-[120px]"
+                    />
+                  </div>
                 </div>
               </div>
             )}
@@ -198,7 +235,14 @@ export default function Navbar() {
               ))}
             </div>
           )}
-
+          <Link
+            href="/products/shopify-assistant"
+            onClick={closeAllMenus}
+            className="flex items-center text-[13px] gap-3 group hover:text-secondary transition-colors"
+          >
+            <ShopifyIcon className="h-5 w-5   group-hover:text-secondary" />
+            <span className="text-[13px]">Shopify Asistan</span>
+          </Link>
           <Link
             href="/about"
             onClick={closeAllMenus}

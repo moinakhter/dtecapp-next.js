@@ -1,6 +1,7 @@
 import Image from "next/image";
-
+import Step from "./Step";
 import TextGradientWhite from "@/components/common/text-gradient-white";
+import Step5 from "./Step5";
 
 import { useTranslations } from "next-intl";
 
@@ -9,21 +10,30 @@ import FloatingBalls from "@/components/common/FloatingBalls";
 import FadeText from "@/components/common/FadeText";
 import { Button } from "@/components/ui/button";
 import SectionWrapper from "@/components/common/SectionWrapper";
+import Animation from "./Animation";
 
 const Page = () => {
   const t = useTranslations("shopify-assistant");
 
   const steps = [
-    { titleKey: "step1", detailsKey: "step1Details" },
+    {
+      titleKey: "step1",
+      detailsKey: "step1Details",
+      img: "/images/Shopify2.webp",
+    },
     { titleKey: "step2", detailsKey: "step2Details" },
     { titleKey: "step3", detailsKey: "step3Details" },
-    { titleKey: "step4", detailsKey: "step4Details" },
+    {
+      titleKey: "step4",
+      detailsKey: "step4Details",
+      img: "/images/Shopify1.webp",
+    },
   ];
 
   return (
     <>
       {/* Hero Section */}
-      <section className="relative md:p-0 p-2 lg:min-h-screen w-full">
+      <section className="relative md:p-0 p-2 xl:h-full w-full">
         <FloatingBalls />
         <div className="container relative z-10">
           <div className="grid md:mt-[250px] mt-[160px] grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -83,13 +93,14 @@ const Page = () => {
           </p>
         </FadeText>
 
-        <div className="space-y-[38px]">
+        <Animation>
           {steps.map((step, index) => (
             <Step
               key={index}
               step={`Step ${index + 1}:`}
               title={t(step.titleKey)}
               details={t.raw(step.detailsKey)}
+              img={step.img ? step.img : undefined}
             />
           ))}
 
@@ -110,7 +121,7 @@ const Page = () => {
             title={t("step7")}
             details={t.raw("step7Details")}
           />
-        </div>
+        </Animation>
       </SectionWrapper>
 
       <MindsBanner />
@@ -120,81 +131,3 @@ const Page = () => {
 
 export default Page;
 
-interface StepProps {
-  step: string;
-  title: string;
-  details: string[];
-}
-
- function Step({ step, title, details }: StepProps) {
-  return (
-    <div className="grid md:grid-cols-[150px_1fr] gap-9 items-start group">
-      {/* Step Label */}
-      <div>
-        <h3 className="md:text-[32px] text-lg font-medium">{step}</h3>
-      </div>
-
-      {/* Step Content */}
-      <div className="space-y-4">
-        <h4 className="text-xl font-medium">{title}</h4>
-        <ol className="space-y-2 text-base list-decimal list-inside">
-          {details.map((item, idx) => (
-            <li
-              key={idx}
-              dangerouslySetInnerHTML={{ __html: item }}
-              className="[&>strong]:font-bold [&>span.text-red-500]:text-red-500 [&>a]:text-blue-500 [&>a]:hover:underline font-light"
-            />
-          ))}
-        </ol>
-
-        <div className="relative overflow-hidden mt-auto">
-          <div className="w-full h-px bg-border" />
-          <div className="absolute top-0 left-0 h-px bg-secondary w-0 group-hover:w-full transition-all duration-500 ease-out" />
-        </div>
-      </div>
-    </div>
-  );
-}
-
-interface Step5Props {
-  step: string;
-  title: string;
-  details: string[];
-}
-
- function Step5({ step, title, details }: Step5Props) {
-  return (
-    <div className="grid md:grid-cols-[150px_1fr] gap-9 items-start group">
-      {/* Step Label */}
-      <div>
-        <h3 className="md:text-[32px] text-lg font-medium">{step}</h3>
-      </div>
-
-      {/* Step Content */}
-      <div className="space-y-4">
-        <h4 className="text-xl font-medium">{title}</h4>
-
-        <div className="space-y-6">
-          {details.map((item, idx) => (
-            <div key={idx} className="space-y-2">
-              {item.split("\n").map((line, lineIdx) => (
-                <p
-                  key={lineIdx}
-                  dangerouslySetInnerHTML={{ __html: line }}
-                  className={`${
-                    line.trim().startsWith("•") ? "pl-4" : "font-semibold"
-                  } [&>strong]:font-bold font-light`}
-                />
-              ))}
-            </div>
-          ))}
-        </div>
-
-        <div className="relative overflow-hidden mt-auto">
-          <div className="w-full h-px bg-border" />
-          <div className="absolute top-0 left-0 h-px bg-secondary w-0 group-hover:w-full transition-all duration-500 ease-out" />
-        </div>
-      </div>
-    </div>
-  );
-}

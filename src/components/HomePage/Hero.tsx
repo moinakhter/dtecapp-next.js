@@ -15,7 +15,7 @@ export const Hero = () => {
       <FloatingBalls />
 
       {/* Main Content */}
-      <div className="z-10 relative container    flex items-start justify-between md:flex-row flex-col h-full w-full">
+      <div className="z-10 relative container flex items-start justify-between md:flex-row flex-col h-full w-full">
         <div className="md:w-1/2 pt-[250px]  md:pb-[150px] flex flex-col items-start justify-center gap-8">
           <FadeText>
             <h1 className="lg:text-6xl  md:text-4xl text-3xl  leading-tight dark:text-transparent dark:bg-clip-text dark:bg-[linear-gradient(311deg,_#FAFAFA_14%,_#CDCDCD_36%,_#999999_52%,_#E2E2E2_69%,_#FAFAFA_89%)]  text-transparent bg-clip-text bg-[linear-gradient(90deg,_#212121_14%,_#424242_36%,_#616161_52%,_#424242_69%,_#212121_100%)]">
@@ -30,20 +30,24 @@ export const Hero = () => {
               })}
             </p>
           </FadeText>
-          <div className="flex items-center justify-center gap-4">
-            <Button size="sm" className="w-[153px]" variant="secondary">
+          <div className="flex items-center md:flex-row  w-full flex-col md:justify-start justify-center gap-4">
+            <Button
+              size="sm"
+              className="md:max-w-[153px] max-w-[353px] w-full"
+              variant="secondary"
+            >
               {t("getDemo")}{" "}
             </Button>
             <Button
               size="sm"
-              className="w-[176px] border-secondary"
+              className="lg:max-w-[176px]  max-w-[353px] w-full border-secondary"
               variant="outline"
             >
               {t("learnmore")}{" "}
             </Button>
           </div>
           {/* Statistics Cards */}
-          <div className="flex  mt-[64px] pb-16 w-full items-center  justify-center gap-4">
+          <div className="flex  mt-[64px] pb-16 w-full items-center md:flex-nowrap flex-wrap  justify-center gap-4">
             {[
               { value: "6", label: t("counter1") },
               { value: "12", label: t("counter2") },
