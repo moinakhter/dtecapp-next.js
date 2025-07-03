@@ -23,7 +23,7 @@ const t = useTranslations("HomePage.Ecosystem");
   }, [isPlaying]);
 
   return (
-    <SectionWrapper className="bg-[#F8F8F8] dark:bg-[#171717]">
+    <SectionWrapper className="bg-gradient-to-b from-[#EEEEEE] via-[#F8F8F8] to-[#FFFFFF] dark:from-[#121212] dark:via-[#171717] dark:to-[#0B0B0B]  py-16">
       <div className="container flex flex-col md:flex-row items-center justify-between gap-12">
         {/* Left Text Content */}
         <div className="lg:max-w-[400px] w-fill">

@@ -96,7 +96,7 @@ export default function DtecAssistants() {
   ];
 
   return (
-    <SectionWrapper className="w-full bg-white dark:bg-[#0B0B0B]   ">
+    <SectionWrapper className="w-full bg-gradient-to-b from-[#FFFFFF] to-[#EEEEEE] dark:from-[#0B0B0B]  dark:to-[#121212] py-16">
       <div className="container mx-auto">
         {/* Header */}
         <div className="text-center mb-10 md:mb-24">
