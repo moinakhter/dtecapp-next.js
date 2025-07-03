@@ -126,7 +126,7 @@ interface StepProps {
   details: string[];
 }
 
-export function Step({ step, title, details }: StepProps) {
+ function Step({ step, title, details }: StepProps) {
   return (
     <div className="grid md:grid-cols-[150px_1fr] gap-9 items-start group">
       {/* Step Label */}
@@ -162,7 +162,7 @@ interface Step5Props {
   details: string[];
 }
 
-export function Step5({ step, title, details }: Step5Props) {
+ function Step5({ step, title, details }: Step5Props) {
   return (
     <div className="grid md:grid-cols-[150px_1fr] gap-9 items-start group">
       {/* Step Label */}

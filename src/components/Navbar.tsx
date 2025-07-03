@@ -109,16 +109,12 @@ export default function Navbar() {
                         >
                           <item.icon
                             className={`h-5 w-5 ${
-                              pathname === item.href
-                                ? "text-secondary"
-                                : ""
+                              pathname === item.href ? "text-secondary" : ""
                             } group-hover:text-secondary`}
                           />
                           <span
                             className={`${
-                              pathname === item.href
-                                ? "text-secondary"
-                                : ""
+                              pathname === item.href ? "text-secondary" : ""
                             } group-hover:text-secondary`}
                           >
                             {item.title}
