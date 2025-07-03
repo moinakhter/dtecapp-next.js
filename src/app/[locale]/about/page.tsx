@@ -241,7 +241,7 @@ export default function AboutPage() {
         <h3 className="text-center text-2xl font-medium  mt-16">
           {t("awards2")}
         </h3>
-        <div className="flex flex-col md:flex-row items-start gap-6">
+        <div className="flex container flex-col md:flex-row items-start gap-6">
           {/* Image Container */}
           <div className="md:w-[128px] w-[200px]    aspect-square relative flex-shrink-0 mx-auto md:mx-0">
             <Image
