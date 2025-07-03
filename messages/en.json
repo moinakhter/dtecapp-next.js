@@ -366,7 +366,7 @@
   "shopify-assistant": {
     "title": "Shopify Assistant",
     "description": "We store logged-in user data to improve the Assistant experience. Your shipping and default address may be used during the checkout process through the Assistant. You can view or request deletion of your data after <b>logging in.</b>",
-    "buttonText": "Download Dtec Shopify Extension",
+    "buttonText": "Download Dtec Shopify Extension ↗",
     "create": "Create an Account",
     "title2": "How to Install DTEC Extension?",
     "description2": "Use the DTEC Extension in your store by following the steps below.",

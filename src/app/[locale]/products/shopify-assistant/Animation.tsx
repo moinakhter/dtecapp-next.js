@@ -16,7 +16,7 @@ const Animation = ({ children }: { children: React.ReactNode }) => {
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
+       viewport={{ once: true, amount: 0.2 }}
         className="space-y-[38px]"
       >
         {children}

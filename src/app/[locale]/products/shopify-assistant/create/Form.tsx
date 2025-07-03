@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Input } from "@/components/ui/input";
 import { Button, buttonVariants } from "@/components/ui/button";
-
+ 
 import { Link } from "@/i18n/navigation";
 import TextGradientWhite from "@/components/common/text-gradient-white";
 
@@ -32,14 +32,27 @@ const SigninForm = () => {
   const {
     register,
     handleSubmit,
+ 
     formState: { errors },
   } = useForm<FormData>({
     resolver: zodResolver(formSchema),
   });
 
-  const onSubmit = (data: FormData) => {
-    console.log(data);
-  };
+ 
+const onSubmit = (data: FormData) => {
+  const shop = new URL(data.storeUrl).host;
+
+  const clientId = process.env.NEXT_PUBLIC_SHOPIFY_API_KEY!;
+  const scopes = "read_products,write_products"; // Example scopes, use yours
+  const redirectUri = encodeURIComponent(`${window.location.origin}/api/shopify/callback`);
+
+  const installUrl = `https://${shop}/admin/oauth/authorize` +
+    `?client_id=${clientId}` +
+    `&scope=${scopes}` +
+    `&redirect_uri=${redirectUri}`;
+
+  window.location.href = installUrl; // Redirect to Shopify install page
+};
 
   return (
     <div className=" relative z-10 flex flex-col  w-full  mx-auto max-w-[416px] md:w-1/2">
@@ -48,7 +61,7 @@ const SigninForm = () => {
         className="lg:text-[32px] font-bold mb-8"
       />
 
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+      <form onSubmit={handleSubmit(onSubmit)}  className="space-y-4">
         {/* Name Fields */}
         <div className="grid grid-cols-2 gap-4">
           <div>
