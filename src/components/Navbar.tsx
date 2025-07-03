@@ -98,7 +98,7 @@ export default function Navbar() {
             {productsOpen && (
               <div className="absolute top-10 left-1/2  -translate-x-1/2 w-[455px] bg-transparent z-20 drop-shadow-[0_0_5px_#3D7EE2]">
                 <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-10 h-10 bg-[#FAFAFA] dark:bg-[#16191A] rotate-45 z-20" />
-                <div className="flex justify-between   h-[269px]  items-start gap-8 w-full p-6 rounded-2xl from-white to-white relative transition-all duration-300 bg-gradient-to-br dark:from-[#1C1F22] dark:to-[#121212] dark:hover:bg-[radial-gradient(100%_100%_at_0%_100%,rgba(61,126,226,0.2)_0%,#16191A_30%,#16191A_100%),radial-gradient(60%_60%_at_50%_100%,rgba(61,126,226,0.15)_0%,#16191A_20%,#16191A_100%)]">
+                <div className="flex justify-between   h-[269px]  items-start gap-8 w-full p-6 rounded-2xl from-[#FAFAFA] to-white relative transition-all duration-300 bg-gradient-to-br dark:from-[#1C1F22] dark:to-[#121212] dark:hover:bg-[radial-gradient(100%_100%_at_0%_100%,rgba(61,126,226,0.2)_0%,#16191A_30%,#16191A_100%),radial-gradient(60%_60%_at_50%_100%,rgba(61,126,226,0.15)_0%,#16191A_20%,#16191A_100%)]">
                   <div>
                     <div className="text-[10px] font-medium   pb-6">
                       {t("products")}
