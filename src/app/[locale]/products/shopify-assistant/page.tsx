@@ -8,9 +8,10 @@ import { useTranslations } from "next-intl";
 import MindsBanner from "@/components/HomePage/minds-meet";
 import FloatingBalls from "@/components/common/FloatingBalls";
 import FadeText from "@/components/common/FadeText";
-import { Button } from "@/components/ui/button";
+import {  buttonVariants } from "@/components/ui/button";
 import SectionWrapper from "@/components/common/SectionWrapper";
 import Animation from "./Animation";
+import { Link } from "@/i18n/navigation";
 
 const Page = () => {
   const t = useTranslations("shopify-assistant");
@@ -49,12 +50,26 @@ const Page = () => {
                 </p>
               </FadeText>
               <div className="flex flex-col md:flex-row items-center justify-center md:justify-start gap-4">
-                <Button size="sm" variant="secondary" className="mt-4">
+                <Link
+                  href="https://apps.shopify.com/dtec-assistant?st_source=autocomplete&surface_detail=autocomplete_apps"
+                  className={buttonVariants({
+                    variant: "secondary",
+                    size: "sm",
+                    className: "mt-4",
+                  })}
+                >
                   {t("buttonText")}
-                </Button>
-                <Button size="sm" variant="outline" className="mt-4">
+                </Link>
+                <Link
+                  href="/products/shopify-assistant/create"
+                  className={buttonVariants({
+                    variant: "outline",
+                    size: "sm",
+                    className: "mt-4",
+                  })}
+                >
                   {t("create")}
-                </Button>
+                </Link>
               </div>
             </div>
 

@@ -5,24 +5,36 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Input } from "@/components/ui/input";
 import { Button, buttonVariants } from "@/components/ui/button";
+import { useMutation } from "@tanstack/react-query";
 
-import { Link } from "@/i18n/navigation";
+import { Link, useRouter } from "@/i18n/navigation";
 import TextGradientWhite from "@/components/common/text-gradient-white";
+import React, { useEffect } from "react";
 
-const formSchema = z
-  .object({
-   
-    email: z.string().email("Invalid email"),
-    password: z.string().min(6, "Password is required"),
- 
-  })
-  
+const formSchema = z.object({
+  email: z.string().email("Invalid email"),
+  password: z.string().min(6, "Password is required"),
+});
 
 type FormData = z.infer<typeof formSchema>;
 
-import React from "react";
-
 const SigninForm = () => {
+  const router = useRouter();
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      const response = await fetch("/api/auth/validate", {
+        credentials: "include",
+      });
+      const result = await response.json();
+
+      if (result.authenticated) {
+        router.push("/dashboard");
+      }
+    };
+
+    checkAuth();
+  }, [router]);
   const {
     register,
     handleSubmit,
@@ -31,23 +43,42 @@ const SigninForm = () => {
     resolver: zodResolver(formSchema),
   });
 
+  // React Query Mutation
+  const loginMutation = useMutation({
+    mutationFn: async (data: FormData) => {
+      const response = await fetch("/api/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        const result = await response.json();
+        throw new Error(result.error || "Login failed");
+      }
+
+      return response.json();
+    },
+    onSuccess: () => {
+      router.push("/dashboard");
+    },
+    onError: (error: Error) => {
+      alert(error.message || "Something went wrong");
+    },
+  });
+
   const onSubmit = (data: FormData) => {
-    console.log(data);
+    loginMutation.mutate(data);
   };
 
   return (
-    <div className=" relative z-10 flex flex-col  w-full  mx-auto max-w-[416px] md:w-1/2">
+    <div className="relative z-10 flex flex-col w-full mx-auto max-w-[416px] md:w-1/2">
       <TextGradientWhite
         text="Login"
         className="lg:text-[32px] font-bold mb-8"
       />
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
- 
-      
-     
- 
-
         {/* Email */}
         <div>
           <Input
@@ -76,27 +107,30 @@ const SigninForm = () => {
           )}
         </div>
 
- 
-        
-
         {/* Submit Button */}
         <Button
           type="submit"
           className="w-full mt-4 bg-secondary hover:bg-blue-600 text-white"
+          disabled={loginMutation.status === "pending"}
         >
-          Login
+          {loginMutation.status === "pending" ? "Logging in..." : "Login"}
         </Button>
       </form>
+
+      {loginMutation.status === "error" && (
+        <p className="text-red-500 text-center mt-4">
+          {(loginMutation.error as Error)?.message}
+        </p>
+      )}
 
       <Link
         href="/products/shopify-assistant/create"
         className={buttonVariants({
           variant: "outline",
-          className: "w-full  mt-4 text-center  bg-transparent  border-secondary ",
+          className: "w-full mt-4 text-center bg-transparent border-secondary",
         })}
       >
-        {" "}
-      Don&lsquo;t have an account?
+        Don&apos;t have an account?
       </Link>
     </div>
   );

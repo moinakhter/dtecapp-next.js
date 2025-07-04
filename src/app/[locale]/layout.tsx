@@ -6,6 +6,8 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Celias } from "@/lib/utils";
 import Footer from "@/components/Footer";
+ 
+import ReactQueryProvider from "./providers";
 
  
  
@@ -18,6 +20,8 @@ export default async function LocaleLayout({
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
 }) {
+
+ 
   const { locale } = await params;
   if (!hasLocale(routing.locales, locale)) {
     notFound();
@@ -37,7 +41,10 @@ export default async function LocaleLayout({
       >
           <NextIntlClientProvider>
             <Navbar />
+              <ReactQueryProvider >
+
             {children}
+              </ReactQueryProvider>
             <Footer />
           </NextIntlClientProvider>
       </ThemeProvider>

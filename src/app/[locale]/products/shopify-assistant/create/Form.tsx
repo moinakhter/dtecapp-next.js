@@ -5,9 +5,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Input } from "@/components/ui/input";
 import { Button, buttonVariants } from "@/components/ui/button";
- 
-import { Link } from "@/i18n/navigation";
+import { useMutation } from "@tanstack/react-query";
+import { Link, useRouter } from "@/i18n/navigation";
 import TextGradientWhite from "@/components/common/text-gradient-white";
+import React, { useEffect } from "react";
 
 const formSchema = z
   .object({
@@ -26,43 +27,85 @@ const formSchema = z
 
 type FormData = z.infer<typeof formSchema>;
 
-import React from "react";
-
 const SigninForm = () => {
   const {
     register,
     handleSubmit,
- 
     formState: { errors },
   } = useForm<FormData>({
     resolver: zodResolver(formSchema),
   });
 
+
+  const router = useRouter();
+
+    useEffect(() => {
+      const checkAuth = async () => {
+        const response = await fetch('/api/auth/validate', { credentials: 'include' });
+        const result = await response.json();
+  
+        if (result.authenticated) {
+          router.push('/dashboard');
+        }
+      };
+  
+      checkAuth();
+    }, [router]);
+  const registerMutation = useMutation({
+    mutationFn: async (data: FormData) => {
+      const response = await fetch("/api/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        const result = await response.json();
+        throw new Error(result.error || "Registration failed");
+      }
+
+      return response.json();
+    },
+onSuccess: async (_, data) => {
+  try {
+    // After registration, automatically login
+    const loginResponse = await fetch("/api/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: data.email, password: data.password }),
+    });
+
+    if (!loginResponse.ok) {
+      const result = await loginResponse.json();
+      throw new Error(result.error || "Auto-login failed");
+    }
+
  
-const onSubmit = (data: FormData) => {
-  const shop = new URL(data.storeUrl).host;
 
-  const clientId = process.env.NEXT_PUBLIC_SHOPIFY_API_KEY!;
-  const scopes = "read_products,write_products"; // Example scopes, use yours
-  const redirectUri = encodeURIComponent(`${window.location.origin}/api/shopify/callback`);
+ 
 
-  const installUrl = `https://${shop}/admin/oauth/authorize` +
-    `?client_id=${clientId}` +
-    `&scope=${scopes}` +
-    `&redirect_uri=${redirectUri}`;
+    // Redirect to dashboard
+    window.location.href = "/dashboard";
+  } catch (error) {
+    alert((error as Error).message || "Something went wrong during auto-login.");
+  }
+}
 
-  window.location.href = installUrl; // Redirect to Shopify install page
-};
+  });
+
+  const onSubmit = (data: FormData) => {
+    registerMutation.mutate(data);
+  };
 
   return (
-    <div className=" relative z-10 flex flex-col  w-full  mx-auto max-w-[416px] md:w-1/2">
+    <div className="relative z-10 flex flex-col w-full mx-auto max-w-[416px] md:w-1/2">
       <TextGradientWhite
         text="Register"
         className="lg:text-[32px] font-bold mb-8"
       />
 
-      <form onSubmit={handleSubmit(onSubmit)}  className="space-y-4">
-        {/* Name Fields */}
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+        {/* Form Fields */}
         <div className="grid grid-cols-2 gap-4">
           <div>
             <Input
@@ -90,7 +133,6 @@ const onSubmit = (data: FormData) => {
           </div>
         </div>
 
-        {/* Store URL */}
         <div>
           <Input
             id="storeUrl"
@@ -104,7 +146,6 @@ const onSubmit = (data: FormData) => {
           )}
         </div>
 
-        {/* Company Name */}
         <div>
           <Input
             id="companyName"
@@ -118,7 +159,6 @@ const onSubmit = (data: FormData) => {
           )}
         </div>
 
-        {/* Email */}
         <div>
           <Input
             id="email"
@@ -131,7 +171,6 @@ const onSubmit = (data: FormData) => {
           )}
         </div>
 
-        {/* Password */}
         <div>
           <Input
             id="password"
@@ -146,7 +185,6 @@ const onSubmit = (data: FormData) => {
           )}
         </div>
 
-        {/* Confirm Password */}
         <div>
           <Input
             id="confirmPassword"
@@ -161,24 +199,37 @@ const onSubmit = (data: FormData) => {
           )}
         </div>
 
-        {/* Submit Button */}
         <Button
           type="submit"
           className="w-full mt-4 bg-secondary hover:bg-blue-600 text-white"
+          disabled={registerMutation.status === "pending"}
         >
-          Register
+          {registerMutation.status === "pending"
+            ? "Registering..."
+            : "Register"}
         </Button>
       </form>
+
+      {registerMutation.isError && (
+        <p className="text-red-500 text-center mt-4">
+          {(registerMutation.error as Error)?.message}
+        </p>
+      )}
+
+      {registerMutation.isSuccess && (
+        <p className="text-green-500 text-center mt-4">
+          Registration successful! Redirecting...
+        </p>
+      )}
 
       <Link
         href="/products/shopify-assistant/signin"
         className={buttonVariants({
           variant: "outline",
-          className: "w-full  mt-4 text-center bg-transparent   border-secondary ",
+          className: "w-full mt-4 text-center bg-transparent border-secondary",
         })}
       >
-        {" "}
-        Do you have an account?{" "}
+        Do you have an account?
       </Link>
     </div>
   );
