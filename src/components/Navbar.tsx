@@ -18,22 +18,31 @@ import {
 } from "./common/Icons";
 import { usePathname } from "@/i18n/navigation";
 
-const productItems = [
+
+
+export default function Navbar() {
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [productsOpen, setProductsOpen] = useState(false);
+
+  const t = useTranslations("Navbar");
+  const productItems = [
   {
     icon: CarIcon,
-    title: "Araç Asistanı",
+    title:t("carAssistant"),
     href: "/products/car-assistant",
     key: "carAssistant",
   },
   {
     icon: CartIcon,
-    title: "Alışveriş Asistanı",
+    title: t("shoppingAssistant"),
     href: "/products/shopping-assistant",
     key: "shoppingAssistant",
   },
   {
     icon: HomeIcon,
-    title: "Akıllı Ev Asistanı",
+    title: t("homeAssistant"),
     href: "/products/home-assistant",
     key: "homeAssistant",
   },
@@ -45,19 +54,11 @@ const productItems = [
   },
   {
     icon: ThinPlaneIcon,
-    title: "Seyahat Asistanı",
+    title: t("travelAssistant"),
     href: "/products/travel-assistant",
     key: "travelAssistant",
   },
 ];
-
-export default function Navbar() {
-  const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [productsOpen, setProductsOpen] = useState(false);
-
-  const t = useTranslations("Navbar");
   const pathname = usePathname();
   useEffect(() => {
     setMounted(true);

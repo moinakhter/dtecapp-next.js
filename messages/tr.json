@@ -22,7 +22,11 @@
     "whitepaper": "Whitepaper",
     "tokenomics": "Tokenomics",
     "Download": "  Asistanı İndirin",
-    "products2": "Eklentilerimiz"
+    "products2": "Eklentilerimiz",
+    "carAssistant": "Araç Asistanı",
+    "shoppingAssistant": "Alışveriş Asistanı",
+    "homeAssistant": "Akıllı Ev Asistanı",
+    "travelAssistant": "Seyahat Asistanı"
   },
   "Footer": {
     "contact": "Bize Ulaşın",

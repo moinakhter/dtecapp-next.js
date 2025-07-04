@@ -22,7 +22,12 @@
     "whitepaper": "Whitepaper",
     "tokenomics": "Tokenomics",
     "Download": "Download Assistant",
-    "products2": "Our add -ons"
+    "products2": "Our add -ons",
+
+    "carAssistant": "Car Assistant",
+    "shoppingAssistant": "Shopping Assistant",
+    "homeAssistant": "Smart Home Assistant",
+    "travelAssistant": "Travel Assistant"
   },
   "Footer": {
     "contact": "Contact Us",
