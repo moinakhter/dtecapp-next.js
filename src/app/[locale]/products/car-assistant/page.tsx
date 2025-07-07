@@ -22,6 +22,7 @@ import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import MindsBanner from "@/components/HomePage/minds-meet";
 import FloatingBalls from "@/components/common/FloatingBalls";
 import FadeText from "@/components/common/FadeText";
+import SeoHead from "@/components/SeoHead";
 
 export default function CarAssistantPage() {
   const t = useTranslations("car-assistant");
@@ -82,6 +83,9 @@ export default function CarAssistantPage() {
 
   return (
     <>
+ <SeoHead pageKey="car" />
+
+      {/* Hero Section */}
       <section className="relative md:p-0 p-2   lg:min-h-screen w-full  ">
         <FloatingBalls />
         {/* Background Grid Pattern */}

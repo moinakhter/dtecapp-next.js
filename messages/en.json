@@ -1,7 +1,31 @@
 {
   "Metadata": {
-    "language": "tr",
-    "title": "Turkish translation of the home page messages."
+    "language": "en",
+
+    "homeTitle": "Dtec – All-in-One Smart Assistant | Dtec",
+
+    "homeDescription": "Journey to the future: Discover car, shopping, home and travel management in one platform with the smart voice assistant solution.",
+
+    "carTitle": "Dtec Car Assistant – Voice Control & Face Recognition | Safe Driving",
+
+    "carDescription": "Your intelligent companion that redefines the driving experience: face and emotion recognition, voice vehicle equipment control, email sending, multi‑language translation and reminders.",
+
+    "shoppingTitle": "Dtec Shopping Assistant – Voice Shopping with Advanced NLP",
+
+    "shoppingDescription": "Easy shopping experience by talking: advanced NLP, intelligent filtering, secure payment, personalized recommendations and support in 22 languages.",
+
+    "homeAssistantTitle": "Dtec Smart Home Assistant – IoT Integration & Automation",
+
+    "homeAssistantDescription": "Smart home assistant offering synchronized scenarios between home and car, real-time device control, energy saving and high security.",
+
+    "travelTitle": "Dtec Travel Assistant - Flight, Hotel & Planning Assistant",
+    "travelDescription": "Personal travel companion that makes your travel planning easier: real-time flight assistance, hotel recommendations, prices and privacy focused on security.",
+
+    "tokenTitle": "Dtec Token - Blockchain Ecosystem & Mobility Token",
+    "tokenDescription": "Blockchain-based token supporting IoT and vehicle usage with voice commands: transparent, secure and real-time transactions within the ecosystem.",
+
+    "aboutTitle": "About Us - Dtec: The Future of Interaction with Voice Assistant",
+    "aboutDescription": "We aim for brands to offer their own unique voice in the world of voice interaction. Our mission is to develop universal interactive speech assistants."
   },
   "LocaleSwitcher": {
     "locale": "TR"

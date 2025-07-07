@@ -1,7 +1,27 @@
 {
   "Metadata": {
     "language": "tr",
-    "title": "Turkish translation of the home page messages."
+
+    "homeTitle": "Dtec – Hepsi Bir Arada Akıllı Asistan | Dtec",
+    "homeDescription": "Geleceğe yolculuk: Akıllı sesli asistan çözümüyle araç, alışveriş, ev ve seyahat yönetimini tek bir platformda keşfedin.",
+
+    "carTitle": "Dtec Araç Asistanı – Sesli Kontrol & Yüz Tanıma | Güvenli Sürüş",
+    "carDescription": "Sürüş deneyimini yeniden tanımlayan zeki yol arkadaşınız: yüz ve duygu tanıma, sesli araç donanım kontrolü, e‑posta gönderimi, çoklu dil çeviri ve hatırlatmalar.",
+
+    "shoppingTitle": "Dtec Alışveriş Asistanı – Gelişmiş NLP ile Sesli Alışveriş",
+    "shoppingDescription": "Konuşarak kolay alışveriş deneyimi: gelişmiş NLP, akıllı filtreleme, güvenli ödeme, kişiselleştirilmiş öneriler ve 22 dilde destek.",
+
+    "homeAssistantTitle": "Dtec Akıllı Ev Asistanı – IoT Entegrasyon & Otomasyon",
+    "homeAssistantDescription": "Ev ve araç arasında senkronize senaryolar, gerçek zamanlı cihaz kontrolü, enerji tasarrufu ve yüksek güvenlik sunan akıllı ev asistanı.",
+
+    "travelTitle": "Dtec Seyahat Asistanı – Uçuş, Otel & Planlama Asistanı",
+    "travelDescription": "Seyahat planlamanızı kolaylaştıran kişisel seyahat arkadaşı: gerçek zamanlı uçuş yardım, otel önerileri, fiyatlar ve güvenlik odaklı gizlilik.",
+
+    "tokenTitle": "Dtec Token – Blok Zincirli Ekosistem & Mobilite Token’ı",
+    "tokenDescription": "Sesli komutlarla IoT ve araç kullanımını destekleyen blok zincir tabanlı token: şeffaf, güvenli ve real-time ekosistem içinde işlemler.",
+
+    "aboutTitle": "Hakkımızda – Dtec: Sesli Asistanla Etkileşim Geleceği",
+    "aboutDescription": "Markaların sesle etkileşim dünyasında kendine özgü bir ses sunmasını hedefliyoruz. Misyonumuz, evrensel interaktif konuşma asistanları geliştirmek."
   },
   "LocaleSwitcher": {
     "locale": "EN"

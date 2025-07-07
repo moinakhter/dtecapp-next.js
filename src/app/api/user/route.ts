@@ -40,7 +40,9 @@ export async function GET() {
         email: user.email,
         company: user.company_name,
         storeUrl: user.store_url,
-        tokenExpiry: "2025-11-23 15:03:20", // Example expiry, can be dynamic
+        dtecToken: user.dtec_token,
+        role: user.role,
+        tokenExpiry: "2025-11-23 15:03:20",  
         expired: false,
       }),
       { status: 200 }

@@ -1,2 +1,8 @@
-User-Agent: *
-Allow: *
+User-agent: *
+Disallow: /dashboard
+Disallow: /tr/dashboard
+Disallow: /en/dashboard
+
+Allow: /
+
+Sitemap: https://dtec.app/sitemap.xml

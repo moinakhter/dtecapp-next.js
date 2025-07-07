@@ -1,6 +1,7 @@
+// app/[locale]/page.tsx
 import { Locale } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
-import { use } from "react";
+ 
 
 import { Hero } from "@/components/HomePage/Hero";
 import AICallCenter from "@/components/HomePage/AICallCenter";
@@ -10,14 +11,42 @@ import ExtraordinaryExperience from "@/components/HomePage/extraordinary-experie
 import LogosTicker from "@/components/HomePage/logos-tricker";
 import MindsBanner from "@/components/HomePage/minds-meet";
 
+import { getTranslations } from 'next-intl/server';
+
 type Props = {
-  params: Promise<{ locale: Locale }>;
+  params: { locale: Locale }; // ✅ Corrected
 };
 
-export default function IndexPage({ params }: Props) {
-  const { locale } = use(params);
+export async function generateMetadata({ params }: { params: { locale: Locale } }) {
+  const { locale } = params;
+  const t = await getTranslations({ locale, namespace: 'Metadata' });
+  return {
+    title: t('homeTitle'),
+    description: t('homeDescription'),
+    openGraph: {
+      title: t('homeTitle'),
+      description: t('homeDescription'),
+      images: [
+        {
+          url: `https://dtec.app/og?title=${encodeURIComponent(t('homeTitle'))}&locale=${locale}`,
+          width: 1200,
+          height: 630,
+          alt: 'Dtec Smart Assistant',
+        },
+      ]
+    },
+    alternates: {
+      languages: {
+        en: `https://dtec.app/en`,
+        tr: `https://dtec.app/tr`,
+      }
+    },
+  };
+}
 
-  // Enable static rendering
+export default function IndexPage({ params }: Props) {
+  const { locale } = params;
+
   setRequestLocale(locale);
 
   return (
@@ -29,7 +58,6 @@ export default function IndexPage({ params }: Props) {
       <ExtraordinaryExperience />
       <LogosTicker />
       <MindsBanner />
-
     </>
   );
 }

@@ -1,11 +1,11 @@
-"use client";
+ 
 
-import { useState } from "react";
+// import { useState } from "react";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+// import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { Mail, MapPin, Phone } from "lucide-react";
-import { Input } from "./ui/input";
+// import { Input } from "./ui/input";
 import { useTranslations } from "next-intl";
 import DtecTokenCard from "./common/DtecTokenCard";
 
@@ -49,13 +49,13 @@ const socialLinks = [
 
 export default function Footer() {
   const t = useTranslations("Footer");
-  const [email, setEmail] = useState("");
+  // const [email, setEmail] = useState("");
 
-  const handleNewsletterSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log("Newsletter signup:", email);
-    setEmail("");
-  };
+  // const handleNewsletterSubmit = (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   console.log("Newsletter signup:", email);
+  //   setEmail("");
+  // };
 
   const footerLinks = {
     products: [
@@ -159,7 +159,7 @@ export default function Footer() {
         </div>
 
         {/* Newsletter Section */}
-        <div className="pt-[64px] mb-8">
+        {/* <div className="pt-[64px] mb-8">
           <form
             onSubmit={handleNewsletterSubmit}
             className="flex flex-col md:flex-row items-center justify-center gap-3"
@@ -192,7 +192,7 @@ export default function Footer() {
                 </span>
               ))}
           </p>
-        </div>
+        </div> */}
 
         {/* Bottom Legal Links */}
         <div className="pt-[64px]">

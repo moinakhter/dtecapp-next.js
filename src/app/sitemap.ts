@@ -1,27 +1,40 @@
-import {MetadataRoute} from 'next';
-import {Locale} from 'next-intl';
-import {host} from '@/config';
-import {routing} from '@/i18n/routing';
-import {getPathname} from '@/i18n/navigation';
+import { MetadataRoute } from "next";
+import { routing } from "@/i18n/routing";
+import { getPathname } from "@/i18n/navigation";
+
+const host = "https://dtec.app";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return [...getEntries('/'), ...getEntries('/pathnames')];
-}
+  const pages: Array<{ href: Parameters<typeof getPathname>[0]["href"] }> = [
+    { href: "/" },
+    { href: "/about" },
+    { href: "/products/car-assistant" },
+    { href: "/products/ai-call-center" },
+    { href: "/products/home-assistant" },
+    { href: "/products/shopping-assistant" },
+    { href: "/products/travel-assistant" },
 
-type Href = Parameters<typeof getPathname>[0]['href'];
+    { href: "/products/shopify-assistant" },
+    { href: "/products/shopify-assistant/signin" },
+    { href: "/products/shopify-assistant/signup" },
 
-function getEntries(href: Href) {
-  return routing.locales.map((locale) => ({
-    url: getUrl(href, locale),
-    alternates: {
-      languages: Object.fromEntries(
-        routing.locales.map((cur) => [cur, getUrl(href, cur)])
-      )
-    }
-  }));
-}
 
-function getUrl(href: Href, locale: Locale) {
-  const pathname = getPathname({locale, href});
-  return host + pathname;
+  ];
+
+  const entries = pages.flatMap(({ href }) =>
+    routing.locales.map((locale) => ({
+      url: host + getPathname({ locale, href }),
+      lastModified: new Date(),
+      alternates: {
+        languages: Object.fromEntries(
+          routing.locales.map((cur) => [
+            cur,
+            host + getPathname({ locale: cur, href }),
+          ])
+        ),
+      },
+    }))
+  );
+
+  return entries;
 }

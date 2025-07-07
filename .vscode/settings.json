@@ -3,5 +3,21 @@
         "messages",
         "src/i18n"
     ],
-    "i18n-ally.keystyle": "nested"
+    "i18n-ally.keystyle": "nested",
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3306,
+            "driver": "MySQL",
+            "name": "dtec_app",
+            "database": "dtec_app",
+            "username": "root",
+            "askForPassword": true
+        }
+    ]
 }
