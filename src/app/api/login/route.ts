@@ -23,7 +23,7 @@ function decryptPayload(encryptedBase64: string): unknown {
     },
     encryptedBuffer
   );
-  console.log("🔓 Decrypted JSON string:", decryptedBuffer.toString("utf8"));
+ 
 
   const decryptedJson = decryptedBuffer.toString("utf8");
   return JSON.parse(decryptedJson);

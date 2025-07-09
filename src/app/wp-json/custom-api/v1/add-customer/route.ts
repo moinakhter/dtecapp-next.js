@@ -15,7 +15,7 @@ type Body = {
 export async function POST(request: NextRequest) {
   try {
     const body = (await request.json()) as Body;
-    console.log('Received body:', body);
+ ;
 
     const { id, email, first_name, last_name, shop_url, phone } = body;
 
@@ -28,7 +28,7 @@ export async function POST(request: NextRequest) {
       [email, shop_url]
     ) as unknown as [{ count: number }];
 
-    console.log('Existing rows count:', rows.count);
+ 
 
     if (rows.count > 0) {
       return NextResponse.json({ message: 'Email or Shop URL already exists' }, { status: 200 });

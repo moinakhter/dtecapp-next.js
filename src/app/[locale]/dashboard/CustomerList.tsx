@@ -1,5 +1,7 @@
+"use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import {
   Table,
@@ -12,7 +14,6 @@ import {
 import {
   Pagination,
   PaginationContent,
- 
   PaginationItem,
   PaginationLink,
   PaginationNext,
@@ -32,63 +33,75 @@ interface Customer {
 
 const PAGE_SIZE = 5;
 
+const fetchCustomers = async ({
+  storeUrl,
+  page,
+}: {
+  storeUrl: string;
+  page: number;
+}) => {
+  const res = await fetch(
+    `/wp-json/custom-api/v1/customers-by-shop-url?shop_url=${encodeURIComponent(
+      storeUrl
+    )}&page=${page}&limit=${PAGE_SIZE}`
+  );
+  if (!res.ok) throw new Error("Failed to fetch customers");
+  return res.json();
+};
+
+const deleteCustomer = async ({
+  email,
+  shop_url,
+}: {
+  email: string;
+  shop_url: string;
+}) => {
+  const res = await fetch(`/wp-json/custom-api/v1/delete-customer`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email, shop_url }),
+  });
+  const result = await res.json();
+  if (!res.ok) throw new Error(result.message || "Failed to delete customer");
+  return result;
+};
+
 const CustomerList = ({ storeUrl }: { storeUrl: string }) => {
-  const [customers, setCustomers] = useState<Customer[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [total, setTotal] = useState(0);
   const [page, setPage] = useState(1);
+  const queryClient = useQueryClient();
 
-  const fetchCustomers = async () => {
-    setLoading(true);
-    try {
-      const res = await fetch(
-        `/wp-json/custom-api/v1/customers-by-shop-url?shop_url=${encodeURIComponent(
-          storeUrl
-        )}&page=${page}&limit=${PAGE_SIZE}`
-      );
-      const result = await res.json();
-      setCustomers(result.data || []);
-      setTotal(result.total || 0);
-    } catch (error) {
-      console.error("Failed to load customers", error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const {
+    data,
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ["customers", storeUrl, page],
+    queryFn: () => fetchCustomers({ storeUrl, page }),
+  });
 
-  const handleDelete = async (email: string) => {
-    if (!confirm("Are you sure you want to delete this customer?")) return;
-    try {
-      const res = await fetch(`/wp-json/custom-api/v1/delete-customer`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, shop_url: storeUrl }),
+  const mutation = useMutation({
+    mutationFn: deleteCustomer,
+    onSuccess: () => {
+      toast.success("Customer deleted successfully", { richColors: true });
+      queryClient.invalidateQueries({ queryKey: ["customers", storeUrl] });
+    },
+    onError: (error: unknown) => {
+      const message =
+        error && typeof error === "object" && "message" in error
+          ? (error as { message?: string }).message
+          : "Failed to delete customer";
+      toast.error(message || "Failed to delete customer", {
+        richColors: true,
       });
+    },
+  });
 
-      const result = await res.json();
-      if (res.ok) {
-        fetchCustomers();
-        toast.success(result.message || "Customer deleted successfully", {
-          richColors: true,
-        });
-      } else {
-        toast.error(result.message || "Failed to delete customer", {
-          richColors: true,
-        });
-      }
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
-  useEffect(() => {
-    fetchCustomers();
-  }, [storeUrl, page]);
-
-  if (loading) return <p>Loading customers...</p>;
-  if (customers.length === 0) return <p>No customers found.</p>;
-
+  const total = data?.total || 0;
+  const customers: Customer[] = data?.data || [];
   const totalPages = Math.ceil(total / PAGE_SIZE);
+
+  if (isLoading) return <p>Loading customers...</p>;
+  if (isError || customers.length === 0) return <p>No customers found.</p>;
 
   return (
     <div className="mt-6">
@@ -102,7 +115,7 @@ const CustomerList = ({ storeUrl }: { storeUrl: string }) => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {customers.map((c,index) => (
+          {customers.map((c, index) => (
             <TableRow key={index}>
               <TableCell>
                 {c.first_name} {c.last_name}
@@ -113,7 +126,11 @@ const CustomerList = ({ storeUrl }: { storeUrl: string }) => {
                 <Button
                   variant="destructive"
                   size="sm"
-                  onClick={() => handleDelete(c.email)}
+                  onClick={() => {
+                    if (confirm("Are you sure you want to delete this customer?")) {
+                      mutation.mutate({ email: c.email, shop_url: storeUrl });
+                    }
+                  }}
                 >
                   <Trash className="mr-2 h-4 w-4 text-red-500" />
                 </Button>
@@ -122,46 +139,47 @@ const CustomerList = ({ storeUrl }: { storeUrl: string }) => {
           ))}
         </TableBody>
       </Table>
-       {totalPages > 1 && (
-      <Pagination>
-        <PaginationContent>
-          <PaginationItem>
-            <PaginationPrevious
-              href="#"
-              onClick={(e) => {
-                e.preventDefault();
-                if (page > 1) setPage(page - 1);
-              }}
-            />
-          </PaginationItem>
 
-          {Array.from({ length: totalPages }).map((_, index) => (
-            <PaginationItem key={index}>
-              <PaginationLink
+      {totalPages > 1 && (
+        <Pagination>
+          <PaginationContent>
+            <PaginationItem>
+              <PaginationPrevious
                 href="#"
-                isActive={page === index + 1}
                 onClick={(e) => {
                   e.preventDefault();
-                  setPage(index + 1);
+                  if (page > 1) setPage(page - 1);
                 }}
-              >
-                {index + 1}
-              </PaginationLink>
+              />
             </PaginationItem>
-          ))}
 
-          <PaginationItem>
-            <PaginationNext
-              href="#"
-              onClick={(e) => {
-                e.preventDefault();
-                if (page < totalPages) setPage(page + 1);
-              }}
-            />
-          </PaginationItem>
-        </PaginationContent>
-      </Pagination>
-    )}
+            {Array.from({ length: totalPages }).map((_, index) => (
+              <PaginationItem key={index}>
+                <PaginationLink
+                  href="#"
+                  isActive={page === index + 1}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setPage(index + 1);
+                  }}
+                >
+                  {index + 1}
+                </PaginationLink>
+              </PaginationItem>
+            ))}
+
+            <PaginationItem>
+              <PaginationNext
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (page < totalPages) setPage(page + 1);
+                }}
+              />
+            </PaginationItem>
+          </PaginationContent>
+        </Pagination>
+      )}
     </div>
   );
 };

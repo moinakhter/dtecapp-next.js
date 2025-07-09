@@ -1,4 +1,4 @@
-// app/[locale]/page.tsx
+ 
 import { Locale } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
  
@@ -14,11 +14,16 @@ import MindsBanner from "@/components/HomePage/minds-meet";
 import { getTranslations } from 'next-intl/server';
 
 type Props = {
-  params: { locale: Locale };  
+  params: Promise<{ locale: Locale }>;
 };
 
-export async function generateMetadata({ params }: { params: { locale: Locale } }) {
-  const { locale } = params;
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: Locale }>; // ← change to Promise
+}) {
+  const { locale } = await params; // ← await it
+
   const t = await getTranslations({ locale, namespace: 'Metadata' });
   return {
     title: t('homeTitle'),
@@ -33,20 +38,20 @@ export async function generateMetadata({ params }: { params: { locale: Locale } 
           height: 630,
           alt: 'Dtec Smart Assistant',
         },
-      ]
+      ],
     },
     alternates: {
       languages: {
         en: `https://dtec.app/en`,
         tr: `https://dtec.app/tr`,
-      }
+      },
     },
   };
 }
 
-export default function IndexPage({ params }: Props) {
-  const { locale } = params;
 
+export default async function IndexPage({ params }: Props) {
+  const { locale } = await params;
   setRequestLocale(locale);
 
   return (
