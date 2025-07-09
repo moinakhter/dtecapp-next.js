@@ -19,5 +19,8 @@
             "username": "root",
             "askForPassword": true
         }
+    ],
+    "cSpell.words": [
+        "undecryptable"
     ]
 }

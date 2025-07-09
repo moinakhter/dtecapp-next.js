@@ -25,26 +25,22 @@ const DashboardPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
-  useEffect(() => {
+ useEffect(() => {
     const fetchUserData = async () => {
       try {
-       
-        const response = await fetch("/api/user", { credentials: "include" });
+        const res = await fetch("/api/user", {
+          credentials: "include",
+        });
 
-        if (!response.ok) {
-          const result = await response.json();
+        if (!res.ok) {
+          const result = await res.json();
           throw new Error(result.error || "Failed to fetch user data");
         }
 
-        const result = await response.json();
-        console.log(result)
+        const result = await res.json();
         setUserData(result);
-      } catch (err: unknown) {
-        if (err instanceof Error) {
-          setError(err.message);
-        } else {
-          setError("An unknown error occurred");
-        }
+      } catch (err) {
+        setError((err as Error).message);
       } finally {
         setLoading(false);
       }
@@ -62,19 +58,13 @@ const DashboardPage = () => {
     router.push("/products/shopify-assistant/signin");
   };
 
-  if (loading)
-    return (
-      <SectionWrapper className="text-center py-[128px]">
-        Loading...
-      </SectionWrapper>
-    );
-  if (error)
-    return (
-      <SectionWrapper className="text-center  py-[128px] mt-10 text-red-500">
-        {error}
-      </SectionWrapper>
-    );
+  if (loading) {
+    return <SectionWrapper className="text-center py-[128px]">Loading...</SectionWrapper>;
+  }
 
+  if (error || !userData) {
+    return <SectionWrapper className="text-center py-[128px] text-red-500">Unauthorized</SectionWrapper>;
+  }
   return (
     <>
       <section className="relative md:p-0 p-2  md:mt-[250px] mt-[200px]  lg:min-h-screen w-full  ">

@@ -9,7 +9,7 @@ import { useMutation } from "@tanstack/react-query";
 import { Link, useRouter } from "@/i18n/navigation";
 import TextGradientWhite from "@/components/common/text-gradient-white";
 import React, { useEffect } from "react";
-
+import { toast } from "sonner"
 const formSchema = z
   .object({
     firstName: z.string().min(1, "First Name is required"),
@@ -17,7 +17,7 @@ const formSchema = z
     storeUrl: z.string().url("Store URL must be valid"),
     companyName: z.string().min(1, "Company Name is required"),
     email: z.string().email("Invalid email"),
-    password: z.string().min(6, "Password must be at least 6 characters"),
+    password: z.string().min(7, "Password must be at least 7 characters"),
     confirmPassword: z.string(),
   })
   .refine((data) => data.password === data.confirmPassword, {
@@ -36,21 +36,22 @@ const SigninForm = () => {
     resolver: zodResolver(formSchema),
   });
 
-
   const router = useRouter();
 
-    useEffect(() => {
-      const checkAuth = async () => {
-        const response = await fetch('/api/auth/validate', { credentials: 'include' });
-        const result = await response.json();
-  
-        if (result.authenticated) {
-          router.push('/dashboard');
-        }
-      };
-  
-      checkAuth();
-    }, [router]);
+  useEffect(() => {
+    const checkAuth = async () => {
+      const response = await fetch("/api/auth/validate", {
+        credentials: "include",
+      });
+      const result = await response.json();
+
+      if (result.authenticated) {
+        router.push("/dashboard");
+      }
+    };
+
+    checkAuth();
+  }, [router]);
   const registerMutation = useMutation({
     mutationFn: async (data: FormData) => {
       const response = await fetch("/api/register", {
@@ -66,31 +67,10 @@ const SigninForm = () => {
 
       return response.json();
     },
-onSuccess: async (_, data) => {
-  try {
-    // After registration, automatically login
-    const loginResponse = await fetch("/api/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email: data.email, password: data.password }),
-    });
-
-    if (!loginResponse.ok) {
-      const result = await loginResponse.json();
-      throw new Error(result.error || "Auto-login failed");
-    }
-
- 
-
- 
-
-    // Redirect to dashboard
-    window.location.href = "/dashboard";
-  } catch (error) {
-    alert((error as Error).message || "Something went wrong during auto-login.");
-  }
-}
-
+    onSuccess: async () => {
+      toast("Registration successful! Please wait to activate...");
+      
+    },
   });
 
   const onSubmit = (data: FormData) => {
@@ -218,7 +198,7 @@ onSuccess: async (_, data) => {
 
       {registerMutation.isSuccess && (
         <p className="text-green-500 text-center mt-4">
-          Registration successful! Redirecting...
+          Registration successful! Please wait to activate your account.
         </p>
       )}
 

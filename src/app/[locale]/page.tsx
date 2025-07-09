@@ -14,7 +14,7 @@ import MindsBanner from "@/components/HomePage/minds-meet";
 import { getTranslations } from 'next-intl/server';
 
 type Props = {
-  params: { locale: Locale }; // ✅ Corrected
+  params: { locale: Locale };  
 };
 
 export async function generateMetadata({ params }: { params: { locale: Locale } }) {

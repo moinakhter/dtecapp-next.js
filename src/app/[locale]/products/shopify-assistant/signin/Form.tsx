@@ -13,7 +13,7 @@ import React, { useEffect } from "react";
 
 const formSchema = z.object({
   email: z.string().email("Invalid email"),
-  password: z.string().min(6, "Password is required"),
+  password: z.string().min(7, "Password is required"),
 });
 
 type FormData = z.infer<typeof formSchema>;
@@ -59,7 +59,8 @@ const SigninForm = () => {
 
       return response.json();
     },
-    onSuccess: () => {
+    onSuccess: (data) => {
+        localStorage.setItem("accessToken", data.raw_token); 
       router.push("/dashboard");
     },
     onError: (error: Error) => {

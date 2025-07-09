@@ -1,56 +1,54 @@
-import { NextRequest } from 'next/server';
-import { db } from '@/lib/db';
-import bcrypt from 'bcryptjs';
-import { RowDataPacket } from 'mysql2';
-import AES from 'crypto-js/aes';
- 
+import { NextRequest, NextResponse } from 'next/server';
+import { jwtVerify } from 'jose';
 
- 
-function generateDtecToken(userId: number) {
-  const payload = {
-    id: userId,
-    expiresAt: Date.now() + 7 * 24 * 60 * 60 * 1000 // 7 days from now
-  };
-
-  const encrypted = AES.encrypt(JSON.stringify(payload), process.env.DTEC_TOKEN_SECRET!).toString();
-  return encrypted;
-}
+const HS_SECRET = 'DT_yMVYb0viQLBEBpKtgaCD2h9P9gM7Tf1F';
 
 export async function POST(request: NextRequest) {
   try {
-    const { firstName, lastName, storeUrl, companyName, email, password } = await request.json();
+    const body = await request.json();
+    const apiRes = await fetch(`${process.env.API_URL}/register/`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'X-Test-Request': 'true' },
+      body: JSON.stringify({
+        first_name: body.firstName,
+        last_name: body.lastName,
+        company_name: body.companyName,
+        store_url: body.storeUrl,
+        username: body.email,
+        password: body.password,
+        is_web: true,
+      }),
+    });
 
-  
-    const [user] = await db.query<RowDataPacket[]>('SELECT * FROM users WHERE email = ?', [email]);
-    if (user.length > 0) {
-      return new Response(JSON.stringify({ error: 'Email already registered' }), { status: 400 });
+    const resJson = await apiRes.json();
+
+  if (resJson.token) {
+  return NextResponse.json({ message: 'Registration successful!', token: resJson.token }, { status: 200 });
+}
+
+
+    if (resJson.token) {
+      try {
+        const { payload } = await jwtVerify(resJson.token, new TextEncoder().encode(HS_SECRET));
+
+        if (payload.status === true) {
+          return NextResponse.json({ message: 'Registration successful!' }, { status: 200 });
+        }
+
+        return NextResponse.json({ error: payload.message || 'Registration failed.' }, { status: 400 });
+      } catch (err) {
+        console.error('JWT verify error', err);
+        return NextResponse.json({ error: 'Invalid or expired token.' }, { status: 400 });
+      }
     }
 
- 
-    const hashedPassword = await bcrypt.hash(password, 10);
+    if (resJson.errors) {
+      return NextResponse.json({ error: resJson.errors }, { status: 400 });
+    }
 
-     
-    const [result] = await db.query(
-      'INSERT INTO users (first_name, last_name, store_url, company_name, email, password_hash, role) VALUES (?, ?, ?, ?, ?, ?, ?)',
-      [firstName, lastName, storeUrl, companyName, email, hashedPassword, 'shopify']
-    );
-
-    const userId = (result as {
-      insertId: number;
-    }).insertId;
-
-     
-    const dtecToken = generateDtecToken(userId);
-
- 
-    await db.query(
-      'UPDATE users SET dtec_token = ? WHERE id = ?',
-      [dtecToken, userId]
-    );
-
-    return new Response(JSON.stringify({ message: 'Registration successful', dtecToken }), { status: 201 });
-  } catch (error) {
-    console.error(error);
-    return new Response(JSON.stringify({ error: 'Internal Server Error' }), { status: 500 });
+    return NextResponse.json({ error: 'Unknown registration error.' }, { status: 400 });
+  } catch (err) {
+    console.error(err);
+    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   }
 }
