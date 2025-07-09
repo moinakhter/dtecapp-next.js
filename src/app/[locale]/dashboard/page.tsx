@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import SectionWrapper from "@/components/common/SectionWrapper";
 import { useRouter } from "@/i18n/navigation";
 import TextGradientWhite from "@/components/common/text-gradient-white";
@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils";
 import FloatingBalls from "@/components/common/FloatingBalls";
 import Image from "next/image";
 import MindsBanner from "@/components/HomePage/minds-meet";
+import CustomerList from "./CustomerList";
 
 interface UserData {
   username: string;
@@ -25,7 +26,7 @@ const DashboardPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
- useEffect(() => {
+  useEffect(() => {
     const fetchUserData = async () => {
       try {
         const res = await fetch("/api/user", {
@@ -59,11 +60,19 @@ const DashboardPage = () => {
   };
 
   if (loading) {
-    return <SectionWrapper className="text-center py-[128px]">Loading...</SectionWrapper>;
+    return (
+      <SectionWrapper className="text-center py-[128px]">
+        Loading...
+      </SectionWrapper>
+    );
   }
 
   if (error || !userData) {
-    return <SectionWrapper className="text-center py-[128px] text-red-500">Unauthorized</SectionWrapper>;
+    return (
+      <SectionWrapper className="text-center py-[128px] text-red-500">
+        Unauthorized
+      </SectionWrapper>
+    );
   }
   return (
     <>
@@ -91,14 +100,13 @@ const DashboardPage = () => {
             </div>
           </div>
           <div className="relative z-10 flex flex-col w-full mx-auto max-w-[416px] md:w-1/2">
-
             <TextGradientWhite
               text="Store Details"
               className="text-3xl font-bold md:px-0 px-3"
             />
 
             <div className="flex text-[13px] font-medium flex-col gap-8 md:p-2 px-4  my-8">
-              <div className="flex justify-between ">
+              {/* <div className="flex justify-between ">
                 <span>View Store Customers:</span>
                 <a
                   href={userData?.storeUrl}
@@ -111,7 +119,7 @@ const DashboardPage = () => {
                 >
                   Click Here
                 </a>
-              </div>
+              </div> */}
 
               <div className="flex justify-between ">
                 <span>Username:</span>
@@ -218,6 +226,17 @@ const DashboardPage = () => {
         </div>
       </section>
 
+      <SectionWrapper className="text-center py-16 container">
+        {/* Customer List Section */}
+        <TextGradientWhite
+          text="Shopify Customers"
+          className="text-3xl font-bold md:px-0 px-3 mt-12"
+        />
+
+        <div className="md:px-2 px-4 mt-6">
+          {userData && <CustomerList storeUrl={userData.storeUrl} />}
+        </div>
+      </SectionWrapper>
       <MindsBanner />
     </>
   );

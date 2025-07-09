@@ -17,7 +17,13 @@ const formSchema = z
     storeUrl: z.string().url("Store URL must be valid"),
     companyName: z.string().min(1, "Company Name is required"),
     email: z.string().email("Invalid email"),
-    password: z.string().min(7, "Password must be at least 7 characters"),
+    password: z
+      .string()
+      .min(8, "Password must be at least 8 characters")
+      .regex(
+        /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).+$/,
+        "Password must contain letters, numbers, and special characters"
+      ),
     confirmPassword: z.string(),
   })
   .refine((data) => data.password === data.confirmPassword, {

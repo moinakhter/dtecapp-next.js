@@ -6,6 +6,7 @@ import { z } from "zod";
 import { Input } from "@/components/ui/input";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { useMutation } from "@tanstack/react-query";
+import { toast } from "sonner"
 
 import { Link, useRouter } from "@/i18n/navigation";
 import TextGradientWhite from "@/components/common/text-gradient-white";
@@ -59,12 +60,21 @@ const SigninForm = () => {
 
       return response.json();
     },
-    onSuccess: (data) => {
-        localStorage.setItem("accessToken", data.raw_token); 
+    onSuccess: () => {
+      toast.success("Login successful!",
+         {
+               richColors: true,
+          }
+      );
       router.push("/dashboard");
     },
     onError: (error: Error) => {
-      alert(error.message || "Something went wrong");
+         toast.error("Login failed: " + error.message ,
+          {
+               richColors: true,
+          }
+         )
+    
     },
   });
 
@@ -100,7 +110,7 @@ const SigninForm = () => {
             type="password"
             {...register("password")}
             placeholder="Password"
-          />
+          /> 
           {errors.password && (
             <p className="text-red-500 text-sm mt-1">
               {errors.password.message}
