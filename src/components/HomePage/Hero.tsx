@@ -5,8 +5,10 @@ import { useTranslations } from "next-intl";
 import CounterCard from "../common/CounterCard";
 import FloatingBalls from "../common/FloatingBalls";
 import FadeText from "../common/FadeText";
-import Image from "next/image";
+ 
 import { Button } from "../ui/button";
+ 
+import HeroImgLight from "./HeroImgLight";
 
 export const Hero = () => {
   const t = useTranslations("HomePage.Hero");
@@ -63,14 +65,10 @@ export const Hero = () => {
             ))}
           </div>
         </div>
-        <div className="flex items-center md:pt-[250px]  md:pb-[150px] justify-center w-full md:w-1/2">
-          <Image
-            src="/images/Hero/two-small-phones.png"
-            alt="Hero Image"
-            width={500}
-            height={500}
-            className="w-full md:max-w-[400px] max-w-[300px] mx-auto"
-          />
+        <div className="flex items-center md:pt-[250px] md:pb-[150px] justify-center w-full md:w-[572px]">
+          
+        
+        <HeroImgLight />
         </div>
       </div>
 
