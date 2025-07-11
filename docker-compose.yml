@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: dtec-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: Hijikata1
+      MYSQL_DATABASE: dtec_app
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  app:
+    build: .
+    container_name: dtec-app
+    restart: always
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mysql
+    environment:
+      DB_HOST: mysql
+      DB_USER: root
+      DB_PASSWORD: Hijikata1
+      DB_NAME: dtec_app
+      API_URL: https://your-backend-url.com
+      HS_SECRET: your-secret
+    volumes:
+      - ./keys:/app/keys:ro
+
+volumes:
+  mysql_data:
