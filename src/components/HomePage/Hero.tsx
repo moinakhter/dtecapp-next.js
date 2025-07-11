@@ -5,10 +5,11 @@ import { useTranslations } from "next-intl";
 import CounterCard from "../common/CounterCard";
 import FloatingBalls from "../common/FloatingBalls";
 import FadeText from "../common/FadeText";
- 
+
 import { Button } from "../ui/button";
- 
+
 import HeroImgLight from "./HeroImgLight";
+import SpeechAnalyticsCarousel from "./SpeechAnalyticsCarousel";
 
 export const Hero = () => {
   const t = useTranslations("HomePage.Hero");
@@ -48,8 +49,16 @@ export const Hero = () => {
               {t("learnmore")}{" "}
             </Button>
           </div>
-          {/* Statistics Cards */}
-          <div className="flex  mt-[64px] pb-16 w-full items-center md:flex-nowrap flex-wrap  justify-center gap-4">
+        
+        </div>
+        <div className="flex items-center md:pt-[250px] md:pb-[150px] justify-center w-full md:w-[572px]">
+          <HeroImgLight />
+          <SpeechAnalyticsCarousel />
+        </div>
+        
+      </div>
+  {/* Statistics Cards */}
+          <div className="flex max-w-3xl  mt-[64px]  pb-16 w-full items-center md:flex-nowrap flex-wrap  justify-center gap-4">
             {[
               { value: "6", label: t("counter1") },
               { value: "12", label: t("counter2") },
@@ -64,14 +73,6 @@ export const Hero = () => {
               />
             ))}
           </div>
-        </div>
-        <div className="flex items-center md:pt-[250px] md:pb-[150px] justify-center w-full md:w-[572px]">
-          
-        
-        <HeroImgLight />
-        </div>
-      </div>
-
       {/* Logos Row */}
       <LogosTicker />
     </section>

@@ -4,9 +4,21 @@ import Image from "next/image";
 
 import { motion } from "framer-motion";
 import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 
 const HeroImgLight = () => {
-  const { theme } = useTheme();
+    const { theme } = useTheme();
+const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Prevent rendering on server
+  if (!mounted) return null;
+
+  const isDark = theme === "dark";
+
   return (
     <div className="w-[572.23px] flex items-center justify-center h-96 relative">
       {/* AI Call Image (middle one) */}
@@ -20,9 +32,9 @@ const HeroImgLight = () => {
       >
         <Image
           src={
-            theme === "dark"
+            isDark
               ? "/images/Hero/dark/AI-Call.png"
-              : "/images/Hero/light/AI Call from Figma.png"
+              : "/images/Hero/light/AI-Call.png.png"
           }
           alt="Logo"
           width={288}
@@ -42,7 +54,7 @@ const HeroImgLight = () => {
       >
         <Image
           src={
-            theme === "dark"
+            isDark
               ? "/images/Hero/dark/Instagram.png"
               : "/images/Hero/light/Instagram.png"
           }
@@ -63,7 +75,7 @@ const HeroImgLight = () => {
       >
         <Image
           src={
-            theme === "dark"
+            isDark
               ? "/images/Hero/dark/WP Facebook.png"
               : "/images/Hero/light/WP Facebook.png"
           }
@@ -75,7 +87,7 @@ const HeroImgLight = () => {
       </motion.div>
 
       {/* Audio from DTEC */}
-      <motion.div
+      {/* <motion.div
         className="left-[356.23px] top-[315.75px] absolute"
         whileHover={{
           scale: 1.05,
@@ -85,7 +97,7 @@ const HeroImgLight = () => {
       >
         <Image
           src={
-            theme === "dark"
+            isDark
               ? "/images/Hero/dark/Audio.png"
               : "/images/Hero/light/Audio from DTEC.APP.png"
           }
@@ -94,11 +106,11 @@ const HeroImgLight = () => {
           height={616}
           className="object-cover"
         />
-      </motion.div>
+      </motion.div> */}
 
       {/* DtecAiCall */}
       <motion.div
-        className="left-[12.23px] top-[365.75px] absolute"
+        className="left-[2.23px] top-[265.75px] absolute"
         whileHover={{
           scale: 1.05,
           rotate: -1,
@@ -107,7 +119,7 @@ const HeroImgLight = () => {
       >
         <Image
           src={
-            theme === "dark"
+            isDark
               ? "/images/Hero/dark/DtecAiCall.png"
               : "/images/Hero/light/DtecAiCall.png"
           }
@@ -130,7 +142,7 @@ const HeroImgLight = () => {
       >
         <Image
           src={
-            theme === "dark"
+            isDark
               ? "/images/Hero/dark/New Gen AI Assistant.png"
               : "/images/Hero/light/New Gen AI Assistant from Figma.png"
           }
@@ -152,7 +164,7 @@ const HeroImgLight = () => {
       >
         <Image
           src={
-            theme === "dark"
+            isDark
               ? "/images/Hero/dark/Security.png"
               : "/images/Hero/light/Security DTEC App.png"
           }

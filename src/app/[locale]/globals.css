@@ -232,3 +232,42 @@ a {
 .dark .ball-2 {
   background: radial-gradient(circle, #143773 0%, #121212 100%);
 }
+
+
+
+.loader {
+  height: 80px;
+  aspect-ratio: 1;
+  padding: 10px;
+  border-radius: 50%;
+  box-sizing: border-box;
+  position: relative;
+  mask: conic-gradient(#000 0 0) content-box exclude, conic-gradient(#000 0 0);
+  filter: blur(12px);
+}
+
+.loader:before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-conic-gradient(#0000 0 5%, #3d7ee2, #0000 20% 50%);
+  animation: l2 1.5s linear infinite;
+}
+
+@keyframes l2 {
+  to {
+    rotate: 1turn
+  }
+}
+
+@keyframes l3-1 {
+  100% {
+    left: calc(100% - 8px)
+  }
+}
+
+@keyframes l3-2 {
+  100% {
+    top: -0.1px
+  }
+}

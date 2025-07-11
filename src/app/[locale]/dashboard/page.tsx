@@ -155,7 +155,7 @@ const DashboardPage = () => {
                     type="text"
                     readOnly
                     value={userData?.dtecToken}
-                    className="bg-card py-[12px] px-1 text-white rounded-xl truncate w-full   mr-2"
+                    className="bg-card py-[12px] px-1 rounded-xl truncate w-full mr-2"
                   />
                   <Button
                     variant="secondary"

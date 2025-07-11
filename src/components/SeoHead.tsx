@@ -15,7 +15,7 @@ export default function SeoHead({ pageKey }: SeoHeadProps) {
       <meta name="description" content={t(`${pageKey}Description`)} />
       <meta property="og:title" content={t(`${pageKey}Title`)} />
       <meta property="og:description" content={t(`${pageKey}Description`)} />
-      {/* Add your OG images and canonical URLs here */}
+ 
     </Head>
   );
 }
