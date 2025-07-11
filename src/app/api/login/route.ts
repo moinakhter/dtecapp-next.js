@@ -9,10 +9,11 @@ import path from "path";
 import crypto from "crypto";
 import fs from "fs";
 
-const privateKeyPath = path.join(process.cwd(), "keys", "private.pem");
-const privateKeyPem = fs.readFileSync(privateKeyPath, "utf8");
+
 
 function decryptPayload(encryptedBase64: string): unknown {
+  const privateKeyPath = path.join(process.cwd(), "keys", "private.pem");
+const privateKeyPem = fs.readFileSync(privateKeyPath, "utf8");
   const encryptedBuffer = Buffer.from(encryptedBase64, "base64");
 
   const decryptedBuffer = crypto.privateDecrypt(

@@ -6,9 +6,38 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Celias } from "@/lib/utils";
 import Footer from "@/components/Footer";
-
 import ReactQueryProvider from "./providers";
 import Head from "next/head";
+import { getTranslations } from "next-intl/server";
+
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "Metadata" });
+
+  return {
+    title: t('homeTitle'),
+    description: t('homeDescription'),
+    openGraph: {
+      title: t('homeTitle'),
+      description: t('homeDescription'),
+      images: [
+        {
+          url: `https://dtec.app/og?title=${encodeURIComponent(t('homeTitle'))}&locale=${locale}`,
+          width: 1200,
+          height: 630,
+          alt: 'Dtec Smart Assistant',
+        },
+      ],
+    },
+    alternates: {
+      languages: {
+        en: `https://dtec.app/en`,
+        tr: `https://dtec.app/tr`,
+      },
+    },
+  };
+}
 
 export default async function LocaleLayout({
   children,
@@ -25,9 +54,9 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} className={Celias.className} suppressHydrationWarning>
       <Head>
-  <script
-  dangerouslySetInnerHTML={{
-    __html: `
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
       document.addEventListener("DOMContentLoaded", function () {
         const urlParams = new URLSearchParams(window.location.search);
         const shopOrigin = urlParams.get('shop');
@@ -50,11 +79,9 @@ export default async function LocaleLayout({
           redirect.dispatch(Redirect.Action.ADMIN_PATH, '/settings/general');
         }
       });
-    `
-  }}
-/>
-
-
+    `,
+          }}
+        />
       </Head>
       <body
         className="bg-background text-foreground font-normal text-[13px] antialiased w-full h-full flex items-center justify-start flex-col overflow-hidden"

@@ -5,9 +5,8 @@ import path from "path";
 import fs from "fs";
 import crypto from "crypto";
 
-const HS_SECRET = 'DT_yMVYb0viQLBEBpKtgaCD2h9P9gM7Tf1F';
-const privateKeyPath = path.join(process.cwd(), 'keys', 'private.pem');
-const privateKeyPem = fs.readFileSync(privateKeyPath, 'utf8');
+const HS_SECRET = process.env.HS_SECRET;
+
 
 type DecryptedPayload = {
   user: {
@@ -24,6 +23,8 @@ type DecryptedPayload = {
 };
 
 function decryptPayload(encryptedBase64: string): DecryptedPayload {
+  const privateKeyPath = path.join(process.cwd(), 'keys', 'private.pem');
+const privateKeyPem = fs.readFileSync(privateKeyPath, 'utf8');
   const decrypted = crypto.privateDecrypt(
     {
       key: privateKeyPem,
