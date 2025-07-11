@@ -1,28 +1,32 @@
 {
   "Metadata": {
     "language": "tr",
+"homeTitle": "Dtec – Hepsi Bir Arada Akıllı Asistan | Dtec",
 
-    "homeTitle": "Dtec – Hepsi Bir Arada Akıllı Asistan | Dtec",
-    "homeDescription": "Geleceğe yolculuk: Akıllı sesli asistan çözümüyle araç, alışveriş, ev ve seyahat yönetimini tek bir platformda keşfedin.",
+"homeDescription": "Geleceğe yolculuk: Akıllı sesli asistan çözümüyle tek bir platformda araç, alışveriş, ev ve seyahat yönetimini keşfedin.",
 
-    "carTitle": "Dtec Araç Asistanı – Sesli Kontrol & Yüz Tanıma | Güvenli Sürüş",
-    "carDescription": "Sürüş deneyimini yeniden tanımlayan zeki yol arkadaşınız: yüz ve duygu tanıma, sesli araç donanım kontrolü, e‑posta gönderimi, çoklu dil çeviri ve hatırlatmalar.",
+"carTitle": "Dtec Araç Asistanı – Ses Kontrolü ve Yüz Tanıma | Güvenli Sürüş",
 
-    "shoppingTitle": "Dtec Alışveriş Asistanı – Gelişmiş NLP ile Sesli Alışveriş",
-    "shoppingDescription": "Konuşarak kolay alışveriş deneyimi: gelişmiş NLP, akıllı filtreleme, güvenli ödeme, kişiselleştirilmiş öneriler ve 22 dilde destek.",
+"carDescription": "Sürüş deneyimini yeniden tanımlayan akıllı yol arkadaşınız: yüz ve duygu tanıma, sesli araç ekipmanı kontrolü, e-posta gönderme, çoklu dil çeviri ve hatırlatıcılar.",
 
-    "homeAssistantTitle": "Dtec Akıllı Ev Asistanı – IoT Entegrasyon & Otomasyon",
-    "homeAssistantDescription": "Ev ve araç arasında senkronize senaryolar, gerçek zamanlı cihaz kontrolü, enerji tasarrufu ve yüksek güvenlik sunan akıllı ev asistanı.",
+"shoppingTitle": "Dtec Alışveriş Asistanı – Gelişmiş NLP ile Sesli Alışveriş",
 
-    "travelTitle": "Dtec Seyahat Asistanı – Uçuş, Otel & Planlama Asistanı",
-    "travelDescription": "Seyahat planlamanızı kolaylaştıran kişisel seyahat arkadaşı: gerçek zamanlı uçuş yardım, otel önerileri, fiyatlar ve güvenlik odaklı gizlilik.",
+"shoppingDescription": "Konuşarak kolay alışveriş deneyimi: gelişmiş NLP, akıllı filtreleme, güvenli ödeme, kişiselleştirilmiş öneriler ve 22 dilde destek.",
+"shopifyTitle": "Dtec Shopify Asistanı – Gelişmiş NLP ile Sesli Alışveriş",
+"shopifyDescription": "Konuşarak kolay alışveriş deneyimi: gelişmiş NLP, akıllı filtreleme, güvenli Ödeme, kişiselleştirilmiş öneriler ve 22 dilde destek.",
+"homeAssistantTitle": "Dtec Akıllı Ev Asistanı - IoT Entegrasyonu ve Otomasyonu",
 
-    "tokenTitle": "Dtec Token – Blok Zincirli Ekosistem & Mobilite Token’ı",
-    "tokenDescription": "Sesli komutlarla IoT ve araç kullanımını destekleyen blok zincir tabanlı token: şeffaf, güvenli ve real-time ekosistem içinde işlemler.",
+"homeAssistantDescription": "Ev ve araba arasında senkronize senaryolar, gerçek zamanlı cihaz kontrolü, enerji tasarrufu ve yüksek güvenlik sunan akıllı ev asistanı.",
 
-    "aboutTitle": "Hakkımızda – Dtec: Sesli Asistanla Etkileşim Geleceği",
-    "aboutDescription": "Markaların sesle etkileşim dünyasında kendine özgü bir ses sunmasını hedefliyoruz. Misyonumuz, evrensel interaktif konuşma asistanları geliştirmek."
-  },
+"travelTitle": "Dtec Seyahat Asistanı - Uçuş, Otel ve Planlama Asistanı",
+"travelDescription": "Seyahat planlamanızı kolaylaştıran kişisel seyahat arkadaşınız: gerçek zamanlı uçuş yardımı, otel önerileri, fiyatlar ve güvenliğe odaklı gizlilik.",
+
+"aiCallCenterTitle": "Yapay Zeka Destekli Çağrı Merkezi Deneyimi",
+"aiCallCenterDescription": "Dtec Yapay Zeka Çağrı Merkezi çözümümüz, gelen ve giden çağrıları insan müdahalesi olmadan yöneterek müşteri deneyiminde devrim yaratıyor. Yapay zeka destekli çağrılarla işletmenizin verimliliğini artırın ve müşterilerinizle daha hızlı, daha kişisel ve etkili bir şekilde iletişim kurun.",
+
+"aboutTitle": "Hakkımızda - Dtec: Geleceğin Sesli Asistanla Etkileşim",
+"aboutDescription": "Markaların sesli etkileşim dünyasında kendilerine özgü bir ses sunmasını hedefliyoruz. Misyonumuz, evrensel etkileşimli konuşma asistanları geliştirmek."
+},
   "LocaleSwitcher": {
     "locale": "EN"
   },

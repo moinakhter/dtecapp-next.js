@@ -12,7 +12,20 @@ import {  buttonVariants } from "@/components/ui/button";
 import SectionWrapper from "@/components/common/SectionWrapper";
 import Animation from "./Animation";
 import { Link } from "@/i18n/navigation";
+import { getTranslations } from "next-intl/server";
 
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "Metadata" });
+
+  return {
+    title: t('shopifyTitle'),
+    description: t('shopifyDescription'),
+  }
+
+
+}
 const Page = () => {
   const t = useTranslations("shopify-assistant");
 
