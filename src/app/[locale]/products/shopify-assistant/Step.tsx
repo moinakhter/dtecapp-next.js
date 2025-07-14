@@ -30,7 +30,7 @@ return (
      <motion.div
        variants={stepVariants}
 
-      className="grid md:grid-cols-[150px_1fr] gap-9 items-start group"
+      className="grid  md:grid-cols-[150px_1fr] gap-9 items-start group"
     >
       {/* Step Label */}
       <div>
@@ -40,7 +40,7 @@ return (
       {/* Right Side: Content and Optional Image */}
       <div className="grid md:grid-cols-[1fr_auto] gap-8 items-start">
         {/* Step Content */}
-        <div className="space-y-4">
+        <div className="space-y-4 max-w-2xl">
           <h4 className="text-xl font-medium">{title}</h4>
           <ol className="space-y-2 text-base list-decimal list-inside">
             {details.map((item, idx) => (

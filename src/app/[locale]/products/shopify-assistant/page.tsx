@@ -47,16 +47,17 @@ const Page = () => {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative md:p-0 p-2 xl:h-full w-full">
+      <section className="relative min-h-[80vh]  h-full  w-full">
         <FloatingBalls />
-        <div className="container relative z-10">
-          <div className="grid md:mt-[250px] mt-[160px] grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-8 md:text-start text-center">
+       <div className="container relative z-10 flex items-center justify-center min-h-[684px] !pt-[200px]   h-full ">
+               <div className="flex flex-col md:flex-row items-center justify-center gap-12 text-center md:text-left">
+
+            <div className="space-y-8 w-full md:text-start text-center">
               <TextGradientWhite className="text-3xl md:text-7xl font-bold">
                 {t("title")}
               </TextGradientWhite>
               <FadeText delay={0.2}>
-                <p className="text-base font-light max-w-xl">
+                <p className="text-base font-light  ">
                   {t.rich("description", {
                     b: (chunks) => <strong>{chunks}</strong>,
                   })}
@@ -86,22 +87,22 @@ const Page = () => {
               </div>
             </div>
 
-            <div className="relative">
+            <div className="relative lg:w-1/2">
               <div className="relative rounded-3xl md:p-8 overflow-hidden">
                 <Image
                   src="/images/Icons/shopify-light.svg"
                   alt="DTEC Car Assistant"
-                  width={577}
+                  width={400}
                   height={363}
-                  className="w-full mx-auto md:max-w-[577px] max-w-[300px] h-auto block dark:hidden rounded-2xl relative z-10"
+                  className="w-full mx-auto md:max-w-[400px] max-w-[300px] h-auto block dark:hidden rounded-2xl relative z-10"
                   priority
                 />
                 <Image
                   src="/images/Icons/shopify-dark.svg"
                   alt="DTEC Car Assistant"
-                  width={577}
+                  width={400}
                   height={363}
-                  className="w-full mx-auto md:max-w-[577px] max-w-[300px] dark:block hidden h-auto rounded-2xl relative z-10"
+                  className="w-full mx-auto md:max-w-[400px] max-w-[300px] dark:block hidden h-auto rounded-2xl relative z-10"
                   priority
                 />
               </div>

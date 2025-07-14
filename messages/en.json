@@ -1,30 +1,20 @@
 {
   "Metadata": {
     "language": "en",
-
     "homeTitle": "All-in-One Smart Assistant | Dtec",
-
     "homeDescription": "Journey to the future: Discover car, shopping, home and travel management in one platform with the smart voice assistant solution.",
-
     "carTitle": "Dtec Car Assistant – Voice Control & Face Recognition | Safe Driving",
-
     "carDescription": "Your intelligent companion that redefines the driving experience: face and emotion recognition, voice vehicle equipment control, email sending, multi‑language translation and reminders.",
-
     "shoppingTitle": "Dtec Shopping Assistant – Voice Shopping with Advanced NLP",
-
     "shoppingDescription": "Easy shopping experience by talking: advanced NLP, intelligent filtering, secure payment, personalized recommendations and support in 22 languages.",
-"shopifyTitle": "Dtec Shopify Assistant – Voice Shopping with Advanced NLP",
+    "shopifyTitle": "Dtec Shopify Assistant – Voice Shopping with Advanced NLP",
     "shopifyDescription": "Easy shopping experience by talking: advanced NLP, intelligent filtering, secure payment, personalized recommendations and support in 22 languages.",
     "homeAssistantTitle": "Dtec Smart Home Assistant – IoT Integration & Automation",
-
     "homeAssistantDescription": "Smart home assistant offering synchronized scenarios between home and car, real-time device control, energy saving and high security.",
-
     "travelTitle": "Dtec Travel Assistant - Flight, Hotel & Planning Assistant",
     "travelDescription": "Personal travel companion that makes your travel planning easier: real-time flight assistance, hotel recommendations, prices and privacy focused on security.",
-
     "aiCallCenterTitle": "Artificial Intelligence Powered Call Center Experience",
     "aiCallCenterDescription": "Our Dtec AI Call Center solution revolutionizes the customer experience by managing incoming and outgoing calls without human intervention. Increase the efficiency of your business and communicate with your customers faster, more personally and effectively with AI-powered calls.",
-
     "aboutTitle": "About Us - Dtec: The Future of Interaction with Voice Assistant",
     "aboutDescription": "We aim for brands to offer their own unique voice in the world of voice interaction. Our mission is to develop universal interactive speech assistants."
   },
@@ -48,7 +38,6 @@
     "tokenomics": "Tokenomics",
     "Download": "Download Assistant",
     "products2": "Our add -ons",
-
     "carAssistant": "Car Assistant",
     "shoppingAssistant": "Shopping Assistant",
     "homeAssistant": "Smart Home Assistant",
@@ -280,8 +269,8 @@
     "reminderTitle": "Save Reminders",
     "reminderDescription": "Saves reminders set by the driver to help them remember important events at the specified date and time.",
     "dtecgpt": "Our developed DtecGPT combines natural language processing and context tracking. It understands your complex questions like a human and offers a conversational experience with fluent, comprehensive answers. It unifies all the information you need with a single touch while interpreting your vehicle-related commands.",
-    "ComplexQuestionsTitle1": "Responds to Complex Questions and ",
-    "ComplexQuestionsTitle2": "Your Conversations",
+    "ComplexQuestionsTitle1": "Responds to Complex Questions ",
+    "ComplexQuestionsTitle2": "and Your Conversations",
     "dtecgptDescription": "Our Automatic Speech Recognition (ASR) and Natural Language Understanding (NLU) modules process your commands quickly and accurately, responding almost with human-like skill. This ensures the most appropriate action is instantly triggered for every request, and the system continuously improves to make your driving experience smoother.",
     "SafeExperienceTitle": "Safe and Efficient Driving Experience",
     "SafeExperienceDesc": "Vehicle Assistant offers completely hands-free control by eliminating manual distractions. It voice-activates critical alerts and emergency notifications; and thanks to its multitasking ability, it allows you to manage your route, communication or entertainment without interruption. This maximizes both your safety and the efficiency of your journey."

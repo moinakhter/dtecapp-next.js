@@ -24,7 +24,7 @@ function FeatureCard({
           className
         )}
       >
-        <div className="flex flex-col space-y-4">
+        <div className="flex flex-col md:items-start  items-center space-y-4">
          
           {Icon && (
             <div className="w-fit">

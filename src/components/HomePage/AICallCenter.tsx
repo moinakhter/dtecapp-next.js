@@ -53,7 +53,8 @@ function AICallCenter() {
           <div className="md:w-1/2 w-full relative">
             <div className="max-w-[372px]">
               <FadeText>
-                <h3 className="text-2xl font-semibold mb-4">
+                <h3 className="text-2xl md:text-[36px]  font-medium mb-4  dark:text-transparent dark:bg-clip-text dark:bg-[linear-gradient(311deg,_#FAFAFA_14%,_#CDCDCD_36%,_#999999_52%,_#E2E2E2_69%,_#FAFAFA_89%)] 
+        text-transparent bg-clip-text bg-[linear-gradient(90deg,_#212121_14%,_#424242_36%,_#616161_52%,_#424242_69%,_#212121_100%)]">
                   {t("sectionTitle")}
                 </h3>
               </FadeText>
@@ -71,7 +72,8 @@ function AICallCenter() {
                 className: "mt-6 text-white",
               })}
             >
-              {t("button")} <span className="rotate-[-45deg] inline-block">→</span>
+              {t("button")}{" "}
+              <span className="rotate-[-45deg] inline-block">→</span>
             </Link>
           </div>
 
@@ -117,7 +119,7 @@ function AICallCenter() {
           </motion.div>
         </div>
 
-        <div className="w-full flex flex-col  md:flex-row gap-10">
+        <div className="w-full flex flex-col  md:flex-row gap-10 my-5">
           <motion.div
             className="p-6 mx-auto bg-card dark:bg-[radial-gradient(90%_90%_at_top,_#121212_59%,_#003FA1_150%)]  w-full md:w-[300px] rounded-3xl border border-border shadow-md flex items-center justify-center flex-col text-center"
             initial={{ opacity: 0, y: 40 }}

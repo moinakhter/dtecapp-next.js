@@ -23,8 +23,8 @@ import {
   SuitCaseIcon,
   TwoSideArrowIcon,
 } from "@/components/common/Icons";
-import FloatingBalls from "@/components/common/FloatingBalls";
 import FadeText from "@/components/common/FadeText";
+import InnerPageHeader from "@/components/common/InnerPageHeader";
 
 export default function ShoppingAssistantPage() {
   const t = useTranslations("shopping-assistant");
@@ -75,36 +75,12 @@ export default function ShoppingAssistantPage() {
 
   return (
     <>
-      <section className="relative md:p-0 p-2   lg:min-h-screen w-full  ">
-        <FloatingBalls />
-
-        <div className="container relative z-10">
-          <div className="grid  md:mt-[250px] mt-[160px] grid-cols-1 lg:grid-cols-2 lg:gap-12 gap-5 items-center">
-            <div className="space-y-8  md:text-start text-center">
-              <TextGradientWhite className="text-3xl md:text-7xl font-bold  ">
-                {t("heroTitle")}
-              </TextGradientWhite>
-              <p className="text-base font-light  max-w-xl">
-                {t("heroDescription")}
-              </p>
-            </div>
-
-            {/* Right Content - Car Image */}
-            <div className="relative">
-              <div className="relative  rounded-3xl md:p-8  overflow-hidden">
-                <Image
-                  src="/images/Home/dtec-assistants/women-shopping.png"
-                  alt="DTEC Car Assistant"
-                  width={577}
-                  height={363}
-                  className="w-full h-auto rounded-2xl relative z-10"
-                  priority
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+       <InnerPageHeader
+        title={t("heroTitle")}
+        desc={t("heroDescription")}
+        imageSrc="/images/Home/dtec-assistants/women-shopping.png"
+      />
+  
 
       <LogosTicker />
 
@@ -147,7 +123,7 @@ export default function ShoppingAssistantPage() {
         </motion.div>
       </SectionWrapper>
 
-      <SectionWrapper className="relative  w-full  px-4 flex justify-center items-center  ">
+      <SectionWrapper className="relative  w-full  z-10 px-4 flex justify-center items-center  ">
         <div
           ref={ref}
           className="container mx-auto flex flex-col-reverse lg:flex-row items-center gap-12 px-4"

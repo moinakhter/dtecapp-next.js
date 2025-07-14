@@ -42,7 +42,8 @@ export default function AboutPage() {
       role: "Software Engineer",
       image: "/images/dtec-member.png",
       link: "https://www.linkedin.com/in/hasan-alani-sweng/",
-    },  {
+    },
+    {
       name: "Ilham Asgarli",
       role: "Mobil Application Developer",
       image: "/images/dtec-member.png",
@@ -132,7 +133,7 @@ export default function AboutPage() {
       </section>
 
       <SectionWrapper>
-        <TextGradientWhite className="text-center    font-black mb-16">
+        <TextGradientWhite className="text-center font-black mb-16">
           {t("DetcTeam")}
         </TextGradientWhite>
         <div className=" flex items-center h-full justify-center flex-wrap  gap-16 container ">
@@ -241,9 +242,9 @@ export default function AboutPage() {
         <h3 className="text-center text-2xl font-medium  mt-16">
           {t("awards2")}
         </h3>
-        <div className="flex container flex-col md:flex-row items-start gap-6">
+        <div className="flex container lg:w-1/3  md:w-1/2 w-full   flex-col md:flex-row items-start gap-6">
           {/* Image Container */}
-          <div className="md:w-[128px] w-[200px]    aspect-square relative flex-shrink-0 mx-auto md:mx-0">
+          <div className="md:w-[128px]  w-[200px] aspect-square relative flex-shrink-0 mx-auto md:mx-0">
             <Image
               src="/images/Hero/logos/tübitak_logo_beyaz.png"
               alt="TÜBİTAK Logo"

@@ -46,7 +46,7 @@ export default function CounterCard({ value, label, index = 0 }: CounterCardProp
         bg-white 
          h-[140px]
         shadow-md 
-        w-full
+        w-full max-w-[300px]
         rounded-xl 
         px-6 py-4 
         dark:bg-[#1A1A1A]

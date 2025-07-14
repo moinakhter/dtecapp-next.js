@@ -30,12 +30,12 @@ const FloatingBalls = () => {
            className="absolute bottom-50 right-[-30%] h-[1053px] w-[1053px] rounded-full ball-2 blur-[100px] opacity-100 z-0 "
          />
    
-         <div className="absolute inset-0   z-0 mix-blend-overlay">
+         <div className="absolute inset-0 z-0 mix-blend-overlay">
            <Image
              src="/images/Backgrounds/bg2.svg"
              alt="background"
              fill
-             className="object-cover "
+             className="object-cover background-repeat "
            />
          </div>
          </>

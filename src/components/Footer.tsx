@@ -12,37 +12,37 @@ import DtecTokenCard from "./common/DtecTokenCard";
 const socialLinks = [
   {
     icon: "/images/Icons/SOCIAL/X.svg",
-    href: "https://twitter.com/dtec",
+    href: "https://x.com/DtecToken",
     label: "Twitter",
   },
-  {
-    icon: "/images/Icons/SOCIAL/Facebook.svg",
-    href: "https://facebook.com/dtec",
-    label: "Facebook",
-  },
+  // {
+  //   icon: "/images/Icons/SOCIAL/Facebook.svg",
+  //   href: "https://facebook.com/dtec",
+  //   label: "Facebook",
+  // },
   {
     icon: "/images/Icons/SOCIAL/linkedin.svg",
-    href: "https://linkedin.com/company/dtec",
+    href: "https://www.linkedin.com/company/dizayn-vip/",
     label: "LinkedIn",
   },
   {
     icon: "/images/Icons/SOCIAL/discord.svg",
-    href: "https://discord.gg/dtec",
+    href: "https://discord.com/invite/BryYWBsmYY",
     label: "Discord",
   },
   {
     icon: "/images/Icons/SOCIAL/instagram.svg",
-    href: "https://instagram.com/dtec",
+    href: "https://www.instagram.com/dtec_token/",
     label: "Instagram",
   },
-  {
-    icon: "/images/Icons/SOCIAL/youtube.svg",
-    href: "https://youtube.com/dtec",
-    label: "YouTube",
-  },
+  // {
+  //   icon: "/images/Icons/SOCIAL/youtube.svg",
+  //   href: "https://youtube.com/dtec",
+  //   label: "YouTube",
+  // },
   {
     icon: "/images/Icons/SOCIAL/telegram.svg",
-    href: "https://t.me/dtec",
+    href: "https://t.me/dtectoken",
     label: "Telegram",
   },
 ];
@@ -132,22 +132,22 @@ export default function Footer() {
               <div className="space-y-[13px]">
                 <div className="flex items-start justify-center lg:justify-start gap-2">
                   <MapPin className="h-4 w-4 flex-shrink-0" />
-                  <div className="text-[13px] w-full">
-                    {t("address")
-                      .split("\n")
-                      .map((line, i) => (
-                        <p key={i}>{line}</p>
-                      ))}
-                  </div>
+                  <a href="https://maps.app.goo.gl/2Y7wHng3Ghh5JK8m9" className="text-[13px] w-full">
+                  Üniversite Mah. Firuzköy Blv.
+                  <br />
+                   No:100, 34320 Avcılar/İstanbul
+                  </a>
                 </div>
                 <div className="flex items-center justify-center lg:justify-start gap-2">
                   <Phone className="h-4 w-4" />
-                  <span className="text-[13px]">+90 (212) 468 45 45</span>
+                  <a 
+                   href="tel:+902124684545"
+                  
+                  className="text-[13px]">+90 (212) 468 45 45</a>
                 </div>
                 <div className="flex items-center justify-center lg:justify-start gap-2">
                   <Mail className="h-4 w-4" />
-                  <span className="text-[13px]">dtec@dtecyazilim.com</span>
-                </div>
+                  <a href="mailto:dtec@dtecyazilim.com" className="text-[13px]">dtec@dtecyazilim.com</a>   </div>
               </div>
             </div>
           </div>

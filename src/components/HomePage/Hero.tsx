@@ -18,62 +18,69 @@ export const Hero = () => {
       <FloatingBalls />
 
       {/* Main Content */}
-      <div className="z-10 relative container flex items-start justify-between md:flex-row flex-col h-full w-full">
-        <div className="md:w-1/2 pt-[250px]  md:pb-[150px] flex flex-col items-start justify-center gap-8">
-          <FadeText>
-            <h1 className="lg:text-6xl  md:text-4xl text-3xl  leading-tight dark:text-transparent dark:bg-clip-text dark:bg-[linear-gradient(311deg,_#FAFAFA_14%,_#CDCDCD_36%,_#999999_52%,_#E2E2E2_69%,_#FAFAFA_89%)]  text-transparent bg-clip-text bg-[linear-gradient(90deg,_#212121_14%,_#424242_36%,_#616161_52%,_#424242_69%,_#212121_100%)]">
-              <span className="block">{t("title1")}</span>
-              <span className="block font-bold">{t("title2")}</span>
-            </h1>
-          </FadeText>
-          <FadeText delay={0.2}>
-            <p className="lg:text-xl md:text-lg text-sm font-light">
-              {t.rich("description", {
-                b: (chunks) => <b className="font-bold">{chunks}</b>,
-              })}
-            </p>
-          </FadeText>
-          <div className="flex items-center md:flex-row  w-full flex-col md:justify-start justify-center gap-4">
-            <Button
-              size="sm"
-              className="md:max-w-[153px] max-w-[353px] w-full"
-              variant="secondary"
-            >
-              {t("getDemo")}{" "}
-            </Button>
-            <Button
-              size="sm"
-              className="lg:max-w-[176px]  max-w-[353px] w-full border-secondary"
-              variant="outline"
-            >
-              {t("learnmore")}{" "}
-            </Button>
+      {/* Outer wrapper - full height center */}
+      <div className="relative container min-h-screen flex flex-col justify-center items-center px-4">
+        {/* Main Content */}
+        <div className="z-10 relative flex items-center justify-between md:flex-row flex-col w-full gap-12">
+          {/* Right Side - Image first on mobile */}
+          <div className="w-full md:w-[572px] flex items-center justify-center order-1 md:order-2">
+            <HeroImgLight />
+            <SpeechAnalyticsCarousel />
           </div>
-        
+
+          {/* Left Side - Text */}
+          <div className="w-full md:w-1/2 flex flex-col gap-8 items-center md:items-start text-center md:text-left order-2 md:order-1">
+            <FadeText>
+              <h1 className="lg:text-6xl md:text-4xl text-4xl font-black leading-tight dark:text-transparent dark:bg-clip-text dark:bg-[linear-gradient(311deg,_#FAFAFA_14%,_#CDCDCD_36%,_#999999_52%,_#E2E2E2_69%,_#FAFAFA_89%)] text-transparent bg-clip-text bg-[linear-gradient(90deg,_#212121_14%,_#424242_36%,_#616161_52%,_#424242_69%,_#212121_100%)]">
+                <span className="block">{t("title1")}</span>
+                <span className="block font-bold">{t("title2")}</span>
+              </h1>
+            </FadeText>
+
+            <FadeText delay={0.2}>
+              <p className="lg:text-xl md:text-lg text-sm font-light max-w-xl">
+                {t.rich("description", {
+                  b: (chunks) => <b className="font-bold">{chunks}</b>,
+                })}
+              </p>
+            </FadeText>
+
+            <div className="flex flex-col md:flex-row w-full md:justify-start items-center justify-center gap-4">
+              <Button
+                size="sm"
+                className="md:max-w-[153px] max-w-[353px] w-full"
+                variant="secondary"
+              >
+                {t("getDemo")}
+              </Button>
+              <Button
+                size="sm"
+                className="lg:max-w-[176px] max-w-[353px] w-full border-secondary"
+                variant="outline"
+              >
+                {t("learnmore")}
+              </Button>
+            </div>
+          </div>
         </div>
-        <div className="flex items-center md:pt-[250px] md:pb-[150px] justify-center w-full md:w-[572px]">
-          <HeroImgLight />
-          <SpeechAnalyticsCarousel />
-        </div>
-        
       </div>
-  {/* Statistics Cards */}
-          <div className="flex max-w-3xl  mt-[64px]  pb-16 w-full items-center md:flex-nowrap flex-wrap  justify-center gap-4">
-            {[
-              { value: "6", label: t("counter1") },
-              { value: "12", label: t("counter2") },
-              { value: "600.000", label: t("counter3") },
-              // { value: "56+", label: t("counter4") },
-            ].map((item, i) => (
-              <CounterCard
-                key={i}
-                value={item.value}
-                label={item.label}
-                index={i}
-              />
-            ))}
-          </div>
-      {/* Logos Row */}
+
+      <div className="flex max-w-3xl  mt-[64px]  pb-16 w-full items-center md:flex-nowrap flex-wrap  justify-center gap-4">
+        {[
+          { value: "6", label: t("counter1") },
+          { value: "12", label: t("counter2") },
+          { value: "600.000", label: t("counter3") },
+          // { value: "56+", label: t("counter4") },
+        ].map((item, i) => (
+          <CounterCard
+            key={i}
+            value={item.value}
+            label={item.label}
+            index={i}
+          />
+        ))}
+      </div>
+
       <LogosTicker />
     </section>
   );

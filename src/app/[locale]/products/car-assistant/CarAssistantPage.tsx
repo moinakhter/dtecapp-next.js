@@ -20,9 +20,9 @@ import {
 import { useTranslations } from "next-intl";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import MindsBanner from "@/components/HomePage/minds-meet";
-import FloatingBalls from "@/components/common/FloatingBalls";
-import FadeText from "@/components/common/FadeText";
  
+import FadeText from "@/components/common/FadeText";
+import InnerPageHeader from "@/components/common/InnerPageHeader";
 
 export default function CarAssistantPage() {
   const t = useTranslations("car-assistant");
@@ -83,53 +83,14 @@ export default function CarAssistantPage() {
 
   return (
     <>
- 
-
-      {/* Hero Section */}
-      <section className="relative md:p-0 p-2   lg:min-h-screen w-full  ">
-        <FloatingBalls />
-        {/* Background Grid Pattern */}
-
-        <div className="container relative z-10">
-          <div className="grid  md:mt-[250px] mt-[160px] grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* Left Content */}
-            <div className="space-y-8 md:text-start text-center">
-              <TextGradientWhite className="text-3xl md:text-7xl font-bold  ">
-                {t("title")
-                  .split("\n")
-                  .map((line, index) => (
-                    <span key={index}>
-                      {line}
-                      <br />
-                    </span>
-                  ))}
-              </TextGradientWhite>
-              <FadeText delay={0.2}>
-                <p className="text-base font-light  max-w-xl">
-                  {t("description")}
-                </p>
-              </FadeText>
-            </div>
-
-            {/* Right Content - Car Image */}
-            <div className="relative">
-              <div className="relative rounded-3xl md:p-8 overflow-hidden">
-                <Image
-                  src="/images/Home/dtec-assistants/car.png"
-                  alt="DTEC Car Assistant"
-                  width={577}
-                  height={363}
-                  className="w-full max-w-[577px] h-auto rounded-2xl relative z-10"
-                  priority
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <InnerPageHeader
+        title={t("title")}
+        desc={t("description")}
+        imageSrc="/images/Home/dtec-assistants/car.png"
+      />
 
       <LogosTicker />
-
+<div className="flex flex-col gap-[150px]">
       <SectionWrapper className="relative z-10 mx-auto">
         <motion.div
           className="   container flex items-center justify-center flex-wrap  gap-12 lg:gap-[102px] mx-auto  "
@@ -168,7 +129,7 @@ export default function CarAssistantPage() {
         </motion.div>
       </SectionWrapper>
 
-      <SectionWrapper className="relative w-full py-24 px-4 sm:px-8 flex justify-center items-center">
+      <SectionWrapper className="relative z-10 w-full  py-24 px-4 sm:px-8 flex justify-center items-center">
         <div
           ref={ref}
           className="container mx-auto flex flex-col-reverse lg:flex-row items-center gap-12 px-4"
@@ -240,7 +201,7 @@ export default function CarAssistantPage() {
           </div>
         </SectionWrapper>
       </div>
-      <SectionWrapper className="relative w-full bg-transparent py-24 px-4 flex justify-center items-center  ">
+      <SectionWrapper className="relative w-full bg-transparent  py-24 px-4 flex justify-center items-center  ">
         <div
           ref={ref}
           className="container flex flex-col-reverse lg:flex-row justify-between items-center gap-8 px-4"
@@ -271,6 +232,7 @@ export default function CarAssistantPage() {
         </div>
       </SectionWrapper>
       <MindsBanner />
+      </div>
     </>
   );
 }

@@ -1,7 +1,7 @@
 "use client";
+ 
 import { motion } from "framer-motion";
-
-import { useState } from "react";
+import { useState ,useEffect} from "react";
 import {
   Bar,
   BarChart,
@@ -180,6 +180,13 @@ export default function SpeechAnalyticsCarousel() {
       ),
     },
   ];
+useEffect(() => {
+  const interval = setInterval(() => {
+    setCurrentChart((prev) => (prev + 1) % charts.length);
+  }, 4000); // switch every 4 seconds
+
+  return () => clearInterval(interval); // cleanup
+}, []);
 
   const goToChart = (index: number) => {
     setCurrentChart(index);
@@ -192,7 +199,8 @@ export default function SpeechAnalyticsCarousel() {
           rotate: -1,
           transition: { type: "spring", stiffness: 300, damping: 20 },
         }}
-    className="backdrop:blur-3xl border-secondary/30 border-2 px-0 py-2  bg-background/80 rounded-3xl overflow-hidden hidden md:block shadow-2xl relative  md:absolute md:bottom-[180px] -z-[0px] md:right-[-50px]">
+    className="backdrop:blur-3xl border-secondary/30 border-2 px-0 py-2  bg-background/80 rounded-3xl overflow-hidden
+     hidden md:block shadow-2xl relative  md:absolute md:bottom-[0px] -z-[0px] md:right-[-50px]">
       <CardContent className="p-0 relative   w-full">
         {/* Header with dots indicator */}
         <div className="flex justify-between items-center  absolute top-[-0px] z-10  right-10">

@@ -148,12 +148,12 @@ export default function DtecAssistants() {
                 </div>
 
                 {/* Content */}
-                <div className="relative h-full flex   flex-col justify-between p-2 md:px-9 md:pb-8 md:pt-5 z-10">
+                <Link  href={card.link} className="relative h-full flex   flex-col justify-between p-2 md:px-9 md:pb-8 md:pt-5 z-10">
                   {/* Top Right Link - Only visible when active */}
                   {isActive && (
                     <div className="flex justify-end">
-                      <Link
-                        href={card.link}
+                      <div
+                       
                         className="!text-neutral-50  text-[13px] flex items-center hover:underline"
                       >
                         <motion.span
@@ -173,7 +173,7 @@ export default function DtecAssistants() {
                             →
                           </span>
                         </motion.span>
-                      </Link>
+                      </div>
                     </div>
                   )}
 
@@ -228,7 +228,7 @@ export default function DtecAssistants() {
                       </div>
                     )}
                   </div>
-                </div>
+                </Link>
               </motion.div>
             );
           })}

@@ -36,7 +36,7 @@ const stepVariants: Variants = {
                   dangerouslySetInnerHTML={{ __html: line }}
                   className={`${
                     line.trim().startsWith("•") ? "pl-4" : "font-semibold"
-                  } [&>strong]:font-bold font-light`}
+                  } [&>strong]:font-bold font-light text-base`}
                 />
               ))}
             </div>
