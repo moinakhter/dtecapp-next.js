@@ -37,7 +37,7 @@ export default function AboutPage() {
     {
       name: "Moin Akhtar",
       role: "Full Stack Software Engineer",
-      image: "/images/Team/8.JPG",
+      image: "/images/Team/8.jpeg",
 
       link: "https://www.linkedin.com/in/moinakhtar123/",
     },
