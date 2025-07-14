@@ -9,50 +9,59 @@ import { Link } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import React from "react";
-
+import { motion } from "framer-motion";
 export default function AboutPage() {
   const t = useTranslations("AboutPage");
   const teamMembers = [
     {
       name: "Serdar sultanoğlu",
       role: "CEO, Co-Founder",
-      image: "/images/dtec-member.png",
+      image: "/images/Team/1.JPG",
       link: "https://www.linkedin.com/in/serdar-sultanoglu-a98a7355/",
     },
     {
       name: "Mohammad Fares",
       role: "AI team leader",
-      image: "/images/dtec-member.png",
+      image: "/images/Team/22.Jpg",
+
       link: "https://www.linkedin.com/in/mohres/",
     },
     {
       name: "Hanan Abbas",
       role: "AI Software Engineer",
-      image: "/images/dtec-member.png",
+      image: "/images/Team/3.JPG",
+
       link: "https://www.linkedin.com/in/hanan-abbas/",
     },
+
     {
       name: "Moin Akhtar",
       role: "Full Stack Software Engineer",
-      image: "/images/dtec-member.png",
+      image: "/images/Team/8.JPG",
+
       link: "https://www.linkedin.com/in/moinakhtar123/",
     },
     {
       name: "Hasan Alani",
       role: "Software Engineer",
-      image: "/images/dtec-member.png",
+      image: "/images/Team/4.JPG",
+
       link: "https://www.linkedin.com/in/hasan-alani-sweng/",
     },
-    {
+  
+      {
       name: "Ilham Asgarli",
       role: "Mobil Application Developer",
-      image: "/images/dtec-member.png",
+      image: "/images/Team/7.JPG",
+
       link: "https://www.linkedin.com/in/ilham-asgarli/?originalSubdomain=tr",
     },
+
     {
       name: "Zainab Salah",
       role: "Full Stack Web Developer",
-      image: "/images/dtec-member.png",
+      image: "/images/Team/5.JPG",
+
       link: "https://www.linkedin.com/in/zainab-salah-6169431b4/",
     },
   ];
@@ -131,29 +140,43 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
-
       <SectionWrapper>
-        <TextGradientWhite className="text-center font-black mb-16">
-          {t("DetcTeam")}
-        </TextGradientWhite>
-        <div className=" flex items-center h-full justify-center flex-wrap  gap-16 container ">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+        >
+          <TextGradientWhite className="text-center font-black mb-16">
+            {t("DetcTeam")}
+          </TextGradientWhite>
+        </motion.div>
+
+        <div className="flex items-center h-full justify-center flex-wrap gap-16 container">
           {teamMembers.map((member, index) => (
-            <Link
+            <motion.div
               key={index}
-              href={member.link}
-              className="flex flex-col max-w-[240px] w-full items-center text-center"
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              whileInView={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: index * 0.15 }}
+              viewport={{ once: true }}
             >
-              <div className="w-[240px] h-[280px] relative mb-4 rounded-2xl overflow-hidden">
-                <Image
-                  src={member.image}
-                  alt={member.name}
-                  fill
-                  className="object-cover rounded-2xl"
-                />
-              </div>
-              <h3 className="text-base font-medium">{member.name}</h3>
-              <p className="text-[13px]  font-light">{member.role}</p>
-            </Link>
+              <Link
+                href={member.link}
+                className="flex flex-col max-w-[240px] w-full items-center text-center"
+              >
+                <div className="w-[240px] h-[280px] relative mb-4 rounded-2xl overflow-hidden">
+                  <Image
+                    src={member.image}
+                    alt={member.name}
+                    fill
+                    className="object-cover rounded-2xl"
+                  />
+                </div>
+                <h3 className="text-base font-medium">{member.name}</h3>
+                <p className="text-[13px] font-light">{member.role}</p>
+              </Link>
+            </motion.div>
           ))}
         </div>
       </SectionWrapper>
