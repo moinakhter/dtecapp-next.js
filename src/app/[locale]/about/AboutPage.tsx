@@ -16,20 +16,20 @@ export default function AboutPage() {
     {
       name: "Serdar sultanoğlu",
       role: "CEO, Co-Founder",
-      image: "/images/Team/1.JPG",
+      image: "/images/Home/1.JPG",
       link: "https://www.linkedin.com/in/serdar-sultanoglu-a98a7355/",
     },
     {
       name: "Mohammad Fares",
       role: "AI team leader",
-      image: "/images/Team/22.Jpg",
+      image: "/images/Home/22.Jpg",
 
       link: "https://www.linkedin.com/in/mohres/",
     },
     {
       name: "Hanan Abbas",
       role: "AI Software Engineer",
-      image: "/images/Team/3.JPG",
+      image: "/images/Home/3.JPG",
 
       link: "https://www.linkedin.com/in/hanan-abbas/",
     },
@@ -37,14 +37,14 @@ export default function AboutPage() {
     {
       name: "Moin Akhtar",
       role: "Full Stack Software Engineer",
-      image: "/images/Team/8.jpeg",
+      image: "/images/Home/8.jpeg",
 
       link: "https://www.linkedin.com/in/moinakhtar123/",
     },
     {
       name: "Hasan Alani",
       role: "Software Engineer",
-      image: "/images/Team/4.JPG",
+      image: "/images/Home/4.JPG",
 
       link: "https://www.linkedin.com/in/hasan-alani-sweng/",
     },
@@ -52,7 +52,7 @@ export default function AboutPage() {
       {
       name: "Ilham Asgarli",
       role: "Mobil Application Developer",
-      image: "/images/Team/7.JPG",
+      image: "/images/Home/7.JPG",
 
       link: "https://www.linkedin.com/in/ilham-asgarli/?originalSubdomain=tr",
     },
@@ -60,7 +60,7 @@ export default function AboutPage() {
     {
       name: "Zainab Salah",
       role: "Full Stack Web Developer",
-      image: "/images/Team/5.JPG",
+      image: "/images/Home/5.JPG",
 
       link: "https://www.linkedin.com/in/zainab-salah-6169431b4/",
     },
