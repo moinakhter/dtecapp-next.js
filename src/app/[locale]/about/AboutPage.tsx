@@ -16,20 +16,20 @@ export default function AboutPage() {
     {
       name: "Serdar sultanoğlu",
       role: "CEO, Co-Founder",
-      image: "/images/Home/1.JPG",
+      image: "/images/Home/1.jpg",
       link: "https://www.linkedin.com/in/serdar-sultanoglu-a98a7355/",
     },
     {
       name: "Mohammad Fares",
       role: "AI team leader",
-      image: "/images/Home/22.Jpg",
+      image: "/images/Home/22.jpg",
 
       link: "https://www.linkedin.com/in/mohres/",
     },
     {
       name: "Hanan Abbas",
       role: "AI Software Engineer",
-      image: "/images/Home/3.JPG",
+      image: "/images/Home/3.jpg",
 
       link: "https://www.linkedin.com/in/hanan-abbas/",
     },
@@ -44,7 +44,7 @@ export default function AboutPage() {
     {
       name: "Hasan Alani",
       role: "Software Engineer",
-      image: "/images/Home/4.JPG",
+      image: "/images/Home/4.jpg",
 
       link: "https://www.linkedin.com/in/hasan-alani-sweng/",
     },
@@ -52,7 +52,7 @@ export default function AboutPage() {
       {
       name: "Ilham Asgarli",
       role: "Mobil Application Developer",
-      image: "/images/Home/7.JPG",
+      image: "/images/Home/7.jpg",
 
       link: "https://www.linkedin.com/in/ilham-asgarli/?originalSubdomain=tr",
     },
@@ -60,7 +60,7 @@ export default function AboutPage() {
     {
       name: "Zainab Salah",
       role: "Full Stack Web Developer",
-      image: "/images/Home/5.JPG",
+      image: "/images/Home/5.jpg",
 
       link: "https://www.linkedin.com/in/zainab-salah-6169431b4/",
     },
@@ -68,7 +68,7 @@ export default function AboutPage() {
 
   const awards1 = [
     {
-      logo: "/images/Hero/logos/tübitak_logo_beyaz.png",
+      logo: "/images/Hero/logos/tubitak_logo_beyaz.png",
       title: t("award1_title"),
       description: t("award1_description"),
     },
@@ -269,7 +269,8 @@ export default function AboutPage() {
           {/* Image Container */}
           <div className="md:w-[128px]  w-[200px] aspect-square relative flex-shrink-0 mx-auto md:mx-0">
             <Image
-              src="/images/Hero/logos/tübitak_logo_beyaz.png"
+              src="/images/Hero/logos/tubitak_logo_beyaz.png"
+              
               alt="TÜBİTAK Logo"
               fill
               className="object-contain  lg:object-top object-center invert dark:invert-0"
