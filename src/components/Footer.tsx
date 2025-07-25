@@ -102,7 +102,7 @@ export default function Footer() {
           </div>
 
           {/* Footer Links */}
-          <div className="flex flex-col sm:flex-row gap-8 justify-center items-center lg:items-start lg:justify-start">
+          <div className="flex relative z-1 flex-col sm:flex-row gap-8 justify-center items-center lg:items-start lg:justify-start">
             {/* Products */}
             <div className="text-center lg:text-left">
               <h3 className="font-medium text-base mb-4">

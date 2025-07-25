@@ -21,7 +21,7 @@ const features = Object.values(t.raw("features")) as {
             {t("header")}
           </TextGradientWhite>
           <p className="md:text-base text-sm mb-12 mx-auto">{t("description")}</p>
-
+<a href="https://dtec.space/">
           <Button
             variant="outline"
             size="lg"
@@ -30,6 +30,7 @@ const features = Object.values(t.raw("features")) as {
             {t("cta")}
             <span className="rotate-[-45deg] inline-block">→</span>
           </Button>
+          </a>
         </div>
 
         {/* Features Grid */}

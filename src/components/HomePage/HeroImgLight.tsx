@@ -15,7 +15,10 @@ const [mounted, setMounted] = useState(false);
   }, []);
 
   // Prevent rendering on server
-  if (!mounted) return null;
+  if (!mounted) return 
+   <div className="w-[572.23px] h-96 relative flex items-center justify-center">
+      {/* optional: spinner or blurred img here */}
+    </div>
 
   const isDark = theme === "dark";
 
@@ -31,10 +34,12 @@ const [mounted, setMounted] = useState(false);
         }}
       >
         <Image
+          priority
+
           src={
             isDark
               ? "/images/Hero/dark/AI-Call.png"
-              : "/images/Hero/light/AI-Call.png.png"
+              : "/images/Hero/light/AI-Call.png"
           }
           alt="Logo"
           width={288}

@@ -15,7 +15,7 @@ const FloatingBalls = () => {
              repeat: Infinity,
              ease: "easeInOut",
            }}
-           className="absolute top-[-30%] left-[-30%] h-[1053px] w-[1053px] rounded-full ball-1 blur-[120px] opacity-100 z-0 "
+           className="md:absolute hidden  top-[-30%] left-[-30%] h-[1053px] w-[1053px] rounded-full ball-1 blur-[120px] opacity-100 z-0 "
          />
    
          <motion.div

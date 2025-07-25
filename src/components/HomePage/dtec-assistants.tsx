@@ -148,10 +148,10 @@ export default function DtecAssistants() {
                 </div>
 
                 {/* Content */}
-                <Link  href={card.link} className="relative h-full flex   flex-col justify-between p-2 md:px-9 md:pb-8 md:pt-5 z-10">
-                  {/* Top Right Link - Only visible when active */}
+                <div   className="relative h-full flex   flex-col justify-between p-2 md:px-9 md:pb-8 md:pt-5 z-10">
+             
                   {isActive && (
-                    <div className="flex justify-end">
+                    <Link href={card.link} className="flex justify-end">
                       <div
                        
                         className="!text-neutral-50  text-[13px] flex items-center hover:underline"
@@ -168,16 +168,16 @@ export default function DtecAssistants() {
                           animate={{ opacity: 1, x: 0 }}
                           transition={{ duration: 0.3, delay: 0.3 }}
                         >
-                          {/* <ArrowRight className="ml-1 h-4 w-4" /> */}
+                     
                           <span className="ml-1 rotate-[-45deg] inline-block  ">
                             →
                           </span>
                         </motion.span>
                       </div>
-                    </div>
+                    </Link>
                   )}
 
-                  {/* Content Area - Only show content when active */}
+            
                   <div className="mt-auto  ">
                     {isActive && (
                       <div className="relative overflow-hidden lg:mb-0 mb-10  h-[4rem]">
@@ -228,7 +228,7 @@ export default function DtecAssistants() {
                       </div>
                     )}
                   </div>
-                </Link>
+                </div>
               </motion.div>
             );
           })}

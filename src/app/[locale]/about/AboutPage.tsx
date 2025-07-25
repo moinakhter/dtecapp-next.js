@@ -152,7 +152,7 @@ export default function AboutPage() {
           </TextGradientWhite>
         </motion.div>
 
-        <div className="flex items-center h-full justify-center flex-wrap gap-16 container">
+        <div className="flex items-center relative z-10 h-full justify-center flex-wrap gap-16 container">
           {teamMembers.map((member, index) => (
             <motion.div
               key={index}

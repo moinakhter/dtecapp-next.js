@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Moon, Sun, HomeIcon, X, Menu } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
@@ -18,47 +18,66 @@ import {
 } from "./common/Icons";
 import { usePathname } from "@/i18n/navigation";
 
-
-
 export default function Navbar() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [productsOpen, setProductsOpen] = useState(false);
+  const productsRef = useRef<HTMLDivElement>(null);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as Node;
+
+      if (productsRef.current && !productsRef.current.contains(target)) {
+        setProductsOpen(false);
+      }
+
+      if (mobileMenuRef.current && !mobileMenuRef.current.contains(target)) {
+        setMenuOpen(false);
+        setProductsOpen(false); // optional: also close dropdown inside mobile menu
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const t = useTranslations("Navbar");
   const productItems = [
-  {
-    icon: CarIcon,
-    title:t("carAssistant"),
-    href: "/products/car-assistant",
-    key: "carAssistant",
-  },
-  {
-    icon: CartIcon,
-    title: t("shoppingAssistant"),
-    href: "/products/shopping-assistant",
-    key: "shoppingAssistant",
-  },
-  {
-    icon: HomeIcon,
-    title: t("homeAssistant"),
-    href: "/products/home-assistant",
-    key: "homeAssistant",
-  },
-  {
-    icon: MicICon,
-    title: "AI Call Center",
-    href: "/products/ai-call-center",
-    key: "aiCallCenter",
-  },
-  {
-    icon: ThinPlaneIcon,
-    title: t("travelAssistant"),
-    href: "/products/travel-assistant",
-    key: "travelAssistant",
-  },
-];
+    {
+      icon: CarIcon,
+      title: t("carAssistant"),
+      href: "/products/car-assistant",
+      key: "carAssistant",
+    },
+    {
+      icon: CartIcon,
+      title: t("shoppingAssistant"),
+      href: "/products/shopping-assistant",
+      key: "shoppingAssistant",
+    },
+    {
+      icon: HomeIcon,
+      title: t("homeAssistant"),
+      href: "/products/home-assistant",
+      key: "homeAssistant",
+    },
+    {
+      icon: MicICon,
+      title: "AI Call Center",
+      href: "/products/ai-call-center",
+      key: "aiCallCenter",
+    },
+    {
+      icon: ThinPlaneIcon,
+      title: t("travelAssistant"),
+      href: "/products/travel-assistant",
+      key: "travelAssistant",
+    },
+  ];
   const pathname = usePathname();
   useEffect(() => {
     setMounted(true);
@@ -72,8 +91,8 @@ export default function Navbar() {
   const toggleTheme = () => setTheme(theme === "dark" ? "light" : "dark");
 
   return (
-    <nav className="fixed top-8 left-0 right-0 z-50 bg-white/10 container md:mx-auto border-[#808080]/15 border-[1px] backdrop-blur-[32px] rounded-2xl transition-all duration-300">
-      <div className="mx-auto md:px-8 py-4 flex max-w-7xl items-center justify-between">
+<nav className="fixed top-8 left-4 right-4 sm:left-1/2 sm:right-auto sm:-translate-x-1/2 z-50 w-auto sm:w-full max-w-sm sm:max-w-full bg-white/10 container md:mx-auto border-[#808080]/15 border-[1px] backdrop-blur-[32px] rounded-2xl transition-all duration-300">
+<div className="mx-auto md:px-8 py-4 flex max-w-7xl items-center justify-between">
         {/* Logo */}
         <Link href="/" onClick={closeAllMenus} className="flex items-center">
           <Image
@@ -89,7 +108,7 @@ export default function Navbar() {
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center space-x-10">
           {/* Products Dropdown */}
-          <div className="relative">
+          <div className="relative" ref={productsRef}>
             <button
               onClick={() => setProductsOpen(!productsOpen)}
               className="flex items-center space-x-1 hover:text-primary transition-colors group"
@@ -138,7 +157,7 @@ export default function Navbar() {
                       </div>
 
                       <Link
-                       href="/products/shopify-assistant"
+                        href="/products/shopify-assistant"
                         onClick={closeAllMenus}
                         className={`flex items-center text-[13px] gap-3 group rounded-lg transition-colors ${
                           pathname === "" ? "text-secondary" : ""
@@ -146,12 +165,16 @@ export default function Navbar() {
                       >
                         <ShopifyIcon
                           className={`h-5 w-5 ${
-                            pathname === "/products/shopify-assistant" ? "text-secondary" : ""
+                            pathname === "/products/shopify-assistant"
+                              ? "text-secondary"
+                              : ""
                           } group-hover:text-secondary`}
                         />
                         <span
                           className={`${
-                            pathname === "/products/shopify-assistant" ? "text-secondary" : ""
+                            pathname === "/products/shopify-assistant"
+                              ? "text-secondary"
+                              : ""
                           } group-hover:text-secondary`}
                         >
                           Shopify
@@ -211,10 +234,12 @@ export default function Navbar() {
           {menuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </button>
       </div>
-
       {/* Mobile Menu */}
       {menuOpen && (
-        <div className="md:hidden flex flex-col justify-center items-center space-y-4 px-6 pb-6">
+        <div
+          ref={mobileMenuRef}
+          className="md:hidden flex flex-col justify-center items-center space-y-4 px-6 pb-6"
+        >
           <button
             onClick={() => setProductsOpen(!productsOpen)}
             className="text-left hover:text-primary"
