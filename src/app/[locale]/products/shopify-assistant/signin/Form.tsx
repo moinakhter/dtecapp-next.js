@@ -11,17 +11,15 @@ import { toast } from "sonner"
 import { Link, useRouter } from "@/i18n/navigation";
 import TextGradientWhite from "@/components/common/text-gradient-white";
 import React, { useEffect } from "react";
+import { useTranslations } from "next-intl";
 
-const formSchema = z.object({
-  email: z.string().email("Invalid email"),
-  password: z.string().min(7, "Password is required"),
-});
 
-type FormData = z.infer<typeof formSchema>;
+
+
 
 const SigninForm = () => {
   const router = useRouter();
-
+const t = useTranslations("Forms");
   useEffect(() => {
     const checkAuth = async () => {
       const response = await fetch("/api/auth/validate", {
@@ -36,6 +34,11 @@ const SigninForm = () => {
 
     checkAuth();
   }, [router]);
+  const formSchema = z.object({
+  email: z.string().email(t("invalidEmail")),
+  password: z.string().min(7, t("passwordMinLength")),
+});
+type FormData = z.infer<typeof formSchema>;
   const {
     register,
     handleSubmit,
@@ -55,13 +58,13 @@ const SigninForm = () => {
 
       if (!response.ok) {
         const result = await response.json();
-        throw new Error(result.error || "Login failed");
+        throw new Error(result.error || t("loginFailed"));
       }
 
       return response.json();
     },
     onSuccess: () => {
-      toast.success("Login successful!",
+      toast.success(t("loginSuccessful"),
          {
                richColors: true,
           }
@@ -69,7 +72,7 @@ const SigninForm = () => {
       router.push("/dashboard");
     },
     onError: (error: Error) => {
-         toast.error("Login failed: " + error.message ,
+         toast.error(t("loginFailed") + ": " + error.message ,
           {
                richColors: true,
           }
@@ -85,7 +88,7 @@ const SigninForm = () => {
   return (
     <div className="relative z-10 flex flex-col w-full mx-auto max-w-[416px] md:w-1/2">
       <TextGradientWhite
-        text="Login"
+        text={t("login")}
         className="lg:text-[32px] font-bold mb-8"
       />
 
@@ -96,7 +99,7 @@ const SigninForm = () => {
             id="email"
             type="email"
             {...register("email")}
-            placeholder="Email"
+            placeholder={t("email_placeholder")}
           />
           {errors.email && (
             <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
@@ -109,8 +112,8 @@ const SigninForm = () => {
             id="password"
             type="password"
             {...register("password")}
-            placeholder="Password"
-          /> 
+            placeholder={t("password_placeholder")}
+          />
           {errors.password && (
             <p className="text-red-500 text-sm mt-1">
               {errors.password.message}
@@ -124,7 +127,7 @@ const SigninForm = () => {
           className="w-full mt-4 bg-secondary hover:bg-blue-600 text-white"
           disabled={loginMutation.status === "pending"}
         >
-          {loginMutation.status === "pending" ? "Logging in..." : "Login"}
+          {loginMutation.status === "pending" ? t("loggingIn") : t("login")}
         </Button>
       </form>
 
@@ -141,7 +144,7 @@ const SigninForm = () => {
           className: "w-full mt-4 text-center bg-transparent border-secondary",
         })}
       >
-        Don&apos;t have an account?
+        {t("createAccount")}
       </Link>
     </div>
   );

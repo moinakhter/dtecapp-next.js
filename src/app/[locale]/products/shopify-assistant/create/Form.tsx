@@ -10,30 +10,34 @@ import { Link, useRouter } from "@/i18n/navigation";
 import TextGradientWhite from "@/components/common/text-gradient-white";
 import React, { useEffect } from "react";
 import { toast } from "sonner"
-const formSchema = z
+import { useTranslations } from "next-intl";
+
+
+
+
+const SigninForm = () => {
+  const t= useTranslations("Forms");
+  const formSchema = z
   .object({
-    firstName: z.string().min(1, "First Name is required"),
-    lastName: z.string().min(1, "Last Name is required"),
-    storeUrl: z.string().url("Store URL must be valid"),
-    companyName: z.string().min(1, "Company Name is required"),
-    email: z.string().email("Invalid email"),
+    firstName: z.string().min(1, t("fnreq")),
+    lastName: z.string().min(1, t("lnreq")),
+    storeUrl: z.string().url(t("invalidUrl")),
+    companyName: z.string().min(1, t("cnreq")),
+    email: z.string().email(t("invalidEmail")),
     password: z
       .string()
-      .min(8, "Password must be at least 8 characters")
+      .min(8, t("passwordMinLength"))
       .regex(
         /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).+$/,
-        "Password must contain letters, numbers, and special characters"
+        t("passwordComplexity")
       ),
     confirmPassword: z.string(),
   })
   .refine((data) => data.password === data.confirmPassword, {
-    message: "Passwords do not match",
+    message: t("passwordsDontMatch"),
     path: ["confirmPassword"],
   });
-
-type FormData = z.infer<typeof formSchema>;
-
-const SigninForm = () => {
+  type FormData = z.infer<typeof formSchema>;
   const {
     register,
     handleSubmit,
@@ -68,14 +72,14 @@ const SigninForm = () => {
 
       if (!response.ok) {
         const result = await response.json();
-        throw new Error(result.error || "Registration failed");
+        throw new Error(result.error || t("regfaild"));
       }
-
+     
       return response.json();
     },
     onSuccess: async () => {
-      toast("Registration successful! Please wait to activate...");
-      
+      toast(t("registrationSuccessMessage"));
+
     },
   });
 
@@ -86,7 +90,7 @@ const SigninForm = () => {
   return (
     <div className="relative z-10 flex flex-col w-full mx-auto max-w-[416px] md:w-1/2">
       <TextGradientWhite
-        text="Register"
+        text={t("register")}
         className="lg:text-[32px] font-bold mb-8"
       />
 
@@ -97,7 +101,7 @@ const SigninForm = () => {
             <Input
               id="firstName"
               {...register("firstName")}
-              placeholder="First Name"
+              placeholder={t("firstName_placeholder")}
             />
             {errors.firstName && (
               <p className="text-red-500 text-sm mt-1">
@@ -109,7 +113,7 @@ const SigninForm = () => {
             <Input
               id="lastName"
               {...register("lastName")}
-              placeholder="Last Name"
+              placeholder={t("lastName_placeholder")}
             />
             {errors.lastName && (
               <p className="text-red-500 text-sm mt-1">
@@ -123,7 +127,7 @@ const SigninForm = () => {
           <Input
             id="storeUrl"
             {...register("storeUrl")}
-            placeholder="Store URL"
+            placeholder={t("storeUrl_placeholder")}
           />
           {errors.storeUrl && (
             <p className="text-red-500 text-sm mt-1">
@@ -136,7 +140,7 @@ const SigninForm = () => {
           <Input
             id="companyName"
             {...register("companyName")}
-            placeholder="Company Name"
+            placeholder={t("companyName_placeholder")}
           />
           {errors.companyName && (
             <p className="text-red-500 text-sm mt-1">
@@ -150,7 +154,7 @@ const SigninForm = () => {
             id="email"
             type="email"
             {...register("email")}
-            placeholder="Email"
+            placeholder={t("email_placeholder")}
           />
           {errors.email && (
             <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
@@ -162,7 +166,7 @@ const SigninForm = () => {
             id="password"
             type="password"
             {...register("password")}
-            placeholder="Password"
+            placeholder={t("password_placeholder")}
           />
           {errors.password && (
             <p className="text-red-500 text-sm mt-1">
@@ -176,7 +180,7 @@ const SigninForm = () => {
             id="confirmPassword"
             type="password"
             {...register("confirmPassword")}
-            placeholder="Confirm Password"
+            placeholder={t("confirmPassword_placeholder")}
           />
           {errors.confirmPassword && (
             <p className="text-red-500 text-sm mt-1">
@@ -191,8 +195,8 @@ const SigninForm = () => {
           disabled={registerMutation.status === "pending"}
         >
           {registerMutation.status === "pending"
-            ? "Registering..."
-            : "Register"}
+            ? t("loggingIn")
+            : t("register")}
         </Button>
       </form>
 
@@ -204,7 +208,7 @@ const SigninForm = () => {
 
       {registerMutation.isSuccess && (
         <p className="text-green-500 text-center mt-4">
-          Registration successful! Please wait to activate your account.
+          {t("registrationSuccessMessage")}
         </p>
       )}
 
@@ -215,7 +219,7 @@ const SigninForm = () => {
           className: "w-full mt-4 text-center bg-transparent border-secondary",
         })}
       >
-        Do you have an account?
+        {t("signin")}
       </Link>
     </div>
   );

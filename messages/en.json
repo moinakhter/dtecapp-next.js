@@ -449,5 +449,31 @@
       "• Confirm the limit is set in extension settings."
     ],
     "clicktoview": " Click for show full view ↗"
+  },
+  "Forms": {
+    "registrationSuccessMessage": "Registration successful! Please login to continue.",
+    "signin": "Do you have an account?",
+    "email_placeholder": "Email",
+    "password_placeholder": "Password",
+    "storeUrl_placeholder": "Store URL",
+    "lastName_placeholder": "Last Name",
+    "firstName_placeholder": "First Name",
+    "companyName_placeholder": "Company Name",
+    "confirmPassword_placeholder": "Confirm Password",
+    "regfaild": "Registration failed",
+    "fnreq": "First Name is required",
+    "lnreq": "Last Name is required",
+    "invalidUrl": "Store URL is required",
+    "cnreq": "Company Name is required",
+    "invalidEmail": "Email is required",
+    "passwordMinLength": "Password must be at least 8 characters",
+    "passwordComplexity": "Password must contain letters, numbers, and special characters",
+    "passwordsDontMatch": "Passwords do not match",
+    "loginFailed": "Login Failed",
+    "loginSuccessful": "Login successful!",
+    "loggingIn": "Pendeing...",
+    "login": "Login",
+    "createAccount": " Don&apos;t have an account?",
+    "register": "Register"
   }
 }

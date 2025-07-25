@@ -457,5 +457,34 @@
       "• Uzantı ayarlarında sınırın ayarlandığını doğrulayın."
     ],
     "clicktoview": "Tam Görünüm Göster için Tıklayın ↗"
+  },
+  
+  "Forms": {
+    "registrationSuccessMessage": "Kayıt başarılı! Devam etmek için lütfen giriş yapın.",
+    "signin": "Hesabınız var mı?",
+    "email_placeholder": "E-posta",
+    "password_placeholder": "Şifre",
+    "storeUrl_placeholder": "Mağaza URL'si",
+    "lastName_placeholder": "Soyadı",
+    "firstName_placeholder": "Adı",
+    "companyName_placeholder": "Şirket Adı",
+"confirmPassword_placeholder": "Şifreyi Onayla",
+    "regfaild": "Kayıt başarısız",
+    "fnreq": "Ad alanı zorunludur",
+    "lnreq": "Soyad alanı zorunludur",
+    "invalidUrl": "Mağaza URL'si zorunludur",
+    "cnreq": "Şirket adı zorunludur",
+    "invalidEmail": "E-posta adresi zorunludur",
+    "passwordMinLength": "Şifre en az 8 karakter olmalıdır",
+    "passwordComplexity": "Şifre harf, rakam ve özel karakter içermelidir",
+    "passwordsDontMatch": "Şifreler uyuşmuyor",
+    "loginFailed": "Giriş başarısız",
+    "loginSuccessful": "Giriş başarılı!",
+    "loggingIn": "Bekleniyor...",
+    "login": "Giriş Yap",
+    "createAccount": "Hesabınız yok mu?",
+    "register": "Kayıt Ol"
   }
+
+
 }
