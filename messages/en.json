@@ -404,7 +404,7 @@
     "step3": "Get Your Storefront API Access Token",
     "step3Details": [
       "Generate the Storefront API Access Token:",
-      "<span class='text-red-500'>Array [(error) => Missing required parameters ] Access Token not found, please reinstall the app to generate a new Storefront API access token.</span>",
+      "<span class='text-red-500'> Access Token not found, please reinstall the app to generate a new Storefront API access token.</span>",
       "Copy your Storefront API Access Token."
     ],
     "step4": "Configure the Extension in Shopify Theme",

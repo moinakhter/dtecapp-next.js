@@ -13,6 +13,7 @@ import SectionWrapper from "@/components/common/SectionWrapper";
 import Animation from "./Animation";
 import { Link } from "@/i18n/navigation";
 import { getTranslations } from "next-intl/server";
+import Step3Token from "./Step3Token";
 
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
@@ -36,12 +37,12 @@ const Page = () => {
       img: "/images/Shopify2.webp",
     },
     { titleKey: "step2", detailsKey: "step2Details" },
-    { titleKey: "step3", detailsKey: "step3Details" },
-    {
-      titleKey: "step4",
-      detailsKey: "step4Details",
-      img: "/images/Shopify1.webp",
-    },
+    // { titleKey: "step3", detailsKey: "step3Details" },
+    // {
+    //   titleKey: "step4",
+    //   detailsKey: "step4Details",
+    //   img: "/images/Shopify1.webp",
+    // },
   ];
 
   return (
@@ -132,7 +133,14 @@ const Page = () => {
               img={step.img ? step.img : undefined}
             />
           ))}
-
+          <Step3Token />
+ <Step
+              step={`Step 4:`}
+              title="step4"
+              details= {t.raw("step4Details")}
+              img="/images/Shopify1.webp"
+            />
+  
           {/* Step 5 */}
           <Step5
             step="Step 5:"

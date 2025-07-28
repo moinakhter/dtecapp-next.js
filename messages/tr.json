@@ -412,7 +412,7 @@
     "step3": "Storefront API Erişim Belirtecinizi Alın",
     "step3Details": [
       "Storefront API Erişim Belirtecini Oluşturun:",
-      "<span class='text-red-500'>Dizi [(error) => Gerekli parametreler eksik ] Erişim Belirteci bulunamadı, lütfen yeni bir Storefront API erişim belirteci oluşturmak için uygulamayı yeniden yükleyin.</span>",
+      "<span class='text-red-500'>Erişim Belirteci bulunamadı, lütfen yeni bir Storefront API erişim belirteci oluşturmak için uygulamayı yeniden yükleyin.</span>",
       "Storefront API Erişim Belirtecinizi kopyalayın."
     ],
     "step4": "Shopify Temasında Uzantıyı Yapılandırın",
