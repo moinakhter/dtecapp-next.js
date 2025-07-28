@@ -29,23 +29,18 @@ console.log(
     }
 
  
-    if (!code) {
-      fetch(`/api/shopify/callback?shop=${shop}`)
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.redirect_url) {
-            if (window.top) {
-              window.top.location.href = data.redirect_url;
-            } else {
-              window.location.href = data.redirect_url;
-            }
-          } else {
-            setTokenError(true);
-          }
-        })
-        .catch(() => setTokenError(true));
-      return;
-    }
+   if (!code) {
+  fetch(`/api/shopify/callback?shop=${shop}`)
+    .then(res => res.json())
+    .then(data => {
+      if (window.top) {
+        window.top.location.href = data.redirect_url;
+      } else {
+        window.location.href = data.redirect_url;
+      }
+    });
+  return;
+}
 
    
     fetch(`/api/shopify/callback?shop=${shop}&hmac=${hmac}&code=${code}`)

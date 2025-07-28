@@ -7,35 +7,40 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Celias } from "@/lib/utils";
 import Footer from "@/components/Footer";
 import ReactQueryProvider from "./providers";
- import Script from "next/script";
+import Script from "next/script";
 import { getTranslations } from "next-intl/server";
 import ShopifyRedirector from "@/components/ShopifyRedirector";
 import Head from "next/head";
 
-
-export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "Metadata" });
 
   return {
-    title: t('homeTitle'),
-    description: t('homeDescription'),
+    title: t("homeTitle"),
+    description: t("homeDescription"),
     openGraph: {
-      title: t('homeTitle'),
-      description: t('homeDescription'),
+      title: t("homeTitle"),
+      description: t("homeDescription"),
       images: [
         {
-          url: `https://dtec.app/og?title=${encodeURIComponent(t('homeTitle'))}&locale=${locale}`,
+          url: `${
+            process.env.NEXT_PUBLIC_SITE_URL
+          }/og?title=${encodeURIComponent(t("homeTitle"))}&locale=${locale}`,
           width: 1200,
           height: 630,
-          alt: 'Dtec Smart Assistant',
+          alt: "Dtec Smart Assistant",
         },
       ],
     },
     alternates: {
       languages: {
-        en: `https://dtec.app/en`,
-        tr: `https://dtec.app/tr`,
+        en: `${process.env.NEXT_PUBLIC_SITE_URL}/en`,
+        tr: `${process.env.NEXT_PUBLIC_SITE_URL}/tr`,
       },
     },
   };
@@ -55,16 +60,17 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} className={Celias.className} suppressHydrationWarning>
-        <Head>
-        {/* Shopify App Bridge script */}
-        <meta name="shopify-api-key" content={process.env.NEXT_PUBLIC_SHOPIFY_API_KEY} />
-       
+      <Head>
+        <meta
+          name="shopify-api-key"
+          content={process.env.NEXT_PUBLIC_SHOPIFY_API_KEY}
+        />
       </Head>
       <body
         className="bg-background text-foreground font-normal text-[13px] antialiased w-full h-full flex items-center justify-start flex-col overflow-hidden"
         suppressHydrationWarning
       >
-          <Script
+        <Script
           src="https://cdn.shopify.com/shopifycloud/app-bridge.js"
           strategy="beforeInteractive"
         />
@@ -105,7 +111,7 @@ export default async function LocaleLayout({
         >
           <NextIntlClientProvider>
             <Navbar />
-                <ShopifyRedirector />
+            <ShopifyRedirector />
             <ReactQueryProvider>{children}</ReactQueryProvider>
             <Footer />
           </NextIntlClientProvider>

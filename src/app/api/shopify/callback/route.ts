@@ -44,12 +44,9 @@ export async function GET(req: NextRequest) {
 
   const decoded = decodeURIComponent(filtered);
 
-  const generatedHmac = crypto
-    .createHmac("sha256", SHOPIFY_CLIENT_SECRET)
-    .update(decoded)
-    .digest("hex");
-
-  if (!crypto.timingSafeEqual(Buffer.from(generatedHmac), Buffer.from(hmac))) {
+ const generated = crypto.createHmac('sha256', SHOPIFY_CLIENT_SECRET)
+  .update(decoded).digest('hex');
+if (!crypto.timingSafeEqual(Buffer.from(generated), Buffer.from(hmac))) {
     return NextResponse.json({ error: "Invalid HMAC" }, { status: 403 });
   }
 
