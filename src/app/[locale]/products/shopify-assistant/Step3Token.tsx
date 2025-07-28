@@ -18,7 +18,11 @@ export default function Step3Token() {
     const shop = urlParams.get("shop");
     const hmac = urlParams.get("hmac");
     const code = urlParams.get("code");
-
+console.log(
+    code,
+    hmac,
+    shop,
+)
     if (!shop) {
       setTokenError(true);
       return;
