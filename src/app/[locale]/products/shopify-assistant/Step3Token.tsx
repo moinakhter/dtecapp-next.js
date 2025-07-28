@@ -24,7 +24,7 @@ export default function Step3Token() {
       return;
     }
 
-    // If no code, fetch the redirect URL and escape iframe
+ 
     if (!code) {
       fetch(`/api/shopify/callback?shop=${shop}`)
         .then((res) => res.json())
@@ -43,7 +43,7 @@ export default function Step3Token() {
       return;
     }
 
-    // If code is present, validate and get token
+   
     fetch(`/api/shopify/callback?shop=${shop}&hmac=${hmac}&code=${code}`)
       .then((res) => res.json())
       .then((data) => {
