@@ -15,7 +15,6 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "Missing shop" }, { status: 400 });
   }
 
-  
   if (!code) {
     const scopes = [
       "unauthenticated_write_checkouts",
@@ -37,7 +36,6 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "Missing HMAC" }, { status: 400 });
   }
 
- 
   const filtered = Array.from(searchParams.entries())
     .filter(([k]) => k !== "hmac")
     .sort(([a], [b]) => a.localeCompare(b))
@@ -72,12 +70,42 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "Access token not returned" }, { status: 500 });
   }
 
- 
+  // 🔑 Create Storefront Access Token
+  const storefrontTokenRes = await fetch(`https://${shop}/admin/api/2024-01/graphql.json`, {
+    method: "POST",
+    headers: {
+      "X-Shopify-Access-Token": tokenData.access_token,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      query: `
+        mutation {
+          storefrontAccessTokenCreate(input: {
+            title: \"DTEC Assistant\"
+          }) {
+            storefrontAccessToken {
+              accessToken
+              accessScope
+            }
+            userErrors {
+              field
+              message
+            }
+          }
+        }
+      `,
+    }),
+  });
+
+  const storefrontTokenData = await storefrontTokenRes.json();
+  const storefrontAccessToken =
+    storefrontTokenData?.data?.storefrontAccessTokenCreate?.storefrontAccessToken?.accessToken ?? null;
 
   return NextResponse.json({
     status: true,
     shop,
     access_token: tokenData.access_token,
     scope: tokenData.scope,
+    storefront_access_token: storefrontAccessToken,
   });
 }

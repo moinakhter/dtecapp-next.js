@@ -51,9 +51,11 @@ console.log(
     fetch(`/api/shopify/callback?shop=${shop}&hmac=${hmac}&code=${code}`)
       .then((res) => res.json())
       .then((data) => {
-        if (data?.access_token) {
-          setToken(data.access_token);
-        } else {
+   if (data?.storefront_access_token) {
+  setToken(data.storefront_access_token);
+}
+
+         else {
           setTokenError(true);
         }
       })
