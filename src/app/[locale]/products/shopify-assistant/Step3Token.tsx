@@ -18,8 +18,32 @@ export default function Step3Token() {
     const shop = urlParams.get("shop");
     const hmac = urlParams.get("hmac");
     const code = urlParams.get("code");
- 
- 
+
+    if (!shop) {
+      setTokenError(true);
+      return;
+    }
+
+    // If no code, fetch the redirect URL and escape iframe
+    if (!code) {
+      fetch(`/api/shopify/callback?shop=${shop}`)
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.redirect_url) {
+            if (window.top) {
+              window.top.location.href = data.redirect_url;
+            } else {
+              window.location.href = data.redirect_url;
+            }
+          } else {
+            setTokenError(true);
+          }
+        })
+        .catch(() => setTokenError(true));
+      return;
+    }
+
+    // If code is present, validate and get token
     fetch(`/api/shopify/callback?shop=${shop}&hmac=${hmac}&code=${code}`)
       .then((res) => res.json())
       .then((data) => {
@@ -44,7 +68,7 @@ export default function Step3Token() {
       <div className="space-y-4 max-w-2xl">
         <h4 className="text-xl font-medium">Get Your Storefront API Access Token</h4>
 
-        <ul className="space-y-2 text-base   font-light">
+        <ul className="space-y-2 text-base font-light">
           <li>Generate the Storefront API Access Token:</li>
 
           {tokenError && (
@@ -60,8 +84,7 @@ export default function Step3Token() {
                   {token}
                 </code>
                 <Button
-                  className=" "
-                  size={"sm"}
+                  size="sm"
                   onClick={() => navigator.clipboard.writeText(token)}
                 >
                   Copy
@@ -69,6 +92,10 @@ export default function Step3Token() {
               </div>
             </li>
           )}
+
+          <li>
+            <p>Copy your Storefront API Access Token.</p>
+          </li>
         </ul>
 
         <div className="relative overflow-hidden max-w-1/3 mt-auto">
