@@ -18,39 +18,31 @@ export default function Step3Token() {
     const shop = urlParams.get("shop");
     const hmac = urlParams.get("hmac");
     const code = urlParams.get("code");
-console.log(
-    code,
-    hmac,
-    shop,
-)
+    console.log(code, hmac, shop);
     if (!shop) {
       setTokenError(true);
       return;
     }
 
- 
-   if (!code) {
-  fetch(`/api/shopify/callback?shop=${shop}`)
-    .then(res => res.json())
-    .then(data => {
-      if (window.top) {
-        window.top.location.href = data.redirect_url;
-      } else {
-        window.location.href = data.redirect_url;
-      }
-    });
-  return;
-}
+    if (!code) {
+      fetch(`/api/shopify/callback?shop=${shop}`)
+        .then((res) => res.json())
+        .then((data) => {
+          if (window.top) {
+            window.top.location.href = data.redirect_url;
+          } else {
+            window.location.href = data.redirect_url;
+          }
+        });
+      return;
+    }
 
-   
     fetch(`/api/shopify/callback?shop=${shop}&hmac=${hmac}&code=${code}`)
       .then((res) => res.json())
       .then((data) => {
-   if (data?.storefront_access_token) {
-  setToken(data.storefront_access_token);
-}
-
-         else {
+        if (data?.storefront_access_token) {
+          setToken(data.storefront_access_token);
+        } else {
           setTokenError(true);
         }
       })
@@ -67,14 +59,17 @@ console.log(
       </div>
 
       <div className="space-y-4 max-w-2xl">
-        <h4 className="text-xl font-medium">Get Your Storefront API Access Token</h4>
+        <h4 className="text-xl font-medium">
+          Get Your Storefront API Access Token
+        </h4>
 
         <ul className="space-y-2 text-base font-light">
           <li>Generate the Storefront API Access Token:</li>
 
           {tokenError && (
             <li className="text-red-500">
-              Access Token not found. Please reinstall the app or check permissions.
+              Access Token not found. Please reinstall the app or check
+              permissions.
             </li>
           )}
 

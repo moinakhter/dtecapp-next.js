@@ -42,15 +42,19 @@ export async function GET(req: NextRequest) {
     .map(([k, v]) => `${k}=${v}`)
     .join("&");
 
-  const decoded = decodeURIComponent(filtered);
+  const message = filtered;  
+const generated = crypto
+  .createHmac("sha256", SHOPIFY_CLIENT_SECRET)
+  .update(message)
+  .digest("hex");
 
- const generated = crypto.createHmac('sha256', SHOPIFY_CLIENT_SECRET)
-  .update(decoded).digest('hex');
-if (!crypto.timingSafeEqual(Buffer.from(generated), Buffer.from(hmac))) {
-    return NextResponse.json({ error: "Invalid HMAC" }, { status: 403 });
-  }
 
-  // 🔄 Exchange code for token
+  
+if (!crypto.timingSafeEqual(Buffer.from(generated, "utf-8"), Buffer.from(hmac!, "utf-8"))) {
+  return NextResponse.json({ error: "Invalid HMAC" }, { status: 403 });
+}
+
+
   const tokenRes = await fetch(`https://${shop}/admin/oauth/access_token`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -64,18 +68,23 @@ if (!crypto.timingSafeEqual(Buffer.from(generated), Buffer.from(hmac))) {
   const tokenData = await tokenRes.json();
 
   if (!tokenData.access_token) {
-    return NextResponse.json({ error: "Access token not returned" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Access token not returned" },
+      { status: 500 }
+    );
   }
 
   // 🔑 Create Storefront Access Token
-  const storefrontTokenRes = await fetch(`https://${shop}/admin/api/2024-01/graphql.json`, {
-    method: "POST",
-    headers: {
-      "X-Shopify-Access-Token": tokenData.access_token,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      query: `
+  const storefrontTokenRes = await fetch(
+    `https://${shop}/admin/api/2024-01/graphql.json`,
+    {
+      method: "POST",
+      headers: {
+        "X-Shopify-Access-Token": tokenData.access_token,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        query: `
         mutation {
           storefrontAccessTokenCreate(input: {
             title: \"DTEC Assistant\"
@@ -91,12 +100,14 @@ if (!crypto.timingSafeEqual(Buffer.from(generated), Buffer.from(hmac))) {
           }
         }
       `,
-    }),
-  });
+      }),
+    }
+  );
 
   const storefrontTokenData = await storefrontTokenRes.json();
   const storefrontAccessToken =
-    storefrontTokenData?.data?.storefrontAccessTokenCreate?.storefrontAccessToken?.accessToken ?? null;
+    storefrontTokenData?.data?.storefrontAccessTokenCreate
+      ?.storefrontAccessToken?.accessToken ?? null;
 
   return NextResponse.json({
     status: true,
