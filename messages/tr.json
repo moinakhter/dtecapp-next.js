@@ -458,7 +458,7 @@
     ],
     "clicktoview": "Tam Görünüm Göster için Tıklayın ↗"
   },
-  
+
   "Forms": {
     "registrationSuccessMessage": "Kayıt başarılı! Devam etmek için lütfen giriş yapın.",
     "signin": "Hesabınız var mı?",
@@ -468,7 +468,7 @@
     "lastName_placeholder": "Soyadı",
     "firstName_placeholder": "Adı",
     "companyName_placeholder": "Şirket Adı",
-"confirmPassword_placeholder": "Şifreyi Onayla",
+    "confirmPassword_placeholder": "Şifreyi Onayla",
     "regfaild": "Kayıt başarısız",
     "fnreq": "Ad alanı zorunludur",
     "lnreq": "Soyad alanı zorunludur",
@@ -484,7 +484,30 @@
     "login": "Giriş Yap",
     "createAccount": "Hesabınız yok mu?",
     "register": "Kayıt Ol"
+  },"CustomerList":{
+    
+  "loading": "Müşteriler yükleniyor...",
+  "no_customers": "Hiç müşteri bulunamadı.",
+  "name": "İsim",
+  "email": "E-posta",
+  "phone": "Telefon",
+  "actions": "İşlemler",
+  "confirm_delete": "Bu müşteriyi silmek istediğinizden emin misiniz?",
+
+"failed_to_fetch_user": "Kullanıcı verileri alınamadı",
+  "unauthorized": "Yetkisiz",
+  "storetitle": "Mağaza Bilgileri",
+  "username": "Kullanıcı Adı",
+  "company": "Şirket",
+  "shopify_store": "Shopify Mağazası",
+  "dtec_access_token": "DTEC Erişim Anahtarı",
+  "copy_token": "Kopyala",
+  "expired_status": "Süresi Dolmuş Durum",
+  "yes": "Evet",
+  "no": "Hayır",
+  "token_expiry": "Anahtarın Son Kullanma Tarihi",
+  "expired": "Süresi Doldu",
+  "logout": "Çıkış Yap",
+  "shopify_customers": "Shopify Müşterileri"
   }
-
-
 }

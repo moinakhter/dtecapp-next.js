@@ -10,6 +10,7 @@ import FloatingBalls from "@/components/common/FloatingBalls";
 import Image from "next/image";
 import MindsBanner from "@/components/HomePage/minds-meet";
 import CustomerList from "./CustomerList";
+import { useTranslations } from "next-intl";
 
 interface UserData {
   username: string;
@@ -26,6 +27,7 @@ const DashboardPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
+  const t= useTranslations("CustomerList");
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -35,7 +37,7 @@ const DashboardPage = () => {
 
         if (!res.ok) {
           const result = await res.json();
-          throw new Error(result.error || "Failed to fetch user data");
+          throw new Error(result.error || t("failed_to_fetch_user"));
         }
 
         const result = await res.json();
@@ -62,7 +64,7 @@ const DashboardPage = () => {
   if (loading) {
     return (
       <SectionWrapper className="text-center py-[128px]">
-        Loading...
+        {t("loading")}
       </SectionWrapper>
     );
   }
@@ -70,7 +72,7 @@ const DashboardPage = () => {
   if (error || !userData) {
     return (
       <SectionWrapper className="text-center py-[128px] text-red-500">
-        Unauthorized
+        {t("unauthorized")}
       </SectionWrapper>
     );
   }
@@ -99,10 +101,10 @@ const DashboardPage = () => {
               />
             </div>
           </div>
-          <div className="relative z-10 flex flex-col w-full mx-auto max-w-[416px] md:w-1/2">
+          <div className="relative z-10 flex flex-col w-full mx-auto max-w-[416px] md:w-3/4">
             <TextGradientWhite
-              text="Store Details"
-              className="text-3xl font-bold md:px-0 px-3"
+              text={t("storetitle")}
+              className="text-3xl font-bold w-full md:px-0 px-3"
             />
 
             <div className="flex text-[13px] font-medium flex-col gap-8 md:p-2 px-4  my-8">
@@ -122,22 +124,22 @@ const DashboardPage = () => {
               </div> */}
 
               <div className="flex justify-between ">
-                <span>Username:</span>
+                <span>{t("username")}:</span>
                 <span>{userData?.username}</span>
               </div>
 
               <div className="flex justify-between ">
-                <span>Email:</span>
+                <span>{t("email")}:</span>
                 <span>{userData?.email}</span>
               </div>
 
               <div className="flex justify-between ">
-                <span>Company:</span>
+                <span>{t("company")}:</span>
                 <span>{userData?.company}</span>
               </div>
 
               <div className="flex justify-between ">
-                <span>Shopify Store:</span>
+                <span>{t("shopify_store")}:</span>
                 <a
                   href={userData?.storeUrl}
                   target="_blank"
@@ -148,7 +150,7 @@ const DashboardPage = () => {
               </div>
 
               <div className="flex justify-between items-center ">
-                <span className="w-full">DTEC Access Token:</span>
+                <span className="w-full">{t("dtec_access_token")}:</span>
 
                 <div className="flex w-full items-center">
                   <input
@@ -164,32 +166,32 @@ const DashboardPage = () => {
                       navigator.clipboard.writeText(userData?.dtecToken || "")
                     }
                   >
-                    Copy
+                    {t("copy_token")}
                   </Button>
                 </div>
               </div>
 
               <div className="flex justify-between ">
-                <span>Expired Status:</span>
+                <span>{t("expired_status")}:</span>
                 <span
                   className={cn(
                     userData?.expired ? "bg-red-500" : "bg-green-500",
                     "rounded-lg p-3 text-white font-bold"
                   )}
                 >
-                  {userData?.expired ? "Yes" : "No"}
+                  {userData?.expired ? t("yes") : t("no")}
                 </span>
               </div>
 
               <div className="flex justify-between">
-                <span>Token Expiry:</span>
+                <span>{t("token_expiry")}:</span>
                 <span>
                   {userData?.tokenExpiry
                     ? (() => {
                         const expiry = new Date(userData.tokenExpiry);
                         const now = new Date();
                         const diffMs = expiry.getTime() - now.getTime();
-                        if (diffMs <= 0) return "Expired";
+                        if (diffMs <= 0) return t("expired");
                         const diffDays = Math.floor(
                           diffMs / (1000 * 60 * 60 * 24)
                         );
@@ -218,7 +220,7 @@ const DashboardPage = () => {
               </div>
 
               <Button onClick={handleLogout} variant="outline" className="mt-4">
-                Log Out
+                {t("logout")}
               </Button>
             </div>
           </div>
@@ -229,7 +231,7 @@ const DashboardPage = () => {
       <SectionWrapper className="text-center py-16 container">
         {/* Customer List Section */}
         <TextGradientWhite
-          text="Shopify Customers"
+          text={t("shopify_customers")}
           className="text-3xl font-bold md:px-0 px-3 mt-12"
         />
 

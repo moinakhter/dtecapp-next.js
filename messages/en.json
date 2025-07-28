@@ -473,7 +473,31 @@
     "loginSuccessful": "Login successful!",
     "loggingIn": "Pendeing...",
     "login": "Login",
-    "createAccount": " Don&apos;t have an account?",
+    "createAccount": " Don't have an account?",
     "register": "Register"
+  },
+  "CustomerList": {
+    "loading": "Loading...",
+    "no_customers": "No customers found.",
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "actions": "Actions",
+    "confirm_delete": "Are you sure you want to delete this customer?",
+    "failed_to_fetch_user": "Failed to fetch user data",
+    "unauthorized": "Unauthorized",
+    "storetitle": "Store Details",
+    "username": "Username",
+    "company": "Company",
+    "shopify_store": "Shopify Store",
+    "dtec_access_token": "DTEC Access Token",
+    "copy_token": "Copy",
+    "expired_status": "Expired Status",
+    "yes": "Yes",
+    "no": "No",
+    "token_expiry": "Token Expiry",
+    "expired": "Expired",
+    "logout": "Log Out",
+    "shopify_customers": "Shopify Customers"
   }
 }

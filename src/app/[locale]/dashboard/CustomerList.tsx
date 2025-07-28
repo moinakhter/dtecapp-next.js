@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/pagination";
 import { Trash } from "lucide-react";
 import { toast } from "sonner";
+import { useTranslations } from "next-intl";
 
 interface Customer {
   customer_id: string;
@@ -32,6 +33,8 @@ interface Customer {
 }
 
 const PAGE_SIZE = 5;
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ;
+ 
 
 const fetchCustomers = async ({
   storeUrl,
@@ -40,14 +43,18 @@ const fetchCustomers = async ({
   storeUrl: string;
   page: number;
 }) => {
+ 
+  const normalizedUrl = storeUrl.replace(/\/+$/, "");
   const res = await fetch(
-    `/wp-json/custom-api/v1/customers-by-shop-url?shop_url=${encodeURIComponent(
-      storeUrl
-    )}&page=${page}&limit=${PAGE_SIZE}`
-  );
+  `${API_BASE_URL}/customers-by-shop-url/?shop_url=${encodeURIComponent(
+    normalizedUrl
+  )}&page=${page}&limit=5`
+);
+
   if (!res.ok) throw new Error("Failed to fetch customers");
   return res.json();
 };
+
 
 const deleteCustomer = async ({
   email,
@@ -56,15 +63,23 @@ const deleteCustomer = async ({
   email: string;
   shop_url: string;
 }) => {
-  const res = await fetch(`/wp-json/custom-api/v1/delete-customer`, {
+  const normalizedUrl = shop_url.replace(/\/+$/, "");  
+
+  const res = await fetch(`${API_BASE_URL}/delete-customer/`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email, shop_url }),
+    body: JSON.stringify({ email, shop_url: normalizedUrl }),
   });
+
   const result = await res.json();
-  if (!res.ok) throw new Error(result.message || "Failed to delete customer");
+
+  if (!res.ok || result.message !== "Customer deleted successfully") {
+    throw new Error(result.message || "Failed to delete customer");
+  }
+
   return result;
 };
+
 
 const CustomerList = ({ storeUrl }: { storeUrl: string }) => {
   const [page, setPage] = useState(1);
@@ -81,10 +96,19 @@ const CustomerList = ({ storeUrl }: { storeUrl: string }) => {
 
   const mutation = useMutation({
     mutationFn: deleteCustomer,
-    onSuccess: () => {
-      toast.success("Customer deleted successfully", { richColors: true });
-      queryClient.invalidateQueries({ queryKey: ["customers", storeUrl] });
-    },
+   onSuccess: (data) => {
+  if (data.message === "Customer deleted successfully") {
+    toast.success("Customer deleted successfully", { richColors: true });
+    queryClient.invalidateQueries({
+      queryKey: ["customers", storeUrl, page],
+    });
+  } else {
+    toast.error(data.message || "Customer not found", {
+      richColors: true,
+    });
+  }
+}
+,
     onError: (error: unknown) => {
       const message =
         error && typeof error === "object" && "message" in error
@@ -95,49 +119,49 @@ const CustomerList = ({ storeUrl }: { storeUrl: string }) => {
       });
     },
   });
-
+ const t =useTranslations("CustomerList");
   const total = data?.total || 0;
   const customers: Customer[] = data?.data || [];
   const totalPages = Math.ceil(total / PAGE_SIZE);
 
-  if (isLoading) return <p>Loading customers...</p>;
-  if (isError || customers.length === 0) return <p>No customers found.</p>;
+  if (isLoading) return <p>{t("loading")}</p>;
+  if (isError || customers.length === 0) return <p>{t("no_customers")}</p>;
 
   return (
     <div className="mt-6">
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead>Name</TableHead>
-            <TableHead>Email</TableHead>
-            <TableHead>Phone</TableHead>
-            <TableHead className="text-right">Actions</TableHead>
+            <TableHead className="text-start">{t("name")}</TableHead>
+            <TableHead className="text-start">{t("email")}</TableHead>
+            <TableHead className="text-start">{t("phone")}</TableHead>
+            <TableHead className="text-start">{t("actions")}</TableHead>
           </TableRow>
         </TableHeader>
-        <TableBody>
-          {customers.map((c, index) => (
-            <TableRow key={index}>
-              <TableCell>
-                {c.first_name} {c.last_name}
-              </TableCell>
-              <TableCell>{c.email}</TableCell>
-              <TableCell>{c.phone}</TableCell>
-              <TableCell className="text-right">
-                <Button
-                  variant="destructive"
-                  size="sm"
-                  onClick={() => {
-                    if (confirm("Are you sure you want to delete this customer?")) {
-                      mutation.mutate({ email: c.email, shop_url: storeUrl });
-                    }
-                  }}
-                >
-                  <Trash className="mr-2 h-4 w-4 text-red-500" />
-                </Button>
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
+   <TableBody>
+  {customers.map((c, index) => (
+    <TableRow key={index} className="align-middle">
+      <TableCell className="py-3 text-start">{c.first_name} {c.last_name}</TableCell>
+      <TableCell className="py-3 text-start">{c.email}</TableCell>
+      <TableCell className="py-3 text-start">{c.phone}</TableCell>
+      <TableCell className="py-3 text-start ">
+        <Button
+          variant="destructive"
+          size="icon"
+          className="p-2"
+          onClick={() => {
+            if (confirm(t("confirm_delete"))) {
+              mutation.mutate({ email: c.email, shop_url: storeUrl });
+            }
+          }}
+        >
+          <Trash className="h-4 w-4 text-red-500" />
+        </Button>
+      </TableCell>
+    </TableRow>
+  ))}
+</TableBody>
+
       </Table>
 
       {totalPages > 1 && (
