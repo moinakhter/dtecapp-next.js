@@ -36,24 +36,27 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "Missing HMAC" }, { status: 400 });
   }
 
-  const filtered = Array.from(searchParams.entries())
-    .filter(([k]) => k !== "hmac")
-    .sort(([a], [b]) => a.localeCompare(b))
-    .map(([k, v]) => `${k}=${v}`)
-    .join("&");
+ const filtered = Array.from(searchParams.entries())
+  .filter(([k]) => k !== "hmac")
+  .sort(([a],[b]) => a.localeCompare(b))
+  .map(([k,v]) => `${k}=${v}`)
+  .join("&");
 
-  const message = filtered;  
+// IMPORTANT: don't re-encode—use plain filtered string
 const generated = crypto
-  .createHmac("sha256", SHOPIFY_CLIENT_SECRET)
-  .update(message)
-  .digest("hex");
+  .createHmac('sha256', SHOPIFY_CLIENT_SECRET)
+  .update(filtered)
+  .digest('hex');
+ 
 
-
-  
-if (!crypto.timingSafeEqual(Buffer.from(generated, "utf-8"), Buffer.from(hmac!, "utf-8"))) {
-  return NextResponse.json({ error: "Invalid HMAC" }, { status: 403 });
-}
-
+  if (
+    !crypto.timingSafeEqual(
+   Buffer.from(generated),
+  Buffer.from(hmac)
+    )
+  ) {
+    return NextResponse.json({ error: "Invalid HMAC" }, { status: 403 });
+  }
 
   const tokenRes = await fetch(`https://${shop}/admin/oauth/access_token`, {
     method: "POST",
