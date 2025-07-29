@@ -79,10 +79,12 @@ export default function Step3Token() {
     const hmac = searchParams.get("hmac")
     const code = searchParams.get("code")
     const embedded = searchParams.get("embedded")
-const timestamp = searchParams.get("timestamp")
-const state = searchParams.get("state")
+    const timestamp = searchParams.get("timestamp")
+    const state = searchParams.get("state")
 
-    console.log("URL params:", { shop, hmac, code, embedded, locale })
+  
+
+    console.log("URL params:", { shop, hmac, code, embedded, locale, timestamp, state })
 
     if (!shop) {
       console.error("No shop parameter found")
@@ -91,15 +93,14 @@ const state = searchParams.get("state")
       return
     }
 
+    // Build query string for API call
     const queryParams = new URLSearchParams()
-queryParams.set("shop", shop!)
-if (hmac) queryParams.set("hmac", hmac)
-if (code) queryParams.set("code", code)
-if (embedded) queryParams.set("embedded", embedded)
-if (timestamp) queryParams.set("timestamp", timestamp)
-if (state) queryParams.set("state", state)
-
-
+    queryParams.set("shop", shop)
+    if (hmac) queryParams.set("hmac", hmac)
+    if (code) queryParams.set("code", code)
+    if (timestamp) queryParams.set("timestamp", timestamp)
+    if (state) queryParams.set("state", state)
+    if (embedded) queryParams.set("embedded", embedded)
 
     console.log("Calling API with:", queryParams.toString())
 

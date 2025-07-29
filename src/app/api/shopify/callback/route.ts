@@ -1,81 +1,62 @@
-import { NextRequest, NextResponse } from "next/server";
-import crypto from "crypto";
+import { type NextRequest, NextResponse } from "next/server"
+import crypto from "crypto"
 
-const SHOPIFY_CLIENT_SECRET = process.env.SHOPIFY_CLIENT_SECRET!;
-const SHOPIFY_CLIENT_ID = process.env.SHOPIFY_CLIENT_ID!;
-
-function validateHmac(params: URLSearchParams): boolean {
-  const hmac = params.get("hmac")!;
-  const entries: [string, string][] = [];
-  params.forEach((v, k) => {
-    if (k !== "hmac" && k !== "signature") entries.push([k, v]);
-  });
-  const sorted = entries.sort(([a], [b]) => a.localeCompare(b));
-  const raw = sorted.map(([k, v]) => `${k}=${v}`).join("&");
-  const generated = crypto.createHmac("sha256", SHOPIFY_CLIENT_SECRET).update(raw).digest("hex");
-  console.log("Raw payload string:", raw);
-  console.log("Generated HMAC:", generated);
-  console.log("Received HMAC:", hmac);
-  return generated === hmac;
-}
+const SHOPIFY_CLIENT_ID = process.env.SHOPIFY_CLIENT_ID!
 
 export async function GET(req: NextRequest) {
-  const { searchParams } = req.nextUrl;
-  console.log("Callback query params:", Object.fromEntries(searchParams.entries()));
+  const { searchParams } = req.nextUrl
+  const shop = searchParams.get("shop")
+  const code = searchParams.get("code")
+  const hmac = searchParams.get("hmac")
+  const state = searchParams.get("state")
+  const timestamp = searchParams.get("timestamp")
+  const host = searchParams.get("host")
+  
 
-  const shop = searchParams.get("shop");
-  const code = searchParams.get("code");
-  const hmac = searchParams.get("hmac");
-  const state = searchParams.get("state");
-  const timestamp = searchParams.get("timestamp");
-  const host = searchParams.get("host");
+  console.log("Auth route called with:", { shop, code: !!code, hmac: !!hmac, state })
 
-  if (!shop || !code || !hmac || !state || !timestamp) {
-    console.error("Missing required params:", { shop, code, hmac, state, timestamp, host });
-    return NextResponse.json({ error: "Missing required parameters" }, { status: 400 });
+  // If no code, this is the initial OAuth request - redirect to Shopify
+  if (!code && shop) {
+    console.log("No code found, redirecting to Shopify OAuth")
+    const scopes =
+      "unauthenticated_write_checkouts,unauthenticated_read_product_listings,unauthenticated_read_customers,unauthenticated_read_checkouts"
+
+    // Use the API route as redirect URI
+    const redirectUri = "https://dtecapp-design.vercel.app/api/shopify/auth"
+    console.log("Using redirect URI:", redirectUri)
+
+    const stateParam = crypto.randomBytes(16).toString("hex")
+    const authUrl = `https://${shop}/admin/oauth/authorize?client_id=${SHOPIFY_CLIENT_ID}&scope=${scopes}&redirect_uri=${encodeURIComponent(redirectUri)}&state=${stateParam}`
+
+    console.log("Redirecting to Shopify OAuth URL:", authUrl)
+
+    // This should be a redirect, not JSON response
+    return NextResponse.redirect(authUrl)
   }
 
-  const storedState = req.cookies.get("shopify_oauth_state")?.value;
-  if (!storedState || storedState !== state) {
-    console.error("Invalid state:", { received: state, stored: storedState });
-    return NextResponse.json({ error: "Invalid state parameter" }, { status: 403 });
+  // If we have a code, this is the callback from Shopify
+  if (code && shop) {
+    console.log("Received OAuth callback from Shopify, redirecting back to app")
+
+    // Build parameters to pass back to the main app
+    const params = new URLSearchParams()
+    if (shop) params.set("shop", shop)
+    if (code) params.set("code", code)
+    if (hmac) params.set("hmac", hmac)
+    if (state) params.set("state", state)
+    if (timestamp) params.set("timestamp", timestamp)
+    if (host) params.set("host", host)
+
+ 
+
+
+    // Redirect back to your main app page with all the OAuth parameters
+    const redirectUrl = `https://dtecapp-design.vercel.app/en/products/shopify-assistant?${params.toString()}`
+    console.log("Redirecting back to app:", redirectUrl)
+
+    return NextResponse.redirect(redirectUrl)
   }
 
-  if (!validateHmac(searchParams)) {
-    return NextResponse.json(
-      {
-        error: "HMAC validation failed",
-        debug: {
-          received_hmac: hmac,
-          all_params: Object.fromEntries(searchParams.entries()),
-        },
-      },
-      { status: 403 },
-    );
-  }
-
-  console.log("✅ HMAC validated");
-
-  // Exchange code for access token...
-  try {
-    const tokenRes = await fetch(`https://${shop}/admin/oauth/access_token`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ client_id: SHOPIFY_CLIENT_ID, client_secret: SHOPIFY_CLIENT_SECRET, code }),
-    });
-    if (!tokenRes.ok) throw new Error("Token request failed");
-    const data = await tokenRes.json();
-    if (!data.access_token) throw new Error("No access token returned");
-
-    return NextResponse.json({
-      status: true,
-      shop,
-      access_token: data.access_token,
-      scope: data.scope,
-      storefront_access_token: data.storefront_access_token || null,
-    });
-  } catch (err) {
-    console.error("Exchange failed", err);
-    return NextResponse.json({ error: "Token exchange failed" }, { status: 500 });
-  }
+  console.error("Missing required parameters:", { shop, code })
+  return NextResponse.json({ error: "Missing required parameters" }, { status: 400 })
 }

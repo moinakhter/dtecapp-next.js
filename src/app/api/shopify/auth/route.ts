@@ -8,6 +8,8 @@ const REDIRECT_URI = "https://dtecapp-design.vercel.app/api/shopify/callback";
 export async function GET(req: NextRequest) {
   const { searchParams } = req.nextUrl;
   const shop = searchParams.get("shop");
+ 
+
 
   if (!shop) {
     return NextResponse.json({ error: "Missing shop parameter" }, { status: 400 });
@@ -21,6 +23,7 @@ export async function GET(req: NextRequest) {
   authUrl.searchParams.set("scope", SCOPES);
   authUrl.searchParams.set("redirect_uri", REDIRECT_URI);
   authUrl.searchParams.set("state", stateParam);
+ 
 
   // Redirect to Shopify
   const response = NextResponse.redirect(authUrl.toString());
