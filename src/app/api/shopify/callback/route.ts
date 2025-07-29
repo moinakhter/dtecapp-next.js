@@ -5,18 +5,24 @@ const SHOPIFY_CLIENT_SECRET = process.env.SHOPIFY_CLIENT_SECRET!;
 const SHOPIFY_CLIENT_ID = process.env.SHOPIFY_CLIENT_ID!;
 
 function validateHmacRaw(rawQuery: string, secret: string): boolean {
- const params = rawQuery
-    .split("&")
-    .filter(p => !p.startsWith("hmac=") && !p.startsWith("signature="))
-    .sort((a, b) => a.localeCompare(b))
+  const allParams = new URLSearchParams(rawQuery)
 
-  const message = params.join("&")
-  const hmacMatch = new URLSearchParams(rawQuery).get("hmac") || ""
+  // Only include Shopify-signed params
+  const validKeys = ["shop", "code", "state", "timestamp"]
+  const sortedParams = Array.from(allParams.entries())
+    .filter(([key]) => key !== "hmac" && validKeys.includes(key))
+    .sort(([a], [b]) => a.localeCompare(b))
+    .map(([key, value]) => `${key}=${value}`)
+
+  const message = sortedParams.join("&")
+  const receivedHmac = allParams.get("hmac") || ""
   const generatedHmac = crypto.createHmac("sha256", secret).update(message).digest("hex")
 
+  console.log("🧾 HMAC Base Message:", message)
+  console.log("✅ Expected HMAC:", generatedHmac)
+  console.log("🟡 Received HMAC:", receivedHmac)
 
-
-  return hmacMatch === generatedHmac;
+  return crypto.timingSafeEqual(Buffer.from(receivedHmac), Buffer.from(generatedHmac))
 }
 
 async function createStorefrontToken(shop: string, accessToken: string) {
@@ -99,7 +105,8 @@ export async function GET(req: NextRequest) {
     );
   }
 
-  const isValid = validateHmacRaw(cleanRaw, process.env.SHOPIFY_CLIENT_SECRET!);
+const isValid = validateHmacRaw(cleanRaw, SHOPIFY_CLIENT_SECRET)
+
   if (!isValid) {
     return NextResponse.json(
       { error: "HMAC validation failed" },
