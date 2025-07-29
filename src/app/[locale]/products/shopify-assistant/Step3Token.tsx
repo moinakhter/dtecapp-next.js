@@ -13,47 +13,33 @@ export default function Step3Token() {
   const [token, setToken] = useState<string | null>(null);
   const [tokenError, setTokenError] = useState(false);
 
-  useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const shop = urlParams.get("shop");
-    const hmac = urlParams.get("hmac");
-    const code = urlParams.get("code");
-    console.log('Shop:', shop);
-console.log('Code:', code);
-console.log('HMAC:', hmac);
- 
-   
-    if (!shop) {
-      setTokenError(true);
-      return;
-    }
+useEffect(() => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const shop = urlParams.get("shop");
+  const hmac = urlParams.get("hmac");
+  const code = urlParams.get("code");
 
-    if (!code) {
-      // fetch(`/api/shopify/callback?shop=${shop}`)
-      //   .then((res) => res.json())
-      //   .then((data) => {
-      //     if (window.top) {
-      //       window.top.location.href = data.redirect_url;
-      //     } else {
-      //       window.location.href = data.redirect_url;
-      //     }
-      //   });
-      // return;
-       window.location.href = `/api/shopify/callback?shop=${shop}`;
-  return;
-    }
+  if (!shop) {
+    setTokenError(true);
+    return;
+  }
 
-    fetch(`/api/shopify/callback?shop=${shop}&hmac=${hmac}&code=${code}`)
-      .then((res) => res.json())
-      .then((data) => {
-        if (data?.storefront_access_token) {
-          setToken(data.storefront_access_token);
-        } else {
-          setTokenError(true);
-        }
-      })
-      .catch(() => setTokenError(true));
-  }, []);
+  if (!code) {
+    window.location.href = `/api/shopify/callback?shop=${shop}`;
+    return;
+  }
+
+  fetch(`/api/shopify/callback?shop=${shop}&hmac=${hmac}&code=${code}`)
+    .then((res) => res.json())
+    .then((data) => {
+      if (data?.storefront_access_token) {
+        setToken(data.storefront_access_token);
+      } else {
+        setTokenError(true);
+      }
+    })
+    .catch(() => setTokenError(true));
+}, []);
   console.log(token, tokenError);
   
   return (
