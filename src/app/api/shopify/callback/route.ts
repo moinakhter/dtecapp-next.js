@@ -16,22 +16,22 @@ export async function GET(req: Request) {
     return NextResponse.json({ error: "Missing shop" }, { status: 400 });
   }
 
-  if (!code) {
+if (!code) {
     const scopes = [
-      "unauthenticated_write_checkouts",
-      "unauthenticated_read_product_listings",
-      "unauthenticated_read_customers",
-      "unauthenticated_read_checkouts",
+        "unauthenticated_write_checkouts",
+        "unauthenticated_read_product_listings",
+        "unauthenticated_read_customers",
+        "unauthenticated_read_checkouts",
     ].join(",");
 
     const state = crypto.randomBytes(16).toString("hex");
 
     const authUrl = `https://${shop}/admin/oauth/authorize?client_id=${SHOPIFY_CLIENT_ID}&scope=${scopes}&redirect_uri=${encodeURIComponent(
-      REDIRECT_URI
+        REDIRECT_URI
     )}&state=${state}`;
 
-    return NextResponse.json({ redirect_url: authUrl });
-  }
+    return NextResponse.redirect(authUrl);
+}
 
   if (!hmac) {
     return NextResponse.json({ error: "Missing HMAC" }, { status: 400 });
