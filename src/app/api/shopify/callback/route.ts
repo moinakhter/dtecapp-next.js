@@ -1,85 +1,87 @@
-import { type NextRequest, NextResponse } from "next/server"
-import crypto from "crypto"
+import { type NextRequest, NextResponse } from "next/server";
+import crypto from "crypto";
 
-const SHOPIFY_CLIENT_SECRET = process.env.SHOPIFY_CLIENT_SECRET!
-const SHOPIFY_CLIENT_ID = process.env.SHOPIFY_CLIENT_ID!
+const SHOPIFY_CLIENT_SECRET = process.env.SHOPIFY_CLIENT_SECRET!;
+const SHOPIFY_CLIENT_ID = process.env.SHOPIFY_CLIENT_ID!;
 
 function validateHmac(rawQuery: string, secret: string): boolean {
   const query = new URLSearchParams(rawQuery);
   const hmac = query.get("hmac");
   if (!hmac) return false;
 
-  // Remove hmac and signature
-  const filteredParams = new URLSearchParams();
+  // Remove hmac and signature from query params
+  const filteredQuery = new URLSearchParams();
   for (const [key, value] of query.entries()) {
     if (key !== "hmac" && key !== "signature") {
-      filteredParams.append(key, value);
+      filteredQuery.append(key, value);
     }
   }
 
-  // Sort the filtered parameters
-  const sortedParams = Array.from(filteredParams.entries()).sort(([a], [b]) =>
+  // Sort parameters alphabetically by key
+  const sortedParams = Array.from(filteredQuery.entries()).sort(([a], [b]) =>
     a.localeCompare(b)
   );
 
-  // Rebuild query string as Shopify expects
-  const message = sortedParams.map(([key, value]) => `${key}=${value}`).join("&");
+  // Build query string manually to ensure proper formatting
+  const message = sortedParams
+    .map(([key, value]) => `${key}=${value}`)
+    .join("&");
 
   // Generate HMAC
   const generatedHmac = crypto
     .createHmac("sha256", secret)
     .update(message)
     .digest("hex");
-
   const isValid = generatedHmac === hmac;
-
-  console.log("🔒 Raw query string:", rawQuery);
-  console.log("🔄 Reconstructed message:", message);
-  console.log("✅ HMAC Valid:", isValid);
 
   return isValid;
 }
 
-
 async function createStorefrontToken(shop: string, accessToken: string) {
   try {
-    const response = await fetch(`https://${shop}/admin/api/2024-01/storefront_access_tokens.json`, {
-      method: "POST",
-      headers: {
-        "X-Shopify-Access-Token": accessToken,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        storefront_access_token: {
-          title: "Dtec App Access",
+    const response = await fetch(
+      `https://${shop}/admin/api/2024-01/storefront_access_tokens.json`,
+      {
+        method: "POST",
+        headers: {
+          "X-Shopify-Access-Token": accessToken,
+          "Content-Type": "application/json",
         },
-      }),
-    })
+        body: JSON.stringify({
+          storefront_access_token: {
+            title: "Dtec App Access",
+          },
+        }),
+      }
+    );
 
     if (!response.ok) {
-      console.error("Storefront token creation failed:", response.status, response.statusText)
-      return { error: "Failed to create storefront token" }
+      console.error(
+        "Storefront token creation failed:",
+        response.status,
+        response.statusText
+      );
+      return { error: "Failed to create storefront token" };
     }
 
-    const data = await response.json()
+    const data = await response.json();
 
     if (data.storefront_access_token) {
       return {
         storefrontAccessToken: {
           accessToken: data.storefront_access_token.access_token,
         },
-      }
+      };
     }
 
-    return { error: "Failed to create storefront token" }
+    return { error: "Failed to create storefront token" };
   } catch (error) {
-    console.error("Storefront token creation error:", error)
-    return { error: "Failed to create storefront token" }
+    console.error("Storefront token creation error:", error);
+    return { error: "Failed to create storefront token" };
   }
 }
 
 export async function GET(req: NextRequest) {
- 
   const rawQuery = req.nextUrl.search; 
   const cleanQuery = rawQuery.startsWith("?") ? rawQuery.slice(1) : rawQuery;
 
@@ -88,54 +90,89 @@ export async function GET(req: NextRequest) {
   const code = searchParams.get("code");
   const hmac = searchParams.get("hmac");
 
-  if (!shop || !code || !hmac) {
-    return NextResponse.json({ error: "Missing required parameters" }, { status: 400 });
+ 
+
+  // If no code, redirect to auth route to start OAuth
+  if (!code && shop) {
+    console.log("No code found, redirecting to auth route");
+    return NextResponse.json({
+      redirect_url: `https://dtecapp-design.vercel.app/api/shopify/auth?shop=${encodeURIComponent(
+        shop
+      )}`,
+      status: false,
+    });
   }
 
-  const isValid = validateHmac(cleanQuery, SHOPIFY_CLIENT_SECRET);
+  if (!shop || !code || !hmac) {
+    console.error("Missing required parameters:", {
+      shop: !!shop,
+      code: !!code,
+      hmac: !!hmac,
+    });
+    return NextResponse.json(
+      { error: "Missing required parameters" },
+      { status: 400 }
+    );
+  }
+
+
+ const isValid = validateHmac(cleanQuery, SHOPIFY_CLIENT_SECRET);
   if (!isValid) {
     return NextResponse.json({ error: "HMAC validation failed" }, { status: 403 });
   }
 
-
-  console.log("HMAC validation successful!")
+  console.log("HMAC validation successful!");
 
   // Exchange code for access token
   try {
-    console.log("Exchanging code for access token...")
-    const tokenResponse = await fetch(`https://${shop}/admin/oauth/access_token`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        client_id: SHOPIFY_CLIENT_ID,
-        client_secret: SHOPIFY_CLIENT_SECRET,
-        code,
-      }),
-    })
+    console.log("Exchanging code for access token...");
+    const tokenResponse = await fetch(
+      `https://${shop}/admin/oauth/access_token`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          client_id: SHOPIFY_CLIENT_ID,
+          client_secret: SHOPIFY_CLIENT_SECRET,
+          code,
+        }),
+      }
+    );
 
     if (!tokenResponse.ok) {
-      const errorText = await tokenResponse.text()
-      console.error("Token request failed:", tokenResponse.status, tokenResponse.statusText, errorText)
-      return NextResponse.json({ error: "Token request failed" }, { status: 500 })
+      const errorText = await tokenResponse.text();
+      console.error(
+        "Token request failed:",
+        tokenResponse.status,
+        tokenResponse.statusText,
+        errorText
+      );
+      return NextResponse.json(
+        { error: "Token request failed" },
+        { status: 500 }
+      );
     }
 
-    const tokenData = await tokenResponse.json()
-    console.log("Token response:", tokenData)
+    const tokenData = await tokenResponse.json();
+    console.log("Token response:", tokenData);
 
     if (!tokenData?.access_token) {
-      console.error("No access token in response:", tokenData)
-      return NextResponse.json({ error: "No access token returned" }, { status: 500 })
+      console.error("No access token in response:", tokenData);
+      return NextResponse.json(
+        { error: "No access token returned" },
+        { status: 500 }
+      );
     }
 
-    const accessToken = tokenData.access_token
-    const scopes = tokenData.scope
+    const accessToken = tokenData.access_token;
+    const scopes = tokenData.scope;
 
-    console.log("Successfully obtained access token for shop:", shop)
+    console.log("Successfully obtained access token for shop:", shop);
 
     // Create storefront access token
-    const storefrontTokenData = await createStorefrontToken(shop, accessToken)
+    const storefrontTokenData = await createStorefrontToken(shop, accessToken);
 
     return NextResponse.json({
       status: true,
@@ -143,9 +180,12 @@ export async function GET(req: NextRequest) {
       access_token: accessToken,
       scope: scopes,
       storefront_access_token: storefrontTokenData,
-    })
+    });
   } catch (error) {
-    console.error("Token exchange failed:", error)
-    return NextResponse.json({ error: "Token exchange failed" }, { status: 500 })
+    console.error("Token exchange failed:", error);
+    return NextResponse.json(
+      { error: "Token exchange failed" },
+      { status: 500 }
+    );
   }
 }

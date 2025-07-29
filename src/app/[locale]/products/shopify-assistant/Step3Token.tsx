@@ -110,7 +110,7 @@ export default function Step3Token() {
         if (data.status === false && data.redirect_url) {
           console.log("Need to redirect to OAuth:", data.redirect_url)
 
-          // Check if we're in an embedded context and App Bridge is available
+ 
           if (isEmbedded && appBridge) {
             try {
               console.log("Using App Bridge for redirect")
@@ -125,11 +125,11 @@ export default function Step3Token() {
               return
             } catch (error) {
               console.error("App Bridge redirect failed:", error)
-              // Fallback to regular redirect
+              
             }
           }
 
-          // Not embedded or App Bridge failed, use regular redirect
+ 
           console.log("Using regular redirect")
           window.location.href = data.redirect_url
           return
