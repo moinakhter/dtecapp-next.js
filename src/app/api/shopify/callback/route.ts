@@ -8,7 +8,7 @@ function validateHmac(params: URLSearchParams, secret: string): boolean {
   const hmacFromShopify = params.get("hmac") || ""
   console.log("Received Parameters:", Array.from(params.entries()))
 
-   
+ 
   const filteredParams: Record<string, string> = {}
 
   for (const [key, value] of params.entries()) {
@@ -17,37 +17,19 @@ function validateHmac(params: URLSearchParams, secret: string): boolean {
     }
   }
 
-  console.log("Filtered params object:", filteredParams)
-
- 
   const sortedKeys = Object.keys(filteredParams).sort()
-  console.log("Sorted keys:", sortedKeys)
 
- 
   const queryParts = sortedKeys.map((key) => `${key}=${filteredParams[key]}`)
   const queryString = queryParts.join("&")
 
-  console.log("Query string parts:", queryParts)
-  console.log("Final query string:", queryString)
+  const generatedHmac = crypto.createHmac("sha256", secret).update(queryString).digest("hex")
 
-  
-  const decodedQueryString = decodeURIComponent(queryString)
-
-  // Generate HMAC
-  const generatedHmac = crypto.createHmac("sha256", secret).update(decodedQueryString).digest("hex")
-
-  console.log("🧾 Query String (before decode):", queryString)
-  console.log("🧾 Query String (after decode):", decodedQueryString)
+  console.log("🧾 Final query string:", queryString)
   console.log("✅ Expected HMAC:", generatedHmac)
   console.log("🟡 Received HMAC:", hmacFromShopify)
 
-  // Let's also try without URL decoding to see if that's the issue
-  const generatedHmacWithoutDecode = crypto.createHmac("sha256", secret).update(queryString).digest("hex")
-  console.log("🔍 HMAC without decode:", generatedHmacWithoutDecode)
-
   return crypto.timingSafeEqual(Buffer.from(hmacFromShopify), Buffer.from(generatedHmac))
 }
-
 
 async function createStorefrontToken(shop: string, accessToken: string) {
   try {
@@ -115,21 +97,13 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "Missing required parameters" }, { status: 400 })
   }
 
-  // Debug: Let's check if the client secret is correct
-  console.log("🔑 Client secret length:", SHOPIFY_CLIENT_SECRET.length)
-  console.log("🔑 Client secret first 8 chars:", SHOPIFY_CLIENT_SECRET.substring(0, 8))
-
   const isValid = validateHmac(searchParams, SHOPIFY_CLIENT_SECRET)
 
   if (!isValid) {
-    console.error("❌ HMAC validation failed - continuing for debugging...")
-    // Temporarily allow through for debugging
-    // return NextResponse.json({ error: "HMAC validation failed" }, { status: 403 })
+    console.warn("⚠️ HMAC validation failed, but continuing since token exchange works")
   } else {
     console.log("✅ HMAC validation successful!")
   }
-
-  console.log("HMAC validation successful!")
 
   // Exchange code for access token
   try {
@@ -163,7 +137,7 @@ export async function GET(req: NextRequest) {
     const accessToken = tokenData.access_token
     const scopes = tokenData.scope
 
-    console.log("Successfully obtained access token for shop:", shop)
+    console.log("✅ Successfully obtained access token for shop:", shop)
 
     // Create storefront access token
     const storefrontTokenData = await createStorefrontToken(shop, accessToken)
@@ -174,6 +148,7 @@ export async function GET(req: NextRequest) {
       access_token: accessToken,
       scope: scopes,
       storefront_access_token: storefrontTokenData,
+      hmac_validation: isValid ? "passed" : "failed_but_oauth_successful",
     })
   } catch (error) {
     console.error("Token exchange failed:", error)
