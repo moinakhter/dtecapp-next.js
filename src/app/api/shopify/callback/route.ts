@@ -31,7 +31,7 @@ export async function GET(req: NextRequest) {
   const host = searchParams.get("host");
 
   if (!shop || !code || !hmac || !state || !timestamp) {
-    console.error("Missing required params:", { shop, code, hmac, state, timestamp });
+    console.error("Missing required params:", { shop, code, hmac, state, timestamp, host });
     return NextResponse.json({ error: "Missing required parameters" }, { status: 400 });
   }
 
