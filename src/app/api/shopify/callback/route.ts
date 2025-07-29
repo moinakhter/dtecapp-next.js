@@ -4,6 +4,38 @@ import crypto from "crypto"
 const SHOPIFY_CLIENT_SECRET = process.env.SHOPIFY_CLIENT_SECRET!
 const SHOPIFY_CLIENT_ID = process.env.SHOPIFY_CLIENT_ID!
 
+function validateHmac(query: URLSearchParams, secret: string): boolean {
+  const hmac = query.get("hmac")
+  if (!hmac) return false
+
+  // Remove hmac and signature from query params
+  const filteredQuery = new URLSearchParams()
+  for (const [key, value] of query.entries()) {
+    if (key !== "hmac" && key !== "signature") {
+      filteredQuery.append(key, value)
+    }
+  }
+
+  // Sort parameters alphabetically by key
+  const sortedParams = Array.from(filteredQuery.entries()).sort(([a], [b]) => a.localeCompare(b))
+
+  // Build query string manually to ensure proper formatting
+  const queryString = sortedParams.map(([key, value]) => `${key}=${value}`).join("&")
+
+  console.log("HMAC Debug:")
+  console.log("Original query string for HMAC:", queryString)
+  console.log("Sorted params:", sortedParams)
+
+  // Generate HMAC
+  const generatedHmac = crypto.createHmac("sha256", secret).update(queryString).digest("hex")
+
+  console.log("Generated HMAC:", generatedHmac)
+  console.log("Received HMAC:", hmac)
+  console.log("HMAC match:", generatedHmac === hmac)
+
+  return generatedHmac === hmac
+}
+
 async function createStorefrontToken(shop: string, accessToken: string) {
   try {
     const response = await fetch(`https://${shop}/admin/api/2024-01/storefront_access_tokens.json`, {
@@ -48,6 +80,7 @@ export async function GET(req: NextRequest) {
   const hmac = searchParams.get("hmac")
 
   console.log("Callback API called with params:", { shop, code: !!code, hmac: !!hmac })
+  console.log("All search params:", Object.fromEntries(searchParams.entries()))
 
   // If no code, redirect to auth route to start OAuth
   if (!code && shop) {
@@ -63,36 +96,29 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "Missing required parameters" }, { status: 400 })
   }
 
-  // HMAC validation
+  // HMAC validation using the corrected algorithm
   console.log("=== HMAC Validation ===")
-  const filteredParams = new URLSearchParams()
-  for (const [key, value] of searchParams.entries()) {
-    if (key !== "hmac") {
-      filteredParams.append(key, value)
-    }
-  }
+  const isValidHmac = validateHmac(searchParams, SHOPIFY_CLIENT_SECRET)
 
-  const sortedParams = Array.from(filteredParams.entries()).sort(([a], [b]) => a.localeCompare(b))
-  const queryString = new URLSearchParams(sortedParams).toString()
-  const decodedQueryString = decodeURIComponent(queryString)
-
-  const generatedHmac = crypto.createHmac("sha256", SHOPIFY_CLIENT_SECRET).update(decodedQueryString).digest("hex")
-
-  console.log("Generated HMAC:", generatedHmac)
-  console.log("Received HMAC:", hmac)
-
-  const hmacIsValid =
-    generatedHmac.length === hmac.length && crypto.timingSafeEqual(Buffer.from(generatedHmac), Buffer.from(hmac))
-
-  if (!hmacIsValid) {
+  if (!isValidHmac) {
     console.error("HMAC validation failed!")
-    return NextResponse.json({ error: "HMAC validation failed" }, { status: 403 })
+    return NextResponse.json(
+      {
+        error: "HMAC validation failed",
+        debug: {
+          received_hmac: hmac,
+          all_params: Object.fromEntries(searchParams.entries()),
+        },
+      },
+      { status: 403 },
+    )
   }
 
-  console.log("HMAC validation successful")
+  console.log("HMAC validation successful!")
 
   // Exchange code for access token
   try {
+    console.log("Exchanging code for access token...")
     const tokenResponse = await fetch(`https://${shop}/admin/oauth/access_token`, {
       method: "POST",
       headers: {
@@ -106,11 +132,13 @@ export async function GET(req: NextRequest) {
     })
 
     if (!tokenResponse.ok) {
-      console.error("Token request failed:", tokenResponse.status, tokenResponse.statusText)
+      const errorText = await tokenResponse.text()
+      console.error("Token request failed:", tokenResponse.status, tokenResponse.statusText, errorText)
       return NextResponse.json({ error: "Token request failed" }, { status: 500 })
     }
 
     const tokenData = await tokenResponse.json()
+    console.log("Token response:", tokenData)
 
     if (!tokenData?.access_token) {
       console.error("No access token in response:", tokenData)

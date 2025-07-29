@@ -22,6 +22,7 @@ interface TokenResponse {
     error?: string
   }
   error?: string
+  debug?: unknown
 }
 
 interface AppBridgeState {
@@ -34,6 +35,7 @@ export default function Step3Token() {
   const [tokenError, setTokenError] = useState<boolean>(false)
   const [loading, setLoading] = useState<boolean>(true)
   const [appBridge, setAppBridge] = useState<AppBridgeState | null>(null)
+  const [isEmbedded, setIsEmbedded] = useState<boolean>(false)
   const searchParams = useSearchParams()
   const params = useParams()
   const locale = (params.locale as string) || "en"
@@ -57,12 +59,15 @@ export default function Step3Token() {
           })
 
           setAppBridge({ app, Redirect })
+          setIsEmbedded(true)
           console.log("App Bridge initialized successfully")
         } else {
           console.log("Not in embedded context or missing host")
+          setIsEmbedded(false)
         }
       } catch (error) {
         console.error("Failed to initialize App Bridge:", error)
+        setIsEmbedded(false)
       }
     }
 
@@ -97,9 +102,6 @@ export default function Step3Token() {
     fetch(`/api/shopify/callback?${queryParams.toString()}`)
       .then((res) => {
         console.log("API response status:", res.status)
-        if (!res.ok) {
-          throw new Error(`HTTP error! status: ${res.status}`)
-        }
         return res.json() as Promise<TokenResponse>
       })
       .then((data: TokenResponse) => {
@@ -109,7 +111,7 @@ export default function Step3Token() {
           console.log("Need to redirect to OAuth:", data.redirect_url)
 
           // Check if we're in an embedded context and App Bridge is available
-          if (embedded === "1" && appBridge) {
+          if (isEmbedded && appBridge) {
             try {
               console.log("Using App Bridge for redirect")
 
@@ -120,22 +122,17 @@ export default function Step3Token() {
               })
 
               console.log("App Bridge redirect dispatched")
-
-              // Show loading state while redirect happens
-              setLoading(true)
               return
             } catch (error) {
               console.error("App Bridge redirect failed:", error)
-              // Fallback: try to open in new window
-              window.open(data.redirect_url, "_blank")
-              return
+              // Fallback to regular redirect
             }
-          } else {
-            console.log("Not embedded or no App Bridge, using regular redirect")
-            // Not embedded, use regular redirect
-            window.location.href = data.redirect_url
-            return
           }
+
+          // Not embedded or App Bridge failed, use regular redirect
+          console.log("Using regular redirect")
+          window.location.href = data.redirect_url
+          return
         }
 
         if (data.status && data.storefront_access_token) {
@@ -151,6 +148,9 @@ export default function Step3Token() {
           }
         } else if (data.error) {
           console.error("API error:", data.error)
+          if (data.debug) {
+            console.error("Debug info:", data.debug)
+          }
           setTokenError(true)
         } else {
           console.error("Unexpected response format:", data)
@@ -163,7 +163,7 @@ export default function Step3Token() {
         setTokenError(true)
         setLoading(false)
       })
-  }, [searchParams, appBridge, locale])
+  }, [searchParams, appBridge, isEmbedded, locale])
 
   const handleRetry = () => {
     setLoading(true)
@@ -181,7 +181,7 @@ export default function Step3Token() {
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
           <p>Processing Shopify authentication...</p>
           <p className="text-sm text-muted-foreground mt-2">
-            {appBridge ? "App Bridge initialized" : "Initializing App Bridge..."}
+            {isEmbedded ? "Embedded context detected" : "Standalone context"}
           </p>
         </div>
       </div>
