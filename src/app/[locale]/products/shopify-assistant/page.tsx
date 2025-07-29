@@ -15,7 +15,7 @@ import { Link } from "@/i18n/navigation";
 import { getTranslations } from "next-intl/server";
 import Step3Token from "./Step3Token";
 
-import Head from "next/head";
+ 
 
 export async function generateMetadata({
   params,
@@ -50,11 +50,7 @@ const Page = () => {
 
   return (
     <>
-      <Head>
-        <meta name="shopify-api-key" content="9a0b89206045c07c821e340a610" />
-        {/* eslint-disable-next-line @next/next/no-sync-scripts */}
-        <script src="https://cdn.shopify.com/shopifycloud/app-bridge.js" />
-      </Head>
+
 
       {/* Hero Section */}
       <section className="relative min-h-[80vh]  h-full  w-full">

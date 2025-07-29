@@ -10,6 +10,7 @@ import Footer from "@/components/Footer"
 import ReactQueryProvider from "./providers"
 import { getTranslations } from "next-intl/server"
 import ShopifyAppBridgeLoader from "./products/shopify-assistant/loader"
+import Head from "next/head"
  
  
 
@@ -60,9 +61,11 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} className={Celias.className} suppressHydrationWarning>
-      <head>
-        <meta name="shopify-api-key" content="9a0b89206045b51e5c07c821e340a610" />
-      </head>
+          <Head>
+        <meta name="shopify-api-key" content="9a0b89206045c07c821e340a610" />
+        {/* eslint-disable-next-line @next/next/no-sync-scripts */}
+        <script src="https://cdn.shopify.com/shopifycloud/app-bridge.js" />
+      </Head>
    
       <body
         className="bg-background text-foreground font-normal text-[13px] antialiased w-full h-full flex items-center justify-start flex-col overflow-hidden"
