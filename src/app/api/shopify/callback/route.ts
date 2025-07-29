@@ -4,38 +4,24 @@ import crypto from "crypto";
 const SHOPIFY_CLIENT_SECRET = process.env.SHOPIFY_CLIENT_SECRET!;
 const SHOPIFY_CLIENT_ID = process.env.SHOPIFY_CLIENT_ID!;
 
-function validateHmac(rawQuery: string, secret: string): boolean {
-  const query = new URLSearchParams(rawQuery);
-  const hmac = query.get("hmac");
-  if (!hmac) return false;
+ 
 
-  // Remove hmac and signature from query params
-  const filteredQuery = new URLSearchParams();
-  for (const [key, value] of query.entries()) {
-    if (key !== "hmac" && key !== "signature") {
-      filteredQuery.append(key, value);
-    }
-  }
+export function validateHmacRaw(rawQuery: string, secret: string): boolean {
+  const params = rawQuery.split("&").filter(p => !p.startsWith("hmac=") && !p.startsWith("signature="));
+  const sorted = params.sort((a, b) => a.split("=")[0].localeCompare(b.split("=")[0]));
+  const message = sorted.join("&");
 
-  // Sort parameters alphabetically by key
-  const sortedParams = Array.from(filteredQuery.entries()).sort(([a], [b]) =>
-    a.localeCompare(b)
-  );
+  const hmacMatch = new URLSearchParams(rawQuery).get("hmac");
+  const generatedHmac = crypto.createHmac("sha256", secret).update(message).digest("hex");
 
-  // Build query string manually to ensure proper formatting
-  const message = sortedParams
-    .map(([key, value]) => `${key}=${value}`)
-    .join("&");
+  console.log("🔒 Raw Query:", rawQuery);
+  console.log("🔄 Sorted message:", message);
+  console.log("🧠 Generated HMAC:", generatedHmac);
+  console.log("💡 Received HMAC:", hmacMatch);
 
-  // Generate HMAC
-  const generatedHmac = crypto
-    .createHmac("sha256", secret)
-    .update(message)
-    .digest("hex");
-  const isValid = generatedHmac === hmac;
-
-  return isValid;
+  return hmacMatch === generatedHmac;
 }
+
 
 async function createStorefrontToken(shop: string, accessToken: string) {
   try {
@@ -82,8 +68,8 @@ async function createStorefrontToken(shop: string, accessToken: string) {
 }
 
 export async function GET(req: NextRequest) {
-  const rawQuery = req.nextUrl.search; 
-  const cleanQuery = rawQuery.startsWith("?") ? rawQuery.slice(1) : rawQuery;
+ const raw = req.nextUrl.search;
+const cleanRaw = raw.startsWith("?") ? raw.slice(1) : raw;
 
   const searchParams = req.nextUrl.searchParams;
   const shop = searchParams.get("shop");
@@ -116,7 +102,7 @@ export async function GET(req: NextRequest) {
   }
 
 
- const isValid = validateHmac(cleanQuery, SHOPIFY_CLIENT_SECRET);
+ const isValid = validateHmacRaw(cleanRaw, process.env.SHOPIFY_CLIENT_SECRET!);
   if (!isValid) {
     return NextResponse.json({ error: "HMAC validation failed" }, { status: 403 });
   }
