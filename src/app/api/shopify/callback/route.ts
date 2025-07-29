@@ -4,24 +4,30 @@ import crypto from "crypto";
 const SHOPIFY_CLIENT_SECRET = process.env.SHOPIFY_CLIENT_SECRET!;
 const SHOPIFY_CLIENT_ID = process.env.SHOPIFY_CLIENT_ID!;
 
- function validateHmac(params: URLSearchParams, secret: string): boolean {
-  const hmacFromShopify = params.get("hmac") || ""
-console.log("Received Parameters:", Array.from(params.entries()));
+function validateHmac(params: URLSearchParams, secret: string): boolean {
+  const hmacFromShopify = params.get("hmac") || "";
+  console.log("Received Parameters:", Array.from(params.entries()));
   // Build message with only valid Shopify-signed keys
-  const validKeys = ["code", "shop", "state", "timestamp"]
+const validKeys = ["code", "shop", "state", "timestamp", "embedded", "host"];
   const message = Array.from(params.entries())
     .filter(([key]) => key !== "hmac" && validKeys.includes(key))
     .sort(([a], [b]) => a.localeCompare(b))
     .map(([key, value]) => `${key}=${value}`)
-    .join("&")
+    .join("&");
 
-  const generatedHmac = crypto.createHmac("sha256", secret).update(message).digest("hex")
+  const generatedHmac = crypto
+    .createHmac("sha256", secret)
+    .update(message)
+    .digest("hex");
 
-  console.log("🧾 HMAC Base Message:", message)
-  console.log("✅ Expected HMAC:", generatedHmac)
-  console.log("🟡 Received HMAC:", hmacFromShopify)
+  console.log("🧾 HMAC Base Message:", message);
+  console.log("✅ Expected HMAC:", generatedHmac);
+  console.log("🟡 Received HMAC:", hmacFromShopify);
 
-  return crypto.timingSafeEqual(Buffer.from(hmacFromShopify), Buffer.from(generatedHmac))
+  return crypto.timingSafeEqual(
+    Buffer.from(hmacFromShopify),
+    Buffer.from(generatedHmac)
+  );
 }
 
 async function createStorefrontToken(shop: string, accessToken: string) {
@@ -69,27 +75,26 @@ async function createStorefrontToken(shop: string, accessToken: string) {
 }
 
 export async function GET(req: NextRequest) {
- 
- 
-
   const searchParams = req.nextUrl.searchParams;
   const shop = searchParams.get("shop");
   const code = searchParams.get("code");
   const hmac = searchParams.get("hmac");
-   const embedded = searchParams.get("embedded") || "1"
-  const host = searchParams.get("host")
+  const embedded = searchParams.get("embedded") || "1";
+  const host = searchParams.get("host");
 
   if (!code && shop) {
-    console.log("No code found, redirecting to auth route")
-    const redirect = new URL("https://dtecapp-design.vercel.app/api/shopify/auth")
-    redirect.searchParams.set("shop", shop)
-    if (host) redirect.searchParams.set("host", host)
-    if (embedded) redirect.searchParams.set("embedded", embedded)
+    console.log("No code found, redirecting to auth route");
+    const redirect = new URL(
+      "https://dtecapp-design.vercel.app/api/shopify/auth"
+    );
+    redirect.searchParams.set("shop", shop);
+    if (host) redirect.searchParams.set("host", host);
+    if (embedded) redirect.searchParams.set("embedded", embedded);
 
     return NextResponse.json({
       redirect_url: redirect.toString(),
       status: false,
-    })
+    });
   }
 
   if (!shop || !code || !hmac) {
@@ -104,7 +109,7 @@ export async function GET(req: NextRequest) {
     );
   }
 
-const isValid = validateHmac(searchParams, SHOPIFY_CLIENT_SECRET)
+  const isValid = validateHmac(searchParams, SHOPIFY_CLIENT_SECRET);
 
   if (!isValid) {
     return NextResponse.json(
