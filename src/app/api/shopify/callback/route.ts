@@ -9,9 +9,6 @@ export async function GET(req: NextRequest) {
   const code = searchParams.get("code")
   const hmac = searchParams.get("hmac")
   const state = searchParams.get("state")
-  const timestamp = searchParams.get("timestamp")
-  const host = searchParams.get("host")
-  
 
   console.log("Auth route called with:", { shop, code: !!code, hmac: !!hmac, state })
 
@@ -36,19 +33,13 @@ export async function GET(req: NextRequest) {
 
   // If we have a code, this is the callback from Shopify
   if (code && shop) {
-    console.log("Received OAuth callback from Shopify, redirecting back to app")
-
+    
     // Build parameters to pass back to the main app
     const params = new URLSearchParams()
     if (shop) params.set("shop", shop)
     if (code) params.set("code", code)
     if (hmac) params.set("hmac", hmac)
     if (state) params.set("state", state)
-    if (timestamp) params.set("timestamp", timestamp)
-    if (host) params.set("host", host)
-
- 
-
 
     // Redirect back to your main app page with all the OAuth parameters
     const redirectUrl = `https://dtecapp-design.vercel.app/en/products/shopify-assistant?${params.toString()}`
