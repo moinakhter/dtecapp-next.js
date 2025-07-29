@@ -48,6 +48,8 @@ export default function Step3Token() {
         const host = searchParams.get("host")
         const embedded = searchParams.get("embedded")
 
+        console.log("Initializing App Bridge with:", { host, embedded })
+
         if (embedded === "1" && host) {
           const app = createApp({
             apiKey: "9a0b89206045b51e5c07c821e340a610",
@@ -55,7 +57,9 @@ export default function Step3Token() {
           })
 
           setAppBridge({ app, Redirect })
-          console.log("App Bridge initialized with npm package and official types")
+          console.log("App Bridge initialized successfully")
+        } else {
+          console.log("Not in embedded context or missing host")
         }
       } catch (error) {
         console.error("Failed to initialize App Bridge:", error)
@@ -85,6 +89,7 @@ export default function Step3Token() {
     queryParams.set("shop", shop)
     if (hmac) queryParams.set("hmac", hmac)
     if (code) queryParams.set("code", code)
+    if (embedded) queryParams.set("embedded", embedded)
 
     console.log("Calling API with:", queryParams.toString())
 
@@ -106,7 +111,7 @@ export default function Step3Token() {
           // Check if we're in an embedded context and App Bridge is available
           if (embedded === "1" && appBridge) {
             try {
-              console.log("Using App Bridge npm package for redirect")
+              console.log("Using App Bridge for redirect")
 
               const redirect = appBridge.Redirect.create(appBridge.app)
               redirect.dispatch(appBridge.Redirect.Action.REMOTE, {
@@ -115,17 +120,22 @@ export default function Step3Token() {
               })
 
               console.log("App Bridge redirect dispatched")
+
+              // Show loading state while redirect happens
+              setLoading(true)
+              return
             } catch (error) {
               console.error("App Bridge redirect failed:", error)
               // Fallback: try to open in new window
               window.open(data.redirect_url, "_blank")
+              return
             }
           } else {
             console.log("Not embedded or no App Bridge, using regular redirect")
             // Not embedded, use regular redirect
             window.location.href = data.redirect_url
+            return
           }
-          return
         }
 
         if (data.status && data.storefront_access_token) {
@@ -170,6 +180,9 @@ export default function Step3Token() {
         <div className="text-center">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
           <p>Processing Shopify authentication...</p>
+          <p className="text-sm text-muted-foreground mt-2">
+            {appBridge ? "App Bridge initialized" : "Initializing App Bridge..."}
+          </p>
         </div>
       </div>
     )
