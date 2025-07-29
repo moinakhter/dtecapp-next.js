@@ -1,0 +1,52 @@
+import { type NextRequest, NextResponse } from "next/server"
+import crypto from "crypto"
+
+const SHOPIFY_CLIENT_ID = process.env.SHOPIFY_CLIENT_ID!
+
+export async function GET(req: NextRequest) {
+  const { searchParams } = req.nextUrl
+  const shop = searchParams.get("shop")
+  const code = searchParams.get("code")
+  const hmac = searchParams.get("hmac")
+  const state = searchParams.get("state")
+
+  console.log("Shopify auth route called with:", { shop, code: !!code, hmac: !!hmac, state })
+
+  // If no code, this is the initial OAuth request - redirect to Shopify
+  if (!code && shop) {
+    console.log("No code found, redirecting to OAuth")
+    const scopes =
+      "unauthenticated_write_checkouts,unauthenticated_read_product_listings,unauthenticated_read_customers,unauthenticated_read_checkouts"
+
+    // Use the API route as redirect URI - much simpler!
+    const redirectUri = "https://dtecapp-design.vercel.app/api/shopify/auth"
+    console.log("Using redirect URI:", redirectUri)
+
+    const stateParam = crypto.randomBytes(16).toString("hex")
+    const authUrl = `https://${shop}/admin/oauth/authorize?client_id=${SHOPIFY_CLIENT_ID}&scope=${scopes}&redirect_uri=${encodeURIComponent(redirectUri)}&state=${stateParam}`
+
+    console.log("Redirecting to OAuth URL:", authUrl)
+    return NextResponse.redirect(authUrl)
+  }
+
+  // If we have a code, this is the callback from Shopify
+  if (code && shop) {
+    console.log("Received OAuth callback, redirecting back to app")
+
+    // Build parameters to pass back to the main app
+    const params = new URLSearchParams()
+    if (shop) params.set("shop", shop)
+    if (code) params.set("code", code)
+    if (hmac) params.set("hmac", hmac)
+    if (state) params.set("state", state)
+
+    // Redirect back to your main app page with all the OAuth parameters
+    const redirectUrl = `https://dtecapp-design.vercel.app/en/products/shopify-assistant?${params.toString()}`
+    console.log("Redirecting back to app:", redirectUrl)
+
+    return NextResponse.redirect(redirectUrl)
+  }
+
+  console.error("Missing required parameters:", { shop, code })
+  return NextResponse.json({ error: "Missing required parameters" }, { status: 400 })
+}

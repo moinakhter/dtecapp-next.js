@@ -53,17 +53,13 @@ export async function GET(req: NextRequest) {
   // Handle case where there's no code (initial OAuth or re-authentication)
   if (!code && shop) {
     console.log("No code found, redirecting to OAuth")
-    const scopes =
-      "unauthenticated_write_checkouts,unauthenticated_read_product_listings,unauthenticated_read_customers,unauthenticated_read_checkouts"
-    // Fixed: Use consistent redirect URI that matches your actual route structure
-    const redirectUri = encodeURIComponent("https://dtecapp-design.vercel.app/en/products/shopify-assistant/auth")
-    const state = crypto.randomBytes(16).toString("hex")
 
-    const authUrl = `https://${shop}/admin/oauth/authorize?client_id=${SHOPIFY_CLIENT_ID}&scope=${scopes}&redirect_uri=${redirectUri}&state=${state}`
+    // Use the API auth route - much simpler!
+    const authUrl = `/api/shopify/auth?shop=${encodeURIComponent(shop)}`
 
     console.log("Returning redirect URL:", authUrl)
     return NextResponse.json({
-      redirect_url: authUrl,
+      redirect_url: `https://dtecapp-design.vercel.app${authUrl}`,
       status: false,
     })
   }
