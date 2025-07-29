@@ -4,37 +4,42 @@ import crypto from "crypto"
 const SHOPIFY_CLIENT_SECRET = process.env.SHOPIFY_CLIENT_SECRET!
 const SHOPIFY_CLIENT_ID = process.env.SHOPIFY_CLIENT_ID!
 
-function validateHmac(query: URLSearchParams, secret: string): boolean {
-  const hmac = query.get("hmac")
-  if (!hmac) return false
+function validateHmac(rawQuery: string, secret: string): boolean {
+  const query = new URLSearchParams(rawQuery);
+  const hmac = query.get("hmac");
+  if (!hmac) return false;
 
-  // Remove hmac and signature from query params
-  const filteredQuery = new URLSearchParams()
+  // Remove hmac and signature
+  const filteredParams = new URLSearchParams();
   for (const [key, value] of query.entries()) {
     if (key !== "hmac" && key !== "signature") {
-      filteredQuery.append(key, value)
+      filteredParams.append(key, value);
     }
   }
 
-  // Sort parameters alphabetically by key
-  const sortedParams = Array.from(filteredQuery.entries()).sort(([a], [b]) => a.localeCompare(b))
+  // Sort the filtered parameters
+  const sortedParams = Array.from(filteredParams.entries()).sort(([a], [b]) =>
+    a.localeCompare(b)
+  );
 
-  // Build query string manually to ensure proper formatting
-  const queryString = sortedParams.map(([key, value]) => `${key}=${value}`).join("&")
-
-  console.log("HMAC Debug:")
-  console.log("Original query string for HMAC:", queryString)
-  console.log("Sorted params:", sortedParams)
+  // Rebuild query string as Shopify expects
+  const message = sortedParams.map(([key, value]) => `${key}=${value}`).join("&");
 
   // Generate HMAC
-  const generatedHmac = crypto.createHmac("sha256", secret).update(queryString).digest("hex")
+  const generatedHmac = crypto
+    .createHmac("sha256", secret)
+    .update(message)
+    .digest("hex");
 
-  console.log("Generated HMAC:", generatedHmac)
-  console.log("Received HMAC:", hmac)
-  console.log("HMAC match:", generatedHmac === hmac)
+  const isValid = generatedHmac === hmac;
 
-  return generatedHmac === hmac
+  console.log("🔒 Raw query string:", rawQuery);
+  console.log("🔄 Reconstructed message:", message);
+  console.log("✅ HMAC Valid:", isValid);
+
+  return isValid;
 }
+
 
 async function createStorefrontToken(shop: string, accessToken: string) {
   try {
@@ -74,45 +79,24 @@ async function createStorefrontToken(shop: string, accessToken: string) {
 }
 
 export async function GET(req: NextRequest) {
-  const { searchParams } = req.nextUrl
-  const shop = searchParams.get("shop")
-  const code = searchParams.get("code")
-  const hmac = searchParams.get("hmac")
+ 
+  const rawQuery = req.nextUrl.search; 
+  const cleanQuery = rawQuery.startsWith("?") ? rawQuery.slice(1) : rawQuery;
 
-  console.log("Callback API called with params:", { shop, code: !!code, hmac: !!hmac })
-  console.log("All search params:", Object.fromEntries(searchParams.entries()))
-
-  // If no code, redirect to auth route to start OAuth
-  if (!code && shop) {
-    console.log("No code found, redirecting to auth route")
-    return NextResponse.json({
-      redirect_url: `https://dtecapp-design.vercel.app/api/shopify/auth?shop=${encodeURIComponent(shop)}`,
-      status: false,
-    })
-  }
+  const searchParams = req.nextUrl.searchParams;
+  const shop = searchParams.get("shop");
+  const code = searchParams.get("code");
+  const hmac = searchParams.get("hmac");
 
   if (!shop || !code || !hmac) {
-    console.error("Missing required parameters:", { shop: !!shop, code: !!code, hmac: !!hmac })
-    return NextResponse.json({ error: "Missing required parameters" }, { status: 400 })
+    return NextResponse.json({ error: "Missing required parameters" }, { status: 400 });
   }
 
-  // HMAC validation using the corrected algorithm
-  console.log("=== HMAC Validation ===")
-  const isValidHmac = validateHmac(searchParams, SHOPIFY_CLIENT_SECRET)
-
-  if (!isValidHmac) {
-    console.error("HMAC validation failed!")
-    return NextResponse.json(
-      {
-        error: "HMAC validation failed",
-        debug: {
-          received_hmac: hmac,
-          all_params: Object.fromEntries(searchParams.entries()),
-        },
-      },
-      { status: 403 },
-    )
+  const isValid = validateHmac(cleanQuery, SHOPIFY_CLIENT_SECRET);
+  if (!isValid) {
+    return NextResponse.json({ error: "HMAC validation failed" }, { status: 403 });
   }
+
 
   console.log("HMAC validation successful!")
 
