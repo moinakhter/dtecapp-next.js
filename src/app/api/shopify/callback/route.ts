@@ -19,6 +19,11 @@ async function createStorefrontToken(shop: string, accessToken: string) {
       }),
     })
 
+    if (!response.ok) {
+      console.error("Storefront token creation failed:", response.status, response.statusText)
+      return { error: "Failed to create storefront token" }
+    }
+
     const data = await response.json()
 
     if (data.storefront_access_token) {
@@ -30,7 +35,8 @@ async function createStorefrontToken(shop: string, accessToken: string) {
     }
 
     return { error: "Failed to create storefront token" }
-  } catch {
+  } catch (error) {
+    console.error("Storefront token creation error:", error)
     return { error: "Failed to create storefront token" }
   }
 }
@@ -40,15 +46,17 @@ export async function GET(req: NextRequest) {
   const shop = searchParams.get("shop")
   const code = searchParams.get("code")
   const hmac = searchParams.get("hmac")
+  const embedded = searchParams.get("embedded")
 
-  console.log("API called with params:", { shop, code: !!code, hmac: !!hmac })
+  console.log("API called with params:", { shop, code: !!code, hmac: !!hmac, embedded })
 
   // Handle case where there's no code (initial OAuth or re-authentication)
   if (!code && shop) {
     console.log("No code found, redirecting to OAuth")
     const scopes =
       "unauthenticated_write_checkouts,unauthenticated_read_product_listings,unauthenticated_read_customers,unauthenticated_read_checkouts"
-    const redirectUri = encodeURIComponent("https://dtecapp-design.vercel.app/products/shopify-assistant")
+    // Fixed: Use consistent redirect URI that matches your actual route structure
+    const redirectUri = encodeURIComponent("https://dtecapp-design.vercel.app/en/products/shopify-assistant/auth")
     const state = crypto.randomBytes(16).toString("hex")
 
     const authUrl = `https://${shop}/admin/oauth/authorize?client_id=${SHOPIFY_CLIENT_ID}&scope=${scopes}&redirect_uri=${redirectUri}&state=${state}`
@@ -61,6 +69,7 @@ export async function GET(req: NextRequest) {
   }
 
   if (!shop || !code || !hmac) {
+    console.error("Missing required parameters:", { shop: !!shop, code: !!code, hmac: !!hmac })
     return NextResponse.json({ error: "Missing required parameters" }, { status: 400 })
   }
 
@@ -87,6 +96,7 @@ export async function GET(req: NextRequest) {
     generatedHmac.length === hmac.length && crypto.timingSafeEqual(Buffer.from(generatedHmac), Buffer.from(hmac))
 
   if (!hmacIsValid) {
+    console.error("HMAC validation failed:", { generated: generatedHmac, received: hmac })
     return NextResponse.json({ error: "HMAC validation failed" }, { status: 403 })
   }
 
@@ -105,17 +115,21 @@ export async function GET(req: NextRequest) {
     })
 
     if (!tokenResponse.ok) {
+      console.error("Token request failed:", tokenResponse.status, tokenResponse.statusText)
       return NextResponse.json({ error: "Token request failed" }, { status: 500 })
     }
 
     const tokenData = await tokenResponse.json()
 
     if (!tokenData?.access_token) {
+      console.error("No access token in response:", tokenData)
       return NextResponse.json({ error: "No access token returned" }, { status: 500 })
     }
 
     const accessToken = tokenData.access_token
     const scopes = tokenData.scope
+
+    console.log("Successfully obtained access token for shop:", shop)
 
     // Create storefront access token
     const storefrontTokenData = await createStorefrontToken(shop, accessToken)
@@ -127,7 +141,8 @@ export async function GET(req: NextRequest) {
       scope: scopes,
       storefront_access_token: storefrontTokenData,
     })
-  } catch {
+  } catch (error) {
+    console.error("Token exchange failed:", error)
     return NextResponse.json({ error: "Token exchange failed" }, { status: 500 })
   }
 }

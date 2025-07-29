@@ -3,7 +3,9 @@
 import { useEffect, useState } from "react"
 import { motion, type Variants } from "framer-motion"
 import { Button } from "@/components/ui/button"
-import { useSearchParams } from "next/navigation"
+import { useSearchParams, useParams } from "next/navigation"
+import type { ClientApplication } from "@shopify/app-bridge"
+import type { Redirect } from "@shopify/app-bridge/actions"
 
 const stepVariants: Variants = {
   hidden: { opacity: 0, y: 100 },
@@ -22,18 +24,54 @@ interface TokenResponse {
   error?: string
 }
 
-export default function ShopifyAssistant() {
+interface AppBridgeState {
+  app: ClientApplication
+  Redirect: typeof Redirect
+}
+
+export default function Step3Token() {
   const [token, setToken] = useState<string | null>(null)
-  const [tokenError, setTokenError] = useState(false)
-  const [loading, setLoading] = useState(true)
+  const [tokenError, setTokenError] = useState<boolean>(false)
+  const [loading, setLoading] = useState<boolean>(true)
+  const [appBridge, setAppBridge] = useState<AppBridgeState | null>(null)
   const searchParams = useSearchParams()
+  const params = useParams()
+  const locale = (params.locale as string) || "en"
+
+  // Initialize App Bridge using npm package with official types
+  useEffect(() => {
+    const initAppBridge = async (): Promise<void> => {
+      try {
+        const { createApp } = await import("@shopify/app-bridge")
+        const { Redirect } = await import("@shopify/app-bridge/actions")
+
+        const host = searchParams.get("host")
+        const embedded = searchParams.get("embedded")
+
+        if (embedded === "1" && host) {
+          const app = createApp({
+            apiKey: "9a0b89206045b51e5c07c821e340a610",
+            host: host,
+          })
+
+          setAppBridge({ app, Redirect })
+          console.log("App Bridge initialized with npm package and official types")
+        }
+      } catch (error) {
+        console.error("Failed to initialize App Bridge:", error)
+      }
+    }
+
+    initAppBridge()
+  }, [searchParams])
 
   useEffect(() => {
     const shop = searchParams.get("shop")
     const hmac = searchParams.get("hmac")
     const code = searchParams.get("code")
+    const embedded = searchParams.get("embedded")
 
-    console.log("URL params:", { shop, hmac, code })
+    console.log("URL params:", { shop, hmac, code, embedded, locale })
 
     if (!shop) {
       console.error("No shop parameter found")
@@ -54,15 +92,39 @@ export default function ShopifyAssistant() {
     fetch(`/api/shopify/callback?${queryParams.toString()}`)
       .then((res) => {
         console.log("API response status:", res.status)
-        return res.json()
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`)
+        }
+        return res.json() as Promise<TokenResponse>
       })
       .then((data: TokenResponse) => {
         console.log("API response data:", data)
 
         if (data.status === false && data.redirect_url) {
-          console.log("Redirecting to:", data.redirect_url)
-          // Redirect to Shopify OAuth - use window.location.href for top-level redirect
-          window.top!.location.href = data.redirect_url
+          console.log("Need to redirect to OAuth:", data.redirect_url)
+
+          // Check if we're in an embedded context and App Bridge is available
+          if (embedded === "1" && appBridge) {
+            try {
+              console.log("Using App Bridge npm package for redirect")
+
+              const redirect = appBridge.Redirect.create(appBridge.app)
+              redirect.dispatch(appBridge.Redirect.Action.REMOTE, {
+                url: data.redirect_url,
+                newContext: true,
+              })
+
+              console.log("App Bridge redirect dispatched")
+            } catch (error) {
+              console.error("App Bridge redirect failed:", error)
+              // Fallback: try to open in new window
+              window.open(data.redirect_url, "_blank")
+            }
+          } else {
+            console.log("Not embedded or no App Bridge, using regular redirect")
+            // Not embedded, use regular redirect
+            window.location.href = data.redirect_url
+          }
           return
         }
 
@@ -86,12 +148,21 @@ export default function ShopifyAssistant() {
         }
         setLoading(false)
       })
-      .catch((error) => {
+      .catch((error: Error) => {
         console.error("Fetch error:", error)
         setTokenError(true)
         setLoading(false)
       })
-  }, [searchParams])
+  }, [searchParams, appBridge, locale])
+
+  const handleRetry = () => {
+    setLoading(true)
+    setTokenError(false)
+    setToken(null)
+
+    // Reload the page to restart the OAuth flow
+    window.location.reload()
+  }
 
   if (loading) {
     return (
@@ -124,6 +195,9 @@ export default function ShopifyAssistant() {
                 <p className="text-red-600">
                   Access Token not found, please reinstall the app to generate a new Storefront API access token.
                 </p>
+                <Button className="mt-2" onClick={handleRetry}>
+                  Try Again
+                </Button>
               </div>
             )}
 

@@ -8,27 +8,27 @@ import { useTranslations } from "next-intl";
 import MindsBanner from "@/components/HomePage/minds-meet";
 import FloatingBalls from "@/components/common/FloatingBalls";
 import FadeText from "@/components/common/FadeText";
-import {  buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import SectionWrapper from "@/components/common/SectionWrapper";
 import Animation from "./Animation";
 import { Link } from "@/i18n/navigation";
 import { getTranslations } from "next-intl/server";
 import Step3Token from "./Step3Token";
- 
+
 import Head from "next/head";
- 
 
-
-export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "Metadata" });
 
   return {
-    title: t('shopifyTitle'),
-    description: t('shopifyDescription'),
-  }
-
-
+    title: t("shopifyTitle"),
+    description: t("shopifyDescription"),
+  };
 }
 const Page = () => {
   const t = useTranslations("shopify-assistant");
@@ -50,20 +50,17 @@ const Page = () => {
 
   return (
     <>
-   
-     <Head>
-  <meta name="shopify-api-key" content="9a0b89206045c07c821e340a610" />
-  {/* eslint-disable-next-line @next/next/no-sync-scripts */}
-  <script src="https://cdn.shopify.com/shopifycloud/app-bridge.js" />
-</Head>
-    
+      <Head>
+        <meta name="shopify-api-key" content="9a0b89206045c07c821e340a610" />
+        {/* eslint-disable-next-line @next/next/no-sync-scripts */}
+        <script src="https://cdn.shopify.com/shopifycloud/app-bridge.js" />
+      </Head>
 
       {/* Hero Section */}
       <section className="relative min-h-[80vh]  h-full  w-full">
         <FloatingBalls />
-       <div className="container relative z-10 flex items-center justify-center min-h-[684px] !pt-[200px]   h-full ">
-               <div className="flex flex-col md:flex-row items-center justify-center gap-12 text-center md:text-left">
-
+        <div className="container relative z-10 flex items-center justify-center min-h-[684px] !pt-[200px]   h-full ">
+          <div className="flex flex-col md:flex-row items-center justify-center gap-12 text-center md:text-left">
             <div className="space-y-8 w-full md:text-start text-center">
               <TextGradientWhite className="text-3xl md:text-7xl font-bold">
                 {t("title")}
@@ -145,13 +142,13 @@ const Page = () => {
             />
           ))}
           <Step3Token />
- <Step
-              step={`Step 4:`}
-              title="step4"
-              details= {t.raw("step4Details")}
-              img="/images/Shopify1.webp"
-            />
-  
+          <Step
+            step={`Step 4:`}
+            title="step4"
+            details={t.raw("step4Details")}
+            img="/images/Shopify1.webp"
+          />
+
           {/* Step 5 */}
           <Step5
             step="Step 5:"

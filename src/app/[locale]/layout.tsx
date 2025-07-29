@@ -60,6 +60,9 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} className={Celias.className} suppressHydrationWarning>
+      <head>
+        <meta name="shopify-api-key" content="9a0b89206045b51e5c07c821e340a610" />
+      </head>
    
       <body
         className="bg-background text-foreground font-normal text-[13px] antialiased w-full h-full flex items-center justify-start flex-col overflow-hidden"
