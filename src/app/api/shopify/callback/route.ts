@@ -41,15 +41,19 @@ export async function GET(req: NextRequest) {
   const code = searchParams.get("code")
   const hmac = searchParams.get("hmac")
 
+  console.log("API called with params:", { shop, code: !!code, hmac: !!hmac })
+
   // Handle case where there's no code (initial OAuth or re-authentication)
   if (!code && shop) {
+    console.log("No code found, redirecting to OAuth")
     const scopes =
       "unauthenticated_write_checkouts,unauthenticated_read_product_listings,unauthenticated_read_customers,unauthenticated_read_checkouts"
-    const redirectUri = encodeURIComponent("https://dtec.app/en/ai-voice-shopify-assistant")
+    const redirectUri = encodeURIComponent("https://dtecapp-design.vercel.app/products/shopify-assistant")
     const state = crypto.randomBytes(16).toString("hex")
 
     const authUrl = `https://${shop}/admin/oauth/authorize?client_id=${SHOPIFY_CLIENT_ID}&scope=${scopes}&redirect_uri=${redirectUri}&state=${state}`
 
+    console.log("Returning redirect URL:", authUrl)
     return NextResponse.json({
       redirect_url: authUrl,
       status: false,

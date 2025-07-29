@@ -33,7 +33,10 @@ export default function ShopifyAssistant() {
     const hmac = searchParams.get("hmac")
     const code = searchParams.get("code")
 
+    console.log("URL params:", { shop, hmac, code })
+
     if (!shop) {
+      console.error("No shop parameter found")
       setTokenError(true)
       setLoading(false)
       return
@@ -45,31 +48,46 @@ export default function ShopifyAssistant() {
     if (hmac) queryParams.set("hmac", hmac)
     if (code) queryParams.set("code", code)
 
+    console.log("Calling API with:", queryParams.toString())
+
     // Call the backend API
     fetch(`/api/shopify/callback?${queryParams.toString()}`)
-      .then((res) => res.json())
+      .then((res) => {
+        console.log("API response status:", res.status)
+        return res.json()
+      })
       .then((data: TokenResponse) => {
+        console.log("API response data:", data)
+
         if (data.status === false && data.redirect_url) {
-          // Redirect to Shopify OAuth
-          window.location.href = data.redirect_url
+          console.log("Redirecting to:", data.redirect_url)
+          // Redirect to Shopify OAuth - use window.location.href for top-level redirect
+          window.top!.location.href = data.redirect_url
           return
         }
 
         if (data.status && data.storefront_access_token) {
           if (data.storefront_access_token.error) {
+            console.error("Storefront token error:", data.storefront_access_token.error)
             setTokenError(true)
           } else if (data.storefront_access_token.storefrontAccessToken?.accessToken) {
+            console.log("Token received:", data.storefront_access_token.storefrontAccessToken.accessToken)
             setToken(data.storefront_access_token.storefrontAccessToken.accessToken)
           } else {
+            console.error("No access token in response")
             setTokenError(true)
           }
+        } else if (data.error) {
+          console.error("API error:", data.error)
+          setTokenError(true)
         } else {
+          console.error("Unexpected response format:", data)
           setTokenError(true)
         }
         setLoading(false)
       })
       .catch((error) => {
-        console.error("OAuth error:", error)
+        console.error("Fetch error:", error)
         setTokenError(true)
         setLoading(false)
       })
