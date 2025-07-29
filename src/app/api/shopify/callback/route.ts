@@ -4,31 +4,40 @@ import crypto from "crypto"
 const SHOPIFY_CLIENT_SECRET = process.env.SHOPIFY_CLIENT_SECRET!
 const SHOPIFY_CLIENT_ID = process.env.SHOPIFY_CLIENT_ID!
 
-function validateHmac(query: URLSearchParams, secret: string): boolean {
+function validateShopifyHmac(query: URLSearchParams, secret: string): boolean {
   const hmac = query.get("hmac")
-  if (!hmac) return false
+  if (!hmac) {
+    console.log("No HMAC found in request")
+    return false
+  }
 
-  // Remove hmac and signature from query params
-  const filteredQuery = new URLSearchParams()
+ 
+  const filteredParams: Record<string, string> = {}
   for (const [key, value] of query.entries()) {
     if (key !== "hmac" && key !== "signature") {
-      filteredQuery.append(key, value)
+      filteredParams[key] = value
     }
   }
 
-  // Sort parameters alphabetically by key
-  const sortedParams = Array.from(filteredQuery.entries()).sort(([a], [b]) => a.localeCompare(b))
+ 
+  const sortedKeys = Object.keys(filteredParams).sort()
+  const sortedParams: Record<string, string> = {}
+  for (const key of sortedKeys) {
+    sortedParams[key] = filteredParams[key]
+  }
+ 
+  const queryString = new URLSearchParams(sortedParams).toString()
 
-  // Build query string manually to ensure proper formatting
-  const queryString = sortedParams.map(([key, value]) => `${key}=${value}`).join("&")
+ 
+  const decodedQueryString = decodeURIComponent(queryString)
+  const generatedHmac = crypto.createHmac("sha256", secret).update(decodedQueryString).digest("hex")
 
-  console.log("HMAC Debug:")
-  console.log("Original query string for HMAC:", queryString)
+  console.log("=== HMAC Validation Debug (PHP Method) ===")
+  console.log("All query params:", Object.fromEntries(query.entries()))
+  console.log("Filtered params:", filteredParams)
   console.log("Sorted params:", sortedParams)
-
-  // Generate HMAC
-  const generatedHmac = crypto.createHmac("sha256", secret).update(queryString).digest("hex")
-
+  console.log("Query string (encoded):", queryString)
+  console.log("Query string (decoded):", decodedQueryString)
   console.log("Generated HMAC:", generatedHmac)
   console.log("Received HMAC:", hmac)
   console.log("HMAC match:", generatedHmac === hmac)
@@ -79,7 +88,9 @@ export async function GET(req: NextRequest) {
   const code = searchParams.get("code")
   const hmac = searchParams.get("hmac")
 
-  console.log("Callback API called with params:", { shop, code: !!code, hmac: !!hmac })
+  console.log("=== Callback API Called ===")
+  console.log("Basic params:", { shop, code: !!code, hmac: !!hmac })
+  console.log("Full URL:", req.url)
   console.log("All search params:", Object.fromEntries(searchParams.entries()))
 
   // If no code, redirect to auth route to start OAuth
@@ -96,9 +107,8 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "Missing required parameters" }, { status: 400 })
   }
 
-  // HMAC validation using the corrected algorithm
-  console.log("=== HMAC Validation ===")
-  const isValidHmac = validateHmac(searchParams, SHOPIFY_CLIENT_SECRET)
+  // HMAC validation using PHP method
+  const isValidHmac = validateShopifyHmac(searchParams, SHOPIFY_CLIENT_SECRET)
 
   if (!isValidHmac) {
     console.error("HMAC validation failed!")
@@ -114,7 +124,7 @@ export async function GET(req: NextRequest) {
     )
   }
 
-  console.log("HMAC validation successful!")
+  console.log("✅ HMAC validation successful!")
 
   // Exchange code for access token
   try {
@@ -138,7 +148,7 @@ export async function GET(req: NextRequest) {
     }
 
     const tokenData = await tokenResponse.json()
-    console.log("Token response:", tokenData)
+    console.log("Token response received successfully")
 
     if (!tokenData?.access_token) {
       console.error("No access token in response:", tokenData)
@@ -148,7 +158,7 @@ export async function GET(req: NextRequest) {
     const accessToken = tokenData.access_token
     const scopes = tokenData.scope
 
-    console.log("Successfully obtained access token for shop:", shop)
+    console.log("✅ Successfully obtained access token for shop:", shop)
 
     // Create storefront access token
     const storefrontTokenData = await createStorefrontToken(shop, accessToken)
