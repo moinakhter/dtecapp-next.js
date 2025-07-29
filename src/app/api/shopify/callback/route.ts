@@ -8,17 +8,29 @@ function validateHmac(params: URLSearchParams, secret: string): boolean {
   const hmacFromShopify = params.get("hmac") || ""
   console.log("Received Parameters:", Array.from(params.entries()))
 
-  // Build message with ALL parameters except HMAC
-  // This is the key fix - don't filter by validKeys
-  const message = Array.from(params.entries())
-    .filter(([key]) => key !== "hmac") // Only exclude HMAC
-    .sort(([a], [b]) => a.localeCompare(b)) // Sort alphabetically by key
-    .map(([key, value]) => `${key}=${value}`)
-    .join("&")
+  // Create a new URLSearchParams object without the hmac parameter
+  const filteredParams = new URLSearchParams()
 
-  const generatedHmac = crypto.createHmac("sha256", secret).update(message).digest("hex")
+  for (const [key, value] of params.entries()) {
+    if (key !== "hmac") {
+      filteredParams.append(key, value)
+    }
+  }
 
-  console.log("🧾 HMAC Base Message:", message)
+  // Sort the parameters (URLSearchParams.sort() sorts by key)
+  filteredParams.sort()
+
+  // Convert to query string
+  const queryString = filteredParams.toString()
+
+  // URL decode the query string (this was the missing step!)
+  const decodedQueryString = decodeURIComponent(queryString)
+
+  // Generate HMAC
+  const generatedHmac = crypto.createHmac("sha256", secret).update(decodedQueryString).digest("hex")
+
+  console.log("🧾 Query String (before decode):", queryString)
+  console.log("🧾 Query String (after decode):", decodedQueryString)
   console.log("✅ Expected HMAC:", generatedHmac)
   console.log("🟡 Received HMAC:", hmacFromShopify)
 
