@@ -4,25 +4,24 @@ import crypto from "crypto";
 const SHOPIFY_CLIENT_SECRET = process.env.SHOPIFY_CLIENT_SECRET!;
 const SHOPIFY_CLIENT_ID = process.env.SHOPIFY_CLIENT_ID!;
 
-function validateHmacRaw(rawQuery: string, secret: string): boolean {
-  const allParams = new URLSearchParams(rawQuery)
+ function validateHmac(params: URLSearchParams, secret: string): boolean {
+  const hmacFromShopify = params.get("hmac") || ""
 
-  // Only include Shopify-signed params
-  const validKeys = ["shop", "code", "state", "timestamp"]
-  const sortedParams = Array.from(allParams.entries())
+  // Build message with only valid Shopify-signed keys
+  const validKeys = ["code", "shop", "state", "timestamp"]
+  const message = Array.from(params.entries())
     .filter(([key]) => key !== "hmac" && validKeys.includes(key))
     .sort(([a], [b]) => a.localeCompare(b))
     .map(([key, value]) => `${key}=${value}`)
+    .join("&")
 
-  const message = sortedParams.join("&")
-  const receivedHmac = allParams.get("hmac") || ""
   const generatedHmac = crypto.createHmac("sha256", secret).update(message).digest("hex")
 
   console.log("🧾 HMAC Base Message:", message)
   console.log("✅ Expected HMAC:", generatedHmac)
-  console.log("🟡 Received HMAC:", receivedHmac)
+  console.log("🟡 Received HMAC:", hmacFromShopify)
 
-  return crypto.timingSafeEqual(Buffer.from(receivedHmac), Buffer.from(generatedHmac))
+  return crypto.timingSafeEqual(Buffer.from(hmacFromShopify), Buffer.from(generatedHmac))
 }
 
 async function createStorefrontToken(shop: string, accessToken: string) {
@@ -70,8 +69,8 @@ async function createStorefrontToken(shop: string, accessToken: string) {
 }
 
 export async function GET(req: NextRequest) {
-  const raw = req.nextUrl.search;
-  const cleanRaw = raw.startsWith("?") ? raw.slice(1) : raw
+ 
+ 
 
   const searchParams = req.nextUrl.searchParams;
   const shop = searchParams.get("shop");
@@ -105,7 +104,7 @@ export async function GET(req: NextRequest) {
     );
   }
 
-const isValid = validateHmacRaw(cleanRaw, SHOPIFY_CLIENT_SECRET)
+const isValid = validateHmac(searchParams, SHOPIFY_CLIENT_SECRET)
 
   if (!isValid) {
     return NextResponse.json(
