@@ -6,7 +6,7 @@ const SHOPIFY_CLIENT_ID = process.env.SHOPIFY_CLIENT_ID!;
 
  
 
-export function validateHmacRaw(rawQuery: string, secret: string): boolean {
+ function validateHmacRaw(rawQuery: string, secret: string): boolean {
   const params = rawQuery.split("&").filter(p => !p.startsWith("hmac=") && !p.startsWith("signature="));
   const sorted = params.sort((a, b) => a.split("=")[0].localeCompare(b.split("=")[0]));
   const message = sorted.join("&");
