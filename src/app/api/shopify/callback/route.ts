@@ -1,12 +1,13 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import crypto from "crypto";
 
 const SHOPIFY_CLIENT_ID = process.env.SHOPIFY_CLIENT_ID!;
 const SHOPIFY_CLIENT_SECRET = process.env.SHOPIFY_CLIENT_SECRET!;
 const REDIRECT_URI = `${process.env.NEXT_PUBLIC_SITE_URL}/products/shopify-assistant`;
 
-export async function GET(req: NextRequest) {
+export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
+
   const shop = searchParams.get("shop");
   const code = searchParams.get("code");
   const hmac = searchParams.get("hmac");
@@ -29,33 +30,35 @@ export async function GET(req: NextRequest) {
       REDIRECT_URI
     )}&state=${state}`;
 
-    return NextResponse.json({ redirect_url: authUrl, status: false });
+    return NextResponse.json({ redirect_url: authUrl });
   }
 
   if (!hmac) {
     return NextResponse.json({ error: "Missing HMAC" }, { status: 400 });
   }
 
- const filtered = Array.from(searchParams.entries())
-  .filter(([k]) => k !== "hmac")
-  .sort(([a],[b]) => a.localeCompare(b))
-  .map(([k,v]) => `${k}=${v}`)
-  .join("&");
+  const message = Array.from(searchParams.entries())
+    .filter(([key]) => key !== "hmac")
+    .sort(([a], [b]) => a.localeCompare(b))
+    .map(([k, v]) => `${k}=${v}`)
+    .join("&");
 
-// IMPORTANT: don't re-encode—use plain filtered string
-const generated = crypto
-  .createHmac('sha256', SHOPIFY_CLIENT_SECRET)
-  .update(filtered)
-  .digest('hex');
- 
+  const generated = crypto
+    .createHmac("sha256", SHOPIFY_CLIENT_SECRET)
+    .update(message)
+    .digest("hex");
 
   if (
+    generated.length !== hmac.length ||
     !crypto.timingSafeEqual(
-   Buffer.from(generated),
-  Buffer.from(hmac)
+      Buffer.from(generated, "utf-8"),
+      Buffer.from(hmac, "utf-8")
     )
   ) {
-    return NextResponse.json({ error: "Invalid HMAC" }, { status: 403 });
+    return NextResponse.json(
+      { error: "Invalid HMAC", generated, received: hmac },
+      { status: 403 }
+    );
   }
 
   const tokenRes = await fetch(`https://${shop}/admin/oauth/access_token`, {
@@ -77,7 +80,6 @@ const generated = crypto
     );
   }
 
-  // 🔑 Create Storefront Access Token
   const storefrontTokenRes = await fetch(
     `https://${shop}/admin/api/2024-01/graphql.json`,
     {
@@ -90,7 +92,7 @@ const generated = crypto
         query: `
         mutation {
           storefrontAccessTokenCreate(input: {
-            title: \"DTEC Assistant\"
+            title: "DTEC Assistant"
           }) {
             storefrontAccessToken {
               accessToken

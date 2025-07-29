@@ -18,7 +18,11 @@ export default function Step3Token() {
     const shop = urlParams.get("shop");
     const hmac = urlParams.get("hmac");
     const code = urlParams.get("code");
-    console.log(code, hmac, shop);
+    console.log('Shop:', shop);
+console.log('Code:', code);
+console.log('HMAC:', hmac);
+ 
+   
     if (!shop) {
       setTokenError(true);
       return;
@@ -48,7 +52,8 @@ export default function Step3Token() {
       })
       .catch(() => setTokenError(true));
   }, []);
-
+  console.log(token, tokenError);
+  
   return (
     <motion.div
       variants={stepVariants}
@@ -65,6 +70,7 @@ export default function Step3Token() {
 
         <ul className="space-y-2 text-base font-light">
           <li>Generate the Storefront API Access Token:</li>
+          
 
           {tokenError && (
             <li className="text-red-500">
