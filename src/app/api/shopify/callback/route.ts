@@ -6,7 +6,7 @@ const SHOPIFY_CLIENT_ID = process.env.SHOPIFY_CLIENT_ID!;
 
  function validateHmac(params: URLSearchParams, secret: string): boolean {
   const hmacFromShopify = params.get("hmac") || ""
-
+console.log("Received Parameters:", Array.from(params.entries()));
   // Build message with only valid Shopify-signed keys
   const validKeys = ["code", "shop", "state", "timestamp"]
   const message = Array.from(params.entries())
