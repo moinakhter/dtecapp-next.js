@@ -9,39 +9,58 @@ const stepVariants: Variants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
 };
 
+function generateState(length = 20) {
+  const chars = "abcdefghijklmnopqrstuvwxyz0123456789";
+  let result = "";
+  for (let i = 0; i < length; i++) {
+    result += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  return result;
+}
+
 export default function Step3Token() {
   const [token, setToken] = useState<string | null>(null);
   const [tokenError, setTokenError] = useState(false);
 
-useEffect(() => {
-  const urlParams = new URLSearchParams(window.location.search);
-  const shop = urlParams.get("shop");
-  const hmac = urlParams.get("hmac");
-  const code = urlParams.get("code");
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const shop = urlParams.get("shop");
+    const code = urlParams.get("code");
+    const hmac = urlParams.get("hmac");
 
-  if (!shop) {
-    setTokenError(true);
-    return;
-  }
+    if (!shop) {
+      setTokenError(true);
+      return;
+    }
 
-  if (!code) {
-    window.location.href = `/api/shopify/callback?shop=${shop}`;
-    return;
-  }
+    if (!code) {
+ 
+      const state = generateState();
+      const clientId = process.env.NEXT_PUBLIC_SHOPIFY_API_KEY!;
+      const redirectUri = encodeURIComponent(
+        `${window.location.origin}/products/shopify-assistant`
+      );
+      const scopes =
+        "unauthenticated_write_checkouts,unauthenticated_read_product_listings,unauthenticated_read_customers,unauthenticated_read_checkouts";
 
-  fetch(`/api/shopify/callback?shop=${shop}&hmac=${hmac}&code=${code}`)
-    .then((res) => res.json())
-    .then((data) => {
-      if (data?.storefront_access_token) {
-        setToken(data.storefront_access_token);
-      } else {
-        setTokenError(true);
-      }
-    })
-    .catch(() => setTokenError(true));
-}, []);
-  console.log(token, tokenError);
-  
+      const shopifyAuthUrl = `https://${shop}/admin/oauth/authorize?client_id=${clientId}&scope=${scopes}&redirect_uri=${redirectUri}&state=${state}`;
+      window.location.href = shopifyAuthUrl;
+      return;
+    }
+
+ 
+    fetch(`/api/shopify/callback?shop=${shop}&hmac=${hmac}&code=${code}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data?.storefront_access_token) {
+          setToken(data.storefront_access_token);
+        } else {
+          setTokenError(true);
+        }
+      })
+      .catch(() => setTokenError(true));
+  }, []);
+
   return (
     <motion.div
       variants={stepVariants}
@@ -58,7 +77,6 @@ useEffect(() => {
 
         <ul className="space-y-2 text-base font-light">
           <li>Generate the Storefront API Access Token:</li>
-          
 
           {tokenError && (
             <li className="text-red-500">
