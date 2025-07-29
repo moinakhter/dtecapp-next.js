@@ -79,6 +79,8 @@ export default function Step3Token() {
     const hmac = searchParams.get("hmac")
     const code = searchParams.get("code")
     const embedded = searchParams.get("embedded")
+const timestamp = searchParams.get("timestamp")
+const state = searchParams.get("state")
 
     console.log("URL params:", { shop, hmac, code, embedded, locale })
 
@@ -89,12 +91,15 @@ export default function Step3Token() {
       return
     }
 
-    // Build query string for API call
     const queryParams = new URLSearchParams()
-    queryParams.set("shop", shop)
-    if (hmac) queryParams.set("hmac", hmac)
-    if (code) queryParams.set("code", code)
-    if (embedded) queryParams.set("embedded", embedded)
+queryParams.set("shop", shop!)
+if (hmac) queryParams.set("hmac", hmac)
+if (code) queryParams.set("code", code)
+if (embedded) queryParams.set("embedded", embedded)
+if (timestamp) queryParams.set("timestamp", timestamp)
+if (state) queryParams.set("state", state)
+
+
 
     console.log("Calling API with:", queryParams.toString())
 
