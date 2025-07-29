@@ -10,7 +10,7 @@ export async function GET(req: NextRequest) {
   const hmac = searchParams.get("hmac");
   const state = searchParams.get("state");
   const host = searchParams.get("host");
-  const embedded = searchParams.get("embedded");
+ 
 
   console.log("Auth route called with:", {
     shop,
@@ -55,7 +55,7 @@ export async function GET(req: NextRequest) {
     if (hmac) params.set("hmac", hmac);
     if (state) params.set("state", state);
     if (host) params.set("host", host);
-    if (embedded) params.set("embedded", embedded);
+    params.set("embedded", "1")
 
     // Redirect back to your main app page with all the OAuth parameters
     const redirectUrl = `https://dtecapp-design.vercel.app/en/products/shopify-assistant?${params.toString()}`;

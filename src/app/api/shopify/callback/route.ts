@@ -4,24 +4,20 @@ import crypto from "crypto";
 const SHOPIFY_CLIENT_SECRET = process.env.SHOPIFY_CLIENT_SECRET!;
 const SHOPIFY_CLIENT_ID = process.env.SHOPIFY_CLIENT_ID!;
 
- 
+function validateHmacRaw(rawQuery: string, secret: string): boolean {
+ const params = rawQuery
+    .split("&")
+    .filter(p => !p.startsWith("hmac=") && !p.startsWith("signature="))
+    .sort((a, b) => a.localeCompare(b))
 
- function validateHmacRaw(rawQuery: string, secret: string): boolean {
-  const params = rawQuery.split("&").filter(p => !p.startsWith("hmac=") && !p.startsWith("signature="));
-  const sorted = params.sort((a, b) => a.split("=")[0].localeCompare(b.split("=")[0]));
-  const message = sorted.join("&");
+  const message = params.join("&")
+  const hmacMatch = new URLSearchParams(rawQuery).get("hmac") || ""
+  const generatedHmac = crypto.createHmac("sha256", secret).update(message).digest("hex")
 
-  const hmacMatch = new URLSearchParams(rawQuery).get("hmac");
-  const generatedHmac = crypto.createHmac("sha256", secret).update(message).digest("hex");
 
-  console.log("🔒 Raw Query:", rawQuery);
-  console.log("🔄 Sorted message:", message);
-  console.log("🧠 Generated HMAC:", generatedHmac);
-  console.log("💡 Received HMAC:", hmacMatch);
 
   return hmacMatch === generatedHmac;
 }
-
 
 async function createStorefrontToken(shop: string, accessToken: string) {
   try {
@@ -68,25 +64,27 @@ async function createStorefrontToken(shop: string, accessToken: string) {
 }
 
 export async function GET(req: NextRequest) {
- const raw = req.nextUrl.search;
-const cleanRaw = raw.startsWith("?") ? raw.slice(1) : raw;
+  const raw = req.nextUrl.search;
+  const cleanRaw = raw.startsWith("?") ? raw.slice(1) : raw
 
   const searchParams = req.nextUrl.searchParams;
   const shop = searchParams.get("shop");
   const code = searchParams.get("code");
   const hmac = searchParams.get("hmac");
+   const embedded = searchParams.get("embedded") || "1"
+  const host = searchParams.get("host")
 
- 
-
-  // If no code, redirect to auth route to start OAuth
   if (!code && shop) {
-    console.log("No code found, redirecting to auth route");
+    console.log("No code found, redirecting to auth route")
+    const redirect = new URL("https://dtecapp-design.vercel.app/api/shopify/auth")
+    redirect.searchParams.set("shop", shop)
+    if (host) redirect.searchParams.set("host", host)
+    if (embedded) redirect.searchParams.set("embedded", embedded)
+
     return NextResponse.json({
-      redirect_url: `https://dtecapp-design.vercel.app/api/shopify/auth?shop=${encodeURIComponent(
-        shop
-      )}`,
+      redirect_url: redirect.toString(),
       status: false,
-    });
+    })
   }
 
   if (!shop || !code || !hmac) {
@@ -101,10 +99,12 @@ const cleanRaw = raw.startsWith("?") ? raw.slice(1) : raw;
     );
   }
 
-
- const isValid = validateHmacRaw(cleanRaw, process.env.SHOPIFY_CLIENT_SECRET!);
+  const isValid = validateHmacRaw(cleanRaw, process.env.SHOPIFY_CLIENT_SECRET!);
   if (!isValid) {
-    return NextResponse.json({ error: "HMAC validation failed" }, { status: 403 });
+    return NextResponse.json(
+      { error: "HMAC validation failed" },
+      { status: 403 }
+    );
   }
 
   console.log("HMAC validation successful!");
