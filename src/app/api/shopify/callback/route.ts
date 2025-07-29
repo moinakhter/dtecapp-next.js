@@ -1,89 +1,88 @@
 import { NextRequest, NextResponse } from "next/server";
 import crypto from "crypto";
 
-const SHOPIFY_API_KEY = process.env.SHOPIFY_CLIENT_ID!;
-const SHOPIFY_API_SECRET = process.env.SHOPIFY_CLIENT_SECRET!;
-const REDIRECT_URI = `${process.env.NEXT_PUBLIC_SITE_URL}/products/shopify-assistant`;
+const SHOPIFY_CLIENT_SECRET = process.env.SHOPIFY_CLIENT_SECRET!;
+const SHOPIFY_CLIENT_ID = process.env.SHOPIFY_CLIENT_ID!;
+ 
 
 export async function GET(req: NextRequest) {
-  const { searchParams } = new URL(req.url);
+  const { searchParams } = req.nextUrl;
 
   const shop = searchParams.get("shop");
-  const hmac = searchParams.get("hmac");
   const code = searchParams.get("code");
+  const hmac = searchParams.get("hmac");
 
-  if (!shop || !hmac) {
-    return NextResponse.json({ error: "Missing required query params" }, { status: 400 });
+  if (!shop || !code || !hmac) {
+    return NextResponse.json(
+      { error: "Missing required query parameters" },
+      { status: 400 }
+    );
   }
 
- 
-  const sortedParams = [...searchParams.entries()]
+  // Recreate the HMAC message
+  const message = Array.from(searchParams.entries())
     .filter(([key]) => key !== "hmac")
     .sort(([a], [b]) => a.localeCompare(b))
-    .map(([key, val]) => `${key}=${val}`)
+    .map(([key, value]) => `${key}=${value}`)
     .join("&");
 
-  const hash = crypto
-    .createHmac("sha256", SHOPIFY_API_SECRET)
-    .update(sortedParams)
+  const generated = crypto
+    .createHmac("sha256", SHOPIFY_CLIENT_SECRET)
+    .update(message)
     .digest("hex");
 
-  if (
-    hash.length !== hmac.length ||
-    !crypto.timingSafeEqual(Buffer.from(hash), Buffer.from(hmac))
-  ) {
+  const hmacIsValid =
+    generated.length === hmac.length &&
+    crypto.timingSafeEqual(Buffer.from(generated), Buffer.from(hmac));
+
+  if (!hmacIsValid) {
     return NextResponse.json({ error: "Invalid HMAC" }, { status: 403 });
   }
 
- 
-  if (!code) {
-    const redirect_url = `https://${shop}/admin/oauth/authorize?client_id=${SHOPIFY_API_KEY}&scope=unauthenticated_read_product_listings&redirect_uri=${REDIRECT_URI}&state=teststate`;
-    return NextResponse.json({ redirect_url });
-  }
+  // Exchange code for access token
+  const tokenRes = await fetch(
+    `https://${shop}/admin/oauth/access_token`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        client_id: SHOPIFY_CLIENT_ID,
+        client_secret: SHOPIFY_CLIENT_SECRET,
+        code,
+      }),
+    }
+  );
 
-  const tokenResponse = await fetch(`https://${shop}/admin/oauth/access_token`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      client_id: SHOPIFY_API_KEY,
-      client_secret: SHOPIFY_API_SECRET,
-      code,
-    }),
-  });
+  const tokenData = await tokenRes.json();
 
-  if (!tokenResponse.ok) {
+  if (!tokenData?.access_token) {
     return NextResponse.json({ error: "Failed to get access token" }, { status: 500 });
   }
 
-  const tokenData = await tokenResponse.json();
-  const accessToken = tokenData.access_token;
-
- 
-  const sfRes = await fetch(`https://${shop}/admin/api/2024-01/storefront_access_tokens.json`, {
-    method: "POST",
-    headers: {
-      "X-Shopify-Access-Token": accessToken,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      storefront_access_token: {
-        title: "Dtec Storefront Token",
+  // Optional: fetch storefront access token
+  const storefrontTokenRes = await fetch(
+    `https://${shop}/admin/api/2024-01/storefront_access_tokens.json`,
+    {
+      method: "POST",
+      headers: {
+        "X-Shopify-Access-Token": tokenData.access_token,
+        "Content-Type": "application/json",
       },
-    }),
-  });
+      body: JSON.stringify({
+        storefront_access_token: {
+          title: "Dtec App Access",
+        },
+      }),
+    }
+  );
 
-  const sfData = await sfRes.json();
-
-  if (!sfRes.ok || !sfData.storefront_access_token?.access_token) {
-    return NextResponse.json({
-      error: "Could not fetch Storefront Access Token",
-    }, { status: 500 });
-  }
-
-  const storefrontToken = sfData.storefront_access_token.access_token;
+  const storefrontTokenData = await storefrontTokenRes.json();
 
   return NextResponse.json({
     success: true,
-    storefront_access_token: storefrontToken,
+    storefront_access_token:
+      storefrontTokenData.storefront_access_token?.access_token || null,
   });
 }
