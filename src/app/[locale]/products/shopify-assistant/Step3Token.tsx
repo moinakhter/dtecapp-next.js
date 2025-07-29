@@ -90,11 +90,13 @@ export default function Step3Token() {
     }
 
     // Build query string for API call
+    const host = searchParams.get("host") 
     const queryParams = new URLSearchParams()
     queryParams.set("shop", shop)
     if (hmac) queryParams.set("hmac", hmac)
     if (code) queryParams.set("code", code)
     if (embedded) queryParams.set("embedded", embedded)
+    if (host) queryParams.set("host", host)
 
     console.log("Calling API with:", queryParams.toString())
 
