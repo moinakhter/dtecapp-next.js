@@ -46,20 +46,14 @@ export async function GET(req: NextRequest) {
   const shop = searchParams.get("shop")
   const code = searchParams.get("code")
   const hmac = searchParams.get("hmac")
-  const embedded = searchParams.get("embedded")
 
-  console.log("API called with params:", { shop, code: !!code, hmac: !!hmac, embedded })
+  console.log("Callback API called with params:", { shop, code: !!code, hmac: !!hmac })
 
-  // Handle case where there's no code (initial OAuth or re-authentication)
+  // If no code, redirect to auth route to start OAuth
   if (!code && shop) {
-    console.log("No code found, redirecting to OAuth")
-
-    // Use the API auth route - much simpler!
-    const authUrl = `/api/shopify/auth?shop=${encodeURIComponent(shop)}`
-
-    console.log("Returning redirect URL:", authUrl)
+    console.log("No code found, redirecting to auth route")
     return NextResponse.json({
-      redirect_url: `https://dtecapp-design.vercel.app${authUrl}`,
+      redirect_url: `https://dtecapp-design.vercel.app/api/shopify/auth?shop=${encodeURIComponent(shop)}`,
       status: false,
     })
   }
@@ -69,7 +63,8 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "Missing required parameters" }, { status: 400 })
   }
 
-  // HMAC validation - matching PHP logic exactly
+  // HMAC validation
+  console.log("=== HMAC Validation ===")
   const filteredParams = new URLSearchParams()
   for (const [key, value] of searchParams.entries()) {
     if (key !== "hmac") {
@@ -77,24 +72,24 @@ export async function GET(req: NextRequest) {
     }
   }
 
-  // Sort parameters
-  const sortedParams = Array.from(filteredParams.entries()).sort()
+  const sortedParams = Array.from(filteredParams.entries()).sort(([a], [b]) => a.localeCompare(b))
   const queryString = new URLSearchParams(sortedParams).toString()
+  const decodedQueryString = decodeURIComponent(queryString)
 
-  // Generate HMAC - decode the query string like PHP does
-  const generatedHmac = crypto
-    .createHmac("sha256", SHOPIFY_CLIENT_SECRET)
-    .update(decodeURIComponent(queryString))
-    .digest("hex")
+  const generatedHmac = crypto.createHmac("sha256", SHOPIFY_CLIENT_SECRET).update(decodedQueryString).digest("hex")
 
-  // Timing-safe comparison
+  console.log("Generated HMAC:", generatedHmac)
+  console.log("Received HMAC:", hmac)
+
   const hmacIsValid =
     generatedHmac.length === hmac.length && crypto.timingSafeEqual(Buffer.from(generatedHmac), Buffer.from(hmac))
 
   if (!hmacIsValid) {
-    console.error("HMAC validation failed:", { generated: generatedHmac, received: hmac })
+    console.error("HMAC validation failed!")
     return NextResponse.json({ error: "HMAC validation failed" }, { status: 403 })
   }
+
+  console.log("HMAC validation successful")
 
   // Exchange code for access token
   try {
