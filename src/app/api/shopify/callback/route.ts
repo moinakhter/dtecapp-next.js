@@ -119,7 +119,7 @@ export async function GET(req: NextRequest) {
         code,
       }),
     })
-
+    console.log("Token response:", tokenResponse)
     if (!tokenResponse.ok) {
       const errorText = await tokenResponse.text()
       console.error("Token request failed:", tokenResponse.status, tokenResponse.statusText, errorText)
