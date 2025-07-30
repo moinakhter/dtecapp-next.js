@@ -7,7 +7,7 @@ import { useRouter } from "@/i18n/navigation";
 import TextGradientWhite from "@/components/common/text-gradient-white";
 import { cn } from "@/lib/utils";
 import FloatingBalls from "@/components/common/FloatingBalls";
-import Image from "next/image";
+ 
 import MindsBanner from "@/components/HomePage/minds-meet";
 import CustomerList from "./CustomerList";
 import { useTranslations } from "next-intl";
@@ -27,7 +27,7 @@ const DashboardPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
-  const t= useTranslations("CustomerList");
+  const t = useTranslations("CustomerList");
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -81,27 +81,20 @@ const DashboardPage = () => {
       <section className="relative md:p-0 p-2  md:mt-[250px] mt-[200px]  lg:min-h-screen w-full  ">
         <FloatingBalls />
         <div className="relative z-10  container  gap-28  md:gap-[196px] flex md:flex-row flex-col items-start justify-between  w-full ">
-          <div className="relative w-full   md:w-1/3">
-            <div className="relative rounded-3xl md:p-8 overflow-hidden">
-              <Image
-                src="/images/Icons/shopify-light.svg"
-                alt="DTEC Car Assistant"
-                width={449}
-                height={128}
-                className="w-full  md:max-w-[449px] max-w-[300px] mx-auto h-auto block dark:hidden rounded-2xl"
-                priority
+       
+            <div className="relative w-full   md:w-1/2">
+              <TextGradientWhite
+                text={t("shopify_customers")}
+                 className="text-3xl font-bold w-full md:px-0 px-3"
+
               />
-              <Image
-                src="/images/Icons/shopify-dark.svg"
-                alt="DTEC Car Assistant"
-                width={449}
-                height={128}
-                className="w-full  md:max-w-[449px] max-w-[300px] mx-auto dark:block hidden h-auto rounded-2xl"
-                priority
-              />
+
+              <div className="md:px-2 px-4 mt-6">
+                {userData && <CustomerList storeUrl={userData.storeUrl} />}
+              </div>
             </div>
-          </div>
-          <div className="relative z-10 flex flex-col w-full mx-auto max-w-[416px] md:w-3/4">
+     
+          <div className="relative z-10 flex flex-col w-full mx-auto  md:w-1/2">
             <TextGradientWhite
               text={t("storetitle")}
               className="text-3xl font-bold w-full md:px-0 px-3"
@@ -224,21 +217,10 @@ const DashboardPage = () => {
               </Button>
             </div>
           </div>
-          <div className="lg:w-1/3"></div>
+         
         </div>
       </section>
 
-      <SectionWrapper className="text-center py-16 container">
-        {/* Customer List Section */}
-        <TextGradientWhite
-          text={t("shopify_customers")}
-          className="text-3xl font-bold md:px-0 px-3 mt-12"
-        />
-
-        <div className="md:px-2 px-4 mt-6">
-          {userData && <CustomerList storeUrl={userData.storeUrl} />}
-        </div>
-      </SectionWrapper>
       <MindsBanner />
     </>
   );
