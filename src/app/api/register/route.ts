@@ -6,7 +6,7 @@ const HS_SECRET = 'DT_yMVYb0viQLBEBpKtgaCD2h9P9gM7Tf1F';
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const apiRes = await fetch(`${process.env.API_URL}/register/`, {
+    const apiRes = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/register/`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'X-Test-Request': 'true' },
       body: JSON.stringify({

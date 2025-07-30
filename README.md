@@ -53,7 +53,7 @@ DB_PASSWORD=your_mysql_password
 DB_NAME=dtec_app
 
 # API Configuration
-API_URL=https://your-backend-url.com
+NEXT_PUBLIC_API_BASE_URL=https://your-backend-url.com
 HS_SECRET=your-jwt-secret-key
 
 # Application Configuration
@@ -122,7 +122,7 @@ docker run -p 3000:3000 \
   -e DB_USER=your_db_user \
   -e DB_PASSWORD=your_db_password \
   -e DB_NAME=dtec_app \
-  -e API_URL=https://your-backend-url.com \
+  -e NEXT_PUBLIC_API_BASE_URL=https://your-backend-url.com \
   -e HS_SECRET=your-secret \
   -v ./keys:/app/keys:ro \
   dtec-app

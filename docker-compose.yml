@@ -26,7 +26,7 @@ services:
       DB_USER: root
       DB_PASSWORD: Hijikata1
       DB_NAME: dtec_app
-      API_URL: https://your-backend-url.com
+      NEXT_PUBLIC_API_BASE_URL: https://your-backend-url.com
       HS_SECRET: your-secret
     volumes:
       - ./keys:/app/keys:ro
