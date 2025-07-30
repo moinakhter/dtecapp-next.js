@@ -1,14 +1,28 @@
 "use client"
+
 import { useEffect, useState } from "react"
 import { motion, type Variants } from "framer-motion"
 import { Button } from "@/components/ui/button"
-import { useSearchParams } from "next/navigation"
+import { useSearchParams, useParams } from "next/navigation"
 import type { ClientApplication } from "@shopify/app-bridge"
 import type { Redirect } from "@shopify/app-bridge/actions"
 
 const stepVariants: Variants = {
   hidden: { opacity: 0, y: 100 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
+}
+
+interface TokenResponse {
+  status: boolean
+  redirect_url?: string
+  storefront_access_token?: {
+    storefrontAccessToken?: {
+      accessToken: string
+    }
+    error?: string
+  }
+  error?: string
+  debug?: unknown
 }
 
 interface AppBridgeState {
@@ -22,18 +36,17 @@ export default function Step3Token() {
   const [loading, setLoading] = useState<boolean>(true)
   const [appBridge, setAppBridge] = useState<AppBridgeState | null>(null)
   const [isEmbedded, setIsEmbedded] = useState<boolean>(false)
-  const [errorMessage, setErrorMessage] = useState<string>("")
-
   const searchParams = useSearchParams()
- 
- 
+  const params = useParams()
+  const locale = (params.locale as string) || "en"
 
-  // Initialize App Bridge
+  // Initialize App Bridge using npm package with official types
   useEffect(() => {
     const initAppBridge = async (): Promise<void> => {
       try {
         const { createApp } = await import("@shopify/app-bridge")
         const { Redirect } = await import("@shopify/app-bridge/actions")
+
         const host = searchParams.get("host")
         const embedded = searchParams.get("embedded")
 
@@ -44,6 +57,7 @@ export default function Step3Token() {
             apiKey: "9a0b89206045b51e5c07c821e340a610",
             host: host,
           })
+
           setAppBridge({ app, Redirect })
           setIsEmbedded(true)
           console.log("App Bridge initialized successfully")
@@ -56,97 +70,111 @@ export default function Step3Token() {
         setIsEmbedded(false)
       }
     }
+
     initAppBridge()
   }, [searchParams])
 
-  // Handle OAuth flow
   useEffect(() => {
     const shop = searchParams.get("shop")
-    const success = searchParams.get("success")
-    const error = searchParams.get("error")
-    const storefrontToken = searchParams.get("storefront_token")
-    const storefrontError = searchParams.get("storefront_error")
+    const hmac = searchParams.get("hmac")
+    const code = searchParams.get("code")
+    const embedded = searchParams.get("embedded")
 
-    console.log("URL params:", { shop, success, error, storefrontToken, storefrontError })
+    console.log("URL params:", { shop, hmac, code, embedded, locale })
 
     if (!shop) {
       console.error("No shop parameter found")
-      setErrorMessage("No shop parameter found")
       setTokenError(true)
       setLoading(false)
       return
     }
 
-    // Handle success case (token already obtained from callback redirect)
-    if (success === "true") {
-      if (storefrontToken) {
-        console.log("✅ Token received from callback:", storefrontToken)
-        setToken(storefrontToken)
+    // Build query string for API call
+    const host = searchParams.get("host") 
+    const queryParams = new URLSearchParams()
+    queryParams.set("shop", shop)
+    if (hmac) queryParams.set("hmac", hmac)
+    if (code) queryParams.set("code", code)
+    if (embedded) queryParams.set("embedded", embedded)
+    if (host) queryParams.set("host", host)
+
+    console.log("Calling API with:", queryParams.toString())
+
+    // Call the backend API
+    fetch(`/api/shopify/callback?${queryParams.toString()}`)
+      .then((res) => {
+        console.log("API response status:", res.status)
+        return res.json() as Promise<TokenResponse>
+      })
+      .then((data: TokenResponse) => {
+        console.log("API response data:", data)
+
+        if (data.status === false && data.redirect_url) {
+          console.log("Need to redirect to OAuth:", data.redirect_url)
+
+ 
+          if (isEmbedded && appBridge) {
+            try {
+              console.log("Using App Bridge for redirect")
+
+              const redirect = appBridge.Redirect.create(appBridge.app)
+              redirect.dispatch(appBridge.Redirect.Action.REMOTE, {
+                url: data.redirect_url,
+                newContext: true,
+              })
+
+              console.log("App Bridge redirect dispatched")
+              return
+            } catch (error) {
+              console.error("App Bridge redirect failed:", error)
+              
+            }
+          }
+
+ 
+          console.log("Using regular redirect")
+          window.location.href = data.redirect_url
+          return
+        }
+
+        if (data.status && data.storefront_access_token) {
+          console.error("Storefront token error:", data.storefront_access_token.error)
+          if (data.storefront_access_token.error) {
+            console.error("Storefront token error:", data.storefront_access_token.error)
+            setTokenError(true)
+          } else if (data.storefront_access_token.storefrontAccessToken?.accessToken) {
+            console.log("Token received:", data.storefront_access_token.storefrontAccessToken.accessToken)
+            setToken(data.storefront_access_token.storefrontAccessToken.accessToken)
+          } else {
+            console.error("No access token in response")
+            setTokenError(true)
+          }
+        } else if (data.error) {
+          console.error("API error:", data.error)
+          if (data.debug) {
+            console.error("Debug info:", data.debug)
+          }
+          setTokenError(true)
+        } else {
+          console.error("Unexpected response format:", data)
+          setTokenError(true)
+        }
         setLoading(false)
-        return
-      } else if (storefrontError) {
-        console.error("Storefront token error:", storefrontError)
-        setErrorMessage(`Storefront token error: ${storefrontError}`)
+      })
+      .catch((error: Error) => {
+        console.error("Fetch error:", error)
         setTokenError(true)
         setLoading(false)
-        return
-      }
-    }
-
-    // Handle error cases
-    if (error) {
-      console.error("OAuth error:", error)
-      let errorMsg = "OAuth authentication failed"
-      switch (error) {
-        case "missing_parameters":
-          errorMsg = "Missing required parameters for OAuth"
-          break
-        case "token_exchange_failed":
-          errorMsg = "Failed to exchange authorization code for access token"
-          break
-        case "no_access_token":
-          errorMsg = "No access token received from Shopify"
-          break
-        case "token_exchange_exception":
-          errorMsg = "An error occurred during token exchange"
-          break
-      }
-      setErrorMessage(errorMsg)
-      setTokenError(true)
-      setLoading(false)
-      return
-    }
-
-    // If no success or error, start OAuth flow
-    console.log("Starting OAuth flow...")
-    const authUrl = `/api/shopify/auth?shop=${shop}`
-
-    if (isEmbedded && appBridge) {
-      try {
-        console.log("Using App Bridge for OAuth redirect")
-        const redirect = appBridge.Redirect.create(appBridge.app)
-        redirect.dispatch(appBridge.Redirect.Action.REMOTE, {
-          url: authUrl,
-          newContext: true,
-        })
-        return
-      } catch (error) {
-        console.error("App Bridge redirect failed:", error)
-      }
-    }
-
-    console.log("Using regular redirect for OAuth")
-    window.location.href = authUrl
-  }, [searchParams, appBridge, isEmbedded])
+      })
+  }, [searchParams, appBridge, isEmbedded, locale])
 
   const handleRetry = () => {
-    const shop = searchParams.get("shop")
-    if (shop) {
-      const authUrl = `/api/shopify/auth?shop=${shop}`
-      window.location.href = authUrl
-    } else {
-      window.location.reload()
-    }
+    setLoading(true)
+    setTokenError(false)
+    setToken(null)
+
+    // Reload the page to restart the OAuth flow
+    window.location.reload()
   }
 
   if (loading) {
@@ -176,18 +204,19 @@ export default function Step3Token() {
         </div>
         <div className="space-y-4 max-w-2xl">
           <h4 className="text-xl font-medium">Generate the Storefront API Access Token:</h4>
+
           <div className="space-y-4">
             {tokenError && (
               <div className="p-4 bg-red-50 border border-red-200 rounded-md">
                 <p className="text-red-600">
-                  {errorMessage ||
-                    "Access Token not found, please reinstall the app to generate a new Storefront API access token."}
+                  Access Token not found, please reinstall the app to generate a new Storefront API access token.
                 </p>
                 <Button className="mt-2" onClick={handleRetry}>
                   Try Again
                 </Button>
               </div>
             )}
+
             {token && (
               <div className="space-y-2">
                 <p className="text-sm text-muted-foreground">Your StoreFront API Access Token:</p>
@@ -205,10 +234,12 @@ export default function Step3Token() {
                 </div>
               </div>
             )}
+
             <ol className="list-decimal list-inside space-y-2 text-base font-light">
               <li>Copy your Storefront API Access Token</li>
             </ol>
           </div>
+
           <div className="relative overflow-hidden max-w-1/3 mt-auto">
             <div className="w-full h-px bg-border" />
             <div className="absolute top-0 left-0 h-px bg-secondary w-0 group-hover:w-full transition-all duration-500 ease-out" />

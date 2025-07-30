@@ -1,12 +1,8 @@
 import { type NextRequest, NextResponse } from "next/server"
- 
+
 
 const SHOPIFY_CLIENT_SECRET = process.env.SHOPIFY_CLIENT_SECRET!
 const SHOPIFY_CLIENT_ID = process.env.SHOPIFY_CLIENT_ID!
-
-// Simple in-memory cache to prevent code reuse
-const usedCodes = new Set<string>()
-
  
 
 async function createStorefrontToken(shop: string, accessToken: string) {
@@ -53,12 +49,6 @@ export async function GET(req: NextRequest) {
   const embedded = searchParams.get("embedded") || "1"
   const host = searchParams.get("host")
 
-  console.log("🔍 Callback received:", {
-    shop,
-    code: code?.substring(0, 8) + "...",
-    hmac: hmac?.substring(0, 8) + "...",
-  })
-
   if (!code && shop) {
     console.log("No code found, redirecting to auth route")
     const redirect = new URL("https://dtecapp-design.vercel.app/api/shopify/auth")
@@ -78,39 +68,15 @@ export async function GET(req: NextRequest) {
       code: !!code,
       hmac: !!hmac,
     })
-
-    // Redirect to frontend with error
-    const errorUrl = new URL("https://dtecapp-design.vercel.app/en/products/shopify-assistant")
-    errorUrl.searchParams.set("error", "missing_parameters")
-    if (shop) errorUrl.searchParams.set("shop", shop)
-
-    return NextResponse.redirect(errorUrl)
+    return NextResponse.json({ error: "Missing required parameters" }, { status: 400 })
   }
-
-  // Check if code has already been used
-  if (usedCodes.has(code)) {
-    console.error("❌ Authorization code already processed:", code.substring(0, 8) + "...")
-    return NextResponse.json(
-      {
-        error: "Authorization code already used",
-        message: "This authorization code has already been processed. Please start a new OAuth flow.",
-        action: "restart_oauth",
-        shop: shop,
-      },
-      { status: 400 },
-    )
-  }
-
-  // Mark code as used immediately to prevent race conditions
-  usedCodes.add(code)
-  console.log("✅ Code marked as used:", code.substring(0, 8) + "...")
 
  
 
   // Exchange code for access token
   try {
-    console.log("🔄 Exchanging code for access token...")
-
+    console.log("Exchanging code for access token...")
+   
     const tokenResponse = await fetch(`https://${shop}/admin/oauth/access_token`, {
       method: "POST",
       headers: {
@@ -122,76 +88,38 @@ export async function GET(req: NextRequest) {
         code,
       }),
     })
-
+    console.log("Token response:", tokenResponse)
     if (!tokenResponse.ok) {
       const errorText = await tokenResponse.text()
-      console.error("❌ Token request failed:", tokenResponse.status, errorText)
-
-      // Redirect to frontend with error
-      const errorUrl = new URL("https://dtecapp-design.vercel.app/en/products/shopify-assistant")
-      errorUrl.searchParams.set("error", "token_exchange_failed")
-      errorUrl.searchParams.set("shop", shop)
-      if (host) errorUrl.searchParams.set("host", host)
-      if (embedded) errorUrl.searchParams.set("embedded", embedded)
-
-      return NextResponse.redirect(errorUrl)
+      console.error("Token request failed:", tokenResponse.status, tokenResponse.statusText, errorText)
+      return NextResponse.json({ error: "Token request failed" }, { status: 500 })
     }
 
     const tokenData = await tokenResponse.json()
-    console.log("✅ Token exchange successful")
+    console.log("Token response:", tokenData)
 
     if (!tokenData?.access_token) {
       console.error("No access token in response:", tokenData)
-
-      // Redirect to frontend with error
-      const errorUrl = new URL("https://dtecapp-design.vercel.app/en/products/shopify-assistant")
-      errorUrl.searchParams.set("error", "no_access_token")
-      errorUrl.searchParams.set("shop", shop)
-      if (host) errorUrl.searchParams.set("host", host)
-      if (embedded) errorUrl.searchParams.set("embedded", embedded)
-
-      return NextResponse.redirect(errorUrl)
+      return NextResponse.json({ error: "No access token returned" }, { status: 500 })
     }
 
     const accessToken = tokenData.access_token
     const scopes = tokenData.scope
 
-    console.log("🎉 Successfully obtained access token for shop:", shop)
+    console.log("✅ Successfully obtained access token for shop:", shop)
 
     // Create storefront access token
     const storefrontTokenData = await createStorefrontToken(shop, accessToken)
-
-    // Redirect back to frontend with success and token data
-    const successUrl = new URL("https://dtecapp-design.vercel.app/en/products/shopify-assistant")
-    successUrl.searchParams.set("success", "true")
-    successUrl.searchParams.set("shop", shop)
-    successUrl.searchParams.set("scope", scopes)
-
-    // Add the storefront token if successful
-    if (storefrontTokenData.storefrontAccessToken?.accessToken) {
-      successUrl.searchParams.set("storefront_token", storefrontTokenData.storefrontAccessToken.accessToken)
-    } else if (storefrontTokenData.error) {
-      successUrl.searchParams.set("storefront_error", storefrontTokenData.error)
-    }
-
-    // Preserve embedded context parameters
-    if (host) successUrl.searchParams.set("host", host)
-    if (embedded) successUrl.searchParams.set("embedded", embedded)
-    if (hmac) successUrl.searchParams.set("hmac", hmac)
-    if (code) successUrl.searchParams.set("code", code)
-
-    console.log("🔄 Redirecting to frontend with success")
-    return NextResponse.redirect(successUrl)
+    console.log("scopes token response:", scopes)
+    return NextResponse.json({
+      status: true,
+      shop,
+      access_token: accessToken,
+      scope: scopes,
+      storefront_access_token: storefrontTokenData
+    })
   } catch (error) {
-    console.error("❌ Token exchange failed:", error)
-
-    // Redirect to frontend with error
-    const errorUrl = new URL("https://dtecapp-design.vercel.app/en/products/shopify-assistant")
-    errorUrl.searchParams.set("error", "token_exchange_exception")
-    errorUrl.searchParams.set("shop", shop)
-    if (host) errorUrl.searchParams.set("host", host)
-    if (embedded) errorUrl.searchParams.set("embedded", embedded)
-
-    return NextResponse.redirect(errorUrl)
+    console.error("Token exchange failed:", error)
+    return NextResponse.json({ error: "Token exchange failed" }, { status: 500 })
   }
 }
