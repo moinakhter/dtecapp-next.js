@@ -22,7 +22,7 @@ export async function GET(req: NextRequest) {
 
   console.log(code, shop);
   // If no code, this is the initial OAuth request - redirect to Shopify
-  if (!code && shop) {
+  if ( shop) {
     console.log("No code found, redirecting to Shopify OAuth");
     const scopes =
       "unauthenticated_read_customers,unauthenticated_read_product_listings";
