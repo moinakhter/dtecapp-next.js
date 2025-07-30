@@ -108,6 +108,9 @@ export async function GET(req: NextRequest) {
   // Exchange code for access token
   try {
     console.log("Exchanging code for access token...")
+    console.log("SHOPIFY_CLIENT_ID:", SHOPIFY_CLIENT_ID)
+    console.log("SHOPIFY_CLIENT_SECRET:", SHOPIFY_CLIENT_SECRET)
+    console.log(code)
     const tokenResponse = await fetch(`https://${shop}/admin/oauth/access_token`, {
       method: "POST",
       headers: {
