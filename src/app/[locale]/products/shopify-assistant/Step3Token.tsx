@@ -136,29 +136,19 @@ export default function Step3Token() {
           window.location.href = data.redirect_url
           return
         }
+if (data.status && data.storefront_access_token?.storefrontAccessToken?.accessToken) {
+  const token = data.storefront_access_token.storefrontAccessToken.accessToken
+  console.log("Token received:", token)
+  setToken(token)
 
-        if (data.status && data.storefront_access_token) {
-          console.error("Storefront token storefront_access_token:", data.storefront_access_token)
-          if (data.storefront_access_token.error) {
-            console.error("Storefront token error:", data.storefront_access_token.error)
-            setTokenError(true)
-          } else if (data.storefront_access_token.storefrontAccessToken?.accessToken) {
-            console.log("Token received:", data.storefront_access_token.storefrontAccessToken.accessToken)
-            setToken(data.storefront_access_token.storefrontAccessToken.accessToken)
-          } else {
-            console.error("No access token in response")
-            setTokenError(true)
-          }
-        } else if (data.error) {
-          console.error("API error:", data.error)
-          if (data.debug) {
-            console.error("Debug info:", data.debug)
-          }
-          setTokenError(true)
-        } else {
-          console.error("Unexpected response format:", data)
-          setTokenError(true)
-        }
+  // Optional: clean URL after receiving token
+  window.history.replaceState(null, "", window.location.pathname)
+} else {
+  console.error("Token missing or invalid:", data)
+  setTokenError(true)
+}
+
+        
         setLoading(false)
       })
       .catch((error: Error) => {
