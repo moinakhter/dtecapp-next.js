@@ -24,7 +24,7 @@ export async function GET(req: NextRequest) {
   if (!code && shop) {
     console.log("No code found, redirecting to Shopify OAuth");
     const scopes =
-      "unauthenticated_write_checkouts,unauthenticated_read_product_listings,unauthenticated_read_customers,unauthenticated_read_checkouts";
+      "unauthenticated_read_customers,unauthenticated_read_product_listings";
 
     // Use the API route as redirect URI
     const redirectUri = "https://dtecapp-design.vercel.app/api/shopify/auth";
