@@ -138,6 +138,7 @@ export default function Step3Token() {
         }
 
         if (data.status && data.storefront_access_token) {
+          console.error("Storefront token storefront_access_token:", data.storefront_access_token)
           if (data.storefront_access_token.error) {
             console.error("Storefront token error:", data.storefront_access_token.error)
             setTokenError(true)

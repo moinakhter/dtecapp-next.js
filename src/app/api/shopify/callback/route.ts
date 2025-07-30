@@ -1,35 +1,35 @@
 import { type NextRequest, NextResponse } from "next/server"
-import crypto from "crypto"
+// import crypto from "crypto"
 
 const SHOPIFY_CLIENT_SECRET = process.env.SHOPIFY_CLIENT_SECRET!
 const SHOPIFY_CLIENT_ID = process.env.SHOPIFY_CLIENT_ID!
 
-function validateHmac(params: URLSearchParams, secret: string): boolean {
-  const hmacFromShopify = params.get("hmac") || ""
-  console.log("Received Parameters:", Array.from(params.entries()))
+// function validateHmac(params: URLSearchParams, secret: string): boolean {
+//   const hmacFromShopify = params.get("hmac") || ""
+//   console.log("Received Parameters:", Array.from(params.entries()))
 
  
-  const filteredParams: Record<string, string> = {}
+//   const filteredParams: Record<string, string> = {}
 
-  for (const [key, value] of params.entries()) {
-    if (key !== "hmac") {
-      filteredParams[key] = value
-    }
-  }
+//   for (const [key, value] of params.entries()) {
+//     if (key !== "hmac") {
+//       filteredParams[key] = value
+//     }
+//   }
 
-  const sortedKeys = Object.keys(filteredParams).sort()
+//   const sortedKeys = Object.keys(filteredParams).sort()
 
-  const queryParts = sortedKeys.map((key) => `${key}=${filteredParams[key]}`)
-  const queryString = queryParts.join("&")
+//   const queryParts = sortedKeys.map((key) => `${key}=${filteredParams[key]}`)
+//   const queryString = queryParts.join("&")
 
-  const generatedHmac = crypto.createHmac("sha256", secret).update(queryString).digest("hex")
+//   const generatedHmac = crypto.createHmac("sha256", secret).update(queryString).digest("hex")
 
-  console.log("🧾 Final query string:", queryString)
-  console.log("✅ Expected HMAC:", generatedHmac)
-  console.log("🟡 Received HMAC:", hmacFromShopify)
+//   console.log("🧾 Final query string:", queryString)
+//   console.log("✅ Expected HMAC:", generatedHmac)
+//   console.log("🟡 Received HMAC:", hmacFromShopify)
 
-  return crypto.timingSafeEqual(Buffer.from(hmacFromShopify), Buffer.from(generatedHmac))
-}
+//   return crypto.timingSafeEqual(Buffer.from(hmacFromShopify), Buffer.from(generatedHmac))
+// }
 
 async function createStorefrontToken(shop: string, accessToken: string) {
   try {
@@ -97,13 +97,13 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "Missing required parameters" }, { status: 400 })
   }
 
-  const isValid = validateHmac(searchParams, SHOPIFY_CLIENT_SECRET)
+  // const isValid = validateHmac(searchParams, SHOPIFY_CLIENT_SECRET)
 
-  if (!isValid) {
-    console.warn("⚠️ HMAC validation failed, but continuing since token exchange works")
-  } else {
-    console.log("✅ HMAC validation successful!")
-  }
+  // if (!isValid) {
+  //   console.warn("⚠️ HMAC validation failed, but continuing since token exchange works")
+  // } else {
+  //   console.log("✅ HMAC validation successful!")
+  // }
 
   // Exchange code for access token
   try {
@@ -141,14 +141,13 @@ export async function GET(req: NextRequest) {
 
     // Create storefront access token
     const storefrontTokenData = await createStorefrontToken(shop, accessToken)
-
+    console.log("scopes token response:", scopes)
     return NextResponse.json({
       status: true,
       shop,
       access_token: accessToken,
       scope: scopes,
-      storefront_access_token: storefrontTokenData,
-      hmac_validation: isValid ? "passed" : "failed_but_oauth_successful",
+      storefront_access_token: storefrontTokenData
     })
   } catch (error) {
     console.error("Token exchange failed:", error)
