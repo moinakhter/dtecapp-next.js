@@ -78,7 +78,11 @@ const SigninForm = () => {
       return response.json();
     },
     onSuccess: async () => {
-      toast(t("registrationSuccessMessage"));
+      toast(t("registrationSuccessMessage")
+        ,{
+          className: "bg-green-500 text-white",
+        }
+    );
 
     },
   });

@@ -33,7 +33,7 @@ export async function generateMetadata({
       description: t('homeDescription'),
       images: [
         {
-          url: `https://dtec.app/og?title=${encodeURIComponent(t('homeTitle'))}&locale=${locale}`,
+          url: `${process.env.NEXT_PUBLIC_SITE_URL}/og?title=${encodeURIComponent(t('homeTitle'))}&locale=${locale}`,
           width: 1200,
           height: 630,
           alt: 'Dtec Smart Assistant',
@@ -42,8 +42,8 @@ export async function generateMetadata({
     },
     alternates: {
       languages: {
-        en: `https://dtec.app/en`,
-        tr: `https://dtec.app/tr`,
+        en: `${process.env.NEXT_PUBLIC_SITE_URL}/en`,
+        tr: `${process.env.NEXT_PUBLIC_SITE_URL}/tr`,
       },
     },
   };
