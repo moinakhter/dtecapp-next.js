@@ -58,7 +58,7 @@ export async function GET(req: NextRequest) {
   if (!code && shop) {
     console.log("No code found, redirecting to auth route");
     const redirect = new URL(
-      "https://dtecapp-design.vercel.app/api/shopify/auth"
+      "https://dtec.app/api/shopify/auth"
     );
     redirect.searchParams.set("shop", shop);
     if (host) redirect.searchParams.set("host", host);
@@ -135,7 +135,7 @@ export async function GET(req: NextRequest) {
     const storefrontTokenData = await createStorefrontToken(shop, accessToken);
     console.log("scopes token response:", scopes);
     const redirectUrl = new URL(
-      "https://dtecapp-design.vercel.app/en/products/shopify-assistant"
+      "https://dtec.app/en/products/shopify-assistant"
     );
     redirectUrl.searchParams.set("shop", shop);
     redirectUrl.searchParams.set("status", "true");
