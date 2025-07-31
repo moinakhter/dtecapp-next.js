@@ -1,7 +1,7 @@
 import { type NextRequest, NextResponse } from "next/server";
 
 const SHOPIFY_CLIENT_SECRET = process.env.SHOPIFY_CLIENT_SECRET!;
-const SHOPIFY_CLIENT_ID = process.env.SHOPIFY_CLIENT_ID!;
+const SHOPIFY_CLIENT_ID = "9a0b89206045b51e5c07c821e340a610";
 
 async function createStorefrontToken(shop: string, accessToken: string) {
   try {
@@ -58,7 +58,7 @@ export async function GET(req: NextRequest) {
   if (!code && shop) {
     console.log("No code found, redirecting to auth route");
     const redirect = new URL(
-      `${process.env.NEXT_PUBLIC_SITE_URL}/api/shopify/auth`
+      "https://dtecapp-design.vercel.app/api/shopify/auth"
     );
     redirect.searchParams.set("shop", shop);
     if (host) redirect.searchParams.set("host", host);
@@ -135,7 +135,7 @@ export async function GET(req: NextRequest) {
     const storefrontTokenData = await createStorefrontToken(shop, accessToken);
     console.log("scopes token response:", scopes);
     const redirectUrl = new URL(
-      `${process.env.NEXT_PUBLIC_SITE_URL}/en/products/shopify-assistant`
+      "https://dtecapp-design.vercel.app/en/products/shopify-assistant"
     );
     redirectUrl.searchParams.set("shop", shop);
     redirectUrl.searchParams.set("status", "true");
