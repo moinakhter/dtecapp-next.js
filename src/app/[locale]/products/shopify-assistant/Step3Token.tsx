@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react"
 import { motion, type Variants } from "framer-motion"
 import { Button } from "@/components/ui/button"
-import { useSearchParams, useParams } from "next/navigation"
+import { useSearchParams } from "next/navigation"
 import type { ClientApplication } from "@shopify/app-bridge"
 import type { Redirect } from "@shopify/app-bridge/actions"
 
@@ -11,20 +11,7 @@ const stepVariants: Variants = {
   hidden: { opacity: 0, y: 100 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
 }
-
-interface TokenResponse {
-  status: boolean
-  redirect_url?: string
-  storefront_access_token?: {
-    storefrontAccessToken?: {
-      accessToken: string
-    }
-    error?: string
-  }
-  error?: string
-  debug?: unknown
-}
-
+ 
 interface AppBridgeState {
   app: ClientApplication
   Redirect: typeof Redirect
@@ -37,8 +24,8 @@ export default function Step3Token() {
   const [appBridge, setAppBridge] = useState<AppBridgeState | null>(null)
   const [isEmbedded, setIsEmbedded] = useState<boolean>(false)
   const searchParams = useSearchParams()
-  const params = useParams()
-  const locale = (params.locale as string) || "en"
+ 
+ 
 
   // Initialize App Bridge using npm package with official types
   useEffect(() => {
@@ -74,108 +61,76 @@ export default function Step3Token() {
     initAppBridge()
   }, [searchParams])
 
-  useEffect(() => {
-    const tokenInUrl = searchParams.get("storefront_token")
-      if (tokenInUrl) {
-    console.log("🎉 Token found in URL:", tokenInUrl)
-    sessionStorage.setItem("shopify_callback_done", "true")
+useEffect(() => {
+  const shop = searchParams.get("shop")
+  const code = searchParams.get("code")
+  const host = searchParams.get("host")
+  const embedded = searchParams.get("embedded")
+  const tokenInUrl = searchParams.get("storefront_token")
+
+  // ✅ STEP 1: Token is already in URL
+  if (tokenInUrl) {
     sessionStorage.setItem("shopify_storefront_token", tokenInUrl)
+    sessionStorage.removeItem("oauth_redirect_started")
     setToken(tokenInUrl)
     setLoading(false)
     return
   }
-    const shop = searchParams.get("shop")
-    const hmac = searchParams.get("hmac")
-    const code = searchParams.get("code")
-    const embedded = searchParams.get("embedded")
 
-    console.log("URL params:", { shop, hmac, code, embedded, locale })
+  // 🚫 STEP 2: No code and we are inside embedded frame → redirect ONCE
+  if (!code && shop && isEmbedded && appBridge) {
+    const hasRedirected = sessionStorage.getItem("oauth_redirect_started")
 
-    if (!shop) {
-      console.error("No shop parameter found")
+    if (!hasRedirected) {
+      sessionStorage.setItem("oauth_redirect_started", "1")
+      const authUrl = `/api/auth?shop=${shop}&host=${host || ""}&embedded=${embedded || ""}`
+
+      try {
+        const redirect = appBridge.Redirect.create(appBridge.app)
+        redirect.dispatch(appBridge.Redirect.Action.REMOTE, {
+          url: authUrl,
+          newContext: true,
+        })
+        return
+      } catch (err) {
+        console.error("App Bridge redirect error:", err)
+        window.location.href = authUrl
+        return
+      }
+    } else {
+      console.warn("OAuth redirect already attempted. Not redirecting again.")
       setTokenError(true)
       setLoading(false)
       return
     }
+  }
 
-    // Build query string for API call
-    const host = searchParams.get("host") 
+  // 🔁 STEP 3: Code exists, request the token
+  if (code && shop) {
     const queryParams = new URLSearchParams()
     queryParams.set("shop", shop)
-    if (hmac) queryParams.set("hmac", hmac)
+    if (host) queryParams.set("host", host)
     if (code) queryParams.set("code", code)
     if (embedded) queryParams.set("embedded", embedded)
-    if (host) queryParams.set("host", host)
 
-    console.log("Calling API with:", queryParams.toString())
-
-    // Call the backend API
     fetch(`/api/shopify/callback?${queryParams.toString()}`)
-      .then((res) => {
-        console.log("API response status:", res.status)
-        return res.json() as Promise<TokenResponse>
-      })
-      .then((data: TokenResponse) => {
-        console.log("API response data:", data)
-
-        if (data.status === false && data.redirect_url) {
-          console.log("Need to redirect to OAuth:", data.redirect_url)
-
- 
-          if (isEmbedded && appBridge) {
-            try {
-              console.log("Using App Bridge for redirect")
-
-              const redirect = appBridge.Redirect.create(appBridge.app)
-              redirect.dispatch(appBridge.Redirect.Action.REMOTE, {
-                url: data.redirect_url,
-                newContext: true,
-              })
-
-              console.log("App Bridge redirect dispatched")
-              return
-            } catch (error) {
-              console.error("App Bridge redirect failed:", error)
-              
-            }
-          }
-
- 
-          console.log("Using regular redirect")
-          window.location.href = data.redirect_url
-          return
-        }
-
-        if (data.status && data.storefront_access_token) {
-          console.error("Storefront token error:", data.storefront_access_token.error)
-          if (data.storefront_access_token.error) {
-            console.error("Storefront token error:", data.storefront_access_token.error)
-            setTokenError(true)
-          } else if (data.storefront_access_token.storefrontAccessToken?.accessToken) {
-            console.log("Token received:", data.storefront_access_token.storefrontAccessToken.accessToken)
-            setToken(data.storefront_access_token.storefrontAccessToken.accessToken)
-          } else {
-            console.error("No access token in response")
-            setTokenError(true)
-          }
-        } else if (data.error) {
-          console.error("API error:", data.error)
-          if (data.debug) {
-            console.error("Debug info:", data.debug)
-          }
-          setTokenError(true)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.status && data.storefront_access_token?.storefrontAccessToken?.accessToken) {
+          const token = data.storefront_access_token.storefrontAccessToken.accessToken
+          setToken(token)
+          sessionStorage.removeItem("oauth_redirect_started")
         } else {
-          console.error("Unexpected response format:", data)
           setTokenError(true)
         }
         setLoading(false)
       })
-      .catch((error: Error) => {
-        console.error("Fetch error:", error)
+      .catch(() => {
         setTokenError(true)
         setLoading(false)
       })
-  }, [searchParams, appBridge, isEmbedded, locale])
+  }
+}, [searchParams, appBridge, isEmbedded])
 
   const handleRetry = () => {
      sessionStorage.clear()
