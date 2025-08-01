@@ -58,21 +58,29 @@ export default function Step3Token() {
 
     initAppBridge();
   }, [searchParams]);
-  useEffect(() => {
-    if (!appBridge) return;
 
-    const shop = searchParams.get("shop");
-    const code = searchParams.get("code");
-    const host = searchParams.get("host");
+useEffect(() => {
+  if (!appBridge) return;
 
-    if (!shop || !code || !host) return;
+  const shop = searchParams.get("shop");
+  const code = searchParams.get("code");
+  const host = searchParams.get("host");
 
-    const tokenFromUrl = searchParams.get("token");
-    if (tokenFromUrl) setToken(tokenFromUrl);
-  }, [appBridge]);
+  if (!shop || !code || !host) return;
+
+  const tokenFromUrl = searchParams.get("token");
+  if (tokenFromUrl) {
+    setToken(tokenFromUrl);
+    setLoading(false);  
+  } else {
+    setTokenError(true);
+    setLoading(false);  
+  }
+}, [appBridge, searchParams]);
+
 
   const handleRetry = () => {
-    sessionStorage.clear();
+ 
     setLoading(true);
     setTokenError(false);
     setToken(null);
