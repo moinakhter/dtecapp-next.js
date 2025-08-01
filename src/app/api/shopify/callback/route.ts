@@ -147,7 +147,15 @@ export async function GET(req: NextRequest) {
       );
     }
 
-    return NextResponse.redirect(redirectUrl.toString());
+    return NextResponse.json({
+  status: true,
+  storefront_access_token: {
+    storefrontAccessToken: {
+      accessToken: storefrontTokenData?.storefrontAccessToken?.accessToken,
+    },
+  },
+});
+
   } catch (error) {
     console.error("Token exchange failed:", error);
     return NextResponse.json(
