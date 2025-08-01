@@ -1,7 +1,7 @@
 import { type NextRequest, NextResponse } from "next/server";
 
 const SHOPIFY_CLIENT_SECRET = process.env.SHOPIFY_CLIENT_SECRET!;
-const SHOPIFY_CLIENT_ID = "9a0b89206045b51e5c07c821e340a610"
+const SHOPIFY_CLIENT_ID = "9a0b89206045b51e5c07c821e340a610";
 
 async function createStorefrontToken(shop: string, accessToken: string) {
   try {
@@ -53,7 +53,6 @@ export async function GET(req: NextRequest) {
   const hmac = searchParams.get("hmac");
   const embedded = searchParams.get("embedded") || "1";
   const host = searchParams.get("host");
-  
 
   if (!code && shop) {
     console.log("No code found, redirecting to auth route");
@@ -131,23 +130,15 @@ export async function GET(req: NextRequest) {
 
     console.log("✅ Successfully obtained access token for shop:", shop);
 
-    // Create storefront access token
     const storefrontTokenData = await createStorefrontToken(shop, accessToken);
     console.log("scopes token response:", scopes);
-    const redirectUrl = new URL(
-      `${process.env.NEXT_PUBLIC_SITE_URL}/en/products/shopify-assistant`
-    );
-    redirectUrl.searchParams.set("shop", shop);
-    redirectUrl.searchParams.set("status", "true");
 
-    if ("storefrontAccessToken" in storefrontTokenData) {
-      redirectUrl.searchParams.set(
-        "storefront_token",
-        storefrontTokenData?.storefrontAccessToken?.accessToken
-      );
-    }
-
-    return NextResponse.redirect(redirectUrl.toString());
+    return NextResponse.json({
+      status: true,
+      shop,
+      scope: scopes,
+      storefront_access_token: storefrontTokenData,
+    });
   } catch (error) {
     console.error("Token exchange failed:", error);
     return NextResponse.json(
