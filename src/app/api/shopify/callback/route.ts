@@ -114,10 +114,22 @@ export async function GET(req: NextRequest) {
     // Check if we have the required scopes
     if (!scopes.includes("unauthenticated_read_product_listings")) {
       console.error("Missing required scope: unauthenticated_read_product_listings")
+
+      // Force a new OAuth flow with correct scopes
+      const redirect = new URL("https://dtecapp-design.vercel.app/api/shopify/auth")
+      redirect.searchParams.set("shop", shop)
+      if (host) redirect.searchParams.set("host", host)
+      if (embedded) redirect.searchParams.set("embedded", embedded)
+
       return NextResponse.json({
         status: false,
+        redirect_url: redirect.toString(),
         error: "App needs to be reinstalled with proper permissions",
-        debug: { scopes, required: "unauthenticated_read_product_listings" },
+        debug: {
+          currentScopes: scopes,
+          requiredScope: "unauthenticated_read_product_listings",
+          action: "redirecting_to_reauth",
+        },
       })
     }
 

@@ -11,14 +11,14 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "Missing 'shop' query parameter" }, { status: 400 })
   }
 
-  // Updated scopes - you need write permissions to create storefront tokens
-  const scopes = "read_products,write_products,unauthenticated_read_product_listings"
+  // Minimal scopes needed for storefront token creation
+  const scopes = "read_products,write_storefront_access_tokens,read_content,read_customers,read_fulfillments,read_orders,read_products,read_script_tags"
   const redirectUri = "https://dtecapp-design.vercel.app/api/shopify/callback"
   const stateParam = crypto.randomBytes(16).toString("hex")
 
   const authUrl = `https://${shop}/admin/oauth/authorize?client_id=${SHOPIFY_CLIENT_ID}&scope=${scopes}&redirect_uri=${encodeURIComponent(
     redirectUri,
-  )}&state=${stateParam}`
+  )}&state=${stateParam}&grant_options[]=per-user`
 
   console.log("Redirecting to Shopify OAuth URL:", authUrl)
   return NextResponse.redirect(authUrl)
