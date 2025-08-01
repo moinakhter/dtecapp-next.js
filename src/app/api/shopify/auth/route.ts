@@ -1,29 +1,31 @@
 import { type NextRequest, NextResponse } from "next/server";
-import crypto from "crypto";
 
 const SHOPIFY_CLIENT_ID = process.env.SHOPIFY_CLIENT_ID!;
+const REDIRECT_URI = `${process.env.NEXT_PUBLIC_SITE_URL}/api/shopify/callback`;
 
 export async function GET(req: NextRequest) {
-  const { searchParams } = req.nextUrl;
+  const searchParams = req.nextUrl.searchParams;
   const shop = searchParams.get("shop");
+  const host = searchParams.get("host");
+  const embedded = searchParams.get("embedded");
 
   if (!shop) {
     return NextResponse.json(
-      { error: "Missing 'shop' query parameter" },
+      { error: "Missing shop parameter" },
       { status: 400 }
     );
   }
 
   const scopes =
-    "unauthenticated_read_customers,unauthenticated_read_product_listings";
-  const redirectUri = `${process.env.NEXT_PUBLIC_SITE_URL}/api/shopify/callback`;
-  const stateParam = crypto.randomBytes(16).toString("hex");
+    "read_products,read_customers,write_storefront_access_tokens";
 
-  const authUrl = `https://${shop}/admin/oauth/authorize?client_id=${SHOPIFY_CLIENT_ID}&scope=${scopes}&redirect_uri=${encodeURIComponent(
-    redirectUri
-  )}&state=${stateParam}`;
+  const authUrl = new URL(`https://${shop}/admin/oauth/authorize`);
+  authUrl.searchParams.set("client_id", SHOPIFY_CLIENT_ID);
+  authUrl.searchParams.set("scope", scopes);
+  authUrl.searchParams.set("redirect_uri", REDIRECT_URI);
+  authUrl.searchParams.set("state", crypto.randomUUID());
+  if (host) authUrl.searchParams.set("host", host);
+  if (embedded) authUrl.searchParams.set("embedded", embedded);
 
-  console.log("Redirecting to Shopify OAuth URL:", authUrl);
-
-  return NextResponse.redirect(authUrl);
+  return NextResponse.redirect(authUrl.toString());
 }
