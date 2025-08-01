@@ -21,15 +21,26 @@ async function createStorefrontToken(shop: string, accessToken: string) {
     const data = await response.json()
 
     if (response.ok && data.storefront_access_token) {
-      return {
-        accessToken: data.storefront_access_token.access_token,
-      }
-    } else {
-      console.error("❌ Storefront token creation failed:", data)
-      return null
+      return data.storefront_access_token.access_token
     }
+
+    // Try to get existing tokens if creation fails
+    const existingResponse = await fetch(`https://${shop}/admin/api/2024-01/storefront_access_tokens.json`, {
+      method: "GET",
+      headers: {
+        "X-Shopify-Access-Token": accessToken,
+        "Content-Type": "application/json",
+      },
+    })
+
+    const existingData = await existingResponse.json()
+    if (existingResponse.ok && existingData.storefront_access_tokens?.length > 0) {
+      return existingData.storefront_access_tokens[0].access_token
+    }
+
+    return null
   } catch (error) {
-    console.error("❌ Storefront token error:", error)
+    console.error("Storefront token error:", error)
     return null
   }
 }
@@ -38,33 +49,20 @@ export async function GET(req: NextRequest) {
   const searchParams = req.nextUrl.searchParams
   const shop = searchParams.get("shop")
   const code = searchParams.get("code")
-  const hmac = searchParams.get("hmac")
-  const embedded = searchParams.get("embedded") || "1"
   const host = searchParams.get("host")
+  const embedded = searchParams.get("embedded")
 
-  // Step 1: Redirect to auth if no code is present
-  if (!code && shop) {
-    const redirect = new URL("https://dtec.app/api/shopify/auth")
-    redirect.searchParams.set("shop", shop)
-    if (host) redirect.searchParams.set("host", host)
-    if (embedded) redirect.searchParams.set("embedded", embedded)
-    return NextResponse.redirect(redirect.toString())
-  }
-
-  // Step 2: Validate required params
-  if (!shop || !code || !hmac) {
-    console.error("❌ Missing required parameters:", { shop, code, hmac })
+  if (!shop || !code) {
     const errorUrl = new URL("https://dtec.app/en/products/shopify-assistant")
     errorUrl.searchParams.set("shop", shop || "")
-    errorUrl.searchParams.set("status", "error")
-    errorUrl.searchParams.set("error", "Missing required parameters")
+    errorUrl.searchParams.set("error", "Missing parameters")
     if (host) errorUrl.searchParams.set("host", host)
     if (embedded) errorUrl.searchParams.set("embedded", embedded)
     return NextResponse.redirect(errorUrl.toString())
   }
 
-  // Step 4: Exchange code for access token
   try {
+    // Exchange code for access token
     const tokenResponse = await fetch(`https://${shop}/admin/oauth/access_token`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -78,30 +76,26 @@ export async function GET(req: NextRequest) {
     const tokenData = await tokenResponse.json()
 
     if (!tokenResponse.ok || !tokenData.access_token) {
-      console.error("❌ Access token request failed:", tokenData)
       const errorUrl = new URL("https://dtec.app/en/products/shopify-assistant")
       errorUrl.searchParams.set("shop", shop)
-      errorUrl.searchParams.set("status", "error")
       errorUrl.searchParams.set("error", "Failed to get access token")
       if (host) errorUrl.searchParams.set("host", host)
       if (embedded) errorUrl.searchParams.set("embedded", embedded)
       return NextResponse.redirect(errorUrl.toString())
     }
 
-    const accessToken = tokenData.access_token
-
-    // Step 5: Create Storefront Access Token
-    const storefrontToken = await createStorefrontToken(shop, accessToken)
+    // Create storefront token
+    const storefrontToken = await createStorefrontToken(shop, tokenData.access_token)
 
     const redirectUrl = new URL("https://dtec.app/en/products/shopify-assistant")
     redirectUrl.searchParams.set("shop", shop)
-    redirectUrl.searchParams.set("status", "true")
 
-    if (storefrontToken?.accessToken) {
-      redirectUrl.searchParams.set("storefront_token", storefrontToken.accessToken)
+    if (storefrontToken) {
+      redirectUrl.searchParams.set("token", storefrontToken)
+      redirectUrl.searchParams.set("status", "success")
     } else {
-      redirectUrl.searchParams.set("status", "error")
       redirectUrl.searchParams.set("error", "Failed to create storefront token")
+      redirectUrl.searchParams.set("status", "error")
     }
 
     // Preserve iframe context
@@ -110,11 +104,10 @@ export async function GET(req: NextRequest) {
 
     return NextResponse.redirect(redirectUrl.toString())
   } catch (error) {
-    console.error("❌ Token exchange failed:", error)
+    console.error("Callback error:", error)
     const errorUrl = new URL("https://dtec.app/en/products/shopify-assistant")
     errorUrl.searchParams.set("shop", shop)
-    errorUrl.searchParams.set("status", "error")
-    errorUrl.searchParams.set("error", "Internal error during token exchange")
+    errorUrl.searchParams.set("error", "Internal server error")
     if (host) errorUrl.searchParams.set("host", host)
     if (embedded) errorUrl.searchParams.set("embedded", embedded)
     return NextResponse.redirect(errorUrl.toString())

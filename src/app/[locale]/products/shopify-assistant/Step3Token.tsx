@@ -1,8 +1,10 @@
 "use client"
+
 import { useEffect, useState } from "react"
 import { motion, type Variants } from "framer-motion"
 import { Button } from "@/components/ui/button"
-import { useSearchParams  } from "next/navigation"
+import { useSearchParams } from "next/navigation"
+import { CheckCircle, XCircle, Copy, Loader2 } from 'lucide-react'
 import type { ClientApplication } from "@shopify/app-bridge"
 import type { Redirect } from "@shopify/app-bridge/actions"
 
@@ -18,13 +20,13 @@ interface AppBridgeState {
 
 export default function Step3Token() {
   const [token, setToken] = useState<string | null>(null)
-  const [tokenError, setTokenError] = useState<boolean>(false)
-  const [loading, setLoading] = useState<boolean>(false)
+  const [loading, setLoading] = useState<boolean>(true)
+  const [error, setError] = useState<string | null>(null)
+  const [copied, setCopied] = useState<boolean>(false)
   const [appBridge, setAppBridge] = useState<AppBridgeState | null>(null)
   const [isEmbedded, setIsEmbedded] = useState<boolean>(false)
 
   const searchParams = useSearchParams()
- 
 
   useEffect(() => {
     const initAppBridge = async (): Promise<void> => {
@@ -54,92 +56,126 @@ export default function Step3Token() {
   }, [searchParams])
 
   useEffect(() => {
-    // Check URL parameters first
-    const status = searchParams.get("status")
-    const storefrontToken = searchParams.get("storefront_token")
-    const error = searchParams.get("error")
-    const shop = searchParams.get("shop")
-
-    if (status === "true" && storefrontToken) {
-      setToken(storefrontToken)
-      sessionStorage.setItem("shopify_storefront_token", storefrontToken)
-      setLoading(false)
-      setTokenError(false)
-      return
-    }
-
-    if (status === "error") {
-      setTokenError(true)
-      setLoading(false)
-      console.error("Token generation error:", error)
-      return
-    }
-
-    // Check session storage for existing token
-    const existingToken = sessionStorage.getItem("shopify_storefront_token")
-    if (existingToken) {
-      setToken(existingToken)
-      setLoading(false)
-      return
-    }
-
-    // If no token and we have shop, show install button
-    if (shop && !storefrontToken && status !== "error") {
-      setLoading(false)
-    }
-  }, [searchParams])
-
-  const handleInstallApp = () => {
     const shop = searchParams.get("shop")
     const host = searchParams.get("host")
     const embedded = searchParams.get("embedded")
+    const tokenParam = searchParams.get("token")
+    const status = searchParams.get("status")
+    const errorParam = searchParams.get("error")
 
-    if (!shop) {
-      alert("Shop parameter is missing")
+    // If we have a token in URL, display it
+    if (tokenParam && status === "success") {
+      setToken(tokenParam)
+      setLoading(false)
       return
     }
 
-    setLoading(true)
+    // If we have an error in URL, display it
+    if (errorParam || status === "error") {
+      setError(errorParam || "Unknown error occurred")
+      setLoading(false)
+      return
+    }
 
-    const authUrl = new URL("https://dtec.app/api/shopify/auth")
-    authUrl.searchParams.set("shop", shop)
-    if (host) authUrl.searchParams.set("host", host)
-    if (embedded) authUrl.searchParams.set("embedded", embedded)
+    // Check if we're in iframe and have shop - start OAuth automatically
+    if (shop && host && embedded === "1" && !tokenParam && !errorParam) {
+      console.log("Detected iframe context, starting OAuth flow...")
 
-    if (isEmbedded && appBridge) {
-      const redirect = appBridge.Redirect.create(appBridge.app)
-      redirect.dispatch(appBridge.Redirect.Action.REMOTE, {
-        url: authUrl.toString(),
-        newContext: true,
-      })
-    } else {
-      window.location.href = authUrl.toString()
+      // Start OAuth flow automatically using App Bridge
+      const authUrl = new URL("https://dtec.app/api/shopify/auth")
+      authUrl.searchParams.set("shop", shop)
+      authUrl.searchParams.set("host", host)
+      authUrl.searchParams.set("embedded", embedded)
+
+      if (isEmbedded && appBridge) {
+        const redirect = appBridge.Redirect.create(appBridge.app)
+        redirect.dispatch(appBridge.Redirect.Action.REMOTE, {
+          url: authUrl.toString(),
+          newContext: true,
+        })
+      } else {
+        // Fallback to direct redirect if App Bridge not ready
+        window.location.href = authUrl.toString()
+      }
+      return
+    }
+
+    // If no iframe context, show error
+    if (!shop || !host || embedded !== "1") {
+      setError("This page must be opened from within the Shopify admin")
+      setLoading(false)
+      return
+    }
+
+    setLoading(false)
+  }, [searchParams, appBridge, isEmbedded])
+
+  const handleCopy = async () => {
+    if (!token) return
+
+    try {
+      await navigator.clipboard.writeText(token)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    } catch {
+      // Fallback
+      const textArea = document.createElement("textarea")
+      textArea.value = token
+      document.body.appendChild(textArea)
+      textArea.select()
+      document.execCommand("copy")
+      document.body.removeChild(textArea)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
     }
   }
 
   const handleRetry = () => {
-    sessionStorage.clear()
-    setLoading(false)
-    setTokenError(false)
-    setToken(null)
+    const shop = searchParams.get("shop")
+    const host = searchParams.get("host")
+    const embedded = searchParams.get("embedded")
 
-    // Remove URL parameters and reload
-    const url = new URL(window.location.href)
-    url.searchParams.delete("status")
-    url.searchParams.delete("storefront_token")
-    url.searchParams.delete("error")
-    window.history.replaceState({}, document.title, url.toString())
+    if (shop && host && embedded) {
+      // Clear URL params and restart
+      const url = new URL(window.location.href)
+      url.searchParams.delete("token")
+      url.searchParams.delete("status")
+      url.searchParams.delete("error")
+      window.history.replaceState({}, document.title, url.toString())
+
+      setLoading(true)
+      setError(null)
+      setToken(null)
+
+      // Restart OAuth flow using App Bridge
+      const authUrl = new URL("https://dtec.app/api/shopify/auth")
+      authUrl.searchParams.set("shop", shop)
+      authUrl.searchParams.set("host", host)
+      authUrl.searchParams.set("embedded", embedded)
+
+      if (isEmbedded && appBridge) {
+        const redirect = appBridge.Redirect.create(appBridge.app)
+        redirect.dispatch(appBridge.Redirect.Action.REMOTE, {
+          url: authUrl.toString(),
+          newContext: true,
+        })
+      } else {
+        window.location.href = authUrl.toString()
+      }
+    }
   }
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
-          <p>Processing Shopify authentication...</p>
-          <p className="text-sm text-muted-foreground mt-2">
-            {isEmbedded ? "Embedded context detected" : "Standalone context"}
-          </p>
+      <div className="container mx-auto px-4 py-8">
+        <div className="flex items-center justify-center min-h-[400px]">
+          <div className="text-center">
+            <Loader2 className="h-8 w-8 animate-spin mx-auto mb-4 text-primary" />
+            <p className="text-lg font-medium">Generating your Storefront API token...</p>
+            <p className="text-sm text-muted-foreground mt-2">
+              {isEmbedded ? "Embedded context detected" : "Standalone context"}
+            </p>
+          </div>
         </div>
       </div>
     )
@@ -158,48 +194,54 @@ export default function Step3Token() {
         </div>
         <div className="space-y-4 max-w-2xl">
           <h4 className="text-xl font-medium">Generate the Storefront API Access Token:</h4>
-          <div className="space-y-4">
-            {tokenError && (
-              <div className="p-4 bg-red-50 border border-red-200 rounded-md">
-                <p className="text-red-600">Failed to generate Storefront API access token. Please try again.</p>
-                <Button className="mt-2" onClick={handleRetry}>
-                  Try Again
-                </Button>
-              </div>
-            )}
 
-            {!token && !tokenError && (
-              <div className="space-y-4">
-                <p className="text-sm text-muted-foreground">
-                  Click the button below to generate your Storefront API access token.
-                </p>
-                <Button onClick={handleInstallApp}>Generate Token</Button>
-              </div>
-            )}
-
-            {token && (
-              <div className="space-y-2">
-                <p className="text-sm text-muted-foreground">Your StoreFront API Access Token:</p>
-                <div className="flex bg-card w-fit items-center gap-2 p-2 border rounded-md">
-                  <code className="px-2 py-1 bg-muted rounded font-semibold text-black dark:text-white">{token}</code>
-                  <Button
-                    size="sm"
-                    onClick={() => {
-                      navigator.clipboard.writeText(token)
-                      alert("Copied to clipboard!")
-                    }}
-                  >
-                    Copy
+          {error && (
+            <div className="p-4 bg-red-50 border border-red-200 rounded-md">
+              <div className="flex items-start gap-3">
+                <XCircle className="h-5 w-5 text-red-600 mt-0.5 shrink-0" />
+                <div className="flex-1">
+                  <p className="text-red-600 font-medium">Failed to generate token</p>
+                  <p className="text-red-600 text-sm mt-1">{error}</p>
+                  <Button className="mt-3" size="sm" onClick={handleRetry}>
+                    Try Again
                   </Button>
                 </div>
               </div>
-            )}
+            </div>
+          )}
 
-            <ol className="list-decimal list-inside space-y-2 text-base font-light">
-              <li>Copy your Storefront API Access Token</li>
-            </ol>
-          </div>
-          <div className="relative overflow-hidden max-w-1/3 mt-auto">
+          {token && (
+            <div className="space-y-4">
+              <div className="p-4 bg-green-50 border border-green-200 rounded-md">
+                <div className="flex items-center gap-2 mb-2">
+                  <CheckCircle className="h-5 w-5 text-green-600" />
+                  <p className="text-green-600 font-medium">Token generated successfully!</p>
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <p className="text-sm font-medium">Your Storefront API Access Token:</p>
+                <div className="flex items-center gap-2 p-3 bg-gray-100 rounded-lg border">
+                  <code className="flex-1 text-sm font-mono break-all">{token}</code>
+                  <Button size="sm" onClick={handleCopy}>
+                    <Copy className="h-4 w-4 mr-1" />
+                    {copied ? "Copied!" : "Copy"}
+                  </Button>
+                </div>
+              </div>
+
+              <div className="bg-blue-50 p-4 rounded-lg">
+                <h5 className="font-medium text-blue-900 mb-2">Next Steps:</h5>
+                <ol className="list-decimal list-inside space-y-1 text-sm text-blue-800">
+                  <li>Copy your Storefront API Access Token above</li>
+                  <li>Use this token in your API requests</li>
+     
+                </ol>
+              </div>
+            </div>
+          )}
+
+          <div className="relative overflow-hidden mt-8">
             <div className="w-full h-px bg-border" />
             <div className="absolute top-0 left-0 h-px bg-secondary w-0 group-hover:w-full transition-all duration-500 ease-out" />
           </div>
