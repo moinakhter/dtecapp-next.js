@@ -50,7 +50,7 @@ export async function GET(req: NextRequest) {
   const searchParams = req.nextUrl.searchParams;
   const shop = searchParams.get("shop");
   const code = searchParams.get("code");
-  const hmac = searchParams.get("hmac");
+  
   const embedded = searchParams.get("embedded") || "1";
   const host = searchParams.get("host");
   
@@ -70,11 +70,11 @@ export async function GET(req: NextRequest) {
     });
   }
 
-  if (!shop || !code || !hmac) {
+  if (!shop || !code ) {
     console.error("Missing required parameters:", {
       shop: !!shop,
       code: !!code,
-      hmac: !!hmac,
+     
     });
     return NextResponse.json(
       { error: "Missing required parameters" },

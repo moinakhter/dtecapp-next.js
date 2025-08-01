@@ -75,21 +75,21 @@ export default function Step3Token() {
   }, [searchParams])
 
   useEffect(() => {
-    const tokenInUrl = searchParams.get("storefront_token")
-      if (tokenInUrl) {
-    console.log("🎉 Token found in URL:", tokenInUrl)
-    sessionStorage.setItem("shopify_callback_done", "true")
-    sessionStorage.setItem("shopify_storefront_token", tokenInUrl)
-    setToken(tokenInUrl)
-    setLoading(false)
-    return
-  }
+  //   const tokenInUrl = searchParams.get("storefront_token")
+  //     if (tokenInUrl) {
+  //   console.log("🎉 Token found in URL:", tokenInUrl)
+  //   sessionStorage.setItem("shopify_callback_done", "true")
+  //   sessionStorage.setItem("shopify_storefront_token", tokenInUrl)
+  //   setToken(tokenInUrl)
+  //   setLoading(false)
+  //   return
+  // }
     const shop = searchParams.get("shop")
-    const hmac = searchParams.get("hmac")
+  
     const code = searchParams.get("code")
     const embedded = searchParams.get("embedded")
 
-    console.log("URL params:", { shop, hmac, code, embedded, locale })
+    console.log("URL params:", { shop,   code, embedded, locale })
 
     if (!shop) {
       console.error("No shop parameter found")
@@ -102,7 +102,7 @@ export default function Step3Token() {
     const host = searchParams.get("host") 
     const queryParams = new URLSearchParams()
     queryParams.set("shop", shop)
-    if (hmac) queryParams.set("hmac", hmac)
+    
     if (code) queryParams.set("code", code)
     if (embedded) queryParams.set("embedded", embedded)
     if (host) queryParams.set("host", host)
@@ -152,6 +152,7 @@ export default function Step3Token() {
             console.error("Storefront token error:", data.storefront_access_token.error)
             setTokenError(true)
           } else if (data.storefront_access_token.storefrontAccessToken?.accessToken) {
+            
             console.log("Token received:", data.storefront_access_token.storefrontAccessToken.accessToken)
             setToken(data.storefront_access_token.storefrontAccessToken.accessToken)
           } else {
