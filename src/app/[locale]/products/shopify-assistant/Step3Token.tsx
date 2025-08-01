@@ -60,53 +60,26 @@ export default function Step3Token() {
 
     initAppBridge()
   }, [searchParams])
-
 useEffect(() => {
-  if (!appBridge) return;
+    if (!appBridge) return;
 
-  const shop = searchParams.get("shop");
-  const code = searchParams.get("code");
-  const host = searchParams.get("host");
-  const embedded = searchParams.get("embedded");
+    const shop = searchParams.get("shop");
+    const code = searchParams.get("code");
+    const host = searchParams.get("host");
 
-  if (!shop) return;
+    if (!shop || !code || !host) return;
 
-  const queryParams = new URLSearchParams();
-  queryParams.set("shop", shop);
-  if (code) queryParams.set("code", code);
-  if (host) queryParams.set("host", host);
-  if (embedded) queryParams.set("embedded", embedded);
-
-  const fetchToken = async () => {
-    try {
-      const res = await fetch(`/api/shopify/callback?${queryParams.toString()}`);
+    const fetchToken = async () => {
+      const res = await fetch(`/api/shopify/callback?shop=${shop}&code=${code}&host=${host}`);
       const data = await res.json();
-
-      if (!data.status && data.redirect_url) {
-        const redirect = appBridge.Redirect.create(appBridge.app);
-        redirect.dispatch(appBridge.Redirect.Action.REMOTE, {
-          url: data.redirect_url,
-          newContext: true,
-        });
-        return;
-      }
-
-      const token = data?.storefront_access_token?.storefrontAccessToken?.accessToken;
-      if (token) {
-        setToken(token);
-      } else {
-        setTokenError(true);
-      }
-    } catch (err) {
-      console.error("Fetch failed:", err);
-      setTokenError(true);
-    } finally {
+      const t = data?.storefront_access_token?.storefrontAccessToken?.accessToken;
+      if (t) setToken(t);
       setLoading(false);
-    }
-  };
+    };
 
-  fetchToken();
-}, [appBridge, searchParams]);
+    fetchToken();
+  }, [appBridge]);
+
 
 
 

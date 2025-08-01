@@ -1,7 +1,7 @@
 import { type NextRequest, NextResponse } from "next/server";
 import crypto from "crypto";
 
-const SHOPIFY_CLIENT_ID ="9a0b89206045b51e5c07c821e340a610";
+const SHOPIFY_CLIENT_ID = "9a0b89206045b51e5c07c821e340a610";
 
 export async function GET(req: NextRequest) {
   const { searchParams } = req.nextUrl;
@@ -16,14 +16,12 @@ export async function GET(req: NextRequest) {
 
   const scopes =
     "unauthenticated_read_customers,unauthenticated_read_product_listings";
-  const redirectUri = "https://dtec.app/api/shopify/callback";
+  const redirectUri = "https://dtec.app/en/products/shopify-assistant";
   const stateParam = crypto.randomBytes(16).toString("hex");
 
   const authUrl = `https://${shop}/admin/oauth/authorize?client_id=${SHOPIFY_CLIENT_ID}&scope=${scopes}&redirect_uri=${encodeURIComponent(
     redirectUri
   )}&state=${stateParam}`;
-
-  console.log("Redirecting to Shopify OAuth URL:", authUrl);
 
   return NextResponse.redirect(authUrl);
 }

@@ -1,3 +1,4 @@
+// /api/shopify/callback/route.ts
 import { type NextRequest, NextResponse } from "next/server";
 
 const SHOPIFY_CLIENT_SECRET = process.env.SHOPIFY_CLIENT_SECRET!;
@@ -21,14 +22,7 @@ async function createStorefrontToken(shop: string, accessToken: string) {
       }
     );
 
-    if (!response.ok) {
-      console.error(
-        "Storefront token creation failed:",
-        response.status,
-        response.statusText
-      );
-      return { error: "Failed to create storefront token" };
-    }
+    if (!response.ok) return { error: "Failed to create storefront token" };
 
     const data = await response.json();
     if (data.storefront_access_token) {
@@ -39,10 +33,9 @@ async function createStorefrontToken(shop: string, accessToken: string) {
       };
     }
 
-    return { error: "Failed to create storefront token" };
-  } catch (error) {
-    console.error("Storefront token creation error:", error);
-    return { error: "Failed to create storefront token" };
+    return { error: "Missing token in response" };
+  } catch {
+    return { error: "Token creation error" };
   }
 }
 
@@ -51,116 +44,34 @@ export async function GET(req: NextRequest) {
   const shop = searchParams.get("shop");
   const code = searchParams.get("code");
 
-  const embedded = searchParams.get("embedded") || "1";
-  const host = searchParams.get("host");
-  
-
-  if (!code && shop) {
-    console.log("No code found, redirecting to auth route");
-    const redirect = new URL(
-      "https://dtec.app/api/shopify/auth"
-    );
-    redirect.searchParams.set("shop", shop);
-    if (host) redirect.searchParams.set("host", host);
-    if (embedded) redirect.searchParams.set("embedded", embedded);
-
-    return NextResponse.json({
-      redirect_url: redirect.toString(),
-      status: false,
-    });
+  if (!shop || !code) {
+    return NextResponse.json({ error: "Missing parameters" }, { status: 400 });
   }
 
-  if (!shop || !code ) {
-    console.error("Missing required parameters:", {
-      shop: !!shop,
-      code: !!code,
-     
-    });
-    return NextResponse.json(
-      { error: "Missing required parameters" },
-      { status: 400 }
-    );
-  }
-
-  // Exchange code for access token
   try {
-    console.log("Exchanging code for access token...");
+    const tokenRes = await fetch(`https://${shop}/admin/oauth/access_token`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        client_id: SHOPIFY_CLIENT_ID,
+        client_secret: SHOPIFY_CLIENT_SECRET,
+        code,
+      }),
+    });
 
-    const tokenResponse = await fetch(
-      `https://${shop}/admin/oauth/access_token`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          client_id: SHOPIFY_CLIENT_ID,
-          client_secret: SHOPIFY_CLIENT_SECRET,
-          code,
-        }),
-      }
-    );
-    console.log("Token response:", tokenResponse);
-    if (!tokenResponse.ok) {
-      const errorText = await tokenResponse.text();
-      console.error(
-        "Token request failed:",
-        tokenResponse.status,
-        tokenResponse.statusText,
-        errorText
-      );
-      return NextResponse.json(
-        { error: "Token request failed" },
-        { status: 500 }
-      );
-    }
+    const tokenData = await tokenRes.json();
+    const accessToken = tokenData?.access_token;
+    if (!accessToken) throw new Error("No token returned");
 
-    const tokenData = await tokenResponse.json();
-    console.log("Token response:", tokenData);
-
-    if (!tokenData?.access_token) {
-      console.error("No access token in response:", tokenData);
-      return NextResponse.json(
-        { error: "No access token returned" },
-        { status: 500 }
-      );
-    }
-
-    const accessToken = tokenData.access_token;
-    const scopes = tokenData.scope;
-
-    console.log("✅ Successfully obtained access token for shop:", shop);
-
-    // Create storefront access token
     const storefrontTokenData = await createStorefrontToken(shop, accessToken);
-    console.log("scopes token response:", scopes);
-    const redirectUrl = new URL(
-      "https://dtec.app/en/products/shopify-assistant"
-    );
-    redirectUrl.searchParams.set("shop", shop);
-    redirectUrl.searchParams.set("status", "true");
-
-    if ("storefrontAccessToken" in storefrontTokenData) {
-      redirectUrl.searchParams.set(
-        "storefront_token",
-        storefrontTokenData?.storefrontAccessToken?.accessToken
-      );
-    }
 
     return NextResponse.json({
-  status: true,
-  storefront_access_token: {
-    storefrontAccessToken: {
-      accessToken: storefrontTokenData?.storefrontAccessToken?.accessToken,
-    },
-  },
-});
-
-  } catch (error) {
-    console.error("Token exchange failed:", error);
-    return NextResponse.json(
-      { error: "Token exchange failed" },
-      { status: 500 }
-    );
+      status: true,
+      storefront_access_token: {
+        storefrontAccessToken: storefrontTokenData?.storefrontAccessToken || {},
+      },
+    });
+  } catch {
+    return NextResponse.json({ error: "OAuth failed" }, { status: 500 });
   }
 }
