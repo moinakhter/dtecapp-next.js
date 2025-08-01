@@ -1,7 +1,7 @@
 import { type NextRequest, NextResponse } from "next/server";
 import crypto from "crypto";
 
-const SHOPIFY_CLIENT_ID = "9a0b89206045b51e5c07c821e340a610"
+const SHOPIFY_CLIENT_ID = "9a0b89206045b51e5c07c821e340a610";
 
 export async function GET(req: NextRequest) {
   const { searchParams } = req.nextUrl;
@@ -13,21 +13,8 @@ export async function GET(req: NextRequest) {
       { status: 400 }
     );
   }
-const scopes = [
-  "read_products",
-  "write_products",
-
-  "unauthenticated_read_content",
-  "unauthenticated_read_customer_tags",
-  "unauthenticated_read_product_tags",
-  "unauthenticated_read_product_listings",
-  "unauthenticated_write_checkouts",
-  "unauthenticated_read_checkouts",
-  "unauthenticated_write_customers",
-  "unauthenticated_read_customers"
-].join(",");
-
-
+  const scopes =
+    "unauthenticated_write_checkouts,unauthenticated_read_product_listings,unauthenticated_read_customers,unauthenticated_read_checkouts";
   const redirectUri = `${process.env.NEXT_PUBLIC_SITE_URL}/api/shopify/callback`;
   const stateParam = crypto.randomBytes(16).toString("hex");
 
