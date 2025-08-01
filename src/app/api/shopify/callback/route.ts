@@ -50,36 +50,24 @@ export async function GET(req: NextRequest) {
   const searchParams = req.nextUrl.searchParams;
   const shop = searchParams.get("shop");
   const code = searchParams.get("code");
-  
   const embedded = searchParams.get("embedded") || "1";
   const host = searchParams.get("host");
-  
 
-  if (!code && shop) {
-    console.log("No code found, redirecting to auth route");
-    const redirect = new URL(
-      "https://dtec.app/api/shopify/auth"
-    );
-    redirect.searchParams.set("shop", shop);
-    if (host) redirect.searchParams.set("host", host);
-    if (embedded) redirect.searchParams.set("embedded", embedded);
-
-    return NextResponse.json({
-      redirect_url: redirect.toString(),
-      status: false,
-    });
-  }
-
-  if (!shop || !code ) {
-    console.error("Missing required parameters:", {
-      shop: !!shop,
-      code: !!code,
-     
-    });
+  if (!shop) {
     return NextResponse.json(
-      { error: "Missing required parameters" },
+      { error: "Missing 'shop' query parameter" },
       { status: 400 }
     );
+  }
+
+  if (!code) {
+    console.log("No code found, redirecting to auth route");
+    const redirect = new URL("https://dtec.app/api/shopify/auth");
+    redirect.searchParams.set("shop", shop);
+    if (host) redirect.searchParams.set("host", host);
+    redirect.searchParams.set("embedded", embedded);
+    
+    return NextResponse.redirect(redirect.toString());
   }
 
   // Exchange code for access token
@@ -100,7 +88,7 @@ export async function GET(req: NextRequest) {
         }),
       }
     );
-    console.log("Token response:", tokenResponse);
+
     if (!tokenResponse.ok) {
       const errorText = await tokenResponse.text();
       console.error(
@@ -116,8 +104,6 @@ export async function GET(req: NextRequest) {
     }
 
     const tokenData = await tokenResponse.json();
-    console.log("Token response:", tokenData);
-
     if (!tokenData?.access_token) {
       console.error("No access token in response:", tokenData);
       return NextResponse.json(
@@ -127,16 +113,11 @@ export async function GET(req: NextRequest) {
     }
 
     const accessToken = tokenData.access_token;
-    const scopes = tokenData.scope;
-
     console.log("✅ Successfully obtained access token for shop:", shop);
 
     // Create storefront access token
     const storefrontTokenData = await createStorefrontToken(shop, accessToken);
-    console.log("scopes token response:", scopes);
-    const redirectUrl = new URL(
-      "https://dtec.app/en/products/shopify-assistant"
-    );
+    const redirectUrl = new URL("https://dtec.app/en/products/shopify-assistant");
     redirectUrl.searchParams.set("shop", shop);
     redirectUrl.searchParams.set("status", "true");
 
