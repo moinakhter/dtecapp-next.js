@@ -16,7 +16,8 @@ export async function GET(req: NextRequest) {
 
   const scopes =
     "unauthenticated_read_customers,unauthenticated_read_product_listings";
-  const redirectUri = "https://dtec.app/en/products/shopify-assistant";
+const redirectUri = "https://dtec.app/api/shopify/callback";
+
   const stateParam = crypto.randomBytes(16).toString("hex");
 
   const authUrl = `https://${shop}/admin/oauth/authorize?client_id=${SHOPIFY_CLIENT_ID}&scope=${scopes}&redirect_uri=${encodeURIComponent(
