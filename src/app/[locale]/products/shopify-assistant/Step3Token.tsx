@@ -75,15 +75,6 @@ export default function Step3Token() {
   }, [searchParams])
 
   useEffect(() => {
-    const tokenInUrl = searchParams.get("storefront_token")
-      if (tokenInUrl) {
-    console.log("🎉 Token found in URL:", tokenInUrl)
-    sessionStorage.setItem("shopify_callback_done", "true")
-    sessionStorage.setItem("shopify_storefront_token", tokenInUrl)
-    setToken(tokenInUrl)
-    setLoading(false)
-    return
-  }
     const shop = searchParams.get("shop")
     const hmac = searchParams.get("hmac")
     const code = searchParams.get("code")
@@ -178,7 +169,6 @@ export default function Step3Token() {
   }, [searchParams, appBridge, isEmbedded, locale])
 
   const handleRetry = () => {
-     sessionStorage.clear()
     setLoading(true)
     setTokenError(false)
     setToken(null)
