@@ -1,9 +1,10 @@
 import { type NextRequest, NextResponse } from "next/server";
-
 const SHOPIFY_CLIENT_SECRET = process.env.SHOPIFY_CLIENT_SECRET!;
 const SHOPIFY_CLIENT_ID = "9a0b89206045b51e5c07c821e340a610";
 
 async function createStorefrontToken(shop: string, accessToken: string) {
+  console.log(`[STOREFRONT] Creating Storefront token for shop: ${shop}`);
+
   try {
     const response = await fetch(
       `https://${shop}/admin/api/2024-01/storefront_access_tokens.json`,
@@ -22,15 +23,14 @@ async function createStorefrontToken(shop: string, accessToken: string) {
     );
 
     if (!response.ok) {
-      console.error(
-        "Storefront token creation failed:",
-        response.status,
-        response.statusText
-      );
+      const errorText = await response.text();
+      console.error(`[STOREFRONT] Failed (${response.status}): ${errorText}`);
       return { error: "Failed to create storefront token" };
     }
 
     const data = await response.json();
+    console.log("[STOREFRONT] Success:", data);
+
     if (data.storefront_access_token) {
       return {
         storefrontAccessToken: {
@@ -39,10 +39,10 @@ async function createStorefrontToken(shop: string, accessToken: string) {
       };
     }
 
-    return { error: "Failed to create storefront token" };
+    return { error: "Missing token in response" };
   } catch (error) {
-    console.error("Storefront token creation error:", error);
-    return { error: "Failed to create storefront token" };
+    console.error("[STOREFRONT] Exception:", error);
+    return { error: "Exception while creating token" };
   }
 }
 
@@ -54,8 +54,16 @@ export async function GET(req: NextRequest) {
   const embedded = searchParams.get("embedded") || "1";
   const host = searchParams.get("host");
 
+  console.log("[CALLBACK] Received request with params:", {
+    shop,
+    code,
+    hmac,
+    embedded,
+    host,
+  });
+
   if (!code && shop) {
-    console.log("No code found, redirecting to auth route");
+    console.warn("[CALLBACK] Missing code param, redirecting to auth...");
     const redirect = new URL(
       `${process.env.NEXT_PUBLIC_SITE_URL}/api/shopify/auth`
     );
@@ -70,7 +78,7 @@ export async function GET(req: NextRequest) {
   }
 
   if (!shop || !code || !hmac) {
-    console.error("Missing required parameters:", {
+    console.error("[CALLBACK] Missing required parameters", {
       shop: !!shop,
       code: !!code,
       hmac: !!hmac,
@@ -81,9 +89,8 @@ export async function GET(req: NextRequest) {
     );
   }
 
-  // Exchange code for access token
   try {
-    console.log("Exchanging code for access token...");
+    console.log("[CALLBACK] Exchanging code for admin access token...");
 
     const tokenResponse = await fetch(
       `https://${shop}/admin/oauth/access_token`,
@@ -99,39 +106,38 @@ export async function GET(req: NextRequest) {
         }),
       }
     );
-    console.log("Token response:", tokenResponse);
+
     if (!tokenResponse.ok) {
       const errorText = await tokenResponse.text();
       console.error(
-        "Token request failed:",
+        "[CALLBACK] Token exchange failed:",
         tokenResponse.status,
         tokenResponse.statusText,
         errorText
       );
       return NextResponse.json(
-        { error: "Token request failed" },
+        { error: "Token exchange failed" },
         { status: 500 }
       );
     }
 
     const tokenData = await tokenResponse.json();
-    console.log("Token response:", tokenData);
+    console.log("[CALLBACK] Access token response:", tokenData);
 
-    if (!tokenData?.access_token) {
-      console.error("No access token in response:", tokenData);
+    const accessToken = tokenData.access_token;
+    const scopes = tokenData.scope;
+
+    if (!accessToken) {
+      console.error("[CALLBACK] No access token in response");
       return NextResponse.json(
         { error: "No access token returned" },
         { status: 500 }
       );
     }
 
-    const accessToken = tokenData.access_token;
-    const scopes = tokenData.scope;
-
-    console.log("✅ Successfully obtained access token for shop:", shop);
-
     const storefrontTokenData = await createStorefrontToken(shop, accessToken);
-    console.log("scopes token response:", scopes);
+
+    console.log("[CALLBACK] Returning token to frontend");
 
     return NextResponse.json({
       status: true,
@@ -140,9 +146,9 @@ export async function GET(req: NextRequest) {
       storefront_access_token: storefrontTokenData,
     });
   } catch (error) {
-    console.error("Token exchange failed:", error);
+    console.error("[CALLBACK] Exception during OAuth flow:", error);
     return NextResponse.json(
-      { error: "Token exchange failed" },
+      { error: "Exception during OAuth" },
       { status: 500 }
     );
   }
