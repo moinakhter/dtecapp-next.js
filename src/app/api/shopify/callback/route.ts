@@ -43,9 +43,10 @@ export async function GET(req: NextRequest) {
   const searchParams = req.nextUrl.searchParams;
   const shop = searchParams.get("shop");
   const code = searchParams.get("code");
+  const host = searchParams.get("host");
 
   if (!shop || !code) {
-    return NextResponse.json({ error: "Missing parameters" }, { status: 400 });
+    return NextResponse.redirect("https://dtec.app/en/products/shopify-assistant?error=missing_params");
   }
 
   try {
@@ -65,13 +66,16 @@ export async function GET(req: NextRequest) {
 
     const storefrontTokenData = await createStorefrontToken(shop, accessToken);
 
-    return NextResponse.json({
-      status: true,
-      storefront_access_token: {
-        storefrontAccessToken: storefrontTokenData?.storefrontAccessToken || {},
-      },
-    });
+    const redirectUrl = new URL("https://dtec.app/en/products/shopify-assistant");
+    redirectUrl.searchParams.set("shop", shop);
+    redirectUrl.searchParams.set("host", host || "");
+    redirectUrl.searchParams.set(
+      "token",
+      storefrontTokenData?.storefrontAccessToken?.accessToken || ""
+    );
+
+    return NextResponse.redirect(redirectUrl.toString());
   } catch {
-    return NextResponse.json({ error: "OAuth failed" }, { status: 500 });
+    return NextResponse.redirect("https://dtec.app/en/products/shopify-assistant?error=oauth_failed");
   }
 }
