@@ -44,7 +44,7 @@ const ShopifyAppBridgeLoader = () => {
       if (!existingMeta) {
         const metaTag = document.createElement("meta")
         metaTag.name = "shopify-api-key"
-        metaTag.content = process.env.NEXT_PUBLIC_SHOPIFY_API_KEY || "9a0b89206045c07c821e340a610"
+        metaTag.content = "9a0b89206045b51e5c07c821e340a610"
         document.head.insertBefore(metaTag, document.head.firstChild)
       }
 

@@ -62,7 +62,7 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} className={Celias.className} suppressHydrationWarning>
           <Head>
-        <meta name="shopify-api-key" content="9a0b89206045c07c821e340a610" />
+        <meta name="shopify-api-key" content="9a0b89206045b51e5c07c821e340a610" />
         {/* eslint-disable-next-line @next/next/no-sync-scripts */}
         <script src="https://cdn.shopify.com/shopifycloud/app-bridge.js" />
       </Head>
