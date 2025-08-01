@@ -14,8 +14,13 @@ export async function GET(req: NextRequest) {
     );
   }
 
-  const scopes =
-    "unauthenticated_read_customers,unauthenticated_read_product_listings";
+  const scopes = [
+  "unauthenticated_read_product_listings",
+  "unauthenticated_read_customers",
+  "unauthenticated_read_checkouts",
+  "unauthenticated_write_checkouts"
+].join(",");
+
   const redirectUri = `${process.env.NEXT_PUBLIC_SITE_URL}/api/shopify/callback`;
   const stateParam = crypto.randomBytes(16).toString("hex");
 
