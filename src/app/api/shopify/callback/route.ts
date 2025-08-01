@@ -1,7 +1,7 @@
 import { type NextRequest, NextResponse } from "next/server";
 
 const SHOPIFY_CLIENT_SECRET = process.env.SHOPIFY_CLIENT_SECRET!;
-const SHOPIFY_CLIENT_ID = process.env.SHOPIFY_CLIENT_ID!;
+const SHOPIFY_CLIENT_ID = "9a0b89206045b51e5c07c821e340a610"
 
 async function createStorefrontToken(shop: string, accessToken: string) {
   try {
@@ -134,20 +134,20 @@ export async function GET(req: NextRequest) {
     // Create storefront access token
     const storefrontTokenData = await createStorefrontToken(shop, accessToken);
     console.log("scopes token response:", scopes);
-    const redirectUrl = new URL(`${process.env.NEXT_PUBLIC_SITE_URL}/en/products/shopify-assistant`);
-redirectUrl.searchParams.set("shop", shop);
-redirectUrl.searchParams.set("status", "true");
+    const redirectUrl = new URL(
+      `${process.env.NEXT_PUBLIC_SITE_URL}/en/products/shopify-assistant`
+    );
+    redirectUrl.searchParams.set("shop", shop);
+    redirectUrl.searchParams.set("status", "true");
 
-if ("storefrontAccessToken" in storefrontTokenData) {
-  redirectUrl.searchParams.set(
-    "storefront_token",
-    storefrontTokenData?.storefrontAccessToken?.accessToken
-  );
-}
+    if ("storefrontAccessToken" in storefrontTokenData) {
+      redirectUrl.searchParams.set(
+        "storefront_token",
+        storefrontTokenData?.storefrontAccessToken?.accessToken
+      );
+    }
 
-// Send a redirect that hits the frontend page again, but now with the token.
-return NextResponse.redirect(redirectUrl.toString());
-
+    return NextResponse.redirect(redirectUrl.toString());
   } catch (error) {
     console.error("Token exchange failed:", error);
     return NextResponse.json(

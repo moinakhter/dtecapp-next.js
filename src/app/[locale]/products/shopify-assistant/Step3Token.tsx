@@ -75,14 +75,6 @@ export default function Step3Token() {
   }, [searchParams])
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
-    const done = sessionStorage.getItem("shopify_callback_done");
-  if (done === "true") {
-    console.log("✅ Callback already done, skipping OAuth flow");
-    setToken(sessionStorage.getItem("shopify_storefront_token"));
-    setLoading(false);
-    return;
-  }
     const tokenInUrl = searchParams.get("storefront_token")
       if (tokenInUrl) {
     console.log("🎉 Token found in URL:", tokenInUrl)
@@ -183,7 +175,7 @@ export default function Step3Token() {
         setTokenError(true)
         setLoading(false)
       })
-  }, [])
+  }, [searchParams, appBridge, isEmbedded, locale])
 
   const handleRetry = () => {
      sessionStorage.clear()
