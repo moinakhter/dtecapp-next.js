@@ -49,16 +49,25 @@ export async function GET(req: NextRequest) {
   const searchParams = req.nextUrl.searchParams
   const shop = searchParams.get("shop")
   const code = searchParams.get("code")
-  const host = searchParams.get("host")
-  const embedded = searchParams.get("embedded")
+  const state = searchParams.get("state")
 
-  if (!shop || !code) {
+  if (!shop || !code || !state) {
     const errorUrl = new URL("https://dtec.app/en/products/shopify-assistant")
     errorUrl.searchParams.set("shop", shop || "")
     errorUrl.searchParams.set("error", "Missing parameters")
-    if (host) errorUrl.searchParams.set("host", host)
-    if (embedded) errorUrl.searchParams.set("embedded", embedded)
     return NextResponse.redirect(errorUrl.toString())
+  }
+
+  // Decode the state to get iframe context
+  let host: string | null = null
+  let embedded: string | null = null
+
+  try {
+    const stateData = JSON.parse(Buffer.from(state, "base64").toString())
+    host = stateData.host
+    embedded = stateData.embedded
+  } catch (error) {
+    console.error("Failed to decode state:", error)
   }
 
   try {
@@ -98,7 +107,7 @@ export async function GET(req: NextRequest) {
       redirectUrl.searchParams.set("status", "error")
     }
 
-    // Preserve iframe context
+    // Restore iframe context from state
     if (host) redirectUrl.searchParams.set("host", host)
     if (embedded) redirectUrl.searchParams.set("embedded", embedded)
 
