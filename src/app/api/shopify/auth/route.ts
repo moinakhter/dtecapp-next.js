@@ -13,13 +13,20 @@ export async function GET(req: NextRequest) {
       { status: 400 }
     );
   }
+const scopes = [
+  "read_products",
+  "write_products",
 
-  const scopes = [
+  "unauthenticated_read_content",
+  "unauthenticated_read_customer_tags",
+  "unauthenticated_read_product_tags",
   "unauthenticated_read_product_listings",
-  "unauthenticated_read_customers",
+  "unauthenticated_write_checkouts",
   "unauthenticated_read_checkouts",
-  "unauthenticated_write_checkouts"
+  "unauthenticated_write_customers",
+  "unauthenticated_read_customers"
 ].join(",");
+
 
   const redirectUri = `${process.env.NEXT_PUBLIC_SITE_URL}/api/shopify/callback`;
   const stateParam = crypto.randomBytes(16).toString("hex");
