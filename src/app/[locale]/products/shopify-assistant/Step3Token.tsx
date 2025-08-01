@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { motion, type Variants } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { useSearchParams } from "next/navigation"
-import { CheckCircle, XCircle, Copy, Loader2 } from 'lucide-react'
+import { CheckCircle, XCircle, Copy, Loader2 } from "lucide-react"
 import type { ClientApplication } from "@shopify/app-bridge"
 import type { Redirect } from "@shopify/app-bridge/actions"
 
@@ -22,6 +22,7 @@ export default function Step3Token() {
   const [token, setToken] = useState<string | null>(null)
   const [loading, setLoading] = useState<boolean>(true)
   const [error, setError] = useState<string | null>(null)
+  const [debugInfo, setDebugInfo] = useState<string | null>(null)
   const [copied, setCopied] = useState<boolean>(false)
   const [appBridge, setAppBridge] = useState<AppBridgeState | null>(null)
   const [isEmbedded, setIsEmbedded] = useState<boolean>(false)
@@ -62,6 +63,9 @@ export default function Step3Token() {
     const tokenParam = searchParams.get("token")
     const status = searchParams.get("status")
     const errorParam = searchParams.get("error")
+    const debugScope = searchParams.get("debug_scope")
+
+    console.log("URL params:", { shop, host, embedded, tokenParam, status, errorParam, debugScope })
 
     // If we have a token in URL, display it
     if (tokenParam && status === "success") {
@@ -73,7 +77,11 @@ export default function Step3Token() {
     // If we have an error in URL, display it
     if (errorParam || status === "error") {
       setError(errorParam || "Unknown error occurred")
+      if (debugScope) {
+        setDebugInfo(`Granted scopes: ${debugScope}`)
+      }
       setLoading(false)
+      console.error("Token generation error:", errorParam)
       return
     }
 
@@ -81,22 +89,24 @@ export default function Step3Token() {
     if (shop && host && embedded === "1" && !tokenParam && !errorParam) {
       console.log("Detected iframe context, starting OAuth flow...")
 
-      // Start OAuth flow automatically using App Bridge
-      const authUrl = new URL("https://dtec.app/api/shopify/auth")
-      authUrl.searchParams.set("shop", shop)
-      authUrl.searchParams.set("host", host)
-      authUrl.searchParams.set("embedded", embedded)
+      // Add a small delay to ensure App Bridge is ready
+      setTimeout(() => {
+        const authUrl = new URL("https://dtec.app/api/shopify/auth")
+        authUrl.searchParams.set("shop", shop)
+        authUrl.searchParams.set("host", host)
+        authUrl.searchParams.set("embedded", embedded)
 
-      if (isEmbedded && appBridge) {
-        const redirect = appBridge.Redirect.create(appBridge.app)
-        redirect.dispatch(appBridge.Redirect.Action.REMOTE, {
-          url: authUrl.toString(),
-          newContext: true,
-        })
-      } else {
-        // Fallback to direct redirect if App Bridge not ready
-        window.location.href = authUrl.toString()
-      }
+        if (isEmbedded && appBridge) {
+          const redirect = appBridge.Redirect.create(appBridge.app)
+          redirect.dispatch(appBridge.Redirect.Action.REMOTE, {
+            url: authUrl.toString(),
+            newContext: true,
+          })
+        } else {
+          // Fallback to direct redirect if App Bridge not ready
+          window.location.href = authUrl.toString()
+        }
+      }, 1000)
       return
     }
 
@@ -141,10 +151,12 @@ export default function Step3Token() {
       url.searchParams.delete("token")
       url.searchParams.delete("status")
       url.searchParams.delete("error")
+      url.searchParams.delete("debug_scope")
       window.history.replaceState({}, document.title, url.toString())
 
       setLoading(true)
       setError(null)
+      setDebugInfo(null)
       setToken(null)
 
       // Restart OAuth flow using App Bridge
@@ -202,9 +214,15 @@ export default function Step3Token() {
                 <div className="flex-1">
                   <p className="text-red-600 font-medium">Failed to generate token</p>
                   <p className="text-red-600 text-sm mt-1">{error}</p>
-                  <Button className="mt-3" size="sm" onClick={handleRetry}>
-                    Try Again
-                  </Button>
+                  {debugInfo && <p className="text-red-600 text-xs mt-2 font-mono">{debugInfo}</p>}
+                  <div className="mt-3 space-x-2">
+                    <Button size="sm" onClick={handleRetry}>
+                      Try Again
+                    </Button>
+                    <Button size="sm" variant="outline" onClick={() => window.open("/debug-logs", "_blank")}>
+                      View Debug Logs
+                    </Button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -235,7 +253,7 @@ export default function Step3Token() {
                 <ol className="list-decimal list-inside space-y-1 text-sm text-blue-800">
                   <li>Copy your Storefront API Access Token above</li>
                   <li>Use this token in your API requests</li>
-     
+ 
                 </ol>
               </div>
             </div>
