@@ -1,7 +1,7 @@
 import { type NextRequest, NextResponse } from "next/server";
 import crypto from "crypto";
 
-const SHOPIFY_CLIENT_ID = "9a0b89206045b51e5c07c821e340a610";
+const SHOPIFY_CLIENT_ID = process.env.SHOPIFY_CLIENT_ID!;
 
 export async function GET(req: NextRequest) {
   const { searchParams } = req.nextUrl;
@@ -13,9 +13,10 @@ export async function GET(req: NextRequest) {
       { status: 400 }
     );
   }
+
   const scopes =
-    "unauthenticated_write_checkouts,unauthenticated_read_product_listings,unauthenticated_read_customers,unauthenticated_read_checkouts";
-  const redirectUri = `${process.env.NEXT_PUBLIC_SITE_URL}/api/shopify/callback`;
+    "unauthenticated_read_customers,unauthenticated_read_product_listings";
+  const redirectUri = "https://dtecapp-design.vercel.app/api/shopify/callback";
   const stateParam = crypto.randomBytes(16).toString("hex");
 
   const authUrl = `https://${shop}/admin/oauth/authorize?client_id=${SHOPIFY_CLIENT_ID}&scope=${scopes}&redirect_uri=${encodeURIComponent(

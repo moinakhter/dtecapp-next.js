@@ -230,13 +230,13 @@ export default function Step3Token() {
             {token && (
               <div className="space-y-2">
                 <p className="text-sm text-muted-foreground">Your StoreFront API Access Token:</p>
-                <div className="flex bg-card w-fit items-center gap-2 p-2   ">
+                <div className="flex bg-card w-fit items-center gap-2 p-2 border rounded-md">
                   <code className="px-2 py-1 bg-muted rounded font-semibold text-black dark:text-white">{token}</code>
                   <Button
                     size="sm"
                     onClick={() => {
                       navigator.clipboard.writeText(token)
-    
+                      // Optional: show toast notification
                     }}
                   >
                     Copy
