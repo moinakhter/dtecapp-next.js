@@ -1,12 +1,12 @@
 import { type NextRequest, NextResponse } from "next/server"
 
-
 const SHOPIFY_CLIENT_SECRET = "a7e2907c64479d91a2b69425dac98a57"
 const SHOPIFY_CLIENT_ID = "9a0b89206045b51e5c07c821e340a610"
- 
 
 async function createStorefrontToken(shop: string, accessToken: string) {
   try {
+    console.log("Creating storefront token for shop:", shop)
+
     const response = await fetch(`https://${shop}/admin/api/2024-01/storefront_access_tokens.json`, {
       method: "POST",
       headers: {
@@ -20,12 +20,17 @@ async function createStorefrontToken(shop: string, accessToken: string) {
       }),
     })
 
+    console.log("Storefront token response status:", response.status)
+
     if (!response.ok) {
-      console.error("Storefront token creation failed:", response.status, response.statusText)
-      return { error: "Failed to create storefront token" }
+      const errorText = await response.text()
+      console.error("Storefront token creation failed:", response.status, response.statusText, errorText)
+      return { error: `Failed to create storefront token: ${response.status} ${response.statusText}` }
     }
 
     const data = await response.json()
+    console.log("Storefront token data:", data)
+
     if (data.storefront_access_token) {
       return {
         storefrontAccessToken: {
@@ -34,10 +39,10 @@ async function createStorefrontToken(shop: string, accessToken: string) {
       }
     }
 
-    return { error: "Failed to create storefront token" }
+    return { error: "Failed to create storefront token - no token in response" }
   } catch (error) {
     console.error("Storefront token creation error:", error)
-    return { error: "Failed to create storefront token" }
+    return { error: "Failed to create storefront token - network error" }
   }
 }
 
@@ -71,12 +76,10 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "Missing required parameters" }, { status: 400 })
   }
 
- 
-
   // Exchange code for access token
   try {
     console.log("Exchanging code for access token...")
-   
+
     const tokenResponse = await fetch(`https://${shop}/admin/oauth/access_token`, {
       method: "POST",
       headers: {
@@ -88,7 +91,7 @@ export async function GET(req: NextRequest) {
         code,
       }),
     })
-    console.log("Token response:", tokenResponse)
+
     if (!tokenResponse.ok) {
       const errorText = await tokenResponse.text()
       console.error("Token request failed:", tokenResponse.status, tokenResponse.statusText, errorText)
@@ -105,21 +108,37 @@ export async function GET(req: NextRequest) {
 
     const accessToken = tokenData.access_token
     const scopes = tokenData.scope
-
     console.log("✅ Successfully obtained access token for shop:", shop)
+    console.log("Granted scopes:", scopes)
+
+    // Check if we have the required scopes
+    if (!scopes.includes("unauthenticated_read_product_listings")) {
+      console.error("Missing required scope: unauthenticated_read_product_listings")
+      return NextResponse.json({
+        status: false,
+        error: "App needs to be reinstalled with proper permissions",
+        debug: { scopes, required: "unauthenticated_read_product_listings" },
+      })
+    }
 
     // Create storefront access token
     const storefrontTokenData = await createStorefrontToken(shop, accessToken)
-    console.log("scopes token response:", scopes)
+
     return NextResponse.json({
       status: true,
       shop,
       access_token: accessToken,
       scope: scopes,
-      storefront_access_token: storefrontTokenData
+      storefront_access_token: storefrontTokenData,
     })
   } catch (error) {
     console.error("Token exchange failed:", error)
-    return NextResponse.json({ error: "Token exchange failed" }, { status: 500 })
+    return NextResponse.json(
+      {
+        error: "Token exchange failed",
+        debug: error instanceof Error ? error.message : "Unknown error",
+      },
+      { status: 500 },
+    )
   }
 }
