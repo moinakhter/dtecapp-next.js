@@ -62,20 +62,22 @@ export default function Step3Token() {
   }, [searchParams])
 
 useEffect(() => {
-  if (!appBridge || !isEmbedded) return;
+  if (!appBridge) return;
 
-  const code = searchParams.get("code");
   const shop = searchParams.get("shop");
+  const code = searchParams.get("code");
+  const host = searchParams.get("host");
+  const embedded = searchParams.get("embedded");
 
   if (!shop) return;
 
-  const callOAuthFlow = async () => {
-    const host = searchParams.get("host") || "";
-    const embedded = searchParams.get("embedded") || "1";
+  const queryParams = new URLSearchParams();
+  queryParams.set("shop", shop);
+  if (code) queryParams.set("code", code);
+  if (host) queryParams.set("host", host);
+  if (embedded) queryParams.set("embedded", embedded);
 
-    const queryParams = new URLSearchParams({ shop, host, embedded });
-    if (code) queryParams.set("code", code);
-
+  const fetchToken = async () => {
     try {
       const res = await fetch(`/api/shopify/callback?${queryParams.toString()}`);
       const data = await res.json();
@@ -89,21 +91,23 @@ useEffect(() => {
         return;
       }
 
-      if (data.storefront_access_token?.storefrontAccessToken?.accessToken) {
-        setToken(data.storefront_access_token.storefrontAccessToken.accessToken);
+      const token = data?.storefront_access_token?.storefrontAccessToken?.accessToken;
+      if (token) {
+        setToken(token);
       } else {
         setTokenError(true);
       }
-    } catch (e) {
-      console.error("Callback fetch failed", e);
+    } catch (err) {
+      console.error("Fetch failed:", err);
       setTokenError(true);
     } finally {
       setLoading(false);
     }
   };
 
-  callOAuthFlow();
-}, [appBridge]);
+  fetchToken();
+}, [appBridge, searchParams]);
+
 
 
   const handleRetry = () => {
