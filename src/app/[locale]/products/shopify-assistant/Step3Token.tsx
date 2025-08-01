@@ -1,171 +1,193 @@
-"use client";
+"use client"
 
-import { useEffect, useState } from "react";
-import { motion, type Variants } from "framer-motion";
-import { Button } from "@/components/ui/button";
-import { useSearchParams, useParams } from "next/navigation";
-import type { ClientApplication } from "@shopify/app-bridge";
-import type { Redirect } from "@shopify/app-bridge/actions";
+import { useEffect, useState } from "react"
+import { motion, type Variants } from "framer-motion"
+import { Button } from "@/components/ui/button"
+import { useSearchParams, useParams } from "next/navigation"
+import type { ClientApplication } from "@shopify/app-bridge"
+import type { Redirect } from "@shopify/app-bridge/actions"
 
 const stepVariants: Variants = {
   hidden: { opacity: 0, y: 100 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
-};
+}
 
 interface TokenResponse {
-  status: boolean;
-  redirect_url?: string;
+  status: boolean
+  redirect_url?: string
   storefront_access_token?: {
     storefrontAccessToken?: {
-      accessToken: string;
-    };
-    error?: string;
-  };
-  error?: string;
-  debug?: unknown;
+      accessToken: string
+    }
+    error?: string
+  }
+  error?: string
+  debug?: unknown
 }
 
 interface AppBridgeState {
-  app: ClientApplication;
-  Redirect: typeof Redirect;
+  app: ClientApplication
+  Redirect: typeof Redirect
 }
 
 export default function Step3Token() {
-  const [tokenInfo, setTokenInfo] = useState<{ token: string | null; error: boolean; loading: boolean }>({
-    token: null,
-    error: false,
-    loading: true,
-  });
-  const [appBridge, setAppBridge] = useState<AppBridgeState | null>(null);
-  const [isEmbedded, setIsEmbedded] = useState<boolean>(false);
-  const searchParams = useSearchParams();
-  const params = useParams();
-  const locale = (params.locale as string) || "en";
+  const [token, setToken] = useState<string | null>(null)
+  const [tokenError, setTokenError] = useState<boolean>(false)
+  const [loading, setLoading] = useState<boolean>(true)
+  const [appBridge, setAppBridge] = useState<AppBridgeState | null>(null)
+  const [isEmbedded, setIsEmbedded] = useState<boolean>(false)
+  const searchParams = useSearchParams()
+  const params = useParams()
+  const locale = (params.locale as string) || "en"
 
+  // Initialize App Bridge using npm package with official types
   useEffect(() => {
     const initAppBridge = async (): Promise<void> => {
       try {
-        const { createApp } = await import("@shopify/app-bridge");
-        const { Redirect } = await import("@shopify/app-bridge/actions");
+        const { createApp } = await import("@shopify/app-bridge")
+        const { Redirect } = await import("@shopify/app-bridge/actions")
 
-        const host = searchParams.get("host");
-        const embedded = searchParams.get("embedded");
+        const host = searchParams.get("host")
+        const embedded = searchParams.get("embedded")
 
-        console.log("Initializing App Bridge with:", { host, embedded });
+        console.log("Initializing App Bridge with:", { host, embedded })
 
         if (embedded === "1" && host) {
           const app = createApp({
             apiKey: "9a0b89206045b51e5c07c821e340a610",
             host: host,
-          });
+          })
 
-          setAppBridge({ app, Redirect });
-          setIsEmbedded(true);
-          console.log("App Bridge initialized successfully");
+          setAppBridge({ app, Redirect })
+          setIsEmbedded(true)
+          console.log("App Bridge initialized successfully")
         } else {
-          console.log("Not in embedded context or missing host");
-          setIsEmbedded(false);
+          console.log("Not in embedded context or missing host")
+          setIsEmbedded(false)
         }
       } catch (error) {
-        console.error("Failed to initialize App Bridge:", error);
-        setIsEmbedded(false);
+        console.error("Failed to initialize App Bridge:", error)
+        setIsEmbedded(false)
       }
-    };
-
-    initAppBridge();
-  }, [searchParams]);
-
-  useEffect(() => {
-    const shop = searchParams.get("shop");
-    const code = searchParams.get("code");
-    const embedded = searchParams.get("embedded");
-
-    console.log("URL params:", { shop, code, embedded, locale });
-
-    if (!shop) {
-      console.error("No shop parameter found");
-      setTokenInfo({ ...tokenInfo, error: true, loading: false });
-      return;
     }
 
-    const host = searchParams.get("host");
-    const queryParams = new URLSearchParams();
-    queryParams.set("shop", shop);
-    
-    if (code) queryParams.set("code", code);
-    if (embedded) queryParams.set("embedded", embedded);
-    if (host) queryParams.set("host", host);
+    initAppBridge()
+  }, [searchParams])
 
-    console.log("Calling API with:", queryParams.toString());
+  useEffect(() => {
+    const tokenInUrl = searchParams.get("storefront_token")
+      if (tokenInUrl) {
+    console.log("🎉 Token found in URL:", tokenInUrl)
+    sessionStorage.setItem("shopify_callback_done", "true")
+    sessionStorage.setItem("shopify_storefront_token", tokenInUrl)
+    setToken(tokenInUrl)
+    setLoading(false)
+    return
+  }
+    const shop = searchParams.get("shop")
+    const hmac = searchParams.get("hmac")
+    const code = searchParams.get("code")
+    const embedded = searchParams.get("embedded")
 
+    console.log("URL params:", { shop, hmac, code, embedded, locale })
+
+    if (!shop) {
+      console.error("No shop parameter found")
+      setTokenError(true)
+      setLoading(false)
+      return
+    }
+
+    // Build query string for API call
+    const host = searchParams.get("host") 
+    const queryParams = new URLSearchParams()
+    queryParams.set("shop", shop)
+ 
+    if (code) queryParams.set("code", code)
+    if (embedded) queryParams.set("embedded", embedded)
+    if (host) queryParams.set("host", host)
+
+    console.log("Calling API with:", queryParams.toString())
+
+    // Call the backend API
     fetch(`/api/shopify/callback?${queryParams.toString()}`)
       .then((res) => {
-        console.log("API response status:", res.status);
-        return res.json() as Promise<TokenResponse>;
+        console.log("API response status:", res.status)
+        return res.json() as Promise<TokenResponse>
       })
       .then((data: TokenResponse) => {
-        console.log("API response data:", data);
+        console.log("API response data:", data)
 
         if (data.status === false && data.redirect_url) {
-          console.log("Need to redirect to OAuth:", data.redirect_url);
+          console.log("Need to redirect to OAuth:", data.redirect_url)
 
+ 
           if (isEmbedded && appBridge) {
             try {
-              console.log("Using App Bridge for redirect");
-              const redirect = appBridge.Redirect.create(appBridge.app);
+              console.log("Using App Bridge for redirect")
+
+              const redirect = appBridge.Redirect.create(appBridge.app)
               redirect.dispatch(appBridge.Redirect.Action.REMOTE, {
                 url: data.redirect_url,
                 newContext: true,
-              });
-              console.log("App Bridge redirect dispatched");
-              return;
+              })
+
+              console.log("App Bridge redirect dispatched")
+              return
             } catch (error) {
-              console.error("App Bridge redirect failed:", error);
+              console.error("App Bridge redirect failed:", error)
+              
             }
           }
 
-          console.log("Using regular redirect");
-          window.location.href = data.redirect_url;
-          return;
+ 
+          console.log("Using regular redirect")
+          window.location.href = data.redirect_url
+          return
         }
 
         if (data.status && data.storefront_access_token) {
+          console.error("Storefront token error:", data.storefront_access_token.error)
           if (data.storefront_access_token.error) {
-            console.error("Storefront token error:", data.storefront_access_token.error);
-            setTokenInfo({ ...tokenInfo, error: true, loading: false });
+            console.error("Storefront token error:", data.storefront_access_token.error)
+            setTokenError(true)
           } else if (data.storefront_access_token.storefrontAccessToken?.accessToken) {
-            console.log("Token received:", data.storefront_access_token.storefrontAccessToken.accessToken);
-            setTokenInfo({ token: data.storefront_access_token.storefrontAccessToken.accessToken, error: false, loading: false });
+            console.log("Token received:", data.storefront_access_token.storefrontAccessToken.accessToken)
+            setToken(data.storefront_access_token.storefrontAccessToken.accessToken)
           } else {
-            console.error("No access token in response");
-            setTokenInfo({ ...tokenInfo, error: true, loading: false });
+            console.error("No access token in response")
+            setTokenError(true)
           }
         } else if (data.error) {
-          console.error("API error:", data.error);
+          console.error("API error:", data.error)
           if (data.debug) {
-            console.error("Debug info:", data.debug);
+            console.error("Debug info:", data.debug)
           }
-          setTokenInfo({ ...tokenInfo, error: true, loading: false });
+          setTokenError(true)
         } else {
-          console.error("Unexpected response format:", data);
-          setTokenInfo({ ...tokenInfo, error: true, loading: false });
+          console.error("Unexpected response format:", data)
+          setTokenError(true)
         }
+        setLoading(false)
       })
       .catch((error: Error) => {
-        console.error("Fetch error:", error);
-        setTokenInfo({ ...tokenInfo, error: true, loading: false });
-      });
-  }, [searchParams, appBridge, isEmbedded, locale]);
+        console.error("Fetch error:", error)
+        setTokenError(true)
+        setLoading(false)
+      })
+  }, [searchParams, appBridge, isEmbedded, locale])
 
   const handleRetry = () => {
-    sessionStorage.clear();
-    setTokenInfo({ token: null, error: false, loading: true });
+     sessionStorage.clear()
+    setLoading(true)
+    setTokenError(false)
+    setToken(null)
 
     // Reload the page to restart the OAuth flow
-    window.location.reload();
-  };
+    window.location.reload()
+  }
 
-  if (tokenInfo.loading) {
+  if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <div className="text-center">
@@ -176,7 +198,7 @@ export default function Step3Token() {
           </p>
         </div>
       </div>
-    );
+    )
   }
 
   return (
@@ -194,7 +216,7 @@ export default function Step3Token() {
           <h4 className="text-xl font-medium">Generate the Storefront API Access Token:</h4>
 
           <div className="space-y-4">
-            {tokenInfo.error && (
+            {tokenError && (
               <div className="p-4 bg-red-50 border border-red-200 rounded-md">
                 <p className="text-red-600">
                   Access Token not found, please reinstall the app to generate a new Storefront API access token.
@@ -205,12 +227,18 @@ export default function Step3Token() {
               </div>
             )}
 
-            {tokenInfo.token && (
+            {token && (
               <div className="space-y-2">
                 <p className="text-sm text-muted-foreground">Your StoreFront API Access Token:</p>
-                <div className="flex bg-card w-fit items-center gap-2 p-2">
-                  <code className="px-2 py-1 bg-muted rounded font-semibold text-black dark:text-white">{tokenInfo.token}</code>
-                  <Button size="sm" onClick={() => navigator.clipboard.writeText(tokenInfo.token || "")}>
+                <div className="flex bg-card w-fit items-center gap-2 p-2   ">
+                  <code className="px-2 py-1 bg-muted rounded font-semibold text-black dark:text-white">{token}</code>
+                  <Button
+                    size="sm"
+                    onClick={() => {
+                      navigator.clipboard.writeText(token)
+    
+                    }}
+                  >
                     Copy
                   </Button>
                 </div>
@@ -229,5 +257,5 @@ export default function Step3Token() {
         </div>
       </motion.div>
     </div>
-  );
+  )
 }
