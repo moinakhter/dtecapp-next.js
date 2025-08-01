@@ -1,7 +1,7 @@
 import { type NextRequest, NextResponse } from "next/server";
 import crypto from "crypto";
 
-const SHOPIFY_CLIENT_ID = process.env.SHOPIFY_CLIENT_ID!;
+const SHOPIFY_CLIENT_ID = "9a0b89206045b51e5c07c821e340a610"
 
 export async function GET(req: NextRequest) {
   const { searchParams } = req.nextUrl;

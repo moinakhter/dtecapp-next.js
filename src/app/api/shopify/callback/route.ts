@@ -1,8 +1,8 @@
 import { type NextRequest, NextResponse } from "next/server"
 
 
-const SHOPIFY_CLIENT_SECRET = process.env.SHOPIFY_CLIENT_SECRET!
-const SHOPIFY_CLIENT_ID = process.env.SHOPIFY_CLIENT_ID!
+const SHOPIFY_CLIENT_SECRET = "a7e2907c64479d91a2b69425dac98a57"
+const SHOPIFY_CLIENT_ID = "9a0b89206045b51e5c07c821e340a610"
  
 
 async function createStorefrontToken(shop: string, accessToken: string) {
