@@ -56,7 +56,7 @@ export async function GET(req: NextRequest) {
 
   if (!code && shop) {
     console.log("No code found, redirecting to auth route")
-    const redirect = new URL("/api/shopify/auth", process.env.NEXT_PUBLIC_APP_URL)
+    const redirect = new URL("/api/shopify/auth", process.env.NEXT_PUBLIC_SITE_URL)
     redirect.searchParams.set("shop", shop)
     if (host) redirect.searchParams.set("host", host)
     if (embedded) redirect.searchParams.set("embedded", embedded)
@@ -116,7 +116,7 @@ export async function GET(req: NextRequest) {
     if (!scopeArray.includes("unauthenticated_read_product_listings")) {
       console.error("Missing required scope: unauthenticated_read_product_listings")
 
-      const redirect = new URL("/api/shopify/auth", process.env.NEXT_PUBLIC_APP_URL)
+      const redirect = new URL("/api/shopify/auth", process.env.NEXT_PUBLIC_SITE_URL)
       redirect.searchParams.set("shop", shop)
       if (host) redirect.searchParams.set("host", host)
       if (embedded) redirect.searchParams.set("embedded", embedded)
