@@ -51,12 +51,12 @@ export async function GET(req: NextRequest) {
   const shop = searchParams.get("shop")
   const code = searchParams.get("code")
   const hmac = searchParams.get("hmac")
-  const embedded = searchParams.get("embedded") || "1"
+  const embedded = searchParams.get("embedded") ?? undefined
   const host = searchParams.get("host")
 
   if (!code && shop) {
     console.log("No code found, redirecting to auth route")
-    const redirect = new URL("https://dtecapp-design.vercel.app/api/shopify/auth")
+    const redirect = new URL("/api/shopify/auth", process.env.NEXT_PUBLIC_APP_URL)
     redirect.searchParams.set("shop", shop)
     if (host) redirect.searchParams.set("host", host)
     if (embedded) redirect.searchParams.set("embedded", embedded)
@@ -76,7 +76,6 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "Missing required parameters" }, { status: 400 })
   }
 
-  // Exchange code for access token
   try {
     console.log("Exchanging code for access token...")
 
@@ -108,15 +107,16 @@ export async function GET(req: NextRequest) {
 
     const accessToken = tokenData.access_token
     const scopes = tokenData.scope
+    const scopeArray: string[] = scopes.split(",").map((s: string) => s.trim())
+
     console.log("✅ Successfully obtained access token for shop:", shop)
     console.log("Granted scopes:", scopes)
 
-    // Check if we have the required scopes
-    if (!scopes.includes("unauthenticated_read_product_listings")) {
+    // Check for required scope
+    if (!scopeArray.includes("unauthenticated_read_product_listings")) {
       console.error("Missing required scope: unauthenticated_read_product_listings")
 
-      // Force a new OAuth flow with correct scopes
-      const redirect = new URL("https://dtecapp-design.vercel.app/api/shopify/auth")
+      const redirect = new URL("/api/shopify/auth", process.env.NEXT_PUBLIC_APP_URL)
       redirect.searchParams.set("shop", shop)
       if (host) redirect.searchParams.set("host", host)
       if (embedded) redirect.searchParams.set("embedded", embedded)
@@ -133,12 +133,12 @@ export async function GET(req: NextRequest) {
       })
     }
 
-    // Create storefront access token
     const storefrontTokenData = await createStorefrontToken(shop, accessToken)
 
     return NextResponse.json({
       status: true,
       shop,
+      host,
       access_token: accessToken,
       scope: scopes,
       storefront_access_token: storefrontTokenData,
