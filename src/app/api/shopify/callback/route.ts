@@ -46,6 +46,55 @@ async function createStorefrontToken(shop: string, accessToken: string) {
   }
 }
 
+async function createStorefrontToken2(shop: string, accessToken: string) {
+  const query = `
+    mutation storefrontAccessTokenCreate($input: StorefrontAccessTokenInput!) {
+      storefrontAccessTokenCreate(input: $input) {
+        storefrontAccessToken {
+          id
+          accessToken
+        }
+        userErrors {
+          field
+          message
+        }
+      }
+    }
+  `;
+
+  const variables = {
+    input: {
+      title: 'JavaScript Storefront Token',
+    },
+  };
+
+  try {
+    const response = await fetch(`https://${shop}/admin/api/2023-10/graphql.json`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Shopify-Access-Token': accessToken,
+      },
+      body: JSON.stringify({
+        query,
+        variables,
+      }),
+    });
+    console.log("222 Storefront token response status:", response.status)
+    const json = await response.json();
+    console.log(" 222 Storefront token data:", json)
+
+    if (!json.data || json.data.storefrontAccessTokenCreate == null) {
+      return { error: '22 Unknown error', details: json };
+    }
+
+    return json.data.storefrontAccessTokenCreate;
+  } catch (error) {
+    return { error: error };
+  }
+}
+
+
 export async function GET(req: NextRequest) {
   const searchParams = req.nextUrl.searchParams
   const shop = searchParams.get("shop")
@@ -114,6 +163,7 @@ export async function GET(req: NextRequest) {
 
  
     const storefrontTokenData = await createStorefrontToken(shop, accessToken)
+    const createStorefrontTokenD = await createStorefrontToken2(shop, accessToken)
 
     return NextResponse.json({
       status: true,
@@ -122,6 +172,7 @@ export async function GET(req: NextRequest) {
       access_token: accessToken,
       scope: scopes,
       storefront_access_token: storefrontTokenData,
+      createStorefrontToken2: createStorefrontTokenD,
     })
   } catch (error) {
     console.error("Token exchange failed:", error)
