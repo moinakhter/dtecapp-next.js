@@ -107,32 +107,12 @@ export async function GET(req: NextRequest) {
 
     const accessToken = tokenData.access_token
     const scopes = tokenData.scope
-    const scopeArray: string[] = scopes.split(",").map((s: string) => s.trim())
+ 
 
     console.log("✅ Successfully obtained access token for shop:", shop)
     console.log("Granted scopes:", scopes)
 
-    // Check for required scope
-    if (!scopeArray.includes("unauthenticated_read_product_listings")) {
-      console.error("Missing required scope: unauthenticated_read_product_listings")
-
-      const redirect = new URL("/api/shopify/auth", process.env.NEXT_PUBLIC_SITE_URL)
-      redirect.searchParams.set("shop", shop)
-      if (host) redirect.searchParams.set("host", host)
-      if (embedded) redirect.searchParams.set("embedded", embedded)
-
-      return NextResponse.json({
-        status: false,
-        redirect_url: redirect.toString(),
-        error: "App needs to be reinstalled with proper permissions",
-        debug: {
-          currentScopes: scopes,
-          requiredScope: "unauthenticated_read_product_listings",
-          action: "redirecting_to_reauth",
-        },
-      })
-    }
-
+ 
     const storefrontTokenData = await createStorefrontToken(shop, accessToken)
 
     return NextResponse.json({
