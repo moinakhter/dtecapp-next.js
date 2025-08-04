@@ -12,7 +12,7 @@ export async function GET(req: NextRequest) {
   }
 
   // Minimal scopes needed for storefront token creation
-  const scopes = "read_products,write_storefront_access_tokens,read_content,read_customers,read_fulfillments,read_orders,read_products,read_script_tags"
+  const scopes = "read_products,write_storefront_access_tokens,read_content,read_customers,read_fulfillments,read_orders,read_products,read_script_tags,unauthenticated_read_product_listings,unauthenticated_read_customers"
   const redirectUri = "https://dtecapp-design.vercel.app/api/shopify/callback"
   const stateParam = crypto.randomBytes(16).toString("hex")
 
