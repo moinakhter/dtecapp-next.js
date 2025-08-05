@@ -133,7 +133,7 @@ export default function Step3Token() {
           }
 
           console.log("Using regular redirect")
-          window.location.href = data.redirect_url
+          //window.location.href = data.redirect_url
           return
         }
 

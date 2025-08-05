@@ -30,8 +30,8 @@ export async function GET(req: NextRequest) {
   authUrl.searchParams.set("redirect_uri", REDIRECT_URI)
   authUrl.searchParams.set("state", state)
   authUrl.searchParams.append("grant_options[]", "per-user")
-  if (host) authUrl.searchParams.set("host", host)
-  if (embedded) authUrl.searchParams.set("embedded", embedded)
+  // if (host) authUrl.searchParams.set("host", host)
+  // if (embedded) authUrl.searchParams.set("embedded", embedded)
 
   console.log("🔁 Redirecting to Shopify OAuth:", authUrl.toString())
 
