@@ -78,10 +78,12 @@ export default function Step3Token() {
     const shop = searchParams.get("shop")
     const hmac = searchParams.get("hmac")
     const code = searchParams.get("code")
+    // @ts-expect-error window.top may be null but is safe in browser context
+    const winRedirect = window.top.location
     const embedded = searchParams.get("embedded")
 
     console.log("URL params:", { shop, hmac, code, embedded, locale })
-
+    console.log("default shop:", shop)
     if (!shop) {
       console.error("No shop parameter found")
       setTokenError(true)
@@ -93,7 +95,7 @@ export default function Step3Token() {
     const host = searchParams.get("host") 
     const queryParams = new URLSearchParams()
     queryParams.set("shop", shop)
-    console.log("default shop:", shop)
+
     if (hmac) queryParams.set("hmac", hmac)
     if (code) queryParams.set("code", code)
     if (embedded) queryParams.set("embedded", embedded)
@@ -116,25 +118,29 @@ export default function Step3Token() {
  
           if (isEmbedded && appBridge) {
             try {
-              console.log("Using App Bridge for redirect")
-
-              const redirect = appBridge.Redirect.create(appBridge.app)
-              redirect.dispatch(appBridge.Redirect.Action.REMOTE, {
-                url: data.redirect_url,
-                newContext: true,
-              })
-
-              console.log("App Bridge redirect dispatched")
-              return
+              // console.log("Using App Bridge for redirect")
+              //
+              // const redirect = appBridge.Redirect.create(appBridge.app)
+              // redirect.dispatch(appBridge.Redirect.Action.REMOTE, {
+              //   url: data.redirect_url,
+              //   newContext: true,
+              // })
+              //
+              // console.log("App Bridge redirect dispatched")
+              winRedirect.href = data.redirect_url;
+              // return
             } catch (error) {
+              winRedirect.href = data.redirect_url;
               console.error("App Bridge redirect failed:", error)
 
             }
           }
-
-          console.log("Using regular redirect")
-          window.location.href = data.redirect_url
-          return
+          // setTimeout(function () {
+          //   window.top.location.href = data.redirect_url;
+          // },1000);
+          // console.log("Using regular redirect")
+          // window.location.href = data.redirect_url
+          // return
         }
 
         if (data.status && data.storefront_access_token) {
