@@ -78,8 +78,6 @@ export default function Step3Token() {
     const shop = searchParams.get("shop")
     const hmac = searchParams.get("hmac")
     const code = searchParams.get("code")
-    // @ts-expect-error window.top may be null but is safe in browser context
-    const winRedirect = window.location
     const embedded = searchParams.get("embedded")
 
     console.log("URL params:", { shop, hmac, code, embedded, locale })
@@ -118,29 +116,25 @@ export default function Step3Token() {
  
           if (isEmbedded && appBridge) {
             try {
-              // console.log("Using App Bridge for redirect")
-              //
-              // const redirect = appBridge.Redirect.create(appBridge.app)
-              // redirect.dispatch(appBridge.Redirect.Action.REMOTE, {
-              //   url: data.redirect_url,
-              //   newContext: true,
-              // })
-              //
-              // console.log("App Bridge redirect dispatched")
-              winRedirect.href = data.redirect_url;
-              // return
-            } catch (error) {
-              winRedirect.href = data.redirect_url;
-              console.error("App Bridge redirect failed:", error)
+              console.log("Using App Bridge for redirect")
 
+              const redirect = appBridge.Redirect.create(appBridge.app)
+              redirect.dispatch(appBridge.Redirect.Action.REMOTE, {
+                url: data.redirect_url,
+                newContext: true,
+              })
+
+              console.log("App Bridge redirect dispatched")
+              window.location.href = data.redirect_url;
+              return
+            } catch (error) {
+              console.error("App Bridge redirect failed:", error)
             }
           }
-          // setTimeout(function () {
-          //   window.top.location.href = data.redirect_url;
-          // },1000);
-          // console.log("Using regular redirect")
-          // window.location.href = data.redirect_url
-          // return
+
+          console.log("Using regular redirect")
+          window.location.href = data.redirect_url
+          return
         }
 
         if (data.status && data.storefront_access_token) {

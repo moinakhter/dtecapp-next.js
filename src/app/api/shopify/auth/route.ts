@@ -6,12 +6,10 @@ const REDIRECT_URI = process.env.NEXT_PUBLIC_SITE_URL + "/api/shopify/callback"
 // const REDIRECT_URI = process.env.NEXT_PUBLIC_SITE_URL + "/api/shopify/callback"
 // https://dtecapp-next-js.vercel.app/products/shopify-assistant
 const SCOPES = [
- "read_content",
-"read_customers",
-"read_fulfillments",
-"read_orders",
-"read_products",
-"read_script_tags"
+ "unauthenticated_write_checkouts",
+"unauthenticated_read_product_listings",
+"unauthenticated_read_customers",
+"unauthenticated_read_checkouts",
 ].join(",")
 
 export async function GET(req: NextRequest) {
