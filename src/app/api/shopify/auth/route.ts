@@ -5,8 +5,10 @@ const SHOPIFY_CLIENT_ID = process.env.SHOPIFY_CLIENT_ID ?? "9a0b89206045b51e5c07
 const REDIRECT_URI = process.env.NEXT_PUBLIC_SITE_URL + "/api/shopify/callback"
 
 const SCOPES = [
- "unauthenticated_read_customers",
-"unauthenticated_read_product_listings"
+ "unauthenticated_write_checkouts",
+"unauthenticated_read_product_listings",
+"unauthenticated_read_customers",
+"unauthenticated_read_checkouts"
 ].join(",")
 
 export async function GET(req: NextRequest) {
