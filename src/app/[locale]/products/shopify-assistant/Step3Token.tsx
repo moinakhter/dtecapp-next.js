@@ -126,7 +126,6 @@ export default function Step3Token() {
               })
 
               console.log("App Bridge redirect dispatched")
-              window.location.href = data.redirect_url;
               return
             } catch (error) {
               console.error("App Bridge redirect failed:", error)
