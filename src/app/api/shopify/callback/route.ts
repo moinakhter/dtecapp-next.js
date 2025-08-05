@@ -107,8 +107,9 @@ export async function GET(req: NextRequest) {
     console.log("No code found, redirecting to auth route")
     const redirect = new URL("/api/shopify/auth", process.env.NEXT_PUBLIC_SITE_URL)
     console.log("No code found, Redirect URL:", redirect.toString())
+    console.error("Before HOST FOUND :", host)
     redirect.searchParams.set("shop", shop)
-    console.error("HOST FOUND :", host)
+    console.error("After HOST FOUND :", host)
     if (host) redirect.searchParams.set("host", host)
     if (embedded) redirect.searchParams.set("embedded", embedded)
 
