@@ -15,8 +15,8 @@ const SCOPES = [
 export async function GET(req: NextRequest) {
   const { searchParams } = req.nextUrl
   const shop = searchParams.get("shop")
-  const host = searchParams.get("host")
-  const embedded = searchParams.get("embedded")
+  // const host = searchParams.get("host")
+  // const embedded = searchParams.get("embedded")
 
   if (!shop) {
     return NextResponse.json({ error: "Missing 'shop' query parameter" }, { status: 400 })
