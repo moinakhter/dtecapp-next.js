@@ -100,7 +100,7 @@ export async function GET(req: NextRequest) {
   const shop = searchParams.get("shop")
   const code = searchParams.get("code")
   const hmac = searchParams.get("hmac")
-  // const embedded = searchParams.get("embedded") ?? undefined
+  const embedded = searchParams.get("embedded") ?? undefined
   const host = searchParams.get("host")
 
   if (!code && shop) {
@@ -109,9 +109,9 @@ export async function GET(req: NextRequest) {
     console.log("No code found, Redirect URL:", redirect.toString())
 
     redirect.searchParams.set("shop", shop)
-    console.error("Before shop FOUND :", shop)
+    console.error("CODE FOUND :", code)
     if (host) redirect.searchParams.set("host", host)
-    // if (embedded) redirect.searchParams.set("embedded", embedded)
+    if (embedded) redirect.searchParams.set("embedded", embedded)
 
     return NextResponse.json({
       redirect_url: redirect.toString(),
