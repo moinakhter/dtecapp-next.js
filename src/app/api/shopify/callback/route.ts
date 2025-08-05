@@ -100,24 +100,44 @@ export async function GET(req: NextRequest) {
   const shop = searchParams.get("shop")
   const code = searchParams.get("code")
   const hmac = searchParams.get("hmac")
-  const embedded = searchParams.get("embedded") ?? undefined
+  // const embedded = searchParams.get("embedded") ?? undefined
   const host = searchParams.get("host")
-  console.error("Before HOST FOUND :", host)
+
   if (!code && shop) {
     // console.log("No code found, redirecting to auth route")
     const redirect = new URL("/api/shopify/auth", process.env.NEXT_PUBLIC_SITE_URL)
     console.log("No code found, Redirect URL:", redirect.toString())
 
     redirect.searchParams.set("shop", shop)
-    // console.error("After HOST FOUND :", host)
+    console.error("Before shop FOUND :", shop)
     if (host) redirect.searchParams.set("host", host)
-    if (embedded) redirect.searchParams.set("embedded", embedded)
+    // if (embedded) redirect.searchParams.set("embedded", embedded)
 
     return NextResponse.json({
       redirect_url: redirect.toString(),
       status: false,
     })
   }
+
+/*  if (!code && shop) {
+    const scopes = [
+      "unauthenticated_write_checkouts",
+      "unauthenticated_read_product_listings",
+      "unauthenticated_read_customers",
+      "unauthenticated_read_checkouts",
+    ].join(",");
+
+    const clientId = process.env.SHOPIFY_API_KEY;
+    const redirectUri = encodeURIComponent("https://dtecapp-next-js.vercel.app/products/shopify-assistant");
+    const state = "randomstring"; // Ideally, generate and verify this securely to prevent CSRF
+
+    const authUrl = `https://${shop}/admin/oauth/authorize?client_id=${clientId}&scope=${scopes}&redirect_uri=${redirectUri}&state=${state}`;
+
+    return NextResponse.json({
+      redirect_url: authUrl,
+      status: false,
+    });
+  }*/
 
   if (!shop || !code || !hmac) {
     console.error("Missing required parameters:", {

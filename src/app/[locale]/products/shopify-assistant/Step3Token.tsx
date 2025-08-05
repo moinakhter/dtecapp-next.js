@@ -95,7 +95,7 @@ export default function Step3Token() {
     queryParams.set("shop", shop)
     if (hmac) queryParams.set("hmac", hmac)
     if (code) queryParams.set("code", code)
-    if (embedded) queryParams.set("embedded", embedded)
+    // if (embedded) queryParams.set("embedded", embedded)
     if (host) queryParams.set("host", host)
 
     console.log("Calling API with:", queryParams.toString())
@@ -113,23 +113,23 @@ export default function Step3Token() {
           console.log("Need to redirect to OAuth:", data.redirect_url)
 
  
-          if (isEmbedded && appBridge) {
-            try {
-              console.log("Using App Bridge for redirect")
-
-              const redirect = appBridge.Redirect.create(appBridge.app)
-              redirect.dispatch(appBridge.Redirect.Action.REMOTE, {
-                url: data.redirect_url,
-                newContext: true,
-              })
-
-              console.log("App Bridge redirect dispatched")
-              return
-            } catch (error) {
-              console.error("App Bridge redirect failed:", error)
-              
-            }
-          }
+          // if (isEmbedded && appBridge) {
+          //   try {
+          //     console.log("Using App Bridge for redirect")
+          //
+          //     const redirect = appBridge.Redirect.create(appBridge.app)
+          //     redirect.dispatch(appBridge.Redirect.Action.REMOTE, {
+          //       url: data.redirect_url,
+          //       newContext: true,
+          //     })
+          //
+          //     console.log("App Bridge redirect dispatched")
+          //     return
+          //   } catch (error) {
+          //     console.error("App Bridge redirect failed:", error)
+          //
+          //   }
+          // }
 
  
           console.log("Using regular redirect")

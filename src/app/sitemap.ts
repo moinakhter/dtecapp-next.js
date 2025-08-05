@@ -2,7 +2,7 @@ import { MetadataRoute } from "next";
 import { routing } from "@/i18n/routing";
 import { getPathname } from "@/i18n/navigation";
 
-const host = process.env.NEXT_PUBLIC_SITE_URL || "https://dtec.app"; 
+const host = process.env.NEXT_PUBLIC_SITE_URL || "https://dtecapp-next-js.vercel.app";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const pages: Array<{ href: Parameters<typeof getPathname>[0]["href"] }> = [
