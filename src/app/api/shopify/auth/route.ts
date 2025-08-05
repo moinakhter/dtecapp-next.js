@@ -2,7 +2,7 @@ import { type NextRequest, NextResponse } from "next/server"
 import crypto from "crypto"
 
 const SHOPIFY_CLIENT_ID = process.env.SHOPIFY_CLIENT_ID ?? "9a0b89206045b51e5c07c821e340a610"
-const REDIRECT_URI = process.env.NEXT_PUBLIC_SITE_URL + "/products/shopify-assistant"
+const REDIRECT_URI = process.env.NEXT_PUBLIC_SITE_URL + "/api/shopify/callback"
 // const REDIRECT_URI = process.env.NEXT_PUBLIC_SITE_URL + "/api/shopify/callback"
 // https://dtecapp-next-js.vercel.app/products/shopify-assistant
 const SCOPES = [
