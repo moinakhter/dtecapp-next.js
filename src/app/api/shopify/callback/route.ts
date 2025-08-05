@@ -181,6 +181,7 @@ export async function GET(req: NextRequest) {
     const scopes = tokenData.scope
  
 
+    console.log("✅ ADMIN TOKEN:", accessToken)
     console.log("✅ Successfully obtained access token for shop:", shop)
     console.log("Granted scopes:", scopes)
 

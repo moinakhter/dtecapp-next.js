@@ -6,17 +6,19 @@ const REDIRECT_URI = process.env.NEXT_PUBLIC_SITE_URL + "/products/shopify-assis
 // const REDIRECT_URI = process.env.NEXT_PUBLIC_SITE_URL + "/api/shopify/callback"
 // https://dtecapp-next-js.vercel.app/products/shopify-assistant
 const SCOPES = [
- "unauthenticated_write_checkouts",
-"unauthenticated_read_product_listings",
-"unauthenticated_read_customers",
-"unauthenticated_read_checkouts"
+ "read_content",
+"read_customers",
+"read_fulfillments",
+"read_orders",
+"read_products",
+"read_script_tags"
 ].join(",")
 
 export async function GET(req: NextRequest) {
   const { searchParams } = req.nextUrl
   const shop = searchParams.get("shop")
-  // const host = searchParams.get("host")
-  // const embedded = searchParams.get("embedded")
+  const host = searchParams.get("host")
+  const embedded = searchParams.get("embedded")
 
   if (!shop) {
     return NextResponse.json({ error: "Missing 'shop' query parameter" }, { status: 400 })
@@ -29,9 +31,9 @@ export async function GET(req: NextRequest) {
   authUrl.searchParams.set("scope", SCOPES)
   authUrl.searchParams.set("redirect_uri", REDIRECT_URI)
   authUrl.searchParams.set("state", state)
-  // authUrl.searchParams.append("grant_options[]", "per-user")
-  // if (host) authUrl.searchParams.set("host", host)
-  // if (embedded) authUrl.searchParams.set("embedded", embedded)
+  authUrl.searchParams.append("grant_options[]", "per-user")
+  if (host) authUrl.searchParams.set("host", host)
+  if (embedded) authUrl.searchParams.set("embedded", embedded)
 
   console.log("🔁 Redirecting to Shopify OAuth:", authUrl.toString())
 

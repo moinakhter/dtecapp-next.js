@@ -113,23 +113,23 @@ export default function Step3Token() {
           console.log("Need to redirect to OAuth:", data.redirect_url)
 
  
-          if (isEmbedded && appBridge) {
-            try {
-              console.log("Using App Bridge for redirect")
-
-              const redirect = appBridge.Redirect.create(appBridge.app)
-              redirect.dispatch(appBridge.Redirect.Action.REMOTE, {
-                url: data.redirect_url,
-                newContext: true,
-              })
-
-              console.log("App Bridge redirect dispatched")
-              return
-            } catch (error) {
-              console.error("App Bridge redirect failed:", error)
-
-            }
-          }
+          // if (isEmbedded && appBridge) {
+          //   try {
+          //     console.log("Using App Bridge for redirect")
+          //
+          //     const redirect = appBridge.Redirect.create(appBridge.app)
+          //     redirect.dispatch(appBridge.Redirect.Action.REMOTE, {
+          //       url: data.redirect_url,
+          //       newContext: true,
+          //     })
+          //
+          //     console.log("App Bridge redirect dispatched")
+          //     return
+          //   } catch (error) {
+          //     console.error("App Bridge redirect failed:", error)
+          //
+          //   }
+          // }
 
           console.log("Using regular redirect")
           window.location.href = data.redirect_url
