@@ -47,7 +47,7 @@ async function createStorefrontToken(shop: string, accessToken: string) {
 }
 
 async function createStorefrontToken2(shop: string, accessToken: string) {
-  const query = `
+ /* const query = `
     mutation storefrontAccessTokenCreate($input: StorefrontAccessTokenInput!) {
       storefrontAccessTokenCreate(input: $input) {
         storefrontAccessToken {
@@ -60,6 +60,21 @@ async function createStorefrontToken2(shop: string, accessToken: string) {
         }
       }
     }
+  `;*/
+  const query = `
+    mutation {
+        storefrontAccessTokenCreate(input: {
+          title: "My Token"
+        }) {
+          storefrontAccessToken {
+            accessToken
+          }
+          userErrors {
+            field
+            message
+          }
+        }
+      }
   `;
 
   const variables = {
@@ -69,15 +84,19 @@ async function createStorefrontToken2(shop: string, accessToken: string) {
   };
 
   try {
-    const response = await fetch(`https://${shop}/admin/api/2023-10/graphql.json`, {
+    const response = await fetch(`https://${shop}/admin/api/2025-07/graphql.json`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'X-Shopify-Access-Token': accessToken,
       },
       body: JSON.stringify({
-        query,
-        variables,
+        query:"mutation StorefrontAccessTokenCreate($input: StorefrontAccessTokenInput!) { storefrontAccessTokenCreate(input: $input) { userErrors { field message } shop { id } storefrontAccessToken { accessScopes { handle } accessToken title } } }",
+        variables:{
+          "input": {
+            "title": "New Storefront Access Token"
+          }
+        },
       }),
     });
     console.log("222 Storefront token response status:", response.status)
