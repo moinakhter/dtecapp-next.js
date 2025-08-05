@@ -79,7 +79,7 @@ export default function Step3Token() {
     const hmac = searchParams.get("hmac")
     const code = searchParams.get("code")
     // @ts-expect-error window.top may be null but is safe in browser context
-    const winRedirect = window.top.location
+    const winRedirect = window.location
     const embedded = searchParams.get("embedded")
 
     console.log("URL params:", { shop, hmac, code, embedded, locale })
