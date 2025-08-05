@@ -56,6 +56,7 @@ export default function Step3Token() {
           const app = createApp({
             apiKey: "9a0b89206045b51e5c07c821e340a610",
             host: host,
+            forceRedirect: true,
           })
 
           setAppBridge({ app, Redirect })
