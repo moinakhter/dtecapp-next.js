@@ -61,7 +61,7 @@ async function createStorefrontToken2(shop: string, accessToken: string) {
       }
     }
   `;*/
-  const query = `
+/*  const query = `
     mutation {
         storefrontAccessTokenCreate(input: {
           title: "My Token"
@@ -81,7 +81,7 @@ async function createStorefrontToken2(shop: string, accessToken: string) {
     input: {
       title: 'JavaScript Storefront Token',
     },
-  };
+  };*/
 
   try {
     const response = await fetch(`https://${shop}/admin/api/2025-07/graphql.json`, {
