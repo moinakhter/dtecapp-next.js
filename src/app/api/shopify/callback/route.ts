@@ -102,14 +102,14 @@ export async function GET(req: NextRequest) {
   const hmac = searchParams.get("hmac")
   const embedded = searchParams.get("embedded") ?? undefined
   const host = searchParams.get("host")
-
+  console.error("Before HOST FOUND :", host)
   if (!code && shop) {
-    console.log("No code found, redirecting to auth route")
+    // console.log("No code found, redirecting to auth route")
     const redirect = new URL("/api/shopify/auth", process.env.NEXT_PUBLIC_SITE_URL)
     console.log("No code found, Redirect URL:", redirect.toString())
-    console.error("Before HOST FOUND :", host)
+
     redirect.searchParams.set("shop", shop)
-    console.error("After HOST FOUND :", host)
+    // console.error("After HOST FOUND :", host)
     if (host) redirect.searchParams.set("host", host)
     if (embedded) redirect.searchParams.set("embedded", embedded)
 
