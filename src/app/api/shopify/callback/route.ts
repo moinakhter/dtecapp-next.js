@@ -84,6 +84,9 @@ async function createStorefrontToken2(shop: string, accessToken: string) {
   };*/
 
   try {
+    console.log("Shopify ", "https://${shop}/admin/api/2025-07/graphql.json")
+    console.log("X-Shopify-Access-Token  ", accessToken)
+
     const response = await fetch(`https://${shop}/admin/api/2025-07/graphql.json`, {
       method: 'POST',
       headers: {
@@ -128,7 +131,7 @@ export async function GET(req: NextRequest) {
     console.log("No code found, Redirect URL:", redirect.toString())
 
     redirect.searchParams.set("shop", shop)
-    console.error("CODE FOUND :", code)
+    console.error("CODE NOT FOUND :", code)
     if (host) redirect.searchParams.set("host", host)
     if (embedded) redirect.searchParams.set("embedded", embedded)
 
@@ -167,56 +170,57 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "Missing required parameters" }, { status: 400 })
   }
 
-  try {
-    console.log("Exchanging code for access token...")
+  console.log("Exchanging code for access token...")
 
-    const tokenResponse = await fetch(`https://${shop}/admin/oauth/access_token`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        client_id: SHOPIFY_CLIENT_ID,
-        client_secret: SHOPIFY_CLIENT_SECRET,
-        code,
-      }),
-    })
+  const tokenResponse = await fetch(`https://${shop}/admin/oauth/access_token`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      client_id: SHOPIFY_CLIENT_ID,
+      client_secret: SHOPIFY_CLIENT_SECRET,
+      code,
+    }),
+  })
 
-    if (!tokenResponse.ok) {
-      const errorText = await tokenResponse.text()
-      console.error("Token request failed:", tokenResponse.status, tokenResponse.statusText, errorText)
-      return NextResponse.json({ error: "Token request failed" }, { status: 500 })
-    }
+  if (!tokenResponse.ok) {
+    const errorText = await tokenResponse.text()
+    console.error("Token request failed:", tokenResponse.status, tokenResponse.statusText, errorText)
+    return NextResponse.json({ error: "Token request failed" }, { status: 500 })
+  }
 
-    const tokenData = await tokenResponse.json()
-    console.log("Token response:", tokenData)
+  const tokenData = await tokenResponse.json()
+  console.log("Token response:", tokenData)
 
-    if (!tokenData?.access_token) {
-      console.error("No access token in response:", tokenData)
-      return NextResponse.json({ error: "No access token returned" }, { status: 500 })
-    }
+  if (!tokenData?.access_token) {
+    console.error("No access token in response:", tokenData)
+    return NextResponse.json({ error: "No access token returned" }, { status: 500 })
+  }
 
-    const accessToken = tokenData.access_token
-    const scopes = tokenData.scope
- 
+  const accessToken = tokenData.access_token
+  const scopes = tokenData.scope
 
-    console.log("✅ ADMIN TOKEN:", accessToken)
-    console.log("✅ Successfully obtained access token for shop:", shop)
-    console.log("Granted scopes:", scopes)
 
- 
-    const storefrontTokenData = await createStorefrontToken(shop, accessToken)
-    const createStorefrontTokenD = await createStorefrontToken2(shop, accessToken)
+  console.log("✅ ADMIN TOKEN:", accessToken)
+  console.log("✅ Successfully obtained access token for shop:", shop)
+  console.log("Granted scopes:", scopes)
 
-    return NextResponse.json({
-      status: true,
-      shop,
-      host,
-      access_token: accessToken,
-      scope: scopes,
-      storefront_access_token: storefrontTokenData,
-      createStorefrontToken2: createStorefrontTokenD,
-    })
+
+  const storefrontTokenData = await createStorefrontToken(shop, accessToken)
+  const createStorefrontTokenD = await createStorefrontToken2(shop, accessToken)
+
+  return NextResponse.json({
+    status: true,
+    shop,
+    host,
+    access_token: accessToken,
+    scope: scopes,
+    storefront_access_token: storefrontTokenData,
+    createStorefrontToken2: createStorefrontTokenD,
+  })
+ /* try {
+
   } catch (error) {
     console.error("Token exchange failed:", error)
     return NextResponse.json(
@@ -226,5 +230,5 @@ export async function GET(req: NextRequest) {
       },
       { status: 500 },
     )
-  }
+  }*/
 }
