@@ -87,15 +87,15 @@ async function createStorefrontToken2(shop: string, accessToken: string) {
 
     console.log("X-Shopify-Access-Token  ", accessToken)
 
-    const response = await fetch(`https://${shop}/admin/api/2025-07/graphql.json`, {
+    const response = await fetch(`https://${shop}/admin/api/2023-10/graphql.json`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'X-Shopify-Access-Token': accessToken,
       },
       body: JSON.stringify({
-        query,
-        variables,
+        query:query,
+        variables:variables,
       }),
     });
     console.log("Storefront token response status:", response.status)
