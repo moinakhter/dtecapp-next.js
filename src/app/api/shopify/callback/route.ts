@@ -61,7 +61,7 @@ async function createStorefrontToken2(shop: string, accessToken: string) {
       }
     }
   `;*/
-/*  const query = `
+  const query = `
     mutation {
         storefrontAccessTokenCreate(input: {
           title: "My Token"
@@ -79,12 +79,12 @@ async function createStorefrontToken2(shop: string, accessToken: string) {
 
   const variables = {
     input: {
-      title: 'JavaScript Storefront Token',
+      title: 'New Storefront Access Token',
     },
-  };*/
+  };
 
   try {
-    console.log("Shopify ", "https://${shop}/admin/api/2025-07/graphql.json")
+
     console.log("X-Shopify-Access-Token  ", accessToken)
 
     const response = await fetch(`https://${shop}/admin/api/2025-07/graphql.json`, {
@@ -94,17 +94,13 @@ async function createStorefrontToken2(shop: string, accessToken: string) {
         'X-Shopify-Access-Token': accessToken,
       },
       body: JSON.stringify({
-        query:"mutation StorefrontAccessTokenCreate($input: StorefrontAccessTokenInput!) { storefrontAccessTokenCreate(input: $input) { userErrors { field message } shop { id } storefrontAccessToken { accessScopes { handle } accessToken title } } }",
-        variables:{
-          "input": {
-            "title": "New Storefront Access Token"
-          }
-        },
+        query,
+        variables,
       }),
     });
-    console.log("222 Storefront token response status:", response.status)
+    console.log("Storefront token response status:", response.status)
     const json = await response.json();
-    console.log(" 222 Storefront token data:", json)
+    console.log(" Storefront token data:", json)
 
     if (!json.data || json.data.storefrontAccessTokenCreate == null) {
       return { error: '22 Unknown error', details: json };
