@@ -56,7 +56,7 @@ export default function Step3Token() {
           const app = createApp({
             apiKey: "9a0b89206045b51e5c07c821e340a610",
             host: host,
-            forceRedirect: true,
+             // forceRedirect: true,
           })
 
           setAppBridge({ app, Redirect })
@@ -122,7 +122,7 @@ export default function Step3Token() {
               const redirect = appBridge.Redirect.create(appBridge.app)
               redirect.dispatch(appBridge.Redirect.Action.REMOTE, {
                 url: data.redirect_url,
-                newContext: true,
+                // newContext: true,
               })
 
               console.log("App Bridge redirect dispatched")
